@@ -29,7 +29,7 @@ class EasPopup extends StatelessWidget with Popup {
               height: 350,
               width: 650,
             ),
-            decoration: buildBoxDecoration(image: 'images/blue_circles.png'),
+            decoration: buildBoxDecoration(image: 'images/bg_gradient.png'),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,

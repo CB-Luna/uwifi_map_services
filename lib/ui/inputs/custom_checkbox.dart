@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 
 class CustomCheckbox extends StatelessWidget {
   final bool value;
@@ -20,7 +21,7 @@ class CustomCheckbox extends StatelessWidget {
         Checkbox(
           value: value,
           onChanged: onChanged,
-          activeColor: const Color(0xFFD20030),
+          activeColor: colorSecondaryLight,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(6.0)),
           ),
@@ -32,7 +33,7 @@ class CustomCheckbox extends StatelessWidget {
             style: GoogleFonts.plusJakartaSans(
               fontSize: 13,
               height: 1.5,
-              color: const Color(0xff2E5899),
+              color: colorInversePrimary,
               fontWeight: FontWeight.w400,
             ),
           ),

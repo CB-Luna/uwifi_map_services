@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:uwifi_map_services/classes/customer_info.dart';
 import 'package:uwifi_map_services/providers/popup_controller.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/buttons/custom_outlined_button.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_checkbox.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
@@ -39,7 +40,7 @@ class SecondStep extends StatelessWidget {
           value: controller.emailCheckbox,
           onChanged: controller.setEmailCheckbox,
           text:
-              'I would like to receive promotional messages from RTA by E-mail',
+              'I would like to receive promotional messages from UWIFI by E-mail',
         ),
       ),
       FractionallySizedBox(
@@ -47,7 +48,7 @@ class SecondStep extends StatelessWidget {
         child: CustomCheckbox(
           value: controller.smsCheckbox,
           onChanged: controller.setSmsCheckbox,
-          text: 'I would like to receive promotional messages from RTA by SMS',
+          text: 'I would like to receive promotional messages from UWIFI by SMS',
         ),
       ),
     ];
@@ -68,7 +69,7 @@ class SecondStep extends StatelessWidget {
               textAlign: TextAlign.center,
               style: GoogleFonts.plusJakartaSans(
                 fontSize: 18,
-                color: const Color(0xffD20030),
+                color: colorInversePrimary,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -79,7 +80,7 @@ class SecondStep extends StatelessWidget {
               style: GoogleFonts.plusJakartaSans(
                 fontSize: 13,
                 letterSpacing: 0.25,
-                color: const Color.fromARGB(255, 103, 139, 192),
+                color: colorInversePrimary,
               ),
             ),
             const SizedBox(height: 20),
@@ -108,7 +109,7 @@ class SecondStep extends StatelessWidget {
                               }
                               return null;
                             },
-                            style: const TextStyle(color: Color(0xff324057)),
+                            style: const TextStyle(color: colorPrimaryDark),
                             decoration: CustomInputs().formInputDecoration(
                               label: 'First Name',
                               icon: Icons.person_outline_rounded,
@@ -135,7 +136,7 @@ class SecondStep extends StatelessWidget {
                               }
                               return null;
                             },
-                            style: const TextStyle(color: Color(0xff324057)),
+                            style: const TextStyle(color: colorPrimaryDark),
                             decoration: CustomInputs().formInputDecoration(
                               label: 'Last Name',
                               icon: Icons.person_outline_rounded,
@@ -163,7 +164,7 @@ class SecondStep extends StatelessWidget {
                             ? null
                             : 'Please enter a valid phone number';
                       },
-                      style: const TextStyle(color: Color(0xff324057)),
+                      style: const TextStyle(color: colorPrimaryDark),
                       decoration: CustomInputs().formInputDecoration(
                         label: 'Phone Number',
                         icon: Icons.local_phone_outlined,
@@ -185,7 +186,7 @@ class SecondStep extends StatelessWidget {
                         }
                         return null;
                       },
-                      style: const TextStyle(color: Color(0xff324057)),
+                      style: const TextStyle(color: colorPrimaryDark),
                       decoration: CustomInputs().formInputDecoration(
                         label: 'Email',
                         icon: Icons.email_outlined,
@@ -226,7 +227,7 @@ class SecondStep extends StatelessWidget {
                 }
               },
               text: 'Submit',
-              bgColor: const Color(0xFFD20030),
+              bgColor: colorSecondary,
             ),
             const SizedBox(height: 10),
           ],

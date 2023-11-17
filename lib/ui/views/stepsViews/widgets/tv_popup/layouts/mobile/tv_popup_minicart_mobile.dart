@@ -65,7 +65,7 @@ class _Background extends StatelessWidget {
         color: Colors.white,
         image: DecorationImage(
           alignment: Alignment.bottomCenter,
-          image: AssetImage('images/blue_circles.png'),
+          image: AssetImage('images/bg_gradient.png'),
           fit: BoxFit.contain,
         ),
       ),

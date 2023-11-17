@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/classes/home_page.dart';
 import 'package:uwifi_map_services/data/constants.dart';
 import 'package:uwifi_map_services/providers/search_controller.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/buttons/custom_outlined_button.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
 import 'package:uwifi_map_services/ui/views/widgets/custom_list_tile.dart';
@@ -89,7 +90,7 @@ class _FormViewState extends State<FormView> {
                                         return null;
                                       },
                                       style: const TextStyle(
-                                          color: Color(0xff324057)),
+                                          color: colorPrimaryDark),
                                       decoration:
                                           CustomInputs().formInputDecoration(
                                         label: 'Address Search',
@@ -115,7 +116,7 @@ class _FormViewState extends State<FormView> {
                                         return null;
                                       },
                                       style: const TextStyle(
-                                          color: Color(0xff324057)),
+                                          color: colorPrimaryDark),
                                       decoration:
                                           CustomInputs().formInputDecoration(
                                         label: 'Zipcode',
@@ -309,7 +310,7 @@ class _FormViewState extends State<FormView> {
                           children: [
                             Container(
                               decoration: BoxDecoration(
-                                color: Colors.blue.shade100,
+                                color: colorsTheme(context).background,
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               width: 600,
@@ -321,7 +322,7 @@ class _FormViewState extends State<FormView> {
                                 'Address not found \n Please verify the input data',
                                 style: GoogleFonts.poppins(
                                     fontSize: 20,
-                                    color: const Color(0xff001E4D),
+                                    color: colorsTheme(context).onPrimary,
                                     fontWeight: FontWeight.w200),
                               )),
                             ),
@@ -330,7 +331,7 @@ class _FormViewState extends State<FormView> {
                                 controller.clickOKWarning();
                               },
                               text: 'OK',
-                              bgColor: const Color(0xFFD20030),
+                              bgColor: colorsTheme(context).secondary,
                             ),
                           ],
                         ),

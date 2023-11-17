@@ -23,7 +23,7 @@ class FinalPopup extends StatelessWidget {
       content: Container(
         padding: const EdgeInsets.all(20.0),
         width: 600,
-        decoration: buildBoxDecoration('images/blue_circles.png'),
+        decoration: buildBoxDecoration('images/bg_gradient.png'),
         child: Container(
           padding: EdgeInsets.all(mobile ? 10.0 : 25.0),
           child: Column(

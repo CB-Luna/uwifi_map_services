@@ -13,7 +13,7 @@ class PopPortabilityAlreadyDone extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             height: 250,
             width: 560,
-            decoration: buildBoxDecoration(image: 'images/blue_circles.png'),
+            decoration: buildBoxDecoration(image: 'images/bg_gradient.png'),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

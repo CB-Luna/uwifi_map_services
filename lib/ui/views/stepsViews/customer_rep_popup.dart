@@ -97,7 +97,7 @@ class CustomerRepPopup extends StatelessWidget with Popup {
       width: 600,
       height: 300,
       decoration: buildBoxDecoration(
-        image: 'images/blue_circles.png',
+        image: 'images/bg_gradient.png',
         bgColor: Colors.white,
       ),
       padding: const EdgeInsets.all(25.0),

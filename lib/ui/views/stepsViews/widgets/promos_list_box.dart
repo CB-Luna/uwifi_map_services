@@ -48,7 +48,7 @@ class PromosListBox extends StatelessWidget {
                         image: DecorationImage(
                           alignment: Alignment.center,
                           opacity: 0.75,
-                          image: AssetImage('images/blue_circles.png'),
+                          image: AssetImage('images/bg_gradient.png'),
                           fit: BoxFit.cover,
                         ),
                         borderRadius: BorderRadius.only(

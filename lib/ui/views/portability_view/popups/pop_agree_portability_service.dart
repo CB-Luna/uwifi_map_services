@@ -20,7 +20,7 @@ class PopAgreePortabilityService extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             width: 660,
             height: mobile ? 500 : 360,
-            decoration: buildBoxDecoration(image: 'images/blue_circles.png'),
+            decoration: buildBoxDecoration(image: 'images/bg_gradient.png'),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

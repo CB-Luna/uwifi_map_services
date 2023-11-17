@@ -30,7 +30,7 @@ class SmiPopup extends StatelessWidget with Popup {
               height: 550,
               width: 650,
             ),
-            decoration: buildBoxDecoration(image: 'images/blue_circles.png'),
+            decoration: buildBoxDecoration(image: 'images/bg_gradient.png'),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [

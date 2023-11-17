@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 
 class CustomRadioButton extends StatelessWidget {
   final IconData icon;
@@ -34,7 +35,7 @@ class CustomRadioButton extends StatelessWidget {
           const SizedBox(height: 15),
           Icon(
             icon,
-            color: const Color(0xff2E5899),
+            color: colorSecondary,
             size: mobile ? 45 : 60,
           ),
           const SizedBox(height: 5),
@@ -44,7 +45,7 @@ class CustomRadioButton extends StatelessWidget {
             style: GoogleFonts.workSans(
               fontSize: 16,
               height: 1,
-              color: const Color(0xff2E5899),
+              color: colorSecondary,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -56,7 +57,7 @@ class CustomRadioButton extends StatelessWidget {
                 scale: 0.75,
                 child: Radio(
                   value: value,
-                  activeColor: const Color(0xFFD20030),
+                  activeColor: colorSecondary,
                   groupValue: groupValue,
                   onChanged: (Enum? value) {
                     function(value!);
@@ -73,32 +74,15 @@ class CustomRadioButton extends StatelessWidget {
   Decoration getDecoration(value, groupValue) {
     late final Color borderColor;
     if (value == groupValue) {
-      borderColor = const Color(0xFFD20030);
+      borderColor = colorSecondary;
     } else {
-      borderColor = const Color(0xff8AA7D2);
+      borderColor = colorBgLight;
     }
     return BoxDecoration(
-      color: Colors.white,
-      border: Border.all(color: borderColor, width: 2.5),
+      color: colorBgWhite,
+      border: Border.all(color: borderColor, width: 5),
       borderRadius: const BorderRadius.all(Radius.circular(15)),
     );
   }
 
-  String parseLocation(String location) {
-    String parsedText = '';
-    switch (location) {
-      case 'cry':
-        parsedText = "Crystal Beach";
-        break;
-
-      case 'ode':
-        parsedText = "Midland - Odessa";
-        break;
-
-      case 'smi':
-        parsedText = "Smithville";
-        break;
-    }
-    return parsedText;
-  }
 }

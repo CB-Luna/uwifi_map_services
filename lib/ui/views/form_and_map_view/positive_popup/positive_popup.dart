@@ -5,6 +5,7 @@ import 'package:uwifi_map_services/classes/customer_info.dart';
 import 'package:uwifi_map_services/classes/popup.dart';
 import 'package:uwifi_map_services/providers/popup_controller.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 
 import '../parse_methods.dart';
 import 'plan_type_step.dart';
@@ -35,7 +36,7 @@ class PositivePopup extends StatelessWidget with Popup {
               height: 550,
               width: 660,
             ),
-            decoration: buildBoxDecoration(image: 'images/blue_circles.png'),
+            decoration: buildBoxDecoration(image: 'images/bg_gradient.png', fit: BoxFit.cover),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -47,7 +48,7 @@ class PositivePopup extends StatelessWidget with Popup {
                     padding: const EdgeInsets.only(right: 10),
                     icon: const Icon(
                       Icons.close,
-                      color: Color(0xff8aa7d2),
+                      color: colorInversePrimary,
                       size: 20,
                     ),
                     onPressed: () => Navigator.of(context).pop(),
@@ -61,7 +62,7 @@ class PositivePopup extends StatelessWidget with Popup {
                   style: GoogleFonts.poppins(
                     fontSize: mobile ? 20 : 34,
                     height: 1,
-                    color: const Color(0xff2E5899),
+                    color: colorInversePrimary,
                     fontWeight: FontWeight.w700,
                   ),
                 ),

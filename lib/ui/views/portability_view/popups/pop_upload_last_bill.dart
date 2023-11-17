@@ -23,7 +23,7 @@ class PopUploadLastBill extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       height: 405,
       width: 660,
-      decoration: buildBoxDecoration(image: 'images/blue_circles.png'),
+      decoration: buildBoxDecoration(image: 'images/bg_gradient.png'),
       child: Form(
         key: portabilityFormProvider.upLoadBillKey,
         child: Column(

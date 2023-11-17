@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/providers/tracking_provider.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 
 import '../../../../../providers/popup_controller.dart';
 import '../../../../classes/customer_info.dart';
@@ -37,7 +38,7 @@ class PlanTypeStep extends StatelessWidget {
           style: GoogleFonts.poppins(
             fontSize: mobile ? 20 : 30,
             height: 1.5,
-            color: const Color(0xff001E4D),
+            color: colorInversePrimary,
             fontWeight: FontWeight.w700,
           ),
           maxLines: 2,
@@ -92,7 +93,7 @@ class PlanTypeStep extends StatelessWidget {
               }
             },
             text: 'Start now',
-            bgColor: const Color(0xFFD20030),
+            bgColor: colorSecondary,
           );
         }),
         const SizedBox(height: 10),

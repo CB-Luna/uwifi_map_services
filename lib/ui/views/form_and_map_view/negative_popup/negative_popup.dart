@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/classes/customer_info.dart';
 import 'package:uwifi_map_services/classes/popup.dart';
 import 'package:uwifi_map_services/providers/popup_controller.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/views/form_and_map_view/negative_popup/first_step.dart';
 import 'package:uwifi_map_services/ui/views/form_and_map_view/negative_popup/second_step.dart';
 import 'package:uwifi_map_services/ui/views/form_and_map_view/negative_popup/third_step.dart';
@@ -36,7 +37,7 @@ class NegativePopup extends StatelessWidget with Popup {
               height: 550,
               width: 650,
             ),
-            decoration: buildBoxDecoration(image: 'images/blue_circles.png'),
+            decoration: buildBoxDecoration(image: 'images/bg_gradient.png', fit: BoxFit.cover),
             child: Scrollbar(
               thumbVisibility: true,
               controller: scrollController,
@@ -52,7 +53,7 @@ class NegativePopup extends StatelessWidget with Popup {
                         padding: const EdgeInsets.all(12.0),
                         icon: const Icon(
                           Icons.close,
-                          color: Color(0xff8aa7d2),
+                          color: colorInversePrimary,
                           size: 20,
                         ),
                         onPressed: () => Navigator.of(context).pop(),

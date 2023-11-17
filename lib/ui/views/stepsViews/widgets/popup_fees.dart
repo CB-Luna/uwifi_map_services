@@ -34,7 +34,7 @@ class FeesPopup extends StatelessWidget with Popup {
         padding: const EdgeInsets.all(25),
         constraints: const BoxConstraints(maxWidth: 850),
         decoration: buildBoxDecoration(
-            image: 'images/blue_circles.png',
+            image: 'images/bg_gradient.png',
             fit: BoxFit.contain,
             alignment: Alignment.bottomCenter),
         child: Column(

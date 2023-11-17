@@ -34,7 +34,7 @@ class PromoDetailsPopup extends StatelessWidget with Popup {
         constraints:
             const BoxConstraints(maxWidth: 850, minWidth: 700, maxHeight: 650),
         decoration: buildBoxDecoration(
-            image: 'images/blue_circles.png',
+            image: 'images/bg_gradient.png',
             fit: BoxFit.contain,
             alignment: Alignment.bottomCenter),
         child: Column(
