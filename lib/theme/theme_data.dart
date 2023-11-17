@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 //Backgrounds
-const colorBgLight = Color(0xffebf3fc);
-const colorBg = Color(0xffd8e4f4);
-const colorBgWhite = Color(0xffffffff);
+const colorBgLight = Color(0xFFEBF3FC);
+const colorBg = Color(0xFFD8E4F4);
+const colorBgWhite = Color(0xFFFFFFFF);
 // const imgBg = "$strapiUrl/uploads/waves_bg_opacity_be9bc7371f.png";
 
 //FontsR
@@ -12,21 +12,21 @@ const mainTitleFont = "Plus Jakarta Sans";
 const bodyFont = "Plus Jakarta Sans";
 
 //General Colors
-const colorPrimary = Color(0xFF2e5899);
-const colorPrimaryLight = Color(0xFF1A65D4);
-const colorPrimaryShade = Color(0xff22457B);
-const colorPrimaryDark = Color(0xFF092146);
+const colorPrimary = Color(0xFF7949DC);
+const colorPrimaryLight = Color(0xFFBB6BD9);
+const colorPrimaryShade = Color(0xFF7D47DD);
+const colorPrimaryDark = Color(0xFF5243C2);
 const colorPrimaryContainerLight = Color(0xFFEDF6FF);
 const colorPrimaryContainer = Color(0xFFDFECF9);
 
-const colorSecondary = Color(0xFFd20030);
-const colorSecondaryLight = Color(0xffF84971);
-const colorSecondaryShade = Color(0xff9d0020);
+const colorSecondary = Color(0xFF00B837);
+const colorSecondaryLight = Color(0xFF00C637);
+const colorSecondaryShade = Color(0xFF00B837);
 
 const colorTertiary = Color(0xFF13B295);
 const colorTertiaryDark = Color(0xff47B489);
 
-const colorInversePrimary = Color(0xFF7391BE);
+const colorInversePrimary = Color(0xFFFFFFFF);
 
 //Button Decoration Colors
 const colorBtnBorder = Color.fromRGBO(255, 255, 255, 0.459);
@@ -37,7 +37,7 @@ ThemeData defaultTheme = ThemeData(
   scrollbarTheme: const ScrollbarThemeData().copyWith(
     trackVisibility: MaterialStateProperty.all(true),
     thumbColor:
-        MaterialStateProperty.all(const Color(0xff2e5899).withOpacity(0.5)),
+        MaterialStateProperty.all(const Color(0xFF7949DC).withOpacity(0.5)),
     mainAxisMargin: 2.5,
     crossAxisMargin: 2.5,
     trackColor: MaterialStateProperty.all(colorPrimaryShade.withOpacity(0.25)),

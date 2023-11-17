@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 
 class CustomInputs {
   InputDecoration formInputDecoration({
@@ -8,27 +9,27 @@ class CustomInputs {
     double maxWidth = double.infinity,
     double maxHeight = double.infinity,
     bool autoSuggest = false,
-    Color labelColor = const Color(0xFF8aa7d2),
-    Color hintColor = const Color(0xFF8aa7d2),
+    Color labelColor = colorPrimaryLight,
+    Color hintColor = colorPrimaryLight,
   }) {
     return InputDecoration(
         contentPadding: const EdgeInsets.symmetric(horizontal: 5),
         border: OutlineInputBorder(
             borderRadius: getBorderRadius(autoSuggest),
-            borderSide: getBordeSide(autoSuggest, const Color(0xFF8AA7D2))),
+            borderSide: getBordeSide(autoSuggest, colorPrimaryLight)),
         enabledBorder: OutlineInputBorder(
             borderRadius: getBorderRadius(autoSuggest),
-            borderSide: getBordeSide(autoSuggest, const Color(0xFF8aa7d2))),
+            borderSide: getBordeSide(autoSuggest, colorPrimaryLight)),
         focusedBorder: OutlineInputBorder(
             borderRadius: getBorderRadius(autoSuggest),
-            borderSide: getBordeSide(autoSuggest, Colors.blue.shade900)),
-        fillColor: Colors.white,
+            borderSide: getBordeSide(autoSuggest, colorPrimaryDark)),
+        fillColor: colorBgWhite,
         filled: true,
         hintText: hint,
         labelText: label,
         prefixIcon: Icon(
           icon,
-          color: const Color(0xff8990A2),
+          color: colorPrimary,
         ),
         labelStyle: TextStyle(color: labelColor),
         hintStyle: TextStyle(color: hintColor),

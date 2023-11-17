@@ -9,6 +9,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:uwifi_map_services/classes/home_page.dart';
 
 import 'package:uwifi_map_services/providers/search_controller.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 
 class MapView extends StatelessWidget with HomePage {
   const MapView({Key? key}) : super(key: key);
@@ -43,9 +44,9 @@ class MapView extends StatelessWidget with HomePage {
                           size: 200,
                           itemBuilder: (context, index) {
                             final colors = [
-                              const Color(0xFFD20030),
-                              Colors.white,
-                              const Color(0xffB6D9F9)
+                              colorPrimaryLight,
+                              colorInversePrimary,
+                              colorSecondaryLight
                             ];
                             final color = colors[index % colors.length];
                             return DecoratedBox(
@@ -58,7 +59,7 @@ class MapView extends StatelessWidget with HomePage {
                           child: DefaultTextStyle(
                             style: const TextStyle(
                               fontFamily: 'Work Sans',
-                              color: Colors.white,
+                              color: colorInversePrimary,
                               fontSize: 20,
                             ),
                             child: AnimatedTextKit(

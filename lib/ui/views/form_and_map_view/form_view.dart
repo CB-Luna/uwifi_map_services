@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/classes/home_page.dart';
+import 'package:uwifi_map_services/data/constants.dart';
 import 'package:uwifi_map_services/providers/search_controller.dart';
 import 'package:uwifi_map_services/ui/buttons/custom_outlined_button.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
@@ -256,7 +257,7 @@ class _FormViewState extends State<FormView> {
                             FocusScope.of(context).requestFocus(FocusNode());
                           },
                           text: 'Check for services',
-                          bgColor: const Color(0xFF37BE88),
+                          bgColor: colorsTheme(context).secondary,
                         );
                       }),
 

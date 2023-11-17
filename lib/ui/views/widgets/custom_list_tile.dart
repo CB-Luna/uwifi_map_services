@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uwifi_map_services/models/domain/place.dart';
 import 'package:uwifi_map_services/providers/search_controller.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 
 class CustomListTile extends StatelessWidget {
   final Place place;
@@ -53,7 +54,7 @@ class CustomListTile extends StatelessWidget {
     return ListTile(
       leading: const Icon(
         Icons.location_on_outlined,
-        color: Color(0xFFff3a3a),
+        color: colorPrimaryLight,
       ),
       title: streetNumber != ''
           ? Text('$streetNumber ${place.address}')
@@ -62,7 +63,7 @@ class CustomListTile extends StatelessWidget {
         controller.pickPlace(place, streetNumber);
         controller.clearPlaces();
       },
-      hoverColor: Colors.grey[200],
+      hoverColor: colorBgLight,
     );
   }
 }

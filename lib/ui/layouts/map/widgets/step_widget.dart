@@ -11,14 +11,11 @@ class CustomStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const Color primaryColor = Colors.white;
 
     TextStyle textPrimary = GoogleFonts.plusJakartaSans(
         fontWeight: FontWeight.w700,
-        color: primaryColor,
+        color: colorsTheme(context).inversePrimary,
         fontSize: fontSize ?? 18);
-
-    var palette = colorsTheme(context);
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -35,11 +32,11 @@ class CustomStep extends StatelessWidget {
                     padding: const EdgeInsets.all(5),
                     margin: const EdgeInsets.only(right: 10),
                     decoration: BoxDecoration(
-                      color: palette.primary,
+                      color: colorsTheme(context).primary,
                       shape: BoxShape.circle,
                     ),
                     child: Icon(icon,
-                        size: 16, color: Colors.white.withOpacity(0.75)),
+                        size: 16, color: colorsTheme(context).inversePrimary),
                   ),
                 Flexible(
                   child: Column(
@@ -64,45 +61,4 @@ class CustomStep extends StatelessWidget {
     );
   }
 
-  Widget stepWidget(String number, List<String> texts, [double? fontSize]) {
-    const Color primaryColor = Color(0xFF2e5899);
-    const Color labelColor = Color.fromARGB(255, 103, 139, 192);
-
-    TextStyle textPrimary = GoogleFonts.plusJakartaSans(
-        fontWeight: FontWeight.w700,
-        color: primaryColor,
-        fontSize: fontSize ?? 18);
-
-    TextStyle textLabel = GoogleFonts.plusJakartaSans(color: labelColor);
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-              padding: const EdgeInsets.all(10),
-              margin: const EdgeInsets.only(right: 10),
-              decoration: const BoxDecoration(
-                color: primaryColor,
-                shape: BoxShape.circle,
-              ),
-              child: Text(number, style: const TextStyle(color: Colors.white))),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for (var text in texts)
-                  Text(
-                    text,
-                    style: texts.indexOf(text) > 0 ? textLabel : textPrimary,
-                    textAlign: TextAlign.justify,
-                  )
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
 }

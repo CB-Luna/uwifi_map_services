@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uwifi_map_services/data/constants.dart';
 import 'package:uwifi_map_services/ui/layouts/map/widgets/step_widget.dart';
 
 class CustomTitle extends StatelessWidget {
@@ -9,13 +10,14 @@ class CustomTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (mobile) {
-      return mobileTitle();
+      return mobileTitle(context);
     } else {
-      return desktopTitle();
+      return desktopTitle(context);
     }
   }
 
-  Widget mobileTitle() {
+  Widget mobileTitle(BuildContext context) {
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -45,7 +47,7 @@ class CustomTitle extends StatelessWidget {
                 style: GoogleFonts.plusJakartaSans(
                   fontSize: 35,
                   height: 1,
-                  color: Colors.white,
+                  color: colorsTheme(context).inversePrimary,
                   fontWeight: FontWeight.w800,
                 ),
               ),
@@ -58,7 +60,7 @@ class CustomTitle extends StatelessWidget {
     );
   }
 
-  Widget desktopTitle() {
+  Widget desktopTitle(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -79,7 +81,7 @@ class CustomTitle extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 5,
+            height: 50,
           ),
           Center(
             child: FittedBox(
@@ -92,13 +94,13 @@ class CustomTitle extends StatelessWidget {
                 style: GoogleFonts.plusJakartaSans(
                   fontSize: 55,
                   height: 1,
-                  color: Colors.white,
+                  color: colorsTheme(context).inversePrimary,
                   fontWeight: FontWeight.w800,
                 ),
               ),
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 50),
           textStepOne()
         ],
       ),
