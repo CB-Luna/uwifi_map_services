@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/views/sales_views/version_customer/step_plans/widgets/plan_radiobutton.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/bundle_custom_radio_widget.dart';
 
@@ -49,11 +50,11 @@ class PlansListViewCustomer extends StatelessWidget {
                   child: Text("Bundles",
                       style: GoogleFonts.plusJakartaSans(
                         fontSize: mobile(context) ? 16 : 20,
-                        color: const Color(0xFF2e5899),
+                        color: colorInversePrimary,
                         fontWeight: FontWeight.w700,
                       )))
               : Image.asset(
-                  'images/$category.png',
+                  'images/uwifi.png',
                   height: 40,
                 ),
           ListView.builder(

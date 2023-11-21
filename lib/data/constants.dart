@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 
 const String apiKey = '3cBEFVR4qQleIRO2yWu0FcOCDdyZbuaU';
 
@@ -80,7 +81,7 @@ TextStyle subtitleStyle(context, {fontSize, color}) {
   textSize = lerpDouble(24, 30, screenSize(context).width * 0.0005)!;
 
   return GoogleFonts.plusJakartaSans(
-    color: color ?? colorsTheme(context).primary,
+    color: color ?? colorInversePrimary,
     fontSize: fontSize ?? textSize,
     fontWeight: FontWeight.w800,
     letterSpacing: -0.25,
@@ -114,7 +115,7 @@ TextStyle bodyStyle(context, {fontSize, color}) {
   return GoogleFonts.plusJakartaSans(
     height: 1.5,
     letterSpacing: 0.15,
-    color: color ?? colorsTheme(context).inversePrimary,
+    color: color ?? colorsTheme(context).primary,
     fontSize: fontSize ?? textSize,
   );
 }

@@ -56,7 +56,7 @@ class PositivePopup extends StatelessWidget with Popup {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  '${parseServiceType(customerInfo.coverageType)} Service is Available!',
+                  'Service is Available!',
                   maxLines: 2,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(

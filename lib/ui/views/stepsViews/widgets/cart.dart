@@ -9,6 +9,7 @@ import 'package:uwifi_map_services/providers/cart_controller.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 import 'package:uwifi_map_services/providers/plan_controller.dart';
 import 'package:uwifi_map_services/providers/portability_form_provider.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/column_builder.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/popup_fees.dart';
 import '../../../../providers/remote/boxes_behavior_controller.dart';
@@ -49,22 +50,16 @@ class CartWidget extends StatelessWidget {
                 BoxShadow(
                   blurRadius: 15,
                   spreadRadius: -5,
-                  color: Color(0x506FA5DB),
+                  color: colorBgBlack,
                   offset: Offset(0, 15),
                 )
-              ], color: Colors.white, borderRadius: BorderRadius.circular(50)),
+              ], color: colorInversePrimary, borderRadius: BorderRadius.circular(50)),
               child: Consumer<Cart>(
                 builder: (BuildContext context, Cart cart, Widget? child) {
                   return Column(children: <Widget>[
                     Container(
                         decoration: const BoxDecoration(
-                            color: Color(0xFF2e5899),
-                            image: DecorationImage(
-                              alignment: Alignment.center,
-                              opacity: 0.75,
-                              image: AssetImage('images/bg_gradient.png'),
-                              fit: BoxFit.cover,
-                            ),
+                            color: colorPrimary,
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(50.0),
                                 topRight: Radius.circular(50.0))),
@@ -76,8 +71,8 @@ class CartWidget extends StatelessWidget {
                           children: [
                             ClayContainer(
                               spread: 3,
-                              color: Colors.white,
-                              parentColor: const Color(0xff2e5899),
+                              color: colorInversePrimary,
+                              parentColor: colorPrimary,
                               height: 35,
                               width: 35,
                               depth: 30,
@@ -86,7 +81,7 @@ class CartWidget extends StatelessWidget {
                               child: IconButton(
                                 icon: const Icon(
                                   Icons.keyboard_tab_rounded,
-                                  color: Color(0xff2e5899),
+                                  color: colorPrimary,
                                   size: 18,
                                 ),
                                 onPressed: () {
@@ -96,7 +91,7 @@ class CartWidget extends StatelessWidget {
                             ),
                             Text("Your plan details",
                                 style: h2Style(context,
-                                    color: Colors.white, fontSize: 18)),
+                                    color: colorInversePrimary, fontSize: 18)),
                             const SizedBox(width: 30),
                           ],
                         )),
@@ -236,19 +231,19 @@ class CartWidget extends StatelessWidget {
                                       title: Text(item.name,
                                           style: GoogleFonts.workSans(
                                               fontSize: 16,
-                                              color: const Color(0xff2e5899),
+                                              color: colorPrimary,
                                               fontWeight: FontWeight.w700,
                                               letterSpacing: -0.5)),
                                       subtitle: Text(item.category,
                                           style: GoogleFonts.workSans(
                                               fontSize: 13,
-                                              color: const Color(0xff8AA7d2),
+                                              color: colorInversePrimary,
                                               fontWeight: FontWeight.w400)),
                                       trailing: Text(
                                           '\$ ${item.cost.toString()}/mo',
                                           style: GoogleFonts.workSans(
                                               fontSize: 18,
-                                              color: const Color(0xff2e5899),
+                                              color: colorPrimary,
                                               fontWeight: FontWeight.w300,
                                               letterSpacing: -1.0)));
                                 },
@@ -274,14 +269,14 @@ class CartWidget extends StatelessWidget {
                                     title: Text('${item.quantity} ${item.name}',
                                         style: GoogleFonts.workSans(
                                             fontSize: 16,
-                                            color: const Color(0xff2e5899),
+                                            color: colorPrimary,
                                             fontWeight: FontWeight.w700,
                                             letterSpacing: -0.5)),
                                     trailing: Text(
                                         '\$ ${(item.cost * item.quantity)}/mo',
                                         style: GoogleFonts.workSans(
                                             fontSize: 18,
-                                            color: const Color(0xff2e5899),
+                                            color: colorPrimary,
                                             fontWeight: FontWeight.w300,
                                             letterSpacing: -1.0)),
                                   );
@@ -302,14 +297,14 @@ class CartWidget extends StatelessWidget {
                                             : ('${item.name} +${item.quantity} '),
                                         style: GoogleFonts.workSans(
                                             fontSize: 16,
-                                            color: const Color(0xff2e5899),
+                                            color: colorPrimary,
                                             fontWeight: FontWeight.w700,
                                             letterSpacing: -0.5)),
                                     trailing: Text(
                                         '\$ ${(item.cost * item.quantity).toString()}/mo',
                                         style: GoogleFonts.workSans(
                                             fontSize: 18,
-                                            color: const Color(0xff2e5899),
+                                            color: colorPrimary,
                                             fontWeight: FontWeight.w300,
                                             letterSpacing: -1.0)),
                                   );
@@ -329,14 +324,14 @@ class CartWidget extends StatelessWidget {
                                     title: Text(item.name,
                                         style: GoogleFonts.workSans(
                                             fontSize: 16,
-                                            color: const Color(0xff2e5899),
+                                            color: colorPrimary,
                                             fontWeight: FontWeight.w700,
                                             letterSpacing: -0.5)),
                                     trailing: Text(
                                         '\$ ${item.cost.toStringAsFixed(2)} /mo',
                                         style: GoogleFonts.workSans(
                                             fontSize: 18,
-                                            color: const Color(0xff2e5899),
+                                            color: colorPrimary,
                                             fontWeight: FontWeight.w300,
                                             letterSpacing: -1.0)),
                                     // onTap: () {
@@ -375,14 +370,14 @@ class CartWidget extends StatelessWidget {
                                     title: Text(item.name,
                                         style: GoogleFonts.workSans(
                                             fontSize: 16,
-                                            color: const Color(0xff2e5899),
+                                            color: colorPrimary,
                                             fontWeight: FontWeight.w700,
                                             letterSpacing: -0.5)),
                                     trailing: Text(
                                         '\$ ${item.cost.toString()} /mo',
                                         style: GoogleFonts.workSans(
                                             fontSize: 18,
-                                            color: const Color(0xff2e5899),
+                                            color: colorPrimary,
                                             fontWeight: FontWeight.w300,
                                             letterSpacing: -1.0)),
                                     // onTap: () {
@@ -478,7 +473,7 @@ class CartWidget extends StatelessWidget {
                     //                       style: GoogleFonts.workSans(
                     //                           height: 1.5,
                     //                           fontSize: 14,
-                    //                           color: Colors.white,
+                    //                           color: colorInversePrimary,
                     //                           fontWeight: FontWeight.w600,
                     //                           letterSpacing: -0.2)),
                     //                 ),
@@ -500,14 +495,14 @@ class CartWidget extends StatelessWidget {
                             Text('Subtotal',
                                 style: GoogleFonts.workSans(
                                     fontSize: 16,
-                                    color: const Color(0xff2e5899),
+                                    color: colorPrimary,
                                     fontWeight: FontWeight.w600,
                                     letterSpacing: -0.5)),
                             Text(
                                 '\$${context.select((Cart c) => c.total.toStringAsFixed(2))}',
                                 style: GoogleFonts.workSans(
                                     fontSize: 30,
-                                    color: const Color(0xff2e5899),
+                                    color: colorPrimary,
                                     fontWeight: FontWeight.w300,
                                     letterSpacing: -0.5)),
                             //style: Theme.of(context).textTheme.headline3
@@ -541,8 +536,8 @@ class CartWidget extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: ClayContainer(
                 spread: 6,
-                color: const Color(0xff2e5899),
-                parentColor: const Color(0xffdfedff),
+                color: colorPrimary,
+                parentColor: colorBgBlack,
                 height: 45,
                 width: 45,
                 depth: 40,
@@ -559,15 +554,15 @@ class CartWidget extends StatelessWidget {
                     child: badge.Badge(
                       badgeContent: Text(
                           cartController.generalCartCounter.toString(),
-                          style: const TextStyle(color: Colors.white)),
+                          style: const TextStyle(color: colorInversePrimary)),
                       showBadge:
                           cartController.generalCartCounter == 0 ? false : true,
-                      badgeColor: const Color(0xFFD20030),
+                      badgeColor: colorPrimary,
                       position: badge.BadgePosition.bottomStart(),
                       elevation: 4,
                       child: const Icon(
                         Icons.add_shopping_cart,
-                        color: Colors.white,
+                        color: colorInversePrimary,
                         size: 25,
                       ),
                     ),

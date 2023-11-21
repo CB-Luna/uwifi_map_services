@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 
 //Backgrounds
 const colorBgLight = Color(0xFFEBF3FC);
-const colorBg = Color(0xFFD8E4F4);
+const colorBgW = Color(0xFFD8E4F4);
 const colorBgWhite = Color(0xFFFFFFFF);
+
+const colorBgDark = Color(0xFF140D03);
+const colorBgB = Color(0xFF191919);
+const colorBgBlack = Color(0xFF000000);
 // const imgBg = "$strapiUrl/uploads/waves_bg_opacity_be9bc7371f.png";
 
 //FontsR

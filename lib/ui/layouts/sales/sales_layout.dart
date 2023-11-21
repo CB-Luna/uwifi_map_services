@@ -6,6 +6,7 @@ import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 import 'package:uwifi_map_services/providers/plan_controller.dart';
 
 import 'package:uwifi_map_services/providers/tracking_provider.dart' as track;
+import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/cart.dart';
 
 import '../../../data/constants.dart';
@@ -68,7 +69,7 @@ class SalesLayout extends StatelessWidget {
                 ? NavigationMobile(customerController: customerController)
                 : null,
             key: _scaffoldKey,
-            backgroundColor: const Color(0xffdfedff),
+            backgroundColor: colorBgB,
             body: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [

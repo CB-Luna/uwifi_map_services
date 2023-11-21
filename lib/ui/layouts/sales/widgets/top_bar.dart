@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 
 import '../../../../data/constants.dart';
 import '../../../../providers/cart_controller.dart';
@@ -57,10 +58,10 @@ class TopBar extends StatelessWidget {
         BoxShadow(
           blurRadius: 15,
           spreadRadius: -5,
-          color: Color(0x506FA5DB),
+          color: colorBgB,
           offset: Offset(0, 5),
         )
-      ], color: Colors.white),
+      ], color: colorBgBlack),
       padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: Wrap(
         runSpacing: 20,
@@ -85,14 +86,14 @@ class TopBar extends StatelessWidget {
                       borderRadius:
                           const BorderRadius.all(Radius.circular(25.0)),
                       border: Border.all(
-                        color: const Color(0xFF8AA7D2),
+                        color: colorBgWhite,
                         width: 2.0,
                       ),
                     ),
                     child: IconButton(
                       padding: const EdgeInsets.all(0),
                       iconSize: 18,
-                      color: const Color(0xFF8AA7D2),
+                      color: colorBgWhite,
                       icon: const Icon(Icons.arrow_back),
                       onPressed: () {
                         Navigator.pop(context);
@@ -103,7 +104,7 @@ class TopBar extends StatelessWidget {
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
-                    child: Image.asset('images/pointer.png',
+                    child: Image.asset('images/you-pointer.png',
                         width: 35, height: 35),
                   ),
                   Column(
@@ -114,7 +115,7 @@ class TopBar extends StatelessWidget {
                         "Current Location",
                         style: GoogleFonts.workSans(
                             fontSize: 16,
-                            color: const Color(0xFF2e5899),
+                            color: colorInversePrimary,
                             fontWeight: FontWeight.bold,
                             letterSpacing: -0.5),
                       ),
@@ -122,7 +123,7 @@ class TopBar extends StatelessWidget {
                         custAddress,
                         style: GoogleFonts.workSans(
                             fontSize: 12,
-                            color: const Color(0xFF2e5899),
+                            color: colorInversePrimary,
                             fontWeight: FontWeight.normal),
                       ),
                     ],

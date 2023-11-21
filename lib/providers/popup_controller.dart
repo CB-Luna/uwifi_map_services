@@ -36,6 +36,7 @@ class PopupController extends ChangeNotifier {
 
   Location location = Location.cry;
   Technology technology = Technology.fiber;
+  bool planSwitch = true;
   Plan plan = Plan.residential;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -91,8 +92,12 @@ class PopupController extends ChangeNotifier {
     return formKey.currentState!.validate() ? true : false;
   }
 
-  void setPlan(plan) {
-    this.plan = plan;
+  void setPlan() {
+    if (planSwitch) {
+      plan = Plan.residential;
+    } else {
+      plan = Plan.business;
+    }
     notifyListeners();
   }
 
