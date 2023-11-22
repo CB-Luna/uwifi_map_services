@@ -19,6 +19,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
     final stepsController = Provider.of<StepsController>(context);
     final customerInfo = Provider.of<CustomerInfoProvider>(context);
     final bool isRep = customerInfo.customerInfo.customerRep != '';
+    bool? selected = false;
 
     final portabilityFormProvider =
         Provider.of<PortabilityFormProvider>(context);
@@ -242,6 +243,23 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                             TextFormField(
                               /// VARIABLE STORAGE
                               controller: controller.parsedPhone,
+                              onChanged: (value) =>
+                                  controller.setAddress(value),
+
+                              ///VALIDATION TRIGGER
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              obscureText: false,
+                              keyboardType: TextInputType.phone,
+                              decoration: CustomInputs().formInputDecoration(
+                                  label: 'Address', icon: Icons.house_outlined),
+                              style: const TextStyle(
+                                color: colorPrimaryDark,
+                              ),
+                            ),
+                            TextFormField(
+                              /// VARIABLE STORAGE
+                              controller: controller.parsedPhone,
                               onChanged: (value) => controller.setPhone(value),
 
                               ///VALIDATION TRIGGER
@@ -301,6 +319,212 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
               ),
             ],
           ),
+        ),
+        const SizedBox(
+          height: 30,
+        ),
+        Container(
+          height: 450,
+          decoration: BoxDecoration(
+            color: colorInversePrimary,
+            boxShadow: const [
+              BoxShadow(
+                blurRadius: 15,
+                spreadRadius: -5,
+                color: colorBgB,
+                offset: Offset(0, 15),
+              )
+            ],
+            borderRadius: BorderRadius.circular(40),
+          ),
+          child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(
+                        Icons.location_history_outlined,
+                        color: colorPrimary,
+                        size: 40,
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        'Card Info',
+                        style: h2Style(context),
+                      ),
+                    ],
+                  ),
+                ),
+                const Divider(
+                  height: 1,
+                  thickness: 1.5,
+                  color: colorPrimaryDark,
+                ),
+                Flexible(
+                  child: Form(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20, horizontal: 25),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          TextFormField(
+                            /// VARIABLE STORAGE
+                            // controller: controller.parsedEmail,
+                            onChanged: (value) {
+                              controller.setCard(value);
+                            },
+
+                            ///VALIDATION TRIGGER
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            obscureText: false,
+                            keyboardType: TextInputType.number,
+                            decoration: CustomInputs().formInputDecoration(
+                                label: 'Card Number',
+                                icon: Icons.add_card_rounded),
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(16)
+                            ],
+                            validator: (value) {
+                              return (phoneCharacters.hasMatch(value ?? '') &&
+                                      value?.length == 16)
+                                  ? null
+                                  : 'Please enter a valid card number';
+                            },
+                            style: const TextStyle(
+                              color: colorPrimaryDark,
+                            ),
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                children: [
+                                  const Text(
+                                    "Same name as before?",
+                                    style: TextStyle(
+                                      color: colorPrimaryDark,
+                                    ),
+                                  ),
+                                  Checkbox(
+                                      checkColor: colorPrimaryDark,
+                                      semanticLabel: "Same as before?",
+                                      value: selected,
+                                      onChanged: (value) {
+                                        selected = value;
+                                      }),
+                                ],
+                              ),
+                              ),
+                              const SizedBox(width: 15),
+                              Expanded(
+                                  child: TextFormField(
+                                          /// VARIABLE STORAGE
+                                          controller: controller.parsedFName,
+                                          onChanged: (value) {
+                                            controller.setfName(value);
+                                            portabilityFormProvider
+                                                .portFirstName = value;
+                                          },
+
+                                          ///VALIDATION TRIGGER
+                                          autovalidateMode: AutovalidateMode
+                                              .onUserInteraction,
+                                          autocorrect: false,
+                                          obscureText: false,
+                                          keyboardType: TextInputType.name,
+                                          decoration: CustomInputs()
+                                              .formInputDecoration(
+                                                  label: 'Name on the Card',
+                                                  icon: Icons.person_outlined),
+
+                                          validator: (value) {
+                                            return validCharacters
+                                                    .hasMatch(value ?? '')
+                                                ? null
+                                                : 'Please enter your name';
+                                          },
+                                          style: const TextStyle(
+                                            color: colorPrimaryDark,
+                                          ),
+                                        ),
+                                  ),
+                            ],
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Expanded(
+                                child: TextFormField(
+                                  /// VARIABLE STORAGE
+                                  // controller: controller.parsedEmail,
+                                  onChanged: (value) {
+                                    controller.setCard(value);
+                                  },
+
+                                  ///VALIDATION TRIGGER
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  obscureText: false,
+                                  keyboardType: TextInputType.number,
+                                  decoration: CustomInputs()
+                                      .formInputDecoration(
+                                          label: 'Card Security Code',
+                                          icon: Icons.lock_outline),
+                                  inputFormatters: [
+                                    LengthLimitingTextInputFormatter(3)
+                                  ],
+                                  validator: (value) {
+                                    return (phoneCharacters
+                                                .hasMatch(value ?? '') &&
+                                            value?.length == 3)
+                                        ? null
+                                        : 'Please enter a valid card Security Code';
+                                  },
+                                  style: const TextStyle(
+                                    color: colorPrimaryDark,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 15),
+                              Expanded(
+                                  child: TextFormField(
+                                /// VARIABLE STORAGE
+                                // controller: controller.parsedEmail,
+                                onChanged: (value) {
+                                  controller.setCard(value);
+                                },
+
+                                ///VALIDATION TRIGGER
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                obscureText: false,
+                                keyboardType: TextInputType.datetime,
+                                decoration: CustomInputs().formInputDecoration(
+                                    label: 'Card Expiration Date',
+                                    icon: Icons.calendar_month_outlined),
+
+                                style: const TextStyle(
+                                  color: colorPrimaryDark,
+                                ),
+                              )),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              ]),
         ),
         if (isRep) const SizedBox(height: 30),
         if (isRep)

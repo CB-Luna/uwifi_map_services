@@ -18,10 +18,17 @@ class CustomerInfoProvider with ChangeNotifier {
   final TextEditingController parsedPhone = TextEditingController();
   final TextEditingController parsedEmail = TextEditingController();
 
+  //Card Variables
+  String number = '';
+  String ccv = '';
+  String date = '';
+  String cardName = '';
+
   String origin;
   String lastName = '';
   String firstName = '';
   String phone = '';
+  String address = '';
   String custEmail = '';
   String contactRange = 'Any time';
   bool contactByEmail = true;
@@ -84,10 +91,27 @@ class CustomerInfoProvider with ChangeNotifier {
     this.phone = phone;
     //notifyListeners();
   }
+  void setAddress(String address){
+    this.address = address;
+  }
 
   void setEmail(String email) {
     custEmail = email;
     notifyListeners();
+  }
+
+  //Functions for the card
+  void setCard(String card){
+    number = card;
+  }
+  void setCcv(String value){
+    ccv=value;
+  }
+  void setDate(String date){
+    this.date=date;
+  }
+  void setCardName(String name){
+    cardName = name;
   }
 
   void setEngage(String engopt) {
