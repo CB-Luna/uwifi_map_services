@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/views/widgets/engage_form_field.dart';
 
 class EngagementPanel extends StatefulWidget {
@@ -23,7 +24,7 @@ class _EngagementPanelState extends State<EngagementPanel> {
     double? bodyfontSize = lerpDouble(14, 16, (appwidth - 500) / maxAppWidth);
     final customerController = Provider.of<CustomerInfoProvider>(context);
 
-    Color panelColor = customerController.panelcolor;
+    Color panelColor = colorPrimary;
     final view = Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -33,10 +34,10 @@ class _EngagementPanelState extends State<EngagementPanel> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Flexible(
-                child: Text('How did you hear about RTA?',
+                child: Text('How did you hear about UWIFI?',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.plusJakartaSans(
-                      color: const Color(0xFFFFFFFF),
+                      color: colorInversePrimary,
                       fontWeight: FontWeight.bold,
                       fontSize: headerfontSize! - 2,
                     )),
@@ -45,7 +46,7 @@ class _EngagementPanelState extends State<EngagementPanel> {
           ),
           Text('Please select one:',
               style: GoogleFonts.workSans(
-                  color: const Color(0xFFFFFFFF),
+                  color: colorInversePrimary,
                   fontWeight: FontWeight.w500,
                   fontSize: bodyfontSize,
                   height: 2.5)),

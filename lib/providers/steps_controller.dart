@@ -123,8 +123,10 @@ class StepsController with ChangeNotifier {
         final cartController = Provider.of<Cart>(context, listen: false);
         if (formValidation() && promoCheckFlag) {
           cartController.isSelectedGigFastVoice()
-              ? selectorSummaryview(context)
-              : null;
+              // ? selectorSummaryview(context)
+              ? null
+              : 
+              null;
 
           repCurrentStep = RepViews.plansView;
         }
@@ -148,7 +150,8 @@ class StepsController with ChangeNotifier {
         final cartController = Provider.of<Cart>(context, listen: false);
         if (formValidation() && promoCheckFlag) {
           cartController.isSelectedGigFastVoice()
-              ? selectorSummaryview(context)
+              // ? selectorSummaryview(context)
+              ? null
               : null;
           // popupAcknowledge(context);
           currentStep = Views.finalSummaryView;

@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/data/constants.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 
 class AddNotepad extends StatefulWidget {
   const AddNotepad({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class AddNotepadState extends State<AddNotepad> {
       child: Container(
         padding: const EdgeInsetsDirectional.fromSTEB(15, 15, 15, 15),
         decoration: BoxDecoration(
-          color: const Color(0xFF2e5899),
+          color: colorPrimary,
           borderRadius: BorderRadius.circular(25),
           boxShadow: const [
             BoxShadow(
@@ -44,7 +45,7 @@ class AddNotepadState extends State<AddNotepad> {
                 child: Text(
                   'Add a note for our representative',
                   textAlign: TextAlign.center,
-                  style: h2Style(context, color: Colors.white),
+                  style: h2Style(context, color: colorInversePrimary),
                 )),
             ConstrainedBox(
               constraints: const BoxConstraints(
@@ -57,7 +58,7 @@ class AddNotepadState extends State<AddNotepad> {
                 padding: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20.0),
-                    color: Colors.white),
+                    color: colorInversePrimary),
                 child: TextField(
                   onChanged: (value) {
                     setState(() {

@@ -25,8 +25,8 @@ class CustomTitle extends StatelessWidget {
         children: [
           ConstrainedBox(
             constraints: const BoxConstraints(
-              maxWidth: 50,
-              maxHeight: 50,
+              maxWidth: 200,
+              maxHeight: 200,
             ),
             child: const Image(
               fit: BoxFit.contain,
@@ -34,26 +34,22 @@ class CustomTitle extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 10,
+            height: 40,
           ),
           Center(
-            child: FittedBox(
-              alignment: Alignment.center,
-              fit: BoxFit.contain,
-              child: Text(
-                'Find the services \nnear your area',
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                style: GoogleFonts.plusJakartaSans(
-                  fontSize: 35,
-                  height: 1,
-                  color: colorsTheme(context).inversePrimary,
-                  fontWeight: FontWeight.w800,
-                ),
+            child: Text(
+              'Find the services \nnear your area',
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              style: GoogleFonts.plusJakartaSans(
+                fontSize: 35,
+                height: 1,
+                color: colorsTheme(context).inversePrimary,
+                fontWeight: FontWeight.w800,
               ),
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 50),
           textStepOne()
         ],
       ),

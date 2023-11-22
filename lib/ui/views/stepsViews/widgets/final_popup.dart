@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:restart_app/restart_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uwifi_map_services/providers/portability_form_provider.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 
 class FinalPopup extends StatelessWidget {
   const FinalPopup({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class FinalPopup extends StatelessWidget {
       contentPadding: const EdgeInsets.all(0.0),
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(35.0))),
-      backgroundColor: Colors.white,
+      backgroundColor: colorBgW,
       content: Container(
         padding: const EdgeInsets.all(20.0),
         width: 600,
@@ -36,7 +37,7 @@ class FinalPopup extends StatelessWidget {
                 style: GoogleFonts.poppins(
                   height: 1.5,
                   fontSize: 35,
-                  color: const Color(0xFFd20030),
+                  color: colorInversePrimary,
                   fontWeight: FontWeight.bold,
                   letterSpacing: -1.0,
                 ),
@@ -47,7 +48,7 @@ class FinalPopup extends StatelessWidget {
                 style: GoogleFonts.poppins(
                   height: 1.5,
                   fontSize: mobile ? 16 : 24,
-                  color: const Color(0xFF2e5899),
+                  color: colorInversePrimary,
                   fontWeight: FontWeight.bold,
                   letterSpacing: -0.50,
                 ),
@@ -58,12 +59,12 @@ class FinalPopup extends StatelessWidget {
                       "",
                     )
                   : Text(
-                      "If you don't have your last bill right now you can go to https://rtatel.com/ later to upload",
+                      "If you don't have your last bill right now you can go to https://uwifi.com/ later to upload",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                         height: 1.5,
                         fontSize: mobile ? 14 : 20,
-                        color: const Color(0xFF2e5899),
+                        color: colorInversePrimary,
                         fontWeight: FontWeight.bold,
                         letterSpacing: -0.50,
                       ),
@@ -74,7 +75,7 @@ class FinalPopup extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
-                  backgroundColor: const Color(0xFF2e5899),
+                  backgroundColor: colorSecondary,
                   minimumSize: const Size.fromHeight(50),
                 ),
                 onPressed: () => Restart.restartApp(webOrigin: '/'),

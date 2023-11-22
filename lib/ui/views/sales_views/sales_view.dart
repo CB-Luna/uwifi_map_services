@@ -27,23 +27,23 @@ class _SalesViewState extends State<SalesView> {
 
     final bool isRep = customerController.customerInfo.customerRep != "";
 
-    if (!_popupShown) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Future.delayed(const Duration(seconds: 1), () {
-          var bundlePlans = controller.plansList
-              .where((element) => element.planCategory.contains('bundle'))
-              .toList();
-          if (!isRep) {
-            if (bundlePlans.isNotEmpty) {
-              popupBundleAd(context, bundlePlans, controller);
-            }
-          }
-        });
-        setState(() {
-          _popupShown = true;
-        });
-      });
-    }
+    // if (!_popupShown) {
+    //   WidgetsBinding.instance.addPostFrameCallback((_) {
+    //     Future.delayed(const Duration(seconds: 1), () {
+    //       var bundlePlans = controller.plansList
+    //           .where((element) => element.planCategory.contains('bundle'))
+    //           .toList();
+    //       if (!isRep) {
+    //         if (bundlePlans.isNotEmpty) {
+    //           popupBundleAd(context, bundlePlans, controller);
+    //         }
+    //       }
+    //     });
+    //     setState(() {
+    //       _popupShown = true;
+    //     });
+    //   });
+    // }
 
     final ScrollController scrollController = ScrollController();
 

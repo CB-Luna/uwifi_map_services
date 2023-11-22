@@ -17,25 +17,25 @@ abstract class HomePage {
     final customerInfo = controller.fillCustomerInfo();
 
     if (result) {
-      if (controller.flow == '3') {
-        showDialog(
-          context: context,
-          builder: (_) {
-            return EasPopup(
-              customerInfo: customerInfo,
-            );
-          },
-        );
-      } else if (controller.flow == '2') {
-        showDialog(
-          context: context,
-          builder: (_) {
-            return SmiPopup(
-              customerInfo: customerInfo,
-            );
-          },
-        );
-      } else if (controller.flow == '1' || controller.flow == '') {
+      // if (controller.flow == '3') {
+      //   showDialog(
+      //     context: context,
+      //     builder: (_) {
+      //       return EasPopup(
+      //         customerInfo: customerInfo,
+      //       );
+      //     },
+      //   );
+      // } else if (controller.flow == '2') {
+      //   showDialog(
+      //     context: context,
+      //     builder: (_) {
+      //       return SmiPopup(
+      //         customerInfo: customerInfo,
+      //       );
+      //     },
+      //   );
+      // } else if (controller.flow == '1' || controller.flow == '') {
         showDialog(
           context: context,
           builder: (_) {
@@ -44,12 +44,12 @@ abstract class HomePage {
             );
           },
         );
-      }
+      // }
     } else {
       showDialog(
         context: context,
         builder: (_) {
-          return NegativePopup(
+          return PositivePopup(
             customerInfo: customerInfo,
           );
         },

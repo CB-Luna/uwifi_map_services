@@ -60,7 +60,7 @@ class PositivePopup extends StatelessWidget with Popup {
                   maxLines: 2,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
-                    fontSize: mobile ? 20 : 34,
+                    fontSize: mobile ? 30 : 40,
                     height: 1,
                     color: colorInversePrimary,
                     fontWeight: FontWeight.w700,

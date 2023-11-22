@@ -218,29 +218,26 @@ class CartWidget extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          FadeInImage.assetNetwork(
-                                            placeholder:
-                                                '../assets/images/loading.gif',
-                                            image: item.imageurl!,
-                                            width: 30,
+                                          Image.asset(
+                                            'images/you-pointer.png',
                                             height: 30,
-                                            fit: BoxFit.fill,
+                                            width: 30,
                                           ),
                                         ],
                                       ),
-                                      title: Text(item.name,
+                                      title: Text("Package ${index + 1}",
                                           style: GoogleFonts.workSans(
                                               fontSize: 16,
                                               color: colorPrimary,
                                               fontWeight: FontWeight.w700,
                                               letterSpacing: -0.5)),
-                                      subtitle: Text(item.category,
+                                      subtitle: Text("$index",
                                           style: GoogleFonts.workSans(
                                               fontSize: 13,
                                               color: colorInversePrimary,
                                               fontWeight: FontWeight.w400)),
                                       trailing: Text(
-                                          '\$ ${item.cost.toString()}/mo',
+                                          '\$ 30/mo',
                                           style: GoogleFonts.workSans(
                                               fontSize: 18,
                                               color: colorPrimary,
@@ -258,22 +255,20 @@ class CartWidget extends StatelessWidget {
                                   final item =
                                       cart.additionalsDevicesSelected[index];
                                   return ListTile(
-                                    leading: FadeInImage.assetNetwork(
-                                      placeholder:
-                                          '../assets/images/loading.gif',
-                                      image: item.imageurl!,
-                                      width: 30,
-                                      height: 30,
-                                      fit: BoxFit.fill,
-                                    ),
-                                    title: Text('${item.quantity} ${item.name}',
+                                    leading: 
+                                    Image.asset(
+                                        'images/you-pointer.png',
+                                        height: 30,
+                                        width: 30,
+                                      ),
+                                    title: Text('Package $index',
                                         style: GoogleFonts.workSans(
                                             fontSize: 16,
                                             color: colorPrimary,
                                             fontWeight: FontWeight.w700,
                                             letterSpacing: -0.5)),
                                     trailing: Text(
-                                        '\$ ${(item.cost * item.quantity)}/mo',
+                                        '\$ 30/mo',
                                         style: GoogleFonts.workSans(
                                             fontSize: 18,
                                             color: colorPrimary,
@@ -301,7 +296,7 @@ class CartWidget extends StatelessWidget {
                                             fontWeight: FontWeight.w700,
                                             letterSpacing: -0.5)),
                                     trailing: Text(
-                                        '\$ ${(item.cost * item.quantity).toString()}/mo',
+                                        '\$ 30/mo',
                                         style: GoogleFonts.workSans(
                                             fontSize: 18,
                                             color: colorPrimary,
@@ -328,7 +323,7 @@ class CartWidget extends StatelessWidget {
                                             fontWeight: FontWeight.w700,
                                             letterSpacing: -0.5)),
                                     trailing: Text(
-                                        '\$ ${item.cost.toStringAsFixed(2)} /mo',
+                                        '\$ 30 /mo',
                                         style: GoogleFonts.workSans(
                                             fontSize: 18,
                                             color: colorPrimary,
@@ -341,51 +336,51 @@ class CartWidget extends StatelessWidget {
                                 },
                               ),
 
-                              CartTab(
-                                  title: "Fees",
-                                  widget: TextButton(
-                                      onPressed: () {
-                                        showDialog(
-                                          barrierColor: const Color(0x00022963)
-                                              .withOpacity(0.40),
-                                          context: context,
-                                          builder: (_) {
-                                            return const FeesPopup();
-                                          },
-                                        );
-                                      },
-                                      child: Text(
-                                        'What is this?',
-                                        style: bodyStyle(context, fontSize: 12),
-                                      ))),
+                              // CartTab(
+                              //     title: "Fees",
+                              //     widget: TextButton(
+                              //         onPressed: () {
+                              //           // showDialog(
+                              //           //   barrierColor: const Color(0x00022963)
+                              //           //       .withOpacity(0.40),
+                              //           //   context: context,
+                              //           //   builder: (_) {
+                              //           //     return const FeesPopup();
+                              //           //   },
+                              //           // );
+                              //         },
+                              //         child: Text(
+                              //           'What is this?',
+                              //           style: bodyStyle(context, fontSize: 12),
+                              //         ))),
 
-                              ColumnBuilder(
-                                itemCount: cart.fees.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  if (cart.fees.isEmpty) {
-                                    return const Text('no fees in cart');
-                                  }
-                                  final item = cart.fees[index];
-                                  return ListTile(
-                                    title: Text(item.name,
-                                        style: GoogleFonts.workSans(
-                                            fontSize: 16,
-                                            color: colorPrimary,
-                                            fontWeight: FontWeight.w700,
-                                            letterSpacing: -0.5)),
-                                    trailing: Text(
-                                        '\$ ${item.cost.toString()} /mo',
-                                        style: GoogleFonts.workSans(
-                                            fontSize: 18,
-                                            color: colorPrimary,
-                                            fontWeight: FontWeight.w300,
-                                            letterSpacing: -1.0)),
-                                    // onTap: () {
-                                    //   context.read<Cart>().removeFromCart(item);
-                                    // },
-                                  );
-                                },
-                              ),
+                              // ColumnBuilder(
+                              //   itemCount: cart.fees.length,
+                              //   itemBuilder: (BuildContext context, int index) {
+                              //     if (cart.fees.isEmpty) {
+                              //       return const Text('no fees in cart');
+                              //     }
+                              //     final item = cart.fees[index];
+                              //     return ListTile(
+                              //       title: Text(item.name,
+                              //           style: GoogleFonts.workSans(
+                              //               fontSize: 16,
+                              //               color: colorPrimary,
+                              //               fontWeight: FontWeight.w700,
+                              //               letterSpacing: -0.5)),
+                              //       trailing: Text(
+                              //           '\$ ${item.cost.toString()} /mo',
+                              //           style: GoogleFonts.workSans(
+                              //               fontSize: 18,
+                              //               color: colorPrimary,
+                              //               fontWeight: FontWeight.w300,
+                              //               letterSpacing: -1.0)),
+                              //       // onTap: () {
+                              //       //   context.read<Cart>().removeFromCart(item);
+                              //       // },
+                              //     );
+                              //   },
+                              // ),
 
                               //const Divider(),
                             ],
@@ -499,7 +494,7 @@ class CartWidget extends StatelessWidget {
                                     fontWeight: FontWeight.w600,
                                     letterSpacing: -0.5)),
                             Text(
-                                '\$${context.select((Cart c) => c.total.toStringAsFixed(2))}',
+                                '\$30.0',
                                 style: GoogleFonts.workSans(
                                     fontSize: 30,
                                     color: colorPrimary,

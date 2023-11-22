@@ -43,17 +43,18 @@ class PlansListViewCustomer extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 5),
       child: Column(
         children: [
-          category.contains('bundle')
-              ? Container(
-                  alignment: Alignment.center,
-                  height: 40,
-                  child: Text("Bundles",
-                      style: GoogleFonts.plusJakartaSans(
-                        fontSize: mobile(context) ? 16 : 20,
-                        color: colorInversePrimary,
-                        fontWeight: FontWeight.w700,
-                      )))
-              : Image.asset(
+          // category.contains('bundle')
+          //     ? Container(
+          //         alignment: Alignment.center,
+          //         height: 40,
+          //         child: Text("Bundles",
+          //             style: GoogleFonts.plusJakartaSans(
+          //               fontSize: mobile(context) ? 16 : 20,
+          //               color: colorInversePrimary,
+          //               fontWeight: FontWeight.w700,
+          //             )))
+          //     : 
+              Image.asset(
                   'images/uwifi.png',
                   height: 40,
                 ),
@@ -67,7 +68,7 @@ class PlansListViewCustomer extends StatelessWidget {
                 cost: products[index].price!,
                 imageurl: category.contains('bundle')
                     ? '../assets/images/swipes.png'
-                    : '../assets/images/icon_$category.png',
+                    : '../assets/images/uwifi.png',
                 service: '',
                 category: products[index].planCategory,
                 quantity: 1,
@@ -149,9 +150,12 @@ class PlansListViewCustomer extends StatelessWidget {
                       cursor: products[index].isEnabled
                           ? SystemMouseCursors.click
                           : SystemMouseCursors.forbidden,
-                      child: (products[index].planCategory.contains('bundle')
-                          ? BundleCustomRadio(plan: products[index])
-                          : products[index].associations == null
+                      child: (
+                        products[index].planCategory.contains('bundle')
+                          // ? BundleCustomRadio(plan: products[index])
+                          ? const SizedBox.shrink()
+                          : 
+                          products[index].associations == null
                               ? PlanRadioButton(
                                   plan: products[index], isTherePromo: false)
                               : (customerController.customerInfo.customerRep !=

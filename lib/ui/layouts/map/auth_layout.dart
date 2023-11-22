@@ -69,26 +69,23 @@ class _MobileBody extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ListView(
-            shrinkWrap: true,
-            children: [
-              Container(
-                decoration: buildBoxDecoration('images/bg_image.png'),
-                child: const Column(
-                  children: [
-                    SizedBox(
-                      height: 10,
-                    ),
-                    CustomTitle(
-                      mobile: true,
-                    ),
-                    FormView(),
-                  ],
-                ),
+          Expanded(
+            child: Container(
+              decoration: buildBoxDecoration('images/bg_image.png'),
+              child: const Column(
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  CustomTitle(
+                    mobile: true,
+                  ),
+                  FormView(),
+                ],
               ),
-            ],
+            ),
           ),
-          const Expanded(child: MapView()),
+          // const Expanded(child: MapView()),
         ],
       ),
     );
@@ -112,7 +109,7 @@ class _DesktopBody extends StatelessWidget {
         children: [
           Container(
             decoration: buildBoxDecoration('images/bg_image.png'),
-            width: size.width * 0.43,
+            width: size.width,
             child: Padding(
               padding: const EdgeInsets.only(top: 50),
               child: ListView(
@@ -126,11 +123,11 @@ class _DesktopBody extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            height: size.height,
-            width: size.width * 0.57,
-            child: const MapView(),
-          ),
+          // SizedBox(
+          //   height: size.height,
+          //   width: size.width * 0.57,
+          //   child: const MapView(),
+          // ),
         ],
       ),
     );

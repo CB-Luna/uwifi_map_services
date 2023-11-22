@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/data/constants.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/customer_location_display.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/customer_personal_details_form.dart';
 
@@ -81,7 +82,7 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
     final customerInfo = Provider.of<CustomerInfoProvider>(context);
     final bool isRep = customerInfo.customerInfo.customerRep != '';
     return Scaffold(
-      backgroundColor: const Color(0xFFDFEDFF),
+      backgroundColor: colorBgB,
       body: (MediaQuery.of(context).size.width > 1130)
           ? Scrollbar(
               controller: _watchchecks,

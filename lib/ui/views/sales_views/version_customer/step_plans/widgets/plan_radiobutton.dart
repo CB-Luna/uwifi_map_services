@@ -94,7 +94,7 @@ class PlanRadioButton extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(plan.name ?? "",
+                                Text("Package",
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 1,
                                     style: tagTitleStyle(context,
@@ -126,7 +126,7 @@ class PlanRadioButton extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                              "\$${promo != null ? plansController.setPromoPrice(plan.price!, promo!).toString() : plan.price.toString()}",
+                              "\$30",
                               style: GoogleFonts.workSans(
                                   fontSize: priceTxtSize,
                                   color: plan.isEnabled

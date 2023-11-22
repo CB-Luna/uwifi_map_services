@@ -103,7 +103,7 @@ TextStyle tagTitleStyle(context, {fontSize, color}) {
   textSize = lerpDouble(12, 16, screenSize(context).width * 0.0005)!;
 
   return GoogleFonts.plusJakartaSans(
-    color: color ?? colorsTheme(context).onPrimary,
+    color: color ?? colorsTheme(context).primary,
     fontSize: fontSize ?? textSize,
     fontWeight: FontWeight.w600,
   );

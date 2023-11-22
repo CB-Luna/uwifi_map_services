@@ -6,6 +6,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:uwifi_map_services/data/constants.dart';
 import 'package:uwifi_map_services/providers/portability_form_provider.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
 import '../../../providers/steps_controller.dart';
 
@@ -37,12 +38,12 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
         Container(
           height: 450,
           decoration: BoxDecoration(
-            color: const Color(0xffffffff),
+            color: colorInversePrimary,
             boxShadow: const [
               BoxShadow(
                 blurRadius: 15,
                 spreadRadius: -5,
-                color: Color(0x506FA5DB),
+                color: colorBgB,
                 offset: Offset(0, 15),
               )
             ],
@@ -60,7 +61,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                   children: [
                     const Icon(
                       Icons.location_history_outlined,
-                      color: Color(0xFFD20030),
+                      color: colorPrimary,
                       size: 40,
                     ),
                     const SizedBox(width: 10),
@@ -74,7 +75,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
               const Divider(
                 height: 1,
                 thickness: 1.5,
-                color: Color(0xFF8AA7D2),
+                color: colorPrimaryDark,
               ),
               Flexible(
                 child: Form(
@@ -119,7 +120,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                                 : 'Please enter your name';
                                           },
                                           style: const TextStyle(
-                                            color: Color(0xFF2E5899),
+                                            color: colorPrimaryDark,
                                           ),
                                         ),
                                       ),
@@ -152,7 +153,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                                 : 'Please enter your name';
                                           },
                                           style: const TextStyle(
-                                            color: Color(0xFF2E5899),
+                                            color: colorPrimaryDark,
                                           ),
                                         ),
                                       ),
@@ -197,7 +198,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                                     : 'Please enter your name';
                                               },
                                               style: const TextStyle(
-                                                color: Color(0xFF2E5899),
+                                                color: colorPrimaryDark,
                                               ),
                                             ),
                                           ),
@@ -232,7 +233,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                                     : 'Please enter your name';
                                               },
                                               style: const TextStyle(
-                                                color: Color(0xFF2E5899),
+                                                color: colorPrimaryDark,
                                               ),
                                             ),
                                           ),
@@ -263,7 +264,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                     : 'Please enter a valid phone number';
                               },
                               style: const TextStyle(
-                                color: Color(0xFF2E5899),
+                                color: colorPrimaryDark,
                               ),
                             ),
                             TextFormField(
@@ -292,7 +293,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                     : 'Please enter a valid e-mail address';
                               },
                               style: const TextStyle(
-                                color: Color(0xFF2E5899),
+                                color: colorPrimaryDark,
                               ),
                             ),
                           ]),
@@ -330,7 +331,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                       Text(
                         'Disclaimers',
                         style: GoogleFonts.getFont('Work Sans',
-                            color: const Color(0xFF2E5899),
+                            color: colorPrimaryDark,
                             fontWeight: FontWeight.w500,
                             fontSize: 18,
                             letterSpacing: -0.5),

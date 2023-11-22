@@ -8,6 +8,7 @@ import 'package:uwifi_map_services/providers/cart_controller.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 import 'package:uwifi_map_services/providers/portability_form_provider.dart';
 import 'package:uwifi_map_services/providers/referal_providers/portability_form_provider_r.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/views/form_and_map_view/wigdets/gradient_button.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/customer_rep_popup.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/end_sum_add_note.dart';
@@ -50,7 +51,7 @@ class EndSummaryWidgetState extends State<EndSummaryWidget> {
         Provider.of<PortabilityFormProvider>(context);
     final bool isRep = customerController.customerInfo.customerRep != '';
     return Scaffold(
-      backgroundColor: const Color(0xFFDFEDFF),
+      backgroundColor: colorBgB,
       body: Scrollbar(
         thumbVisibility: true,
         controller: scrollController,
@@ -176,34 +177,34 @@ class EndSummaryWidgetState extends State<EndSummaryWidget> {
     if (customerController.orderSent) {
     } else {
       if (formKey.currentState!.validate()) {
-        customerController.setColor(const Color(0xFF2E5899));
+        // customerController.setColor(const Color(0xFF2E5899));
 
         if (hasRep) {
-          final Future<String> order = customerController.createOrder(
-            services: cartController.products,
-            devices: cartController.devices,
-            fees: cartController.fees,
-            additionals: cartController.additionals,
-            discounts: cartController.discounts,
-            referral: portabilityr?.customerId,
-          );
+          // final Future<String> order = customerController.createOrder(
+          //   services: cartController.products,
+          //   devices: cartController.devices,
+          //   fees: cartController.fees,
+          //   additionals: cartController.additionals,
+          //   discounts: cartController.discounts,
+          //   referral: portabilityr?.customerId,
+          // );
           showDialog(
             barrierColor: const Color(0x00022963).withOpacity(0.40),
             barrierDismissible: false,
             context: context,
             builder: (_) {
-              return CustomerRepPopup(order: order);
+              return const FinalPopup();
             },
           );
         } else {
-          await customerController.createOrder(
-            services: cartController.products,
-            devices: cartController.devices,
-            fees: cartController.fees,
-            additionals: cartController.additionals,
-            discounts: cartController.discounts,
-            referral: portabilityr?.customerId,
-          );
+          // await customerController.createOrder(
+          //   services: cartController.products,
+          //   devices: cartController.devices,
+          //   fees: cartController.fees,
+          //   additionals: cartController.additionals,
+          //   discounts: cartController.discounts,
+          //   referral: portabilityr?.customerId,
+          // );
           showDialog(
             barrierColor: const Color(0x00022963).withOpacity(0.40),
             barrierDismissible: false,
@@ -214,7 +215,7 @@ class EndSummaryWidgetState extends State<EndSummaryWidget> {
           );
         }
       } else {
-        customerController.setColor(const Color(0xFFD20030));
+        // customerController.setColor(const Color(0xFFD20030));
       }
     }
   }

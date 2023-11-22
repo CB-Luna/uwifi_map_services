@@ -60,7 +60,7 @@ class PlansListView extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                       )))
               : Image.asset(
-                  'images/$category.png',
+                  'images/uwifi.png',
                   height: 40,
                 ),
           Flexible(
