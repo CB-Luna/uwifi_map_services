@@ -11,7 +11,6 @@ import 'package:uwifi_map_services/providers/plan_controller.dart';
 import 'package:uwifi_map_services/providers/portability_form_provider.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/column_builder.dart';
-import 'package:uwifi_map_services/ui/views/stepsViews/widgets/popup_fees.dart';
 import '../../../../providers/remote/boxes_behavior_controller.dart';
 import '../../../../providers/steps_controller.dart';
 import 'cart_buttons_views.dart';
@@ -335,151 +334,9 @@ class CartWidget extends StatelessWidget {
                                   );
                                 },
                               ),
-
-                              // CartTab(
-                              //     title: "Fees",
-                              //     widget: TextButton(
-                              //         onPressed: () {
-                              //           // showDialog(
-                              //           //   barrierColor: const Color(0x00022963)
-                              //           //       .withOpacity(0.40),
-                              //           //   context: context,
-                              //           //   builder: (_) {
-                              //           //     return const FeesPopup();
-                              //           //   },
-                              //           // );
-                              //         },
-                              //         child: Text(
-                              //           'What is this?',
-                              //           style: bodyStyle(context, fontSize: 12),
-                              //         ))),
-
-                              // ColumnBuilder(
-                              //   itemCount: cart.fees.length,
-                              //   itemBuilder: (BuildContext context, int index) {
-                              //     if (cart.fees.isEmpty) {
-                              //       return const Text('no fees in cart');
-                              //     }
-                              //     final item = cart.fees[index];
-                              //     return ListTile(
-                              //       title: Text(item.name,
-                              //           style: GoogleFonts.workSans(
-                              //               fontSize: 16,
-                              //               color: colorPrimary,
-                              //               fontWeight: FontWeight.w700,
-                              //               letterSpacing: -0.5)),
-                              //       trailing: Text(
-                              //           '\$ ${item.cost.toString()} /mo',
-                              //           style: GoogleFonts.workSans(
-                              //               fontSize: 18,
-                              //               color: colorPrimary,
-                              //               fontWeight: FontWeight.w300,
-                              //               letterSpacing: -1.0)),
-                              //       // onTap: () {
-                              //       //   context.read<Cart>().removeFromCart(item);
-                              //       // },
-                              //     );
-                              //   },
-                              // ),
-
-                              //const Divider(),
                             ],
                           )),
                     )),
-                    // Visibility(
-                    //   visible:
-                    //       stepsController.currentStep == Views.finalSummaryView
-                    //           ? false
-                    //           : true,
-                    //   child: Column(
-                    //     children: [
-                    //       const Divider(),
-                    //       Padding(
-                    //         padding: const EdgeInsets.all(10.0),
-                    //         child: Container(
-                    //           height: 40,
-                    //           decoration: BoxDecoration(
-                    //             borderRadius: BorderRadius.circular(50),
-                    //             shape: BoxShape.rectangle,
-                    //             border: Border.all(
-                    //               color: const Color(0xFFD8E3F2),
-                    //             ),
-                    //           ),
-                    //           child: Row(
-                    //             mainAxisSize: MainAxisSize.max,
-                    //             mainAxisAlignment: MainAxisAlignment.center,
-                    //             crossAxisAlignment: CrossAxisAlignment.center,
-                    //             children: [
-                    //               Expanded(
-                    //                 child: Padding(
-                    //                   padding:
-                    //                       const EdgeInsetsDirectional.fromSTEB(
-                    //                           5, 5, 5, 5),
-                    //                   child: TextFormField(
-                    //                     //controller: textController,
-                    //                     obscureText: false,
-                    //                     decoration: InputDecoration(
-                    //                       isDense: true,
-                    //                       hintText: customerInfoProvider
-                    //                                   .promos.length ==
-                    //                               1
-                    //                           ? ((customerInfoProvider.promos
-                    //                                   .contains("SM"))
-                    //                               ? 'Add here a promo code'
-                    //                               : customerInfoProvider
-                    //                                   .promos[0])
-                    //                           : 'Add here a promo code',
-                    //                       hintStyle: const TextStyle(
-                    //                         fontFamily: 'Work Sans',
-                    //                         color: Color(0xFF8AA7D2),
-                    //                         fontSize: 13,
-                    //                       ),
-                    //                       enabledBorder: InputBorder.none,
-                    //                       focusedBorder: InputBorder.none,
-                    //                     ),
-                    //                     style: const TextStyle(
-                    //                       fontFamily: 'Work Sans',
-                    //                       color: Color(0xFF8AA7D2),
-                    //                       fontSize: 13,
-                    //                     ),
-                    //                     textAlign: TextAlign.start,
-                    //                   ),
-                    //                 ),
-                    //               ),
-                    //               Padding(
-                    //                 padding:
-                    //                     const EdgeInsetsDirectional.fromSTEB(
-                    //                         5, 5, 5, 5),
-                    //                 child: ElevatedButton(
-                    //                   onPressed: () {},
-                    //                   style: ElevatedButton.styleFrom(
-                    //                     shape: RoundedRectangleBorder(
-                    //                       borderRadius:
-                    //                           BorderRadius.circular(50.0),
-                    //                     ),
-                    //                     backgroundColor:
-                    //                         const Color(0xFFD20030),
-                    //                     side: const BorderSide(
-                    //                       color: Colors.transparent,
-                    //                       width: 1,
-                    //                     ),
-                    //                   ),
-                    //                   child: Text('Apply',
-                    //                       style: GoogleFonts.workSans(
-                    //                           height: 1.5,
-                    //                           fontSize: 14,
-                    //                           color: colorInversePrimary,
-                    //                           fontWeight: FontWeight.w600,
-                    //                           letterSpacing: -0.2)),
-                    //                 ),
-                    //               ),
-                    //             ],
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                     const Divider(),
                     Padding(
                       padding: const EdgeInsets.only(

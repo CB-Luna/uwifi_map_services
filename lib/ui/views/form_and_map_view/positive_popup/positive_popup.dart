@@ -6,8 +6,6 @@ import 'package:uwifi_map_services/classes/popup.dart';
 import 'package:uwifi_map_services/providers/popup_controller.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
-
-import '../parse_methods.dart';
 import 'plan_type_step.dart';
 
 class PositivePopup extends StatelessWidget with Popup {

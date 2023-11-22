@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 import 'package:uwifi_map_services/providers/plan_controller.dart';
 import 'package:uwifi_map_services/ui/views/sales_views/version_customer/step_plans/plans_listview_customer.dart';
-import 'package:uwifi_map_services/ui/views/stepsViews/widgets/bundle_ad_popup/bundle_ad.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/plans_listview.dart';
 import '../../../data/constants.dart';
 
@@ -18,7 +17,6 @@ class SalesView extends StatefulWidget {
 }
 
 class _SalesViewState extends State<SalesView> {
-  bool _popupShown = false;
 
   @override
   Widget build(BuildContext context) {
@@ -26,24 +24,6 @@ class _SalesViewState extends State<SalesView> {
     final customerController = Provider.of<CustomerInfoProvider>(context);
 
     final bool isRep = customerController.customerInfo.customerRep != "";
-
-    // if (!_popupShown) {
-    //   WidgetsBinding.instance.addPostFrameCallback((_) {
-    //     Future.delayed(const Duration(seconds: 1), () {
-    //       var bundlePlans = controller.plansList
-    //           .where((element) => element.planCategory.contains('bundle'))
-    //           .toList();
-    //       if (!isRep) {
-    //         if (bundlePlans.isNotEmpty) {
-    //           popupBundleAd(context, bundlePlans, controller);
-    //         }
-    //       }
-    //     });
-    //     setState(() {
-    //       _popupShown = true;
-    //     });
-    //   });
-    // }
 
     final ScrollController scrollController = ScrollController();
 
