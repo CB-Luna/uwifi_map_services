@@ -5,8 +5,6 @@ class StepperWidget extends StatelessWidget {
   final double width;
   final List<IconData> icons = [
     MdiIcons.cartOutline,
-    MdiIcons.accountOutline,
-    MdiIcons.check
   ];
   final int curStep;
   final Color activeColor;

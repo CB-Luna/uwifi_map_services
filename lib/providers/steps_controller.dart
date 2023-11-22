@@ -10,12 +10,12 @@ import '../ui/views/sales_views/sales_view.dart';
 import 'package:uwifi_map_services/ui/views/portability_view/popups/popup_acknowledge.dart';
 import 'package:uwifi_map_services/ui/views/portability_view/selector_view/selector_summary_view.dart';
 
-enum Views { plansView, customerInfoView, finalSummaryView }
+enum Views { customerInfoView, finalSummaryView }
 
-enum RepViews { customerInfoView, plansView, finalSummaryView }
+enum RepViews { customerInfoView, finalSummaryView }
 
 class StepsController with ChangeNotifier {
-  Views _index = Views.plansView;
+  Views _index = Views.customerInfoView;
   RepViews _repIndex = RepViews.customerInfoView;
 
   String _street = '';
@@ -53,8 +53,6 @@ class StepsController with ChangeNotifier {
 
   changeStep(Views index) {
     switch (index) {
-      case Views.plansView:
-        return SalesView(serviceType: _serviceType);
 
       case Views.customerInfoView:
         return CustomerInfoView(
@@ -79,8 +77,6 @@ class StepsController with ChangeNotifier {
 
   changeRepStep(RepViews index) {
     switch (index) {
-      case RepViews.plansView:
-        return SalesView(serviceType: _serviceType);
 
       case RepViews.customerInfoView:
         return CustomerInfoView(
@@ -114,11 +110,6 @@ class StepsController with ChangeNotifier {
 
   validateRepStep(context) {
     switch (repCurrentStep) {
-      case RepViews.plansView:
-        popupAcknowledge(context);
-        repCurrentStep = RepViews.finalSummaryView;
-
-        break;
       case RepViews.customerInfoView:
         final cartController = Provider.of<Cart>(context, listen: false);
         if (formValidation() && promoCheckFlag) {
@@ -128,7 +119,7 @@ class StepsController with ChangeNotifier {
               : 
               null;
 
-          repCurrentStep = RepViews.plansView;
+          repCurrentStep = RepViews.customerInfoView;
         }
         break;
       case RepViews.finalSummaryView:
@@ -140,12 +131,6 @@ class StepsController with ChangeNotifier {
 
   validateStep(bool cartContains, context) {
     switch (currentStep) {
-      case Views.plansView:
-        if (cartContains) {
-          currentStep = Views.customerInfoView;
-        }
-
-        break;
       case Views.customerInfoView:
         final cartController = Provider.of<Cart>(context, listen: false);
         if (formValidation() && promoCheckFlag) {

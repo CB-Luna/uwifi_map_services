@@ -139,7 +139,7 @@ class CartButtons extends StatelessWidget {
           : true;
     } else {
       isPossible =
-          stepsController.currentStep == Views.plansView ? false : true;
+          stepsController.currentStep == Views.customerInfoView ? false : true;
     }
 
     return isPossible;

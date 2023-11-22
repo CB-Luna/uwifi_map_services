@@ -190,7 +190,7 @@ class CartWidget extends StatelessWidget {
 
                                                     stepsController
                                                             .currentStep =
-                                                        Views.plansView;
+                                                        Views.customerInfoView;
                                                   }
                                                   if (item.category
                                                       .contains('TV')) {
@@ -422,19 +422,6 @@ class CartWidget extends StatelessWidget {
                 ),
               ),
             ),
-
-            // IconButton(
-            //   splashRadius: 15.0,
-            //   padding: const EdgeInsets.all(12.0),
-            //   icon: const Icon(
-            //     Icons.shopping_cart,
-            //     color: Color.fromARGB(255, 10, 56, 126),
-            //     size: 30,
-            //   ),
-            //   onPressed: () {
-            //     cartController.changeVisibility();
-            //   },
-            // ),
           );
   }
 }

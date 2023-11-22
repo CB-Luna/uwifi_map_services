@@ -78,7 +78,7 @@ class SalesLayout extends StatelessWidget {
                   child: Row(children: [
                     //Despliegue de Promos list
                     if (isRep)
-                      if (stepsController.repCurrentStep == RepViews.plansView)
+                      if (stepsController.repCurrentStep == RepViews.customerInfoView)
                         const PromosListBox(),
 
                     //Despliegue de planes

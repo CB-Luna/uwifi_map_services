@@ -6,7 +6,7 @@ import 'package:uwifi_map_services/classes/customer_info.dart';
 import '../classes/product.dart';
 import 'package:http/http.dart' as http;
 
-enum Views { map, plans, customerInfo, finalSummary }
+enum Views { map, customerInfo, finalSummary }
 
 class TrackingProvider with ChangeNotifier {
   late String uuid;
@@ -32,10 +32,6 @@ class TrackingProvider with ChangeNotifier {
   changeViewIndex() {
     switch (currentView) {
       case Views.map:
-        _index = Views.plans;
-        break;
-
-      case Views.plans:
         _index = Views.customerInfo;
         break;
 

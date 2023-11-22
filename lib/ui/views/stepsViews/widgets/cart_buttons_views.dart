@@ -13,14 +13,6 @@ styledButton(context) {
   final stepsController = Provider.of<StepsController>(context);
 
   switch (stepsController.currentStep) {
-    case Views.plansView:
-      var opacity = cartController.products.isNotEmpty ? 1.0 : 0.50;
-
-      return CartButtons(
-          opacity: opacity,
-          isVisible: true,
-          buttonText: "Your Information",
-          cartContains: cartController.products.isNotEmpty);
 
     case Views.customerInfoView:
       var opacity = stepsController.promoCheckFlag ? 1.0 : 0.50;
@@ -56,12 +48,6 @@ styledRepButton(context) {
   final stepsController = Provider.of<StepsController>(context);
 
   switch (stepsController.repCurrentStep) {
-    case RepViews.plansView:
-      return CartButtons(
-          opacity: 1.0,
-          isVisible: true,
-          buttonText: "Order",
-          cartContains: cartController.products.isNotEmpty);
 
     case RepViews.customerInfoView:
       var opacity = stepsController.promoCheckFlag ? 1.0 : 0.50;
