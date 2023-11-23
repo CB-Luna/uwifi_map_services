@@ -1,11 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/views/sales_views/version_customer/step_plans/widgets/plan_radiobutton.dart';
-import 'package:uwifi_map_services/ui/views/stepsViews/widgets/bundle_custom_radio_widget.dart';
 
 import 'package:uwifi_map_services/classes/plan.dart';
 import 'package:uwifi_map_services/classes/product.dart';
@@ -80,8 +77,6 @@ class PlansListViewCustomer extends StatelessWidget {
                     if (products[index].isEnabled) {
                       if (!products[index].isSelected) {
                         //Primero limpiamos informacion previa según el servicio seleccionado
-                        cartController
-                            .cleanByCategory(products[index].planCategory);
 
                         //Se selecciona el plan específico
                         plansController.selectPlan(products[index]);
@@ -137,7 +132,6 @@ class PlansListViewCustomer extends StatelessWidget {
                                   .toString()
                                   .toUpperCase()
                                   .contains("SMI"))) {
-                            cartController.discountRules();
                           }
                         } else {
                           cartController.discounts.removeWhere(
@@ -197,8 +191,6 @@ class PlansListViewCustomer extends StatelessWidget {
         plan: plan, isTherePromo: true, promo: promo, isPromoApplied: true);
 
     if (plan.isSelected) {
-      cartController.cleanPromos();
-      cartController.addPromoToCart(promo);
       // cartController.products.clear();
     }
 
@@ -234,9 +226,6 @@ class PlansListViewCustomer extends StatelessWidget {
           for (var i = 0; i < plan.associations!.pack!.products!.length; i++) {
             if (customerController.promos
                 .contains(plan.associations!.pack!.products![i].id)) {
-              cartController.cleanPromos();
-              cartController
-                  .addPromoToCart(plan.associations!.pack!.products![i]);
 
               cartController.discounts
                   .removeWhere((element) => element.id == "bundleDiscount");

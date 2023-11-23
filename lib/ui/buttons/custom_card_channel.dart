@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/classes/premium_channel_packs.dart';
-import 'package:uwifi_map_services/providers/cart_controller.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/tv_popup/square_image.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/tv_popup/tv_popup_bundle.dart';
 
@@ -23,8 +21,7 @@ class CustomCardChannel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<Cart>(context);
-    bool isSelected = controller.packsPremium[index].isSelected!;
+    bool isSelected = true;
     final size = MediaQuery.of(context).size;
     final bool desktop = size.width > 1350 ? true : false;
     return Row(
@@ -34,7 +31,6 @@ class CustomCardChannel extends StatelessWidget {
           flex: 1,
           child: GestureDetector(
             onTap: () {
-             controller.changeSelectedPackPremium(index);
             },
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
@@ -76,8 +72,7 @@ class CustomCardChannel extends StatelessWidget {
                   Positioned(
                     bottom: 4,
                     right: 4,
-                    child: isSelected
-                        ? Container(
+                    child:  Container(
                             height: 20,
                             width: 20,
                             decoration: const BoxDecoration(
@@ -92,34 +87,7 @@ class CustomCardChannel extends StatelessWidget {
                                 color: Colors.white,
                                 size: 15,
                               ),
-                            ))
-                        : Container(
-                            height: 20,
-                            width: 40,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: const Color(0xFFD20030)),
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  bottomRight: Radius.circular(12)),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('Add',
-                                    style: GoogleFonts.workSans(
-                                      fontSize: 12,
-                                      color: const Color(0xFFD20030),
-                                      fontWeight: FontWeight.w400,
-                                      letterSpacing: -2.0,
-                                    )),
-                                const Icon(
-                                  Icons.add,
-                                  color: Color(0xFFD20030),
-                                  size: 10,
-                                )
-                              ],
-                            ),
-                          ),
+                            )),
                   )
                 ]),
               ),

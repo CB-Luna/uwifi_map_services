@@ -25,7 +25,6 @@ class CustomCardSupportedDevices extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            cartController.changeSelectedSuportedDevices(index);
           },
           child: MouseRegion(
             cursor: SystemMouseCursors.click,
@@ -100,7 +99,7 @@ class CustomCardSupportedDevices extends StatelessWidget {
                                children: [
                                  InkWell(
                                      onTap: () {
-                                         cartController.removeCounterSetTopBox(index);
+                                 
                                      },
                                      child: const Icon(
                                        Icons.remove_circle_outline,
@@ -121,7 +120,7 @@ class CustomCardSupportedDevices extends StatelessWidget {
                                  ),
                                   InkWell(
                                      onTap: () {
-                                        cartController.addCounterSetTopBox(index);
+                               
                                      },
                                      child: const Icon(
                                        Icons.add_circle_outline,

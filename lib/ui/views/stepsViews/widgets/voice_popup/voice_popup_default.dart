@@ -39,20 +39,6 @@ class VoiceDefault extends StatelessWidget with Popup {
     final idVoice = plan.id;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (cartController.fees.isEmpty) {
-        cartController.addFeesToCart(voicePopupController.fees);
-      } else {
-        for (var i = 0; i < voicePopupController.fees.length; i++) {
-          List<Product> contains = cartController.fees
-              .where((item) =>
-                  item.category == voicePopupController.fees[i].category)
-              .toList();
-
-          if (contains.isEmpty) {
-            cartController.addFeesToCart(voicePopupController.fees);
-          }
-        }
-      }
     });
     return Stack(
       children: [
@@ -288,8 +274,6 @@ class VoiceDefault extends StatelessWidget with Popup {
                                 pwName: voicePopupController
                                     .aditionalProducts[idVoice]![index].pwName,
                               );
-                              cartController.additionalsLine
-                                  .add(additionalLine);
                               // print(additional);
                               return SliderCard(
                                 id: id,

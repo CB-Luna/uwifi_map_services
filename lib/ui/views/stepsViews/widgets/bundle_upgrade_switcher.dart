@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:rolling_switch/rolling_switch.dart';
 import '../../../../classes/plan.dart';
 import '../../../../classes/product.dart';
-import '../../../../providers/cart_controller.dart';
 
 class BundleSwitchWidget extends StatelessWidget {
   final Products product;
@@ -16,7 +14,6 @@ class BundleSwitchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cartController = Provider.of<Cart>(context, listen: false);
 
     final size = MediaQuery.of(context).size;
     final bool mobile = size.width < 600 ? true : false;
@@ -81,10 +78,6 @@ class BundleSwitchWidget extends StatelessWidget {
                   key: ValueKey(selected),
                   initialState: false,
                   onChanged: (bool state) {
-                    state == true
-                        ? cartController.addAdditionalToCart(cartProduct)
-                        : cartController
-                            .removeFromAdditionalCart(cartProduct.id);
                   },
                   rollingInfoLeft: RollingWidgetInfo(
                     icon: const Icon(

@@ -27,9 +27,6 @@ class SwitchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartController = Provider.of<Cart>(context);
-    double currentValue =
-        cartController.additionalsLine[index].quantity.toDouble();
-    double currentPrice = currentValue * basePrice;
 
     final size = MediaQuery.of(context).size;
     final bool mobile = size.width < 600 ? true : false;
@@ -46,7 +43,6 @@ class SwitchWidget extends StatelessWidget {
               onChanged: (bool state) {
                 // print('turned ${(state) ? 'on' : 'off'}');
                 cartController.aciveToogle = !cartController.aciveToogle;
-                cartController.changeSwitchAdditionalLine(index, state);
               },
               rollingInfoLeft: RollingWidgetInfo(
                 icon: const Icon(
@@ -83,7 +79,7 @@ class SwitchWidget extends StatelessWidget {
               children: [
                 Row(mainAxisSize: MainAxisSize.min, children: [
                   Text(
-                    "\$$currentPrice",
+                    "\$",
                     style: GoogleFonts.workSans(
                       fontSize: 26,
                       color: const Color(0xFF2e5899),

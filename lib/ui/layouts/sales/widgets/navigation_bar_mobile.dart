@@ -26,8 +26,6 @@ class NavigationMobile extends StatelessWidget {
           ],
         ),
         padding: const EdgeInsets.all(15.0),
-        child: customerController.customerInfo.customerRep != ""
-            ? styledRepButton(context)
-            : styledButton(context));
+        child: styledButton(context));
   }
 }

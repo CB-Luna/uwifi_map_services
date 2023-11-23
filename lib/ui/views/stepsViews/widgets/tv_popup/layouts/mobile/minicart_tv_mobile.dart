@@ -65,28 +65,7 @@ class MiniCartTVMobile extends StatelessWidget {
                           ),
                         ),
 
-                        ColumnBuilder(
-                          itemCount:
-                              cartController.additionalsVideoSelected.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            final item =
-                                cartController.additionalsVideoSelected[index];
-                            return ListTile(
-                              title: Text(item.name,
-                                  style: GoogleFonts.workSans(
-                                      fontSize: 15,
-                                      color: const Color(0xff2e5899),
-                                      fontWeight: FontWeight.w700,
-                                      letterSpacing: -0.5)),
-                              trailing: Text('\$ ${item.cost.toString()}/mo',
-                                  style: GoogleFonts.workSans(
-                                      fontSize: 18,
-                                      color: const Color(0xff2e5899),
-                                      fontWeight: FontWeight.w300,
-                                      letterSpacing: -1.0)),
-                            );
-                          },
-                        ),
+                      
 
                         Container(
                           alignment: Alignment.centerLeft,
@@ -109,29 +88,7 @@ class MiniCartTVMobile extends StatelessWidget {
                           ),
                         ),
 
-                        ColumnBuilder(
-                          itemCount: cartController
-                              .additionalsRecordingSelected.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            final item = cartController
-                                .additionalsRecordingSelected[index];
-                            return ListTile(
-                              title: Text(item.name,
-                                  style: GoogleFonts.workSans(
-                                      fontSize: 15,
-                                      color: const Color(0xff2e5899),
-                                      fontWeight: FontWeight.w700,
-                                      letterSpacing: -0.5)),
-                              trailing: Text('\$ ${item.cost.toString()}/mo',
-                                  style: GoogleFonts.workSans(
-                                      fontSize: 18,
-                                      color: const Color(0xff2e5899),
-                                      fontWeight: FontWeight.w300,
-                                      letterSpacing: -1.0)),
-                            );
-                          },
-                        ),
-
+            
                         Container(
                           alignment: Alignment.centerLeft,
                           height: 20,
@@ -151,28 +108,6 @@ class MiniCartTVMobile extends StatelessWidget {
                                     fontWeight: FontWeight.w500,
                                     letterSpacing: -0.5)),
                           ),
-                        ),
-
-                        ColumnBuilder(
-                          itemCount: cartController.packsPremiumSelected.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            final item =
-                                cartController.packsPremiumSelected[index];
-                            return ListTile(
-                              title: Text(item.name,
-                                  style: GoogleFonts.workSans(
-                                      fontSize: 15,
-                                      color: const Color(0xff2e5899),
-                                      fontWeight: FontWeight.w700,
-                                      letterSpacing: -0.5)),
-                              trailing: Text('\$ ${item.cost.toString()}/mo',
-                                  style: GoogleFonts.workSans(
-                                      fontSize: 18,
-                                      color: const Color(0xff2e5899),
-                                      fontWeight: FontWeight.w300,
-                                      letterSpacing: -1.0)),
-                            );
-                          },
                         ),
 
                         Container(
@@ -241,29 +176,6 @@ class MiniCartTVMobile extends StatelessWidget {
                           ),
                         ),
 
-                        ColumnBuilder(
-                          itemCount: cartController.moviesBundleSelected.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            final item =
-                                cartController.moviesBundleSelected[index];
-                            return ListTile(
-                              title: Text(item.name,
-                                  style: GoogleFonts.workSans(
-                                      fontSize: 15,
-                                      color: const Color(0xff2e5899),
-                                      fontWeight: FontWeight.w700,
-                                      letterSpacing: -0.5)),
-                              trailing: Text(
-                                  '\$ ${(item.cost * item.quantity)}/mo',
-                                  style: GoogleFonts.workSans(
-                                      fontSize: 18,
-                                      color: const Color(0xff2e5899),
-                                      fontWeight: FontWeight.w300,
-                                      letterSpacing: -1.0)),
-                            );
-                          },
-                        ),
-
                         //const Divider(),
                       ],
                     ))),
@@ -280,7 +192,7 @@ class MiniCartTVMobile extends StatelessWidget {
                             fontWeight: FontWeight.w600,
                             letterSpacing: -0.5)),
                     Text(
-                        "\$${cartController.additionalsTVPrice + cartController.totalDevices}",
+                        "\$",
                         style: GoogleFonts.workSans(
                             fontSize: 20,
                             color: const Color(0xff2e5899),

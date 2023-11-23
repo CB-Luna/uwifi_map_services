@@ -132,7 +132,7 @@ class TopBar extends StatelessWidget {
               ),
               const Spacer(),
               StepperWidget(
-                width: 500,
+                width: 50,
                 curStep: stepsController.currentStep.index,
                 activeColor: colorsTheme(context).primary),
               const Spacer()

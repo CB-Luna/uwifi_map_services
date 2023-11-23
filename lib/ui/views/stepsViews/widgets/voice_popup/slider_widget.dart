@@ -24,9 +24,6 @@ class SliderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartController = Provider.of<Cart>(context);
-    double currentValue =
-        cartController.additionalsLine[index].quantity.toDouble();
-    double currentPrice = currentValue * basePrice;
 
     final size = MediaQuery.of(context).size;
     final bool mobile = size.width < 600 ? true : false;
@@ -67,15 +64,7 @@ class SliderWidget extends StatelessWidget {
                     overlayShape:
                         RoundSliderOverlayShape(overlayRadius: sliderRadius),
                   ),
-                  child: Slider(
-                    value: currentValue,
-                    max: maxValue,
-                    divisions: maxValue.round(),
-                    label: currentValue.round().toString(),
-                    onChanged: (double value) {
-                      cartController.changeSliderAdditionalLine(value, index);
-                    },
-                  ),
+                  child: Text("Text"),
                 ),
               ),
               Text(
@@ -98,7 +87,7 @@ class SliderWidget extends StatelessWidget {
               children: [
                 Row(mainAxisSize: MainAxisSize.min, children: [
                   Text(
-                    "\$$currentPrice",
+                    "\$",
                     style: GoogleFonts.workSans(
                       fontSize: 26,
                       color: const Color(0xFF2e5899),
@@ -116,7 +105,7 @@ class SliderWidget extends StatelessWidget {
                     ),
                   )
                 ]),
-                Text("For $currentValue $productName(s)",
+                Text("For $productName(s)",
                     style: GoogleFonts.workSans(
                       fontSize: fontSize,
                       color: const Color(0xFF2e5899),

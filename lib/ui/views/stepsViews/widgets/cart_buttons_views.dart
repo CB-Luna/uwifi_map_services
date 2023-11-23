@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:uwifi_map_services/providers/tracking_provider.dart' as track;
+import 'package:uwifi_map_services/ui/views/stepsViews/widgets/final_popup.dart';
 import '../../../../providers/cart_controller.dart';
 import '../../../../providers/steps_controller.dart';
 import 'cart_buttons.dart';
@@ -9,33 +9,23 @@ import 'dart:js' as js;
 
 styledButton(context) {
   final cartController = Provider.of<Cart>(context);
-  final tracking = Provider.of<track.TrackingProvider>(context);
   final stepsController = Provider.of<StepsController>(context);
 
   switch (stepsController.currentStep) {
-
+    //Se controla la leyenda del botón del shopping cart, dependiendo la vista actual del proceso.
     case Views.customerInfoView:
+      //Se controla la opacidad del botón (que se haga ver habilitado)
       var opacity = stepsController.promoCheckFlag ? 1.0 : 0.50;
 
       return CartButtons(
           opacity: opacity,
           isVisible: true,
-          buttonText: "Order",
+          buttonText: "Save & Finish",
           function: () {
-            (tracking.origin.contains("social") &&
-                    stepsController.formValidation())
-                ? js.context.callMethod('fbq', ['track', 'AddToCart'])
-                // js.context['console'].callMethod('log',
-                //     ['Evento de Facebook Pixel AddToCart ejecutado por JS'])
-                : null;
+            if (stepsController.formValidation()) {
+              finalPressed(context, cartController);
+            }
           },
-          cartContains: cartController.products.isNotEmpty);
-
-    case Views.finalSummaryView:
-      return CartButtons(
-          opacity: 1,
-          isVisible: false,
-          buttonText: "",
           cartContains: cartController.products.isNotEmpty);
 
     default:
@@ -43,29 +33,15 @@ styledButton(context) {
   }
 }
 
-styledRepButton(context) {
-  final cartController = Provider.of<Cart>(context);
-  final stepsController = Provider.of<StepsController>(context);
-
-  switch (stepsController.repCurrentStep) {
-
-    case RepViews.customerInfoView:
-      var opacity = stepsController.promoCheckFlag ? 1.0 : 0.50;
-
-      return CartButtons(
-          opacity: opacity,
-          isVisible: true,
-          buttonText: "Choose plans",
-          cartContains: cartController.products.isNotEmpty);
-
-    case RepViews.finalSummaryView:
-      return CartButtons(
-          opacity: 1,
-          isVisible: false,
-          buttonText: "",
-          cartContains: cartController.products.isNotEmpty);
-
-    default:
-      return const Text("a");
+void finalPressed(BuildContext context,
+      Cart cartController) async {
+      showDialog(
+        barrierColor: const Color(0x00022963).withOpacity(0.40),
+        barrierDismissible: false,
+        context: context,
+        builder: (_) {
+          return const FinalPopup();
+        },
+      );
   }
-}
+

@@ -158,15 +158,15 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
                               style: ElevatedButton.styleFrom(
                                   shape: const CircleBorder(
                                     side: BorderSide(
-                                        color: Color(0xFF2E5899), width: 2),
+                                        color: colorPrimary, width: 2),
                                   ),
-                                  primary: const Color(0xFFDFEDFF),
+                                  primary: colorPrimary,
                                   minimumSize: const Size.fromHeight(50)),
                               child: const FittedBox(
                                 fit: BoxFit.contain,
                                 child: Icon(
                                   Icons.location_history_outlined,
-                                  color: Color(0xFFD20030),
+                                  color: colorPrimary,
                                   size: 30,
                                 ),
                               ),
@@ -180,7 +180,10 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset('images/bouncy_down.gif'),
+                                const Icon(
+                                  Icons.expand_circle_down_outlined,
+                                  color: colorSecondary,
+                                  size: 40,),
                                 Padding(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 5.0),
@@ -188,7 +191,7 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
                                     'Scroll Down',
                                     style: GoogleFonts.workSans(
                                         fontSize: 13,
-                                        color: const Color(0xFF2e5899),
+                                        color: colorSecondary,
                                         fontWeight: FontWeight.w500,
                                         letterSpacing: -1.5),
                                   ),
@@ -202,9 +205,9 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
                               style: ElevatedButton.styleFrom(
                                   shape: const CircleBorder(
                                     side: BorderSide(
-                                        color: Color(0xFF2E5899), width: 2),
+                                        color: colorSecondary, width: 2),
                                   ),
-                                  primary: const Color(0xFFDFEDFF),
+                                  primary: colorSecondary,
                                   minimumSize: const Size.fromHeight(50)),
                               child: Image.asset(
                                 'images/pointer.png',

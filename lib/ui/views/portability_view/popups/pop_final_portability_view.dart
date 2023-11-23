@@ -34,10 +34,6 @@ class PopFinalPortabilityView extends StatelessWidget {
                   ),
                 CustomOutlinedButton(
                     onPressed: () {
-                      if(!cartController.checkProductOnAdditionals(portabilityFormProvider.portabilityVoice.id)){
-                          cartController.addAdditionalToCart(portabilityFormProvider.portabilityVoice);
-                          portabilityFormProvider.portabilityCheck = true;
-                        }
                         Navigator.of(context).pop();
                     },
                     text: 'Continue'),

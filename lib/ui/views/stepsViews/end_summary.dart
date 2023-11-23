@@ -10,7 +10,6 @@ import 'package:uwifi_map_services/providers/portability_form_provider.dart';
 import 'package:uwifi_map_services/providers/referal_providers/portability_form_provider_r.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/views/form_and_map_view/wigdets/gradient_button.dart';
-import 'package:uwifi_map_services/ui/views/stepsViews/customer_rep_popup.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/end_sum_add_note.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/end_sum_personal.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/end_sum_repView.dart';
@@ -59,7 +58,7 @@ class EndSummaryWidgetState extends State<EndSummaryWidget> {
           controller: scrollController,
           primary: false,
           child: Padding(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Wrap(
               children: [
                 SizedBox(
@@ -148,7 +147,7 @@ class EndSummaryWidgetState extends State<EndSummaryWidget> {
                                     portabilityFormProvider.telephoneNumber,
                                     portabilityFormProvider.billingTelephone);
                               }
-                              finalPressed(isRep, customerController,
+                              finalPressed(customerController,
                                   cartController, portabilityFormProviderR);
                               if (portabilityFormProvider.fileSelected) {
                                 portabilityFormProvider.uploadFileLastBill();
@@ -172,31 +171,12 @@ class EndSummaryWidgetState extends State<EndSummaryWidget> {
     );
   }
 
-  void finalPressed(bool hasRep, CustomerInfoProvider customerController,
+  void finalPressed(CustomerInfoProvider customerController,
       Cart cartController, PortabilityFormProviderR? portabilityr) async {
-    if (customerController.orderSent) {
-    } else {
+    // if (customerController.orderSent) {
+    // } else {
       if (formKey.currentState!.validate()) {
         // customerController.setColor(const Color(0xFF2E5899));
-
-        if (hasRep) {
-          // final Future<String> order = customerController.createOrder(
-          //   services: cartController.products,
-          //   devices: cartController.devices,
-          //   fees: cartController.fees,
-          //   additionals: cartController.additionals,
-          //   discounts: cartController.discounts,
-          //   referral: portabilityr?.customerId,
-          // );
-          showDialog(
-            barrierColor: const Color(0x00022963).withOpacity(0.40),
-            barrierDismissible: false,
-            context: context,
-            builder: (_) {
-              return const FinalPopup();
-            },
-          );
-        } else {
           // await customerController.createOrder(
           //   services: cartController.products,
           //   devices: cartController.devices,
@@ -213,10 +193,10 @@ class EndSummaryWidgetState extends State<EndSummaryWidget> {
               return const FinalPopup();
             },
           );
-        }
-      } else {
-        // customerController.setColor(const Color(0xFFD20030));
       }
-    }
+      // else {
+      //   // customerController.setColor(const Color(0xFFD20030));
+      // }
+    // }
   }
 }

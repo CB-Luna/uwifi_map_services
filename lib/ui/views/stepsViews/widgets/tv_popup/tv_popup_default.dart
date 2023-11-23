@@ -20,32 +20,7 @@ class TVDefault extends StatelessWidget with Popup {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final tvPopupController = Provider.of<TVPopupController>(context);
-    final cartController = Provider.of<Cart>(context);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (cartController.fees.isEmpty) {
-        cartController.addFeesToCart(tvPopupController.fees);
-      } else {
-        for (var i = 0; i < tvPopupController.fees.length; i++) {
-          List<Product> contains = cartController.fees
-              .where(
-                  (item) => item.category == tvPopupController.fees[i].category)
-              .toList();
-
-          if (contains.isEmpty) {
-            cartController.addFeesToCart(tvPopupController.fees);
-          }
-        }
-      }
-      if (cartController.packsPremium.isEmpty) {
-        for (var i = 0;
-            i < tvPopupController.packagePremiumChannels.length;
-            i++) {
-          tvPopupController.packagePremiumChannels[i].isSelected = false;
-        }
-        cartController
-            .addPacksPremiumChannels(tvPopupController.packagePremiumChannels);
-      }
     });
 
     if (size.width >= 1350) {

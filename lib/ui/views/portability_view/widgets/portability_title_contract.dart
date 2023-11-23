@@ -76,7 +76,6 @@ class PortabilityTitleContract extends StatelessWidget {
                   color: const Color(0xFF2e5899),
                   icon: const Icon(Icons.close),
                   onPressed: () {
-                    cartController.removeFromAdditionalCart('phoneNumberPort');
                     portabilityFormProvider.clearInformationPortability();
                     portabilityFormProvider.portabilityCheck = false;
                     Navigator.of(context).pop();},

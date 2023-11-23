@@ -13,7 +13,6 @@ import '../../../data/constants.dart';
 import '../../../providers/remote/boxes_behavior_controller.dart';
 import '../../../providers/steps_controller.dart';
 
-import '../../views/stepsViews/widgets/promos_list_box.dart';
 import 'widgets/navigation_bar_mobile.dart';
 import 'widgets/top_bar.dart';
 
@@ -61,8 +60,6 @@ class SalesLayout extends StatelessWidget {
           final customerController = Provider.of<CustomerInfoProvider>(context);
           final stepsController = Provider.of<StepsController>(context);
 
-          bool isRep = customerController.customerInfo.customerRep != "";
-
           return Scaffold(
             resizeToAvoidBottomInset: false,
             bottomNavigationBar: mobile(context)
@@ -75,19 +72,19 @@ class SalesLayout extends StatelessWidget {
               children: [
                 TopBar(custAddress: custAddress),
                 Expanded(
-                  child: Row(children: [
+                  child: Row(
+                    //Con este parámatro se ajusta la posición del Shopping Cart
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                     //Despliegue de Promos list
-                    if (isRep)
-                      if (stepsController.repCurrentStep == RepViews.customerInfoView)
-                        const PromosListBox(),
+                    // if (isRep)
+                    //   if (stepsController.repCurrentStep == RepViews.customerInfoView)
+                    //     const PromosListBox(),
 
-                    //Despliegue de planes
+                    //Despliegue de contenido de página en Stepper
                     Flexible(
-                        child: isRep
-                            ? stepsController
-                                .changeRepStep(stepsController.repCurrentStep)
-                            : stepsController
-                                .changeStep(stepsController.currentStep)),
+                        child: stepsController
+                          .changeStep(stepsController.currentStep)),
 
                     //Despliegue de Shopping Cart
                     if (!mobile(context)) const CartWidget()

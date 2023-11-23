@@ -75,7 +75,6 @@ class PopAgreePortabilityService extends StatelessWidget {
                       CustomOutlinedButton(
                             onPressed: () {
                               portabilityFormProvider.clearInformationPortability();
-                              cartController.removeFromAdditionalCart('phoneNumberPort');
                               portabilityFormProvider.portabilityCheck = false;
                               Navigator.of(context).pop();
                               },

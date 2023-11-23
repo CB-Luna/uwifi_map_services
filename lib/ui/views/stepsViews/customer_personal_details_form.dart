@@ -416,7 +416,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                   ),
                                   Checkbox(
                                       checkColor: colorPrimaryDark,
-                                      semanticLabel: "Same as before?",
+                                      // semanticLabel: "Same as before?",
                                       value: selected,
                                       onChanged: (value) {
                                         selected = value;

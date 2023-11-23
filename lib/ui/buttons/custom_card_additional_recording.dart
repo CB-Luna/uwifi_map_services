@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:uwifi_map_services/providers/cart_controller.dart';
 
 class CustomCardAdditionalRecording extends StatelessWidget {
   final int index; 
@@ -16,11 +14,8 @@ class CustomCardAdditionalRecording extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<Cart>(context);
-    bool isSelected = controller.additionalsRecording[index].isSelected!;
     return GestureDetector(
       onTap:(){
-        controller.changeSelectedAdditionalsRecording(index);
       },
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
@@ -32,7 +27,6 @@ class CustomCardAdditionalRecording extends StatelessWidget {
               Card(
                 color: Colors.white,
                 elevation: 4,
-                shape: getDecoration(isSelected),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -62,8 +56,7 @@ class CustomCardAdditionalRecording extends StatelessWidget {
               Positioned(
                 bottom: 4,
                 right: 4,
-                child: isSelected ? 
-                Container(
+                child: Container(
                   height: 20,
                   width: 20,
                   decoration: const BoxDecoration(
@@ -78,21 +71,6 @@ class CustomCardAdditionalRecording extends StatelessWidget {
                         color: Colors.white,
                         size: 15,
                         ),
-                      )
-                )
-                :
-                const SizedBox(
-                  height: 20,
-                  width: 20,
-                  // decoration: BoxDecoration(
-                  //       border: Border.all(color: const Color(0xFFD20030)),
-                  //       borderRadius: const BorderRadius.only(
-                  //         topLeft: Radius.circular(20),
-                  //         bottomRight: Radius.circular(12)),
-                  //     ),
-                  child: Icon(Icons.circle_outlined,
-                      color: Color(0xFF101E51),
-                      size: 10,
                       )
                 ),
               )

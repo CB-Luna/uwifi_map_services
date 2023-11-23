@@ -89,9 +89,6 @@ class AdditionalTabsMobile extends StatelessWidget {
                                   quantity: 1, 
                                   pwName: tvpopupController.videoStreams[idTV]![index].pwName);
                                 // ignore: iterable_contains_unrelated_type
-                                if (!cartController.additionalsVideo.contains((element) => element.index == index)) {
-                                  cartController.additionalsVideo.add(additional);
-                                }
                                 // print(additional);
                                 return CustomCardAdditionalVideo(index: index, name: name, cost: cost);
                               })
@@ -119,9 +116,6 @@ class AdditionalTabsMobile extends StatelessWidget {
                                   quantity: 1, 
                                   pwName: tvpopupController.recordingStorage[idTV]![index].pwName);
                                 // ignore: iterable_contains_unrelated_type
-                                if (!cartController.additionalsRecording.contains((element) => element.index == index)) {
-                                  cartController.additionalsRecording.add(additional);
-                                }
                                 return  CustomCardAdditionalRecording(index: index, name: name, cost: cost);
                               }) 
                               :

@@ -4,15 +4,11 @@ import 'package:uwifi_map_services/providers/cart_controller.dart';
 
 import '../classes/customer_info.dart';
 import '../ui/views/stepsViews/customer_info_view.dart';
-import '../ui/views/stepsViews/end_summary.dart';
 import '../ui/views/sales_views/sales_view.dart';
 
-import 'package:uwifi_map_services/ui/views/portability_view/popups/popup_acknowledge.dart';
-import 'package:uwifi_map_services/ui/views/portability_view/selector_view/selector_summary_view.dart';
+enum Views { customerInfoView}
 
-enum Views { customerInfoView, finalSummaryView }
-
-enum RepViews { customerInfoView, finalSummaryView }
+enum RepViews { customerInfoView}
 
 class StepsController with ChangeNotifier {
   Views _index = Views.customerInfoView;
@@ -62,42 +58,11 @@ class StepsController with ChangeNotifier {
           zipcode: _zipcode,
         );
 
-      case Views.finalSummaryView:
-        return EndSummaryWidget(
-          street: _street,
-          city: _city,
-          state: _state,
-          zipcode: _zipcode,
-        );
-
       default:
         return SalesView(serviceType: _serviceType);
     }
   }
 
-  changeRepStep(RepViews index) {
-    switch (index) {
-
-      case RepViews.customerInfoView:
-        return CustomerInfoView(
-          street: _street,
-          city: _city,
-          state: _state,
-          zipcode: _zipcode,
-        );
-
-      case RepViews.finalSummaryView:
-        return EndSummaryWidget(
-          street: _street,
-          city: _city,
-          state: _state,
-          zipcode: _zipcode,
-        );
-
-      default:
-        return SalesView(serviceType: _serviceType);
-    }
-  }
 
   bool formValidation() {
     return formKey.currentState!.validate() ? true : false;
@@ -108,26 +73,6 @@ class StepsController with ChangeNotifier {
     notifyListeners();
   }
 
-  validateRepStep(context) {
-    switch (repCurrentStep) {
-      case RepViews.customerInfoView:
-        final cartController = Provider.of<Cart>(context, listen: false);
-        if (formValidation() && promoCheckFlag) {
-          cartController.isSelectedGigFastVoice()
-              // ? selectorSummaryview(context)
-              ? null
-              : 
-              null;
-
-          repCurrentStep = RepViews.customerInfoView;
-        }
-        break;
-      case RepViews.finalSummaryView:
-        break;
-    }
-
-    notifyListeners();
-  }
 
   validateStep(bool cartContains, context) {
     switch (currentStep) {
@@ -139,10 +84,8 @@ class StepsController with ChangeNotifier {
               ? null
               : null;
           // popupAcknowledge(context);
-          currentStep = Views.finalSummaryView;
+          currentStep = Views.customerInfoView;
         }
-        break;
-      case Views.finalSummaryView:
         break;
     }
 

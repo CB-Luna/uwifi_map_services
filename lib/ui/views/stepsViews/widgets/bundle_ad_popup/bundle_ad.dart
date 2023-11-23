@@ -59,7 +59,6 @@ class BundleAd extends StatelessWidget with Popup {
       if (plan.isEnabled) {
         if (!plan.isSelected) {
           //Primero limpiamos informacion previa según el servicio seleccionado
-          cartController.cleanByCategory(plan.planCategory);
 
           //Se selecciona el plan específico
           //  plansController.selectPlan(plan);

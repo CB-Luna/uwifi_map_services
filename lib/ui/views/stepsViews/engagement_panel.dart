@@ -1,8 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/views/widgets/engage_form_field.dart';
 
@@ -22,7 +20,6 @@ class _EngagementPanelState extends State<EngagementPanel> {
     var appwidth = respSize.width < maxAppWidth ? respSize.width : maxAppWidth;
     double? headerfontSize = lerpDouble(18, 20, (appwidth - 500) / maxAppWidth);
     double? bodyfontSize = lerpDouble(14, 16, (appwidth - 500) / maxAppWidth);
-    final customerController = Provider.of<CustomerInfoProvider>(context);
 
     Color panelColor = colorPrimary;
     final view = Column(

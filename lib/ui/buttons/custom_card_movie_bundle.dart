@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:uwifi_map_services/providers/cart_controller.dart';
 
 class CustomCardMovieBundle extends StatelessWidget {
   final int index; 
@@ -18,14 +16,12 @@ class CustomCardMovieBundle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<Cart>(context);
-    bool isSelected = controller.moviesbundle[index].isSelected!;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         GestureDetector(
           onTap:(){
-            controller.changeMovieBundlesSelected(index);
+      
           },
           child: MouseRegion(
             cursor: SystemMouseCursors.click,
@@ -37,7 +33,6 @@ class CustomCardMovieBundle extends StatelessWidget {
                   Card(
                     color: Colors.white,
                     elevation: 4,
-                    shape: getDecoration(isSelected),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -67,8 +62,7 @@ class CustomCardMovieBundle extends StatelessWidget {
                   Positioned(
                     bottom: 4,
                     right: 4,
-                    child: isSelected ? 
-                    Container(
+                    child:Container(
                       height: 20,
                       width: 20,
                       decoration: const BoxDecoration(
@@ -83,15 +77,6 @@ class CustomCardMovieBundle extends StatelessWidget {
                             color: Colors.white,
                             size: 15,
                             ),
-                          )
-                    )
-                    :
-                    const SizedBox(
-                      height: 20,
-                      width: 20,
-                      child: Icon(Icons.circle_outlined,
-                          color: Color(0xFF101E51),
-                          size: 10,
                           )
                     ),
                   )

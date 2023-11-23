@@ -50,139 +50,10 @@ class MiniCartTV extends StatelessWidget {
                   controller: scrollController,
                   child: Column(
                     children: <Widget>[
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        height: 20,
-                        margin: const EdgeInsets.all(5),
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFDFEDFF),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Padding(
-                          padding:
-                              const EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
-                          child: Text(
-                              'Video Streams ${cartController.additionalsVideoSelected.isEmpty ? "" : cartController.additionalsVideoSelected.length}',
-                              style: GoogleFonts.workSans(
-                                  fontSize: 14,
-                                  color: const Color(0xff3C7DCA),
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: -0.5)),
-                        ),
-                      ),
+                     
 
-                      ColumnBuilder(
-                        itemCount:
-                            cartController.additionalsVideoSelected.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final item =
-                              cartController.additionalsVideoSelected[index];
-                          return ListTile(
-                            title: Text(item.name,
-                                style: GoogleFonts.workSans(
-                                    fontSize: tablet ? 10 : 16,
-                                    color: const Color(0xff2e5899),
-                                    fontWeight: FontWeight.w700,
-                                    letterSpacing: -0.5)),
-                            trailing: Text('\$ ${item.cost.toString()}/mo',
-                                style: GoogleFonts.workSans(
-                                    fontSize: 18,
-                                    color: const Color(0xff2e5899),
-                                    fontWeight: FontWeight.w300,
-                                    letterSpacing: -1.0)),
-                          );
-                        },
-                      ),
-
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        height: 20,
-                        margin: const EdgeInsets.all(5),
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFDFEDFF),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Padding(
-                          padding:
-                              const EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
-                          child: Text(
-                              'Recording Storage ${cartController.additionalsRecordingSelected.isEmpty ? "" : cartController.additionalsRecordingSelected.length}',
-                              style: GoogleFonts.workSans(
-                                  fontSize: 14,
-                                  color: const Color(0xff3C7DCA),
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: -0.5)),
-                        ),
-                      ),
-
-                      ColumnBuilder(
-                        itemCount:
-                            cartController.additionalsRecordingSelected.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final item = cartController
-                              .additionalsRecordingSelected[index];
-                          return ListTile(
-                            title: Text(item.name,
-                                style: GoogleFonts.workSans(
-                                    fontSize: tablet ? 10 : 16,
-                                    color: const Color(0xff2e5899),
-                                    fontWeight: FontWeight.w700,
-                                    letterSpacing: -0.5)),
-                            trailing: Text('\$ ${item.cost.toString()}/mo',
-                                style: GoogleFonts.workSans(
-                                    fontSize: 18,
-                                    color: const Color(0xff2e5899),
-                                    fontWeight: FontWeight.w300,
-                                    letterSpacing: -1.0)),
-                          );
-                        },
-                      ),
-
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        height: 20,
-                        margin: const EdgeInsets.all(5),
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFDFEDFF),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Padding(
-                          padding:
-                              const EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
-                          child: Text(
-                              'Channel Packs ${cartController.packsPremiumSelected.isEmpty ? "" : cartController.packsPremiumSelected.length}',
-                              style: GoogleFonts.workSans(
-                                  fontSize: 14,
-                                  color: const Color(0xff3C7DCA),
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: -0.5)),
-                        ),
-                      ),
-
-                      ColumnBuilder(
-                        itemCount: cartController.packsPremiumSelected.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final item =
-                              cartController.packsPremiumSelected[index];
-                          return ListTile(
-                            title: Text(item.name,
-                                style: GoogleFonts.workSans(
-                                    fontSize: tablet ? 10 : 16,
-                                    color: const Color(0xff2e5899),
-                                    fontWeight: FontWeight.w700,
-                                    letterSpacing: -0.5)),
-                            trailing: Text('\$ ${item.cost.toString()}/mo',
-                                style: GoogleFonts.workSans(
-                                    fontSize: 18,
-                                    color: const Color(0xff2e5899),
-                                    fontWeight: FontWeight.w300,
-                                    letterSpacing: -1.0)),
-                          );
-                        },
-                      ),
+                  
+                      
 
                       Container(
                         alignment: Alignment.centerLeft,
@@ -230,50 +101,6 @@ class MiniCartTV extends StatelessWidget {
                         },
                       ),
 
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        height: 20,
-                        margin: const EdgeInsets.all(5),
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFDFEDFF),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Padding(
-                          padding:
-                              const EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
-                          child: Text(
-                              'Movies Bundles ${cartController.moviesBundleSelected.isEmpty ? "" : cartController.moviesBundleSelected.length}',
-                              style: GoogleFonts.workSans(
-                                  fontSize: 14,
-                                  color: const Color(0xff3C7DCA),
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: -0.5)),
-                        ),
-                      ),
-
-                      ColumnBuilder(
-                        itemCount: cartController.moviesBundleSelected.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final item =
-                              cartController.moviesBundleSelected[index];
-                          return ListTile(
-                            title: Text(item.name,
-                                style: GoogleFonts.workSans(
-                                    fontSize: tablet ? 10 : 16,
-                                    color: const Color(0xff2e5899),
-                                    fontWeight: FontWeight.w700,
-                                    letterSpacing: -0.5)),
-                            trailing: Text(
-                                '\$ ${(item.cost * item.quantity)}/mo',
-                                style: GoogleFonts.workSans(
-                                    fontSize: 18,
-                                    color: const Color(0xff2e5899),
-                                    fontWeight: FontWeight.w300,
-                                    letterSpacing: -1.0)),
-                          );
-                        },
-                      ),
 
                       //const Divider(),
                     ],
@@ -290,13 +117,6 @@ class MiniCartTV extends StatelessWidget {
                             fontSize: tablet ? 10 : 16,
                             color: const Color(0xff2e5899),
                             fontWeight: FontWeight.w600,
-                            letterSpacing: -0.5)),
-                    Text(
-                        "\$${cartController.additionalsTVPrice + cartController.totalDevices}",
-                        style: GoogleFonts.workSans(
-                            fontSize: tablet ? 18 : 30,
-                            color: const Color(0xff2e5899),
-                            fontWeight: FontWeight.w300,
                             letterSpacing: -0.5)),
                     //style: Theme.of(context).textTheme.headline3
                   ]),

@@ -96,9 +96,6 @@ class PlansListView extends StatelessWidget {
                         }
 
                         if (!products[index].isSelected) {
-                          //Primero limpiamos informacion previa según el servicio seleccionado
-                          cartController
-                              .cleanByCategory(products[index].planCategory);
 
                           //Se selecciona el plan específico
                           plansController.selectPlan(products[index]);
@@ -119,9 +116,6 @@ class PlansListView extends StatelessWidget {
                                 //Se agrega al carrito la promoción, sólo si esta se encuentra activa,
                                 //agregando la promoción del plan actual que concuerde dentro de la lista de
                                 //promos, y que además este se encuentre activo (isActive ==true)
-
-                                cartController.addPromoToCart(
-                                    getPromo(context, products[index]));
                               }
                             }
                           }
@@ -173,11 +167,8 @@ class PlansListView extends StatelessWidget {
                                     .toString()
                                     .toUpperCase()
                                     .contains("SMI"))) {
-                              cartController.discountRules();
                             }
                           } else {
-                            cartController.discounts.removeWhere(
-                                (element) => element.id == "bundleDiscount");
                           }
                         }
                       }
@@ -259,14 +250,10 @@ class PlansListView extends StatelessWidget {
   Widget planCustomRadioPromo(plan, context) {
     Products promo = getPromo(context, plan);
 
-    final cartController = Provider.of<Cart>(context, listen: false);
-
     Widget planBox = PlansCustomRadio(
         plan: plan, isTherePromo: true, promo: promo, isPromoApplied: true);
 
     if (plan.isSelected) {
-      cartController.cleanPromos();
-      cartController.addPromoToCart(promo);
       // cartController.products.clear();
     }
 
@@ -292,7 +279,6 @@ class PlansListView extends StatelessWidget {
   }
 
   activateCustomerPromo(plan, context) {
-    final cartController = Provider.of<Cart>(context);
     final customerController = Provider.of<CustomerInfoProvider>(context);
 
     //Check Promos
@@ -302,12 +288,6 @@ class PlansListView extends StatelessWidget {
           for (var i = 0; i < plan.associations!.pack!.products!.length; i++) {
             if (customerController.promos
                 .contains(plan.associations!.pack!.products![i].id)) {
-              cartController.cleanPromos();
-              cartController
-                  .addPromoToCart(plan.associations!.pack!.products![i]);
-
-              cartController.discounts
-                  .removeWhere((element) => element.id == "bundleDiscount");
             }
           }
         }

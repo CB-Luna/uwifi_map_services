@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/providers/cart_controller.dart';
 import 'package:uwifi_map_services/providers/tracking_provider.dart' as track;
+import 'package:uwifi_map_services/theme/theme_data.dart';
 import '../../../../providers/customer_info_controller.dart';
 import '../../../../providers/steps_controller.dart';
 
@@ -22,15 +23,14 @@ class CartButtons extends StatelessWidget {
       required this.opacity,
       required this.isVisible,
       required this.buttonText,
-      this.color = const Color(0xFF37BE88),
-      this.textColor = Colors.white,
+      this.color = colorSecondary,
+      this.textColor = colorInversePrimary,
       required this.cartContains,
       this.function})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Color secondaryColor = const Color(0xffd20030);
     final stepsController = Provider.of<StepsController>(context);
     final customerController = Provider.of<CustomerInfoProvider>(context);
     final customerRep = customerController.customerInfo.customerRep;
@@ -47,7 +47,7 @@ class CartButtons extends StatelessWidget {
           child: Flexible(
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  side: BorderSide(width: 2.0, color: secondaryColor),
+                  side: const BorderSide(width: 2.0, color: colorPrimary),
                   backgroundColor: textColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
@@ -57,7 +57,6 @@ class CartButtons extends StatelessWidget {
                 if (customerController.customerInfo.customerRep != "") {
                   stepsController.repCurrentStep =
                       RepViews.values[stepsController.repCurrentStep.index - 1];
-                  stepsController.changeRepStep(stepsController.repCurrentStep);
                 } else {
                   stepsController.currentStep =
                       Views.values[stepsController.currentStep.index - 1];
@@ -71,7 +70,7 @@ class CartButtons extends StatelessWidget {
                   style: GoogleFonts.workSans(
                       height: 1.5,
                       fontSize: 14,
-                      color: secondaryColor,
+                      color: colorPrimary,
                       fontWeight: FontWeight.w600,
                       letterSpacing: -0.2)),
             ),
@@ -94,27 +93,22 @@ class CartButtons extends StatelessWidget {
                     backgroundColor: color,
                     minimumSize: const Size.fromHeight(50)),
                 onPressed: () => {
-                  if (customerRep != "")
-                    {stepsController.validateRepStep(context)}
+                  if (stepsController.currentStep ==
+                          Views.customerInfoView &&
+                      (!stepsController.formValidation() ||
+                          !stepsController.promoCheckFlag))
+                    {}
                   else
                     {
-                      if (stepsController.currentStep ==
-                              Views.customerInfoView &&
-                          (!stepsController.formValidation() ||
-                              !stepsController.promoCheckFlag))
-                        {}
-                      else
-                        {
-                          tracking.changeViewIndex(),
-                          tracking.recordTrack(
-                              services: cartController.products,
-                              firstName: customer.firstName,
-                              lastName: customer.lastName,
-                              email: customer.custEmail)
-                        },
-                      stepsController.validateStep(cartContains, context),
-                      if (function != null) function!()
-                    }
+                      tracking.changeViewIndex(),
+                      tracking.recordTrack(
+                          services: cartController.products,
+                          firstName: customer.firstName,
+                          lastName: customer.lastName,
+                          email: customer.custEmail)
+                    },
+                  stepsController.validateStep(cartContains, context),
+                  if (function != null) function!()
                 },
                 child: Text("Next: $buttonText",
                     style: GoogleFonts.workSans(

@@ -47,7 +47,6 @@ class PlanTypeStep extends StatelessWidget {
           return CustomOutlinedButton(
             onPressed: () {
               cartController.clearAllProducts();
-              cartController.discounts.clear();
               controller.customerInfo.serviceType = controller.plan.name;
               Flurorouter.router.navigateTo(
                 context,

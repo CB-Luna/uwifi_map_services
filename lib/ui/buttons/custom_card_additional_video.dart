@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:uwifi_map_services/providers/cart_controller.dart';
 
 class CustomCardAdditionalVideo extends StatelessWidget {
   final int index; 
@@ -16,11 +14,8 @@ class CustomCardAdditionalVideo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<Cart>(context);
-    bool isSelected = controller.additionalsVideo[index].isSelected!;
     return GestureDetector(
       onTap:(){
-        controller.changeSelectedAdditionalsVideo(index);
       },
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
@@ -32,7 +27,6 @@ class CustomCardAdditionalVideo extends StatelessWidget {
               Card(
                 color: Colors.white,
                 elevation: 4,
-                shape: getDecoration(isSelected),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -60,29 +54,11 @@ class CustomCardAdditionalVideo extends StatelessWidget {
                   ],
                 ),
               ),
-              Positioned(
+              const Positioned(
                 bottom: 4,
                 right: 4,
-                child: isSelected ? 
-                Container(
-                  height: 20,
-                  width: 20,
-                  decoration: const BoxDecoration(
-                        color: Color(0xFFD20030),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(12)),
-                      ),
-                  child: 
-                      const Center(
-                        child: Icon(Icons.check,
-                        color: Colors.white,
-                        size: 15,
-                        ),
-                      )
-                )
-                :
-                const SizedBox(
+                child:
+                SizedBox(
                   height: 20,
                   width: 20,
                   // decoration: BoxDecoration(

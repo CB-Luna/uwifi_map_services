@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/data/constants.dart';
 import 'package:uwifi_map_services/providers/cart_controller.dart';
-import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 import 'package:uwifi_map_services/providers/plan_controller.dart';
 import 'package:uwifi_map_services/providers/portability_form_provider.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
@@ -27,7 +26,6 @@ class CartWidget extends StatelessWidget {
     final cartBehavior = Provider.of<BoxesBehavior>(context);
     final portabilityFormProvider =
         Provider.of<PortabilityFormProvider>(context);
-    final customerInfoProvider = Provider.of<CustomerInfoProvider>(context);
     final scrollController = ScrollController();
 
     final size = MediaQuery.of(context).size;
@@ -39,11 +37,8 @@ class CartWidget extends StatelessWidget {
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 500),
               curve: Curves.easeInOut,
-              width: stepsController.currentStep == Views.finalSummaryView ||
-                      stepsController.repCurrentStep ==
-                          RepViews.finalSummaryView
-                  ? (MediaQuery.of(context).size.width * 0.5) - 50
-                  : cartWidth,
+              width: cartWidth,
+              height: MediaQuery.of(context).size.height * 0.5,
               margin: EdgeInsets.fromLTRB(mobile ? 25 : 0, 25, 25, 25),
               decoration: BoxDecoration(boxShadow: const [
                 BoxShadow(
@@ -116,105 +111,30 @@ class CartWidget extends StatelessWidget {
                                       leading: Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Visibility(
-                                            visible: stepsController
-                                                            .currentStep ==
-                                                        Views
-                                                            .finalSummaryView ||
-                                                    stepsController
-                                                            .repCurrentStep ==
-                                                        RepViews
-                                                            .finalSummaryView
-                                                ? false
-                                                : true,
-                                            child: Container(
-                                              margin: const EdgeInsets.only(
-                                                  right: 8),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(25.0)),
-                                                border: Border.all(
-                                                  color:
-                                                      const Color(0xFF8AA7D2),
-                                                  width: 1.5,
-                                                ),
+                                          Container(
+                                            margin: const EdgeInsets.only(
+                                                right: 8),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(25.0)),
+                                              border: Border.all(
+                                                color: colorSecondary,
+                                                width: 1.5,
                                               ),
-                                              child: IconButton(
-                                                iconSize: 20,
-                                                padding:
-                                                    const EdgeInsets.all(1),
-                                                constraints:
-                                                    const BoxConstraints(),
-                                                icon: const Icon(
-                                                  Icons.cancel,
-                                                  color: Color(0xff8aa7d2),
-                                                  size: 20,
-                                                ),
-                                                onPressed: () {
-                                                  cartController
-                                                      .removeFromCart(item);
-                                                  if (!plansController
-                                                      .isAnyPlanActive()) {
-                                                    if (!(plansController
-                                                            .networkType
-                                                            .toLowerCase()
-                                                            .contains(
-                                                                "fiber") &&
-                                                        plansController
-                                                            .locationGroup
-                                                            .toString()
-                                                            .toUpperCase()
-                                                            .contains("SMI"))) {
-                                                      cartController
-                                                          .discountRules();
-                                                    }
-                                                  }
-
-                                                  if (item.category.contains(
-                                                          'Internet') ||
-                                                      item.category
-                                                          .contains('bundle')) {
-                                                    plansController
-                                                        .plansActivation(
-                                                            [], true);
-                                                    plansController
-                                                        .plansActivation([
-                                                      "gigFastInternet",
-                                                      "bundleService"
-                                                    ], false);
-                                                    cartController
-                                                        .clearAllProducts();
-                                                    plansController
-                                                        .unselectAll();
-
-                                                    stepsController
-                                                            .currentStep =
-                                                        Views.customerInfoView;
-                                                  }
-                                                  if (item.category
-                                                      .contains('TV')) {
-                                                    cartController
-                                                        .clearProductsGigFastTV();
-                                                  }
-                                                  if (item.category
-                                                      .contains('Voice')) {
-                                                    cartController
-                                                        .clearProductsGigFastVoice();
-                                                    portabilityFormProvider
-                                                        .clearInformationPortability();
-                                                    portabilityFormProvider
-                                                            .portabilityCheck =
-                                                        false;
-                                                  }
-
-                                                  plansController.plansList
-                                                      .firstWhere((element) =>
-                                                          element.name ==
-                                                          item.name)
-                                                      .isSelected = false;
-                                                },
+                                            ),
+                                            child: const IconButton(
+                                              iconSize: 20,
+                                              padding:
+                                                  EdgeInsets.all(1),
+                                              constraints:
+                                                  BoxConstraints(),
+                                              icon: Icon(
+                                                Icons.check,
+                                                color: colorSecondary,
+                                                size: 20,
                                               ),
+                                              onPressed: null,
                                             ),
                                           ),
                                           Image.asset(
@@ -224,19 +144,19 @@ class CartWidget extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-                                      title: Text("Package ${index + 1}",
+                                      title: Text(item.name,
                                           style: GoogleFonts.workSans(
                                               fontSize: 16,
                                               color: colorPrimary,
                                               fontWeight: FontWeight.w700,
                                               letterSpacing: -0.5)),
-                                      subtitle: Text("$index",
+                                      subtitle: Text(item.category,
                                           style: GoogleFonts.workSans(
                                               fontSize: 13,
                                               color: colorInversePrimary,
                                               fontWeight: FontWeight.w400)),
                                       trailing: Text(
-                                          '\$ 30/mo',
+                                          '\$${item.cost} mo',
                                           style: GoogleFonts.workSans(
                                               fontSize: 18,
                                               color: colorPrimary,
@@ -251,8 +171,6 @@ class CartWidget extends StatelessWidget {
                                 itemCount:
                                     cart.additionalsDevicesSelected.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  final item =
-                                      cart.additionalsDevicesSelected[index];
                                   return ListTile(
                                     leading: 
                                     Image.asset(
@@ -261,34 +179,6 @@ class CartWidget extends StatelessWidget {
                                         width: 30,
                                       ),
                                     title: Text('Package $index',
-                                        style: GoogleFonts.workSans(
-                                            fontSize: 16,
-                                            color: colorPrimary,
-                                            fontWeight: FontWeight.w700,
-                                            letterSpacing: -0.5)),
-                                    trailing: Text(
-                                        '\$ 30/mo',
-                                        style: GoogleFonts.workSans(
-                                            fontSize: 18,
-                                            color: colorPrimary,
-                                            fontWeight: FontWeight.w300,
-                                            letterSpacing: -1.0)),
-                                  );
-                                },
-                              ),
-
-                              const CartTab(title: "Additionals"),
-
-                              ColumnBuilder(
-                                itemCount: cart.additionals.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  final item = cart.additionals[index];
-                                  return ListTile(
-                                    title: Text(
-                                        item.name.contains('Bundle') ||
-                                                item.quantity < 1
-                                            ? item.name
-                                            : ('${item.name} +${item.quantity} '),
                                         style: GoogleFonts.workSans(
                                             fontSize: 16,
                                             color: colorPrimary,
@@ -351,7 +241,7 @@ class CartWidget extends StatelessWidget {
                                     fontWeight: FontWeight.w600,
                                     letterSpacing: -0.5)),
                             Text(
-                                '\$30.0',
+                                '\$${cart.total}',
                                 style: GoogleFonts.workSans(
                                     fontSize: 30,
                                     color: colorPrimary,
@@ -368,11 +258,7 @@ class CartWidget extends StatelessWidget {
                           const Divider(),
                           Padding(
                             padding: const EdgeInsets.all(20),
-                            child:
-                                customerInfoProvider.customerInfo.customerRep !=
-                                        ""
-                                    ? styledRepButton(context)
-                                    : styledButton(context),
+                            child:styledButton(context),
                           )
                         ],
                       ),

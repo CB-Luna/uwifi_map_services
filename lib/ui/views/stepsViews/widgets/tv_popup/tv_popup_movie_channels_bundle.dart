@@ -88,7 +88,6 @@ class TVPopupMovieChannelsBundle extends StatelessWidget {
                                 quantity: 1,
                                 pwName: movieBundles[idTV]![index].pwName,
                                 groups: groups);
-                            cartController.moviesbundle.add(movieBundle);
                             return groups.contains('comingSoon') ?
                             CustomCardMovieBundleComingSoon(
                               index: index, 
