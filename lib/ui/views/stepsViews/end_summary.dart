@@ -12,7 +12,6 @@ import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/views/form_and_map_view/wigdets/gradient_button.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/end_sum_add_note.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/end_sum_personal.dart';
-import 'package:uwifi_map_services/ui/views/stepsViews/end_sum_repView.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/engagement_panel.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/final_popup.dart';
 
@@ -69,7 +68,6 @@ class EndSummaryWidgetState extends State<EndSummaryWidget> {
                           ///WEBVIEW
                           ? Column(
                               children: [
-                                if (isRep) const RepToggles(),
                                 Wrap(
                                     children: isRep
                                         ? [EngagementPanel(formKey: formKey)]
@@ -113,7 +111,6 @@ class EndSummaryWidgetState extends State<EndSummaryWidget> {
                                         ),
                                       ),
                                     ),
-                                  if (isRep) const RepToggles(),
                                   Wrap(
                                       children: isRep
                                           ? [EngagementPanel(formKey: formKey)]
