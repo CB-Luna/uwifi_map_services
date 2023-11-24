@@ -242,7 +242,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                   ),
                             TextFormField(
                               /// VARIABLE STORAGE
-                              controller: controller.parsedPhone,
+                              controller: controller.parsedAddress,
                               onChanged: (value) =>
                                   controller.setAddress(value),
 
@@ -428,7 +428,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                               Expanded(
                                   child: TextFormField(
                                           /// VARIABLE STORAGE
-                                          controller: controller.parsedFName,
+                                          controller: controller.parsedName,
                                           onChanged: (value) {
                                             controller.setfName(value);
                                             portabilityFormProvider

@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/data/constants.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/buttons/custom_outlined_button.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
+import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
 
 class PromoCheckbox extends StatefulWidget {
   const PromoCheckbox({Key? key}) : super(key: key);
@@ -19,8 +21,10 @@ class PromoCheckboxState extends State<PromoCheckbox> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<CustomerInfoProvider>(context);
     final customerController =
         Provider.of<CustomerInfoProvider>(context, listen: false);
+    bool? selected;
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -62,6 +66,7 @@ class PromoCheckboxState extends State<PromoCheckbox> {
           controlAffinity: ListTileControlAffinity.trailing,
           contentPadding: const EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
         ),
+       
       ],
     );
   }

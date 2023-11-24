@@ -17,12 +17,21 @@ class CustomerInfoProvider with ChangeNotifier {
   final TextEditingController parsedLName = TextEditingController();
   final TextEditingController parsedPhone = TextEditingController();
   final TextEditingController parsedEmail = TextEditingController();
+  final TextEditingController parsedAddress = TextEditingController();
+  //controllers for the Card Info
+  final TextEditingController parsedName = TextEditingController();
 
   //Card Variables
   String number = '';
   String ccv = '';
   String date = '';
   String cardName = '';
+
+  //Variables de Envio
+  String addressShip = '';
+  String nameShip ='';
+  String lastNameShip ='';
+  String phoneShip='';
 
   String origin;
   String lastName = '';
@@ -103,15 +112,39 @@ class CustomerInfoProvider with ChangeNotifier {
   //Functions for the card
   void setCard(String card){
     number = card;
+    notifyListeners();
   }
   void setCcv(String value){
     ccv=value;
+    notifyListeners();
   }
   void setDate(String date){
     this.date=date;
+    notifyListeners();
   }
   void setCardName(String name){
     cardName = name;
+    notifyListeners();
+  }
+  //funciones para envio
+  void setAddressShipping(String value){
+    addressShip = value;
+    notifyListeners();
+  }
+
+  void setNameShipping(String name){
+    nameShip =name;
+    notifyListeners();
+  }
+  
+  void setLastNameShipping(String lastName){
+    lastNameShip = lastName;
+    notifyListeners();
+  }
+
+  void setphoneShipping(String phone){
+    phoneShip = phone;
+    notifyListeners();
   }
 
   void setEngage(String engopt) {
@@ -119,6 +152,7 @@ class CustomerInfoProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  
   void setColor(Color pancolor) {
     panelcolor = pancolor;
     notifyListeners();

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
+import 'package:uwifi_map_services/ui/views/stepsViews/shipping_info.dart';
+import 'package:uwifi_map_services/ui/views/stepsViews/summary_info.dart';
 import 'customer_info_checks.dart';
 import 'package:uwifi_map_services/classes/popup.dart';
 
@@ -24,6 +26,7 @@ class CustomerLocationDisplay extends StatelessWidget with Popup {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          //Checkboxes
           Container(
             margin: const EdgeInsets.symmetric(vertical: 0),
             padding: const EdgeInsets.all(15),
@@ -33,6 +36,44 @@ class CustomerLocationDisplay extends StatelessWidget with Popup {
             ),
             child: const PromoCheckbox(),
           ),
+           SizedBox(
+          height: 30,
+        ),
+        //Shipping Info
+        Container(
+          height: 300,
+          decoration: BoxDecoration(
+            color: colorInversePrimary,
+            boxShadow: const [
+              BoxShadow(
+                blurRadius: 15,
+                spreadRadius: -5,
+                color: colorBgB,
+                offset: Offset(0, 15),
+              )
+            ],
+            borderRadius: BorderRadius.circular(40),
+          ),
+          child:const ShippingInfo(),
+        ),
+        SizedBox(height: 30,),
+        //Summary
+        Container(
+          height: 300,
+          decoration: BoxDecoration(
+            color: colorInversePrimary,
+            boxShadow: const [
+              BoxShadow(
+                blurRadius: 15,
+                spreadRadius: -5,
+                color: colorBgB,
+                offset: Offset(0, 15),
+              )
+            ],
+            borderRadius: BorderRadius.circular(40),
+          ),
+          child: const SummaryInfo(),
+        ),
         ],
       ),
     );

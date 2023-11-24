@@ -280,9 +280,7 @@ class _WebViewState extends State<_WebView> {
                       zcode: widget.zipcode,
                     ),
                   ),
-                  const SizedBox(
-                    width: 250,
-                  )
+                  
                 ],
               ),
             ],
