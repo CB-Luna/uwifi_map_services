@@ -26,13 +26,13 @@ class _ShippingInfoState extends State<ShippingInfo> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const Icon(
-                      Icons.location_history_outlined,
+                      Icons.local_shipping_outlined,
                       color: colorPrimary,
                       size: 40,
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      'Shipping Details',
+                      'Step 3: Shipping Details',
                       style: h2Style(context),
                     ),
                   ],

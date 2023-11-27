@@ -113,7 +113,7 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
                     padding: const EdgeInsets.all(15.0),
                     child: Container(
                         key: itemKey,
-                        child: const CustomerPersonalDetailsForm()),
+                        child: CustomerPersonalDetailsForm(dir: widget.street)),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(15.0),
@@ -268,17 +268,13 @@ class _WebViewState extends State<_WebView> {
                 alignment: WrapAlignment.start,
                 crossAxisAlignment: WrapCrossAlignment.start,
                 children: [
-                  const FractionallySizedBox(
-                      widthFactor: 0.55, child: CustomerPersonalDetailsForm()),
-                  const SizedBox(width: 30),
-                  FractionallySizedBox(
-                    widthFactor: 0.4,
-                    child: CustomerLocationDisplay(
-                      street: widget.street,
-                      city: widget.city,
-                      state: widget.state,
-                      zcode: widget.zipcode,
-                    ),
+                  CustomerPersonalDetailsForm(dir: widget.street),
+                  const SizedBox(height: 30),
+                  CustomerLocationDisplay(
+                    street: widget.street,
+                    city: widget.city,
+                    state: widget.state,
+                    zcode: widget.zipcode,
                   ),
                   
                 ],

@@ -26,22 +26,24 @@ class CustomerLocationDisplay extends StatelessWidget with Popup {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          const SizedBox(height: 30,),
           //Checkboxes
           Container(
+            height: 400,
             margin: const EdgeInsets.symmetric(vertical: 0),
             padding: const EdgeInsets.all(15),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50),
               color: colorBgWhite,
             ),
-            child: const PromoCheckbox(),
+            child: const ShippingInfo(),
           ),
-           SizedBox(
+           const SizedBox(
           height: 30,
         ),
         //Shipping Info
         Container(
-          height: 300,
+          height: 270,
           decoration: BoxDecoration(
             color: colorInversePrimary,
             boxShadow: const [
@@ -54,26 +56,9 @@ class CustomerLocationDisplay extends StatelessWidget with Popup {
             ],
             borderRadius: BorderRadius.circular(40),
           ),
-          child:const ShippingInfo(),
+          child:const PromoCheckbox(),
         ),
-        SizedBox(height: 30,),
-        //Summary
-        Container(
-          height: 300,
-          decoration: BoxDecoration(
-            color: colorInversePrimary,
-            boxShadow: const [
-              BoxShadow(
-                blurRadius: 15,
-                spreadRadius: -5,
-                color: colorBgB,
-                offset: Offset(0, 15),
-              )
-            ],
-            borderRadius: BorderRadius.circular(40),
-          ),
-          child: const SummaryInfo(),
-        ),
+        
         ],
       ),
     );

@@ -11,7 +11,8 @@ import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
 import '../../../providers/steps_controller.dart';
 
 class CustomerPersonalDetailsForm extends StatelessWidget {
-  const CustomerPersonalDetailsForm({Key? key}) : super(key: key);
+  final String dir;
+  const CustomerPersonalDetailsForm({Key? key, required this.dir}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +68,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      'Personal Details',
+                      'Step 1: Personal Details',
                       style: h2Style(context),
                     ),
                   ],
@@ -247,6 +248,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                   controller.setAddress(value),
 
                               ///VALIDATION TRIGGER
+                              // initialValue: dir,
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
                               obscureText: false,
@@ -348,13 +350,13 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const Icon(
-                        Icons.location_history_outlined,
+                        Icons.add_card_outlined,
                         color: colorPrimary,
                         size: 40,
                       ),
                       const SizedBox(width: 10),
                       Text(
-                        'Card Info',
+                        'Step 2: Card Info',
                         style: h2Style(context),
                       ),
                     ],
