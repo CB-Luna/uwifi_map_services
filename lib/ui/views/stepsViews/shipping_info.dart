@@ -17,142 +17,135 @@ class ShippingInfo extends StatefulWidget {
 class _ShippingInfoState extends State<ShippingInfo> {
   @override
   Widget build(BuildContext context) {
-  final controller = Provider.of<CustomerInfoProvider>(context);
+    final controller = Provider.of<CustomerInfoProvider>(context);
     return Column(
       children: [
         Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Icon(
-                      Icons.local_shipping_outlined,
-                      color: colorPrimary,
-                      size: 40,
-                    ),
-                    const SizedBox(width: 10),
-                    Text(
-                      'Step 3: Shipping Details',
-                      style: h2Style(context),
-                    ),
-                  ],
+          padding: const EdgeInsets.all(25.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.local_shipping_outlined,
+                color: colorPrimary,
+                size: 40,
+              ),
+              const SizedBox(width: 10),
+              Text(
+                'Step 3: Shipping Details',
+                style: TextStyle(
+                  color: colorsTheme(context).primary,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: -0.25,
                 ),
               ),
-              const Divider(
-                height: 1,
-                thickness: 1.5,
-                color: colorPrimaryDark,
-              ),
-              Flexible(
-                child: Form(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 25),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                             Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Expanded(
-                                        child: TextFormField(
-                                          /// VARIABLE STORAGE
-                                          controller: controller.parsedFName,
-                                          onChanged: (value) {
-                                            controller.setNameShipping(value);
-                                            
-                                          },
+            ],
+          ),
+        ),
+        const Divider(
+          height: 1,
+          thickness: 1.5,
+          color: colorPrimaryDark,
+        ),
+        Flexible(
+          child: Form(
+              child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          /// VARIABLE STORAGE
+                          controller: controller.parsedFName,
+                          onChanged: (value) {
+                            controller.setNameShipping(value);
+                          },
 
-                                          ///VALIDATION TRIGGER
-                                          autovalidateMode: AutovalidateMode
-                                              .onUserInteraction,
-                                          autocorrect: false,
-                                          obscureText: false,
-                                          keyboardType: TextInputType.name,
-                                          decoration: CustomInputs()
-                                              .formInputDecoration(
-                                                  label: 'First Name',
-                                                  icon: Icons.person_outlined),
+                          ///VALIDATION TRIGGER
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          autocorrect: false,
+                          obscureText: false,
+                          keyboardType: TextInputType.name,
+                          decoration: CustomInputs().formInputDecoration(
+                              label: 'First Name',
+                              icon: Icons.person_outlined,
+                              maxHeight: 30),
 
-                                          
-                                          style: const TextStyle(
-                                            color: colorPrimaryDark,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 15),
-                                      Expanded(
-                                        child: TextFormField(
-                                          /// VARIABLE STORAGE
-                                          controller: controller.parsedLName,
-                                          onChanged: (value) {
-                                            controller.setLastNameShipping(value);
-                                            
-                                          },
+                          style: const TextStyle(
+                            color: colorPrimaryDark,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: TextFormField(
+                          /// VARIABLE STORAGE
+                          controller: controller.parsedLName,
+                          onChanged: (value) {
+                            controller.setLastNameShipping(value);
+                          },
 
-                                          ///VALIDATION TRIGGER
-                                          autovalidateMode: AutovalidateMode
-                                              .onUserInteraction,
-                                          autocorrect: false,
-                                          obscureText: false,
-                                          keyboardType: TextInputType.name,
-                                          decoration: CustomInputs()
-                                              .formInputDecoration(
-                                                  label: 'Last Name',
-                                                  icon: Icons.person_outlined),
+                          ///VALIDATION TRIGGER
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          autocorrect: false,
+                          obscureText: false,
+                          keyboardType: TextInputType.name,
+                          decoration: CustomInputs().formInputDecoration(
+                              label: 'Last Name',
+                              icon: Icons.person_outlined,
+                              maxHeight: 30),
 
-                                          
-                                          style: const TextStyle(
-                                            color: colorPrimaryDark,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                
-                            TextFormField(
-                              /// VARIABLE STORAGE
-                              controller: controller.parsedAddress,
-                              onChanged: (value) =>
-                                  controller.setAddressShipping(value),
+                          style: const TextStyle(
+                            color: colorPrimaryDark,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  TextFormField(
+                    /// VARIABLE STORAGE
+                    controller: controller.parsedAddress,
+                    onChanged: (value) => controller.setAddressShipping(value),
 
-                              ///VALIDATION TRIGGER
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              obscureText: false,
-                              keyboardType: TextInputType.phone,
-                              decoration: CustomInputs().formInputDecoration(
-                                  label: 'Address', icon: Icons.house_outlined),
-                              style: const TextStyle(
-                                color: colorPrimaryDark,
-                              ),
-                            ),
-                            TextFormField(
-                              /// VARIABLE STORAGE
-                              controller: controller.parsedPhone,
-                              onChanged: (value) => controller.setphoneShipping(value),
+                    ///VALIDATION TRIGGER
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    obscureText: false,
+                    keyboardType: TextInputType.phone,
+                    decoration: CustomInputs().formInputDecoration(
+                        label: 'Address',
+                        icon: Icons.house_outlined,
+                        maxHeight: 30),
+                    style: const TextStyle(
+                      color: colorPrimaryDark,
+                    ),
+                  ),
+                  TextFormField(
+                    /// VARIABLE STORAGE
+                    controller: controller.parsedPhone,
+                    onChanged: (value) => controller.setphoneShipping(value),
 
-                              ///VALIDATION TRIGGER
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              obscureText: false,
-                              keyboardType: TextInputType.phone,
-                              decoration: CustomInputs().formInputDecoration(
-                                  label: 'Phone Number',
-                                  icon: Icons.phone_outlined),
+                    ///VALIDATION TRIGGER
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    obscureText: false,
+                    keyboardType: TextInputType.phone,
+                    decoration: CustomInputs().formInputDecoration(
+                        label: 'Phone Number',
+                        icon: Icons.phone_outlined,
+                        maxHeight: 30),
 
-                              
-                              
-                              style: const TextStyle(
-                                color: colorPrimaryDark,
-                              ),
-                            ),
-                            
-                          ]),
-                    )),
-              ),
+                    style: const TextStyle(
+                      color: colorPrimaryDark,
+                    ),
+                  ),
+                ]),
+          )),
+        ),
       ],
     );
   }
