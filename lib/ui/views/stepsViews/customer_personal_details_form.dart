@@ -37,10 +37,9 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
     );
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
+          width: 1400,
           height: 300,
           decoration: BoxDecoration(
             color: colorInversePrimary,
@@ -63,7 +62,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                 width: 1400,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
-                  color: colorPrimaryDark,
+                  color: colorPrimary,
                 ),
                 child: const Padding(
                   padding: EdgeInsets.all(25.0),
@@ -447,6 +446,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
           height: 30,
         ),
         Container(
+          width: 1400,
           height: 300,
           decoration: BoxDecoration(
             color: colorInversePrimary,
@@ -467,10 +467,10 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
               children: [
                 Container(
                   width: 1400,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     borderRadius:
                         BorderRadius.vertical(top: Radius.circular(30)),
-                    color: colorPrimaryDark,
+                    color: colorPrimary,
                   ),
                   child: const Padding(
                     padding: EdgeInsets.all(25.0),
@@ -484,7 +484,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                           color: Colors.white,
                           size: 40,
                         ),
-                        const SizedBox(width: 10),
+                        SizedBox(width: 10),
                         Text(
                           'Step 2: Card Information',
                           style: TextStyle(

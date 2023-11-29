@@ -21,53 +21,54 @@ class PromoCheckboxState extends State<PromoCheckbox> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<CustomerInfoProvider>(context);
     final customerController =
         Provider.of<CustomerInfoProvider>(context, listen: false);
-    bool? selected;
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(
-          height: 10,
-          width: 5,
-        ),
-        CheckboxListTile(
-          value: emailCheckbox,
-          onChanged: (emailyes) {
-            setState(() {
-              emailCheckbox = emailyes!;
-            });
-            customerController.promoInfobyEmail = emailCheckbox;
-          },
-          subtitle: Text(
-            'I would like to receive promotional messages from UWIFI by E-mail. You can unsubscribe at any time.',
-            style: bodyStyle(context),
+    return SizedBox(
+      width: 1400,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const SizedBox(
+            height: 10,
+            width: 5,
           ),
-          activeColor: colorsTheme(context).tertiary,
-          dense: false,
-          controlAffinity: ListTileControlAffinity.trailing,
-          contentPadding: const EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
-        ),
-        CheckboxListTile(
-          value: smsCheckbox,
-          onChanged: (smsyes) {
-            setState(() {
-              smsCheckbox = smsyes!;
-            });
-            customerController.promoInfoibySMS = smsCheckbox;
-          },
-          subtitle: Text(
-              'I would like to receive promotional messages from UWIFI by SMS.\n\n*Message and data rates may apply to receiving these messages.\n\n*Reply with STOP at any time to opt-out from future messages.',
-              style: bodyStyle(context)),
-          activeColor: colorsTheme(context).tertiary,
-          dense: false,
-          controlAffinity: ListTileControlAffinity.trailing,
-          contentPadding: const EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
-        ),
-       
-      ],
+          CheckboxListTile(
+            value: emailCheckbox,
+            onChanged: (emailyes) {
+              setState(() {
+                emailCheckbox = emailyes!;
+              });
+              customerController.promoInfobyEmail = emailCheckbox;
+            },
+            subtitle: Text(
+              'I would like to receive promotional messages from UWIFI by E-mail. You can unsubscribe at any time.',
+              style: bodyStyle(context),
+            ),
+            activeColor: colorsTheme(context).tertiary,
+            dense: false,
+            controlAffinity: ListTileControlAffinity.trailing,
+            contentPadding: const EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+          ),
+          CheckboxListTile(
+            value: smsCheckbox,
+            onChanged: (smsyes) {
+              setState(() {
+                smsCheckbox = smsyes!;
+              });
+              customerController.promoInfoibySMS = smsCheckbox;
+            },
+            subtitle: Text(
+                'I would like to receive promotional messages from UWIFI by SMS.\n\n*Message and data rates may apply to receiving these messages.\n\n*Reply with STOP at any time to opt-out from future messages.',
+                style: bodyStyle(context)),
+            activeColor: colorsTheme(context).tertiary,
+            dense: false,
+            controlAffinity: ListTileControlAffinity.trailing,
+            contentPadding: const EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+          ),
+         
+        ],
+      ),
     );
   }
 }
