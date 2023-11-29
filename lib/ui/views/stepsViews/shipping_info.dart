@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/data/constants.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
+import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
 import 'package:uwifi_map_services/providers/steps_controller.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
@@ -17,36 +19,49 @@ class ShippingInfo extends StatefulWidget {
 class _ShippingInfoState extends State<ShippingInfo> {
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<CustomerInfoProvider>(context);
+    final controller = Provider.of<CustomerShippingInfo>(context);
+    final validCharacters = RegExp(r'^[a-zA-Z\- ]+$');
+    final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
+    final addressChar = RegExp(r'^[a-zA-Z0-9\-()]+$');
+    // final zcode = widget.zipcode.toString();
+    var phoneFormat = MaskTextInputFormatter(
+      mask: '(###) ###-####',
+      filter: {'#': RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.lazy,
+    );
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(25.0),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(
-                Icons.local_shipping_outlined,
-                color: colorPrimary,
-                size: 40,
-              ),
-              const SizedBox(width: 10),
-              Text(
-                'Step 3: Shipping Details',
-                style: TextStyle(
-                  color: colorsTheme(context).primary,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: -0.25,
-                ),
-              ),
-            ],
+        Container(
+          width: 1400,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+            color: colorPrimaryDark,
           ),
-        ),
-        const Divider(
-          height: 1,
-          thickness: 1.5,
-          color: colorPrimaryDark,
+          child: const Padding(
+            padding: EdgeInsets.all(25.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.local_shipping_outlined,
+                  color: Colors.white,
+                  size: 40,
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  'Step 3: Shipping Details',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: -0.25,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
         Flexible(
           child: Form(
@@ -75,11 +90,16 @@ class _ShippingInfoState extends State<ShippingInfo> {
                           decoration: CustomInputs().formInputDecoration(
                               label: 'First Name',
                               icon: Icons.person_outlined,
-                              maxHeight: 30),
+                              maxHeight: 60),
 
                           style: const TextStyle(
                             color: colorPrimaryDark,
                           ),
+                          validator: (value) {
+                            return validCharacters.hasMatch(value ?? '')
+                                ? null
+                                : 'Please enter your name';
+                          },
                         ),
                       ),
                       const SizedBox(width: 8),
@@ -99,8 +119,135 @@ class _ShippingInfoState extends State<ShippingInfo> {
                           decoration: CustomInputs().formInputDecoration(
                               label: 'Last Name',
                               icon: Icons.person_outlined,
-                              maxHeight: 30),
+                              maxHeight: 60),
 
+                          style: const TextStyle(
+                            color: colorPrimaryDark,
+                          ),
+                          validator: (value) {
+                            return validCharacters.hasMatch(value ?? '')
+                                ? null
+                                : 'Please enter your name';
+                          },
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      Expanded(
+                        child: TextFormField(
+                          /// VARIABLE STORAGE
+                          controller: controller.parsedPhone,
+                          onChanged: (value) =>
+                              controller.setphoneShipping(value),
+
+                          ///VALIDATION TRIGGER
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          obscureText: false,
+                          keyboardType: TextInputType.phone,
+                          decoration: CustomInputs().formInputDecoration(
+                              label: 'Phone Number',
+                              icon: Icons.phone_outlined,
+                              maxHeight: 60),
+                          validator: (value) {
+                            return (phoneCharacters.hasMatch(value ?? '') &&
+                                    value?.length == 14)
+                                ? null
+                                : 'Please enter a valid phone number';
+                          },
+
+                          style: const TextStyle(
+                            color: colorPrimaryDark,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          /// VARIABLE STORAGE
+                          controller: controller.parsedAddress,
+                          onChanged: (value) => controller.setAddress1(value),
+
+                          ///VALIDATION TRIGGER
+                          // initialValue: dir,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          obscureText: false,
+                          keyboardType: TextInputType.phone,
+                          decoration: CustomInputs().formInputDecoration(
+                              label: 'Address Line 1',
+                              icon: Icons.house_outlined,
+                              maxHeight: 60),
+                          style: const TextStyle(
+                            color: colorPrimaryDark,
+                          ),
+                          validator: (value) {
+                            return addressChar.hasMatch(value ?? '')
+                                ? null
+                                : 'Please enter a valid address';
+                          },
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      Expanded(
+                        child: TextFormField(
+                          /// VARIABLE STORAGE
+                          controller: controller.parsedAddress,
+                          onChanged: (value) => controller.setAddress2(value),
+
+                          ///VALIDATION TRIGGER
+                          // initialValue: dir,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          obscureText: false,
+                          keyboardType: TextInputType.phone,
+                          decoration: CustomInputs().formInputDecoration(
+                              label: 'Address Line 2',
+                              icon: Icons.house_outlined,
+                              maxHeight: 60),
+                          style: const TextStyle(
+                            color: colorPrimaryDark,
+                          ),
+                          validator: (value) {
+                            return addressChar.hasMatch(value ?? '')
+                                ? null
+                                : 'Please enter a valid address';
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 15),
+                      Expanded(
+                        child: TextFormField(
+                          /// VARIABLE STORAGE
+                          controller: controller.parsedEmail,
+                          onChanged: (value) {
+                            controller.setZipcode(value);
+                            // portabilityFormProvider.portEmail = value;
+                          },
+
+                          ///VALIDATION TRIGGER
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          obscureText: false,
+                          keyboardType: TextInputType.number,
+                          decoration: CustomInputs().formInputDecoration(
+                              label: 'Zipcode',
+                              icon: Icons.other_houses_outlined,
+                              maxHeight: 60),
+
+                          validator: (value) {
+                            return (phoneCharacters.hasMatch(value ?? '') &&
+                                    value?.length == 5)
+                                ? null
+                                : 'Please enter a valid Zipcode';
+                          },
                           style: const TextStyle(
                             color: colorPrimaryDark,
                           ),
@@ -108,40 +255,67 @@ class _ShippingInfoState extends State<ShippingInfo> {
                       ),
                     ],
                   ),
-                  TextFormField(
-                    /// VARIABLE STORAGE
-                    controller: controller.parsedAddress,
-                    onChanged: (value) => controller.setAddressShipping(value),
-
-                    ///VALIDATION TRIGGER
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    obscureText: false,
-                    keyboardType: TextInputType.phone,
-                    decoration: CustomInputs().formInputDecoration(
-                        label: 'Address',
-                        icon: Icons.house_outlined,
-                        maxHeight: 30),
-                    style: const TextStyle(
-                      color: colorPrimaryDark,
-                    ),
+                  SizedBox(
+                    height: 15,
                   ),
-                  TextFormField(
-                    /// VARIABLE STORAGE
-                    controller: controller.parsedPhone,
-                    onChanged: (value) => controller.setphoneShipping(value),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          /// VARIABLE STORAGE
+                          controller: controller.parsedAddress,
+                          onChanged: (value) => controller.setCity(value),
 
-                    ///VALIDATION TRIGGER
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    obscureText: false,
-                    keyboardType: TextInputType.phone,
-                    decoration: CustomInputs().formInputDecoration(
-                        label: 'Phone Number',
-                        icon: Icons.phone_outlined,
-                        maxHeight: 30),
+                          ///VALIDATION TRIGGER
+                          // initialValue: dir,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          obscureText: false,
+                          keyboardType: TextInputType.phone,
+                          decoration: CustomInputs().formInputDecoration(
+                              label: 'City',
+                              icon: Icons.house_outlined,
+                              maxHeight: 60),
+                          style: const TextStyle(
+                            color: colorPrimaryDark,
+                          ),
+                          validator: (value) {
+                            return validCharacters.hasMatch(value ?? '')
+                                ? null
+                                : 'Please enter a City';
+                          },
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      Expanded(
+                        child: TextFormField(
+                          /// VARIABLE STORAGE
+                          controller: controller.parsedAddress,
+                          onChanged: (value) => controller.setState(value),
 
-                    style: const TextStyle(
-                      color: colorPrimaryDark,
-                    ),
+                          ///VALIDATION TRIGGER
+                          // initialValue: dir,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          obscureText: false,
+                          keyboardType: TextInputType.phone,
+                          decoration: CustomInputs().formInputDecoration(
+                              label: 'State',
+                              icon: Icons.house_outlined,
+                              maxHeight: 60),
+                          style: const TextStyle(
+                            color: colorPrimaryDark,
+                          ),
+                          validator: (value) {
+                            return validCharacters.hasMatch(value ?? '')
+                                ? null
+                                : 'Please enter a State';
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ]),
           )),

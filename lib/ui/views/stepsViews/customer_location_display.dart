@@ -29,9 +29,7 @@ class CustomerLocationDisplay extends StatelessWidget with Popup {
           const SizedBox(height: 30,),
           //Checkboxes
           Container(
-            height: 300,
-            margin: const EdgeInsets.symmetric(vertical: 0),
-            padding: const EdgeInsets.all(15),
+            height: 330,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50),
               color: colorBgWhite,

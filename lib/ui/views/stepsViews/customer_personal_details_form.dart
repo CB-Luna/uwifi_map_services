@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:uwifi_map_services/data/constants.dart';
+import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
 import 'package:uwifi_map_services/providers/portability_form_provider.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
@@ -17,7 +18,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<CustomerInfoProvider>(context);
+    final controller = Provider.of<CustomerShippingInfo>(context);
     final stepsController = Provider.of<StepsController>(context);
     final customerInfo = Provider.of<CustomerInfoProvider>(context);
     final bool isRep = customerInfo.customerInfo.customerRep != '';
@@ -27,6 +28,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
         Provider.of<PortabilityFormProvider>(context);
     final validCharacters = RegExp(r'^[a-zA-Z\- ]+$');
     final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
+    final addressChar = RegExp(r'^[a-zA-Z0-9\-()]+$');
     // final zcode = widget.zipcode.toString();
     var phoneFormat = MaskTextInputFormatter(
       mask: '(###) ###-####',
@@ -57,34 +59,43 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
             // mainAxisAlignment: MainAxisAlignment.start,
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Icon(
-                      Icons.location_history_outlined,
-                      color: colorPrimary,
-                      size: 40,
-                    ),
-                    const SizedBox(width: 10),
-                    Text(
-                      'Step 1: Personal Details',
-                      style: TextStyle(
-                        color: colorsTheme(context).primary,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: -0.25,
+              Container(
+                width: 1400,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+                  color: colorPrimaryDark,
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.all(25.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.location_history_outlined,
+                        color: Colors.white,
+                        size: 40,
                       ),
-                    ),
-                  ],
+                      const SizedBox(width: 10),
+                      Text(
+                        'Step 1: Personal Details',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: -0.25,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              const Divider(
-                height: 1,
-                thickness: 1.5,
-                color: colorPrimaryDark,
-              ),
+              // const Divider(
+              //   height: 1,
+              //   thickness: 1.5,
+              //   color: colorPrimaryDark,
+              // ),
               Flexible(
                 child: Form(
                     key: stepsController.formKey,
@@ -120,7 +131,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                               .formInputDecoration(
                                                   label: 'First Name',
                                                   icon: Icons.person_outlined,
-                                                  maxHeight: 30),
+                                                  maxHeight: 60),
 
                                           validator: (value) {
                                             return validCharacters
@@ -154,7 +165,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                               .formInputDecoration(
                                                   label: 'Last Name',
                                                   icon: Icons.person_outlined,
-                                                  maxHeight: 30),
+                                                  maxHeight: 60),
 
                                           validator: (value) {
                                             return validCharacters
@@ -167,6 +178,41 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                           ),
                                         ),
                                       ),
+                                      const SizedBox(width: 15),
+                                Expanded(
+                                  child: TextFormField(
+                                    /// VARIABLE STORAGE
+                                    controller: controller.parsedPhone,
+                                    onChanged: (value) =>
+                                        controller.setPhone(value),
+
+                                    ///VALIDATION TRIGGER
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
+                                    obscureText: false,
+                                    keyboardType: TextInputType.phone,
+                                    decoration: CustomInputs()
+                                        .formInputDecoration(
+                                            label: 'Phone Number',
+                                            icon: Icons.phone_outlined,
+                                            maxHeight: 60),
+
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(14),
+                                      phoneFormat
+                                    ],
+                                    validator: (value) {
+                                      return (phoneCharacters
+                                                  .hasMatch(value ?? '') &&
+                                              value?.length == 14)
+                                          ? null
+                                          : 'Please enter a valid phone number';
+                                    },
+                                    style: const TextStyle(
+                                      color: colorPrimaryDark,
+                                    ),
+                                  ),
+                                ),
                                     ],
                                   )
                                 : SizedBox(
@@ -200,7 +246,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                                       label: 'First Name',
                                                       icon:
                                                           Icons.person_outlined,
-                                                      maxHeight: 30),
+                                                      maxHeight: 60),
 
                                               validator: (value) {
                                                 return validCharacters
@@ -236,7 +282,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                                       label: 'Last Name',
                                                       icon:
                                                           Icons.person_outlined,
-                                                      maxHeight: 30),
+                                                      maxHeight: 60),
 
                                               validator: (value) {
                                                 return validCharacters
@@ -249,28 +295,47 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                               ),
                                             ),
                                           ),
+                                          const SizedBox(width: 15),
+                                          Expanded(
+                                            child: TextFormField(
+                                              /// VARIABLE STORAGE
+                                              controller:
+                                                  controller.parsedPhone,
+                                              onChanged: (value) =>
+                                                  controller.setPhone(value),
+
+                                              ///VALIDATION TRIGGER
+                                              autovalidateMode: AutovalidateMode
+                                                  .onUserInteraction,
+                                              obscureText: false,
+                                              keyboardType: TextInputType.phone,
+                                              decoration: CustomInputs()
+                                                  .formInputDecoration(
+                                                      label: 'Phone Number',
+                                                      icon:
+                                                          Icons.phone_outlined,
+                                                      maxHeight: 60),
+
+                                              inputFormatters: [
+                                                LengthLimitingTextInputFormatter(
+                                                    14),
+                                                phoneFormat
+                                              ],
+                                              validator: (value) {
+                                                return (phoneCharacters
+                                                            .hasMatch(
+                                                                value ?? '') &&
+                                                        value?.length == 14)
+                                                    ? null
+                                                    : 'Please enter a valid phone number';
+                                              },
+                                              style: const TextStyle(
+                                                color: colorPrimaryDark,
+                                              ),
+                                            ),
+                                          ),
                                         ]),
                                   ),
-                            TextFormField(
-                              /// VARIABLE STORAGE
-                              controller: controller.parsedAddress,
-                              onChanged: (value) =>
-                                  controller.setAddress(value),
-
-                              ///VALIDATION TRIGGER
-                              // initialValue: dir,
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              obscureText: false,
-                              keyboardType: TextInputType.phone,
-                              decoration: CustomInputs().formInputDecoration(
-                                  label: 'Address',
-                                  icon: Icons.house_outlined,
-                                  maxHeight: 30),
-                              style: const TextStyle(
-                                color: colorPrimaryDark,
-                              ),
-                            ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
@@ -278,35 +343,62 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                 Expanded(
                                   child: TextFormField(
                                     /// VARIABLE STORAGE
-                                    controller: controller.parsedPhone,
+                                    controller: controller.parsedAddress,
                                     onChanged: (value) =>
-                                        controller.setPhone(value),
+                                        controller.setAddress1(value),
 
                                     ///VALIDATION TRIGGER
+                                    // initialValue: dir,
                                     autovalidateMode:
                                         AutovalidateMode.onUserInteraction,
                                     obscureText: false,
                                     keyboardType: TextInputType.phone,
                                     decoration: CustomInputs()
                                         .formInputDecoration(
-                                            label: 'Phone Number',
-                                            icon: Icons.phone_outlined,
-                                            maxHeight: 30),
-
-                                    inputFormatters: [
-                                      LengthLimitingTextInputFormatter(14),
-                                      phoneFormat
-                                    ],
-                                    validator: (value) {
-                                      return (phoneCharacters
-                                                  .hasMatch(value ?? '') &&
-                                              value?.length == 14)
-                                          ? null
-                                          : 'Please enter a valid phone number';
-                                    },
+                                            label: 'Address Line 1',
+                                            icon: Icons.house_outlined,
+                                            maxHeight: 60),
                                     style: const TextStyle(
                                       color: colorPrimaryDark,
                                     ),
+                                     validator: (value) {
+                                            return addressChar
+                                                    .hasMatch(value ?? '')
+                                                ? null
+                                                : 'Please enter a valid address';
+                                          },
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                Expanded(
+                                  child: TextFormField(
+                                    /// VARIABLE STORAGE
+                                    controller: controller.parsedAddress,
+                                    onChanged: (value) =>
+                                        controller.setAddress2(value),
+
+                                    ///VALIDATION TRIGGER
+                                    // initialValue: dir,
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
+                                    obscureText: false,
+                                    keyboardType: TextInputType.phone,
+                                    decoration: CustomInputs()
+                                        .formInputDecoration(
+                                            label: 'Address Line 2',
+                                            icon: Icons.house_outlined,
+                                            maxHeight: 60),
+                                    style: const TextStyle(
+                                      color: colorPrimaryDark,
+                                    ),
+                                    validator: (value) {
+                                            return addressChar
+                                                    .hasMatch(value ?? '')
+                                                ? null
+                                                : 'Please enter a valid address';
+                                          },
                                   ),
                                 ),
                                 const SizedBox(width: 15),
@@ -328,7 +420,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                         .formInputDecoration(
                                             label: 'E-mail Address',
                                             icon: Icons.mail_outlined,
-                                            maxHeight: 30),
+                                            maxHeight: 60),
 
                                     validator: (value) {
                                       String pattern =
@@ -355,7 +447,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
           height: 30,
         ),
         Container(
-          height: 260,
+          height: 300,
           decoration: BoxDecoration(
             color: colorInversePrimary,
             boxShadow: const [
@@ -373,33 +465,38 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
               // mainAxisAlignment: MainAxisAlignment.start,
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(25.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(
-                        Icons.add_card_outlined,
-                        color: colorPrimary,
-                        size: 40,
-                      ),
-                      const SizedBox(width: 10),
-                      Text(
-                        'Step 2: Card Info',
-                        style: TextStyle(
-                        color: colorsTheme(context).primary,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: -0.25,
-                      ),
-                      ),
-                    ],
+                Container(
+                  width: 1400,
+                  decoration: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(30)),
+                    color: colorPrimaryDark,
                   ),
-                ),
-                const Divider(
-                  height: 1,
-                  thickness: 1.5,
-                  color: colorPrimaryDark,
+                  child: const Padding(
+                    padding: EdgeInsets.all(25.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.add_card_outlined,
+                          color: Colors.white,
+                          size: 40,
+                        ),
+                        const SizedBox(width: 10),
+                        Text(
+                          'Step 2: Card Information',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: -0.25,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 Flexible(
                   child: Form(
@@ -424,7 +521,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                             decoration: CustomInputs().formInputDecoration(
                                 label: 'Card Number',
                                 icon: Icons.add_card_rounded,
-                                maxHeight: 30),
+                                maxHeight: 60),
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(16)
                             ],
@@ -486,10 +583,11 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                           .formInputDecoration(
                                               label: 'Name on the Card',
                                               icon: Icons.person_outlined,
-                                              maxHeight: 30),
+                                              maxHeight: 60),
 
                                       validator: (value) {
-                                        return validCharacters.hasMatch(value ?? '')
+                                        return validCharacters
+                                                .hasMatch(value ?? '')
                                             ? null
                                             : 'Please enter your name';
                                       },
@@ -523,7 +621,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                       .formInputDecoration(
                                           label: 'Card Security Code',
                                           icon: Icons.lock_outline,
-                                          maxHeight: 30),
+                                          maxHeight: 60),
                                   inputFormatters: [
                                     LengthLimitingTextInputFormatter(3)
                                   ],
@@ -556,7 +654,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                 decoration: CustomInputs().formInputDecoration(
                                     label: 'Card Expiration Date',
                                     icon: Icons.calendar_month_outlined,
-                                    maxHeight: 30),
+                                    maxHeight: 60),
 
                                 style: const TextStyle(
                                   color: colorPrimaryDark,

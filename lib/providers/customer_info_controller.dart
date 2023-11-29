@@ -32,12 +32,16 @@ class CustomerInfoProvider with ChangeNotifier {
   String nameShip ='';
   String lastNameShip ='';
   String phoneShip='';
+  String zipcode = '';
+  String state = '';
+  String city = '';
 
   String origin;
   String lastName = '';
   String firstName = '';
   String phone = '';
   String address = '';
+  String address2 = '';
   String custEmail = '';
   String contactRange = 'Any time';
   bool contactByEmail = true;
@@ -100,8 +104,14 @@ class CustomerInfoProvider with ChangeNotifier {
     this.phone = phone;
     //notifyListeners();
   }
-  void setAddress(String address){
+  void setAddress1(String address){
     this.address = address;
+    notifyListeners();
+  }
+
+  void setAddress2(String value){
+    this.address2 = value;
+    notifyListeners();
   }
 
   void setEmail(String email) {
@@ -146,6 +156,23 @@ class CustomerInfoProvider with ChangeNotifier {
     phoneShip = phone;
     notifyListeners();
   }
+
+  void setZipcode(String value){
+    zipcode = value;
+    notifyListeners();
+  }
+
+  void setCity(String cit){
+    city = cit;
+    notifyListeners();
+  }
+
+  void setState(String stat){
+    state = stat;
+    notifyListeners();
+  }
+
+  //fin Funciones envio
 
   void setEngage(String engopt) {
     engageoption = engopt;

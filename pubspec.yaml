@@ -76,6 +76,7 @@ dependencies:
   syncfusion_flutter_datepicker: ^20.1.56
   url_launcher: ^6.0.20
   uuid: ^3.0.7
+  flutter_credit_card: ^4.0.1
 
 dev_dependencies:
   flutter_lints: ^2.0.1

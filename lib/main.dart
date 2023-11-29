@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/providers/cart_controller.dart';
+import 'package:uwifi_map_services/providers/customer_info_controller.dart';
+import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
 import 'package:uwifi_map_services/providers/location_phone_controller.dart';
 import 'package:uwifi_map_services/providers/number_form_provider.dart';
 import 'package:uwifi_map_services/providers/portability_form_provider.dart';
@@ -66,6 +68,8 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => SelectorSummaryController(),
         ),
+        //Provider para customer y shipping
+        ChangeNotifierProvider(create: (_) => CustomerShippingInfo()),
         ChangeNotifierProvider<SearchControllerPortabilityR>(
           create: (_) => SearchControllerPortabilityR(
               SuggestionsRepositoryImpl(
