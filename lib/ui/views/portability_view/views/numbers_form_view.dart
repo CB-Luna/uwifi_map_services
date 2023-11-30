@@ -5,8 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:uwifi_map_services/providers/selector_summary_controller.dart';
-
-import 'package:uwifi_map_services/ui/buttons/custom_outlined_button.dart';
 import 'package:uwifi_map_services/providers/portability_form_provider.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/voice_popup/inputs/custom_date_time.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/voice_popup/inputs/custom_inputs.dart';
@@ -32,25 +30,6 @@ class NumbersFormView extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
-            mobile
-                ? CustomOutlinedButton(
-                    onPressed: () {
-                      if (portabilityFormProvider.validateNumbersForm()) {
-                        selectorSummaryController.changePortabilityView(6);
-                      } //
-                    },
-                    text: 'Continue')
-                : CustomOutlinedButton(
-                    onPressed: () {
-                      if (portabilityFormProvider.validateNumbersForm()) {
-                        portabilityFormProvider.scrollDown();
-                        selectorSummaryController.changePortabilityView(6);
-                      } //
-                    },
-                    text: 'Continue'),
-            const SizedBox(
-              height: 20,
-            ),
             SizedBox(
               width: size.width < 1000 ? (size.width * 0.8) : 700,
               child: Card(

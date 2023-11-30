@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:uwifi_map_services/providers/selector_summary_controller.dart';
 
-import 'package:uwifi_map_services/ui/buttons/custom_outlined_button.dart';
 import 'package:uwifi_map_services/providers/portability_form_provider.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/voice_popup/inputs/custom_inputs.dart';
 
@@ -117,16 +116,6 @@ class BillingTelephoneView extends StatelessWidget {
             children: [
               const SizedBox(
                 width: 5,
-              ),
-              Flexible(
-                child: CustomOutlinedButton(
-                    onPressed: () {
-                      if (portabilityFormProvider
-                          .validateBillingTelephoneForm()) {
-                        selectorSummaryController.changePortabilityView(2);
-                      } //
-                    },
-                    text: 'Continue'),
               ),
             ],
           ),
