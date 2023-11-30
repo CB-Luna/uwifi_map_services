@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_credit_card/flutter_credit_card.dart';
 
 class CustomerShippingInfo with ChangeNotifier {
   final TextEditingController parsedFName = TextEditingController();
@@ -31,8 +32,9 @@ class CustomerShippingInfo with ChangeNotifier {
   String phone = '';
   String address = '';
   String address2 = '';
-  
   String custEmail = '';
+
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   void setlName(String lName) {
     lastName = lName;
@@ -115,4 +117,10 @@ class CustomerShippingInfo with ChangeNotifier {
     state = stat;
     notifyListeners();
   }
+
+  bool formValidation() {
+    return formKey.currentState!.validate() ? true : false;
+  }
+
+  
 }

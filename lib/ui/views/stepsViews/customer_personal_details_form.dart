@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -23,6 +24,7 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
     final customerInfo = Provider.of<CustomerInfoProvider>(context);
     final bool isRep = customerInfo.customerInfo.customerRep != '';
     bool? selected = false;
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
     final portabilityFormProvider =
         Provider.of<PortabilityFormProvider>(context);
@@ -498,174 +500,25 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                     ),
                   ),
                 ),
-                Flexible(
-                  child: Form(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 25),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          TextFormField(
-                            /// VARIABLE STORAGE
-                            // controller: controller.parsedEmail,
-                            onChanged: (value) {
-                              controller.setCard(value);
-                            },
-
-                            ///VALIDATION TRIGGER
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            obscureText: false,
-                            keyboardType: TextInputType.number,
-                            decoration: CustomInputs().formInputDecoration(
-                                label: 'Card Number',
-                                icon: Icons.add_card_rounded,
-                                maxHeight: 60),
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(16)
-                            ],
-                            validator: (value) {
-                              return (phoneCharacters.hasMatch(value ?? '') &&
-                                      value?.length == 16)
-                                  ? null
-                                  : 'Please enter a valid card number';
-                            },
-                            style: const TextStyle(
-                              color: colorPrimaryDark,
-                            ),
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    const Text(
-                                      "Same name as before?",
-                                      style: TextStyle(
-                                        color: colorPrimaryDark,
-                                      ),
-                                    ),
-                                    Checkbox(
-                                        checkColor: colorPrimaryDark,
-                                        // semanticLabel: "Same as before?",
-                                        value: selected,
-                                        onChanged: (value) {
-                                          selected = value;
-                                        }),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(width: 15),
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    TextFormField(
-                                      /// VARIABLE STORAGE
-                                      controller: controller.parsedName,
-                                      onChanged: (value) {
-                                        controller.setfName(value);
-                                        portabilityFormProvider.portFirstName =
-                                            value;
-                                      },
-
-                                      ///VALIDATION TRIGGER
-                                      autovalidateMode:
-                                          AutovalidateMode.onUserInteraction,
-                                      autocorrect: false,
-                                      obscureText: false,
-                                      keyboardType: TextInputType.name,
-                                      decoration: CustomInputs()
-                                          .formInputDecoration(
-                                              label: 'Name on the Card',
-                                              icon: Icons.person_outlined,
-                                              maxHeight: 60),
-
-                                      validator: (value) {
-                                        return validCharacters
-                                                .hasMatch(value ?? '')
-                                            ? null
-                                            : 'Please enter your name';
-                                      },
-                                      style: const TextStyle(
-                                        color: colorPrimaryDark,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Expanded(
-                                child: TextFormField(
-                                  /// VARIABLE STORAGE
-                                  // controller: controller.parsedEmail,
-                                  onChanged: (value) {
-                                    controller.setCard(value);
-                                  },
-
-                                  ///VALIDATION TRIGGER
-                                  autovalidateMode:
-                                      AutovalidateMode.onUserInteraction,
-                                  obscureText: false,
-                                  keyboardType: TextInputType.number,
-                                  decoration: CustomInputs()
-                                      .formInputDecoration(
-                                          label: 'Card Security Code',
-                                          icon: Icons.lock_outline,
-                                          maxHeight: 60),
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(3)
-                                  ],
-                                  validator: (value) {
-                                    return (phoneCharacters
-                                                .hasMatch(value ?? '') &&
-                                            value?.length == 3)
-                                        ? null
-                                        : 'Please enter a valid card Security Code';
-                                  },
-                                  style: const TextStyle(
-                                    color: colorPrimaryDark,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 15),
-                              Expanded(
-                                  child: TextFormField(
-                                /// VARIABLE STORAGE
-                                // controller: controller.parsedEmail,
-                                onChanged: (value) {
-                                  controller.setCard(value);
-                                },
-
-                                ///VALIDATION TRIGGER
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                                obscureText: false,
-                                keyboardType: TextInputType.datetime,
-                                decoration: CustomInputs().formInputDecoration(
-                                    label: 'Card Expiration Date',
-                                    icon: Icons.calendar_month_outlined,
-                                    maxHeight: 60),
-
-                                style: const TextStyle(
-                                  color: colorPrimaryDark,
-                                ),
-                              )),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
+                Row(
+                  children: [
+                    CreditCardWidget(
+                      width: 400,
+                      height: 160,
+                      cardNumber: "12345678979",
+                       expiryDate: "22/15",
+                        cardHolderName: "Luis Fierro", 
+                        cvvCode: "125", 
+                        showBackView: false, 
+                        onCreditCardWidgetChange: (CreditCardBrand creditCardBrand) {}),
+                    // CreditCardForm(
+                    //   cardNumber: controller.number,
+                    //      expiryDate: controller.date,
+                    //       cardHolderName: controller.cardName, 
+                    //       cvvCode: controller.ccv, 
+                    //   onCreditCardModelChange: onCreditCardModelChange, 
+                    //   formKey: formKey)
+                  ],
                 )
               ]),
         ),
@@ -736,5 +589,8 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
           ),
       ],
     );
+    
   }
+  
 }
+

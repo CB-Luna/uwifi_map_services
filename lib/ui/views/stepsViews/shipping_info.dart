@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/data/constants.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
-import 'package:uwifi_map_services/providers/steps_controller.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
 
@@ -23,12 +22,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
     final validCharacters = RegExp(r'^[a-zA-Z\- ]+$');
     final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
     final addressChar = RegExp(r'^[a-zA-Z0-9\-()]+$');
-    // final zcode = widget.zipcode.toString();
-    var phoneFormat = MaskTextInputFormatter(
-      mask: '(###) ###-####',
-      filter: {'#': RegExp(r'[0-9]')},
-      type: MaskAutoCompletionType.lazy,
-    );
+
     return SizedBox(
       width: 1400,
       child: Column(
@@ -67,6 +61,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
           ),
           Flexible(
             child: Form(
+              key: controller.formKey,
                 child: Container(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
               child: Column(
