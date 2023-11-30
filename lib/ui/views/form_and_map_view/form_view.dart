@@ -27,9 +27,6 @@ class _FormViewState extends State<FormView> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final bool mobile = size.width < 600 ? true : false;
-
-    final portabilityFormProvider =
-        Provider.of<PortabilityFormProvider>(context);
     // ignore: undefined_prefixed_name
 
     final tracking = Provider.of<TrackingProvider>(context);
@@ -223,14 +220,14 @@ class _FormViewState extends State<FormView> {
                                 }
 
                                 await widget.showPopup(controller, context);
-                                portabilityFormProvider.portNumberStreet =
-                                    controller.street;
-                                portabilityFormProvider.portCity =
-                                    controller.city;
-                                portabilityFormProvider.portState =
-                                    controller.state;
-                                portabilityFormProvider.portZipcode =
-                                    controller.zipcode;
+                                // portabilityFormProvider.portNumberStreet =
+                                //     controller.street;
+                                // portabilityFormProvider.portCity =
+                                //     controller.city;
+                                // portabilityFormProvider.portState =
+                                //     controller.state;
+                                // portabilityFormProvider.portZipcode =
+                                //     controller.zipcode;
                                 var customer = controller.fillCustomerInfo();
                                 tracking.setOrigin = controller.origin;
                                 if (!(controller.customerRep != '')) {

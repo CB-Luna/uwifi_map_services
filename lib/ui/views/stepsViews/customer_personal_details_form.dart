@@ -3,9 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:uwifi_map_services/data/constants.dart';
 import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
-import 'package:uwifi_map_services/providers/portability_form_provider.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
@@ -24,8 +22,6 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
     final bool isRep = customerInfo.customerInfo.customerRep != '';
     bool? selected = false;
 
-    final portabilityFormProvider =
-        Provider.of<PortabilityFormProvider>(context);
     final validCharacters = RegExp(r'^[a-zA-Z\- ]+$');
     final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
     final addressChar = RegExp(r'^[a-zA-Z0-9\-()]+$');
@@ -116,8 +112,6 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                           controller: controller.parsedFName,
                                           onChanged: (value) {
                                             controller.setfName(value);
-                                            portabilityFormProvider
-                                                .portFirstName = value;
                                           },
 
                                           ///VALIDATION TRIGGER
@@ -150,8 +144,6 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                           controller: controller.parsedLName,
                                           onChanged: (value) {
                                             controller.setlName(value);
-                                            portabilityFormProvider
-                                                .portLastName = value;
                                           },
 
                                           ///VALIDATION TRIGGER
@@ -230,8 +222,6 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                                   controller.parsedFName,
                                               onChanged: (value) {
                                                 controller.setfName(value);
-                                                portabilityFormProvider
-                                                    .portFirstName = value;
                                               },
 
                                               ///VALIDATION TRIGGER
@@ -266,8 +256,6 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                                   controller.parsedLName,
                                               onChanged: (value) {
                                                 controller.setlName(value);
-                                                portabilityFormProvider
-                                                    .portLastName = value;
                                               },
 
                                               ///VALIDATION TRIGGER
@@ -407,7 +395,6 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                     controller: controller.parsedEmail,
                                     onChanged: (value) {
                                       controller.setEmail(value);
-                                      portabilityFormProvider.portEmail = value;
                                     },
 
                                     ///VALIDATION TRIGGER
@@ -569,8 +556,6 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                                       controller: controller.parsedName,
                                       onChanged: (value) {
                                         controller.setfName(value);
-                                        portabilityFormProvider.portFirstName =
-                                            value;
                                       },
 
                                       ///VALIDATION TRIGGER

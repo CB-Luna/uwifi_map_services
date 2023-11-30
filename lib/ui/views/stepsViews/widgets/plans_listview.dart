@@ -7,7 +7,6 @@ import 'package:uwifi_map_services/ui/views/stepsViews/widgets/bundle_custom_rad
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/plans_custom_radio_widget.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/internet_popup/internet_popup.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/tv_popup/tv_popup.dart';
-import 'package:uwifi_map_services/ui/views/stepsViews/widgets/voice_popup/voice_popup.dart';
 
 import 'package:uwifi_map_services/classes/plan.dart';
 import 'package:uwifi_map_services/classes/product.dart';
@@ -235,8 +234,6 @@ class PlansListView extends StatelessWidget {
                 plan: currentPlan,
                 customerRep: customerController.customerInfo.customerRep!);
 
-          case "gigFastVoice":
-            return VoicePopup(plan: currentPlan, customerType: customerType);
 
           default:
             return InternetPopup(

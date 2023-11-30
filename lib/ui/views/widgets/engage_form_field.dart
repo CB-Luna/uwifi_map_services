@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:uwifi_map_services/providers/referal_providers/portability_form_provider_r.dart';
-import 'package:uwifi_map_services/ui/layouts/map/auth_layoutR.dart';
 import 'package:select_form_field/select_form_field.dart';
 
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
@@ -207,9 +205,6 @@ class _EngageFormFieldState extends State<EngageFormField> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    final portabilityFormProviderR =
-        Provider.of<PortabilityFormProviderR>(context);
-
     final customerController = Provider.of<CustomerInfoProvider>(context);
 
     return Column(
@@ -227,7 +222,7 @@ class _EngageFormFieldState extends State<EngageFormField> {
             child: Column(
               children: [
                 SelectFormField(
-                  enabled: portabilityFormProviderR.engageUsed ? false : true,
+                  enabled: true,
                   type: SelectFormFieldType.dropdown,
 
                   controller: customerController.engageSelect,
@@ -267,7 +262,7 @@ class _EngageFormFieldState extends State<EngageFormField> {
                                     borderRadius: BorderRadius.circular(29)),
                                 clipBehavior: Clip.antiAlias,
                                 child: const Center(
-                                  child: AuthLayoutR(),
+                                  child: null,
                                 ),
                               ),
                             );

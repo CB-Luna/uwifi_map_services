@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/classes/customer_info.dart';
 import 'package:uwifi_map_services/router/promo_params.dart';
 import 'package:uwifi_map_services/router/router.dart';
-import 'package:uwifi_map_services/ui/layouts/map/auth_layoutR.dart';
 import 'package:uwifi_map_services/ui/layouts/sales/sales_layout.dart';
 import 'package:uwifi_map_services/router/query_params.dart';
 import 'package:uwifi_map_services/ui/layouts/map/auth_layout.dart';
@@ -120,7 +119,7 @@ class AdminHandlers {
     //     print("QueryParams: ${params['rep']?[0]}");
     //   }
     // }
-    return const AuthLayoutR();
+    return const AuthLayout();
   });
 }
 
