@@ -7,7 +7,6 @@ import 'package:uwifi_map_services/providers/remote/geocode_api.dart';
 import 'package:uwifi_map_services/providers/remote/suggestions_api.dart';
 import 'package:uwifi_map_services/providers/search_controller.dart';
 import 'package:uwifi_map_services/ui/layouts/map/widgets/custom_title.dart';
-import 'package:uwifi_map_services/ui/views/form_and_map_view/map_view.dart';
 import 'package:uwifi_map_services/ui/views/form_and_map_view/form_view.dart';
 
 class AuthLayout extends StatefulWidget {

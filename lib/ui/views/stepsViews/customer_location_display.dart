@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/shipping_info.dart';
-import 'package:uwifi_map_services/ui/views/stepsViews/summary_info.dart';
 import 'customer_info_checks.dart';
 import 'package:uwifi_map_services/classes/popup.dart';
 

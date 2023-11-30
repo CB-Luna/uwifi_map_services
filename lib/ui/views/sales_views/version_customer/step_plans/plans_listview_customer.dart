@@ -185,8 +185,6 @@ class PlansListViewCustomer extends StatelessWidget {
   Widget planCustomRadioPromo(plan, context) {
     Products promo = getPromo(context, plan);
 
-    final cartController = Provider.of<Cart>(context, listen: false);
-
     Widget planBox = PlanRadioButton(
         plan: plan, isTherePromo: true, promo: promo, isPromoApplied: true);
 
