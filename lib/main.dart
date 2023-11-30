@@ -1,8 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:uwifi_map_services/helpers/constants.dart';
+import 'package:uwifi_map_services/helpers/globals.dart';
 import 'package:uwifi_map_services/providers/cart_controller.dart';
-import 'package:uwifi_map_services/providers/customer_info_controller.dart';
+import 'package:url_strategy/url_strategy.dart';
 import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
 import 'package:uwifi_map_services/providers/location_phone_controller.dart';
 import 'package:uwifi_map_services/providers/number_form_provider.dart';
@@ -23,8 +26,15 @@ import 'package:uuid/uuid.dart';
 import 'data/repositories_impl/suggestions_repository_impl.dart';
 import 'providers/tracking_provider.dart';
 
-void main() {
+void main() async {
   Flurorouter.configureRoutes();
+  WidgetsFlutterBinding.ensureInitialized();
+
+  setPathUrlStrategy();
+
+  supabaseAuth = SupabaseClient(supabaseUrl, anonKey, schema: 'auth');
+
+  await Supabase.initialize(url: supabaseUrl, anonKey: anonKey);
   runApp(const AppState());
 }
 
