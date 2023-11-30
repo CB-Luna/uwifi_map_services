@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/providers/cart_controller.dart';
-import 'package:uwifi_map_services/ui/views/sales_views/sales_view.dart';
+import 'package:uwifi_map_services/ui/views/form_and_map_view/form_view.dart';
 
 import '../classes/customer_info.dart';
 import '../ui/views/stepsViews/customer_info_view.dart';
@@ -18,7 +18,6 @@ class StepsController with ChangeNotifier {
   String _state = '';
   String _city = '';
   String _zipcode = '';
-  String _serviceType = '';
   bool promoCheckFlag = false;
   bool formValidated = false;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -43,7 +42,6 @@ class StepsController with ChangeNotifier {
     _state = customer.state;
     _city = customer.city;
     _zipcode = customer.zipcode;
-    _serviceType = customer.serviceType;
     notifyListeners();
   }
 
@@ -59,7 +57,7 @@ class StepsController with ChangeNotifier {
         );
 
       default:
-        return SalesView(serviceType: _serviceType);
+        return const FormView();
     }
   }
 

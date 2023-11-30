@@ -2,28 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:provider/provider.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
-import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
 import '../../../providers/steps_controller.dart';
 
-class CustomerPersonalDetailsForm extends StatelessWidget {
+class Step1PersonalDetailsForm extends StatelessWidget {
   final String dir;
-  const CustomerPersonalDetailsForm({Key? key, required this.dir})
+  const Step1PersonalDetailsForm({Key? key, required this.dir})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<CustomerShippingInfo>(context);
     final stepsController = Provider.of<StepsController>(context);
-    final customerInfo = Provider.of<CustomerInfoProvider>(context);
-    final bool isRep = customerInfo.customerInfo.customerRep != '';
-    bool? selected = false;
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
     final validCharacters = RegExp(r'^[a-zA-Z\- ]+$');
     final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
     final addressChar = RegExp(r'^[a-zA-Z0-9\-()]+$');
@@ -509,71 +502,6 @@ class CustomerPersonalDetailsForm extends StatelessWidget {
                 )
               ]),
         ),
-        if (isRep) const SizedBox(height: 30),
-        if (isRep)
-          Container(
-            height: 180,
-            decoration: BoxDecoration(
-              color: const Color(0xFFF5F9FF),
-              boxShadow: const [
-                BoxShadow(
-                  blurRadius: 15,
-                  spreadRadius: -5,
-                  color: Color(0x506FA5DB),
-                  offset: Offset(0, 15),
-                )
-              ],
-              borderRadius: BorderRadius.circular(40),
-            ),
-            child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(35, 35, 35, 35),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Disclaimers',
-                        style: GoogleFonts.getFont('Work Sans',
-                            color: colorPrimaryDark,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 18,
-                            letterSpacing: -0.5),
-                      ),
-                    ],
-                  ),
-                  Flexible(
-                    child: Text(
-                      '* Install cannot be guaranteed until the technician completes a site survey and provide options for service.',
-                      style: GoogleFonts.getFont(
-                        'Work Sans',
-                        color: const Color(0xFFD20030),
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Flexible(
-                    child: Text(
-                      '* Installation fees may apply to the order. The representative will provide these fees when you are contacted.',
-                      style: GoogleFonts.getFont(
-                        'Work Sans',
-                        color: const Color(0xFFD20030),
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
       ],
     );
     

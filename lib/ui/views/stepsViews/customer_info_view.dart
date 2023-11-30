@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/data/constants.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/customer_location_display.dart';
-import 'package:uwifi_map_services/ui/views/stepsViews/customer_personal_details_form.dart';
+import 'package:uwifi_map_services/ui/views/stepsViews/step1_personal_details_form.dart';
 
 import '../../../providers/customer_info_controller.dart';
 import '../../../providers/steps_controller.dart';
@@ -30,7 +30,7 @@ class CustomerInfoView extends StatefulWidget {
 }
 
 class CustomerInfoViewState extends State<CustomerInfoView> {
-  final ScrollController _watchchecks = ScrollController();
+  final ScrollController _scrollController = ScrollController();
   final itemKey = GlobalKey();
   final itemKey2 = GlobalKey();
 
@@ -57,10 +57,10 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
           ? stepsController.promoCheck(true)
           : stepsController.promoCheck(false);
 
-      _watchchecks.addListener(() {
-        double maxScroll = _watchchecks.position.maxScrollExtent;
+      _scrollController.addListener(() {
+        double maxScroll = _scrollController.position.maxScrollExtent;
 
-        if (_watchchecks.offset >= (maxScroll - 85) ||
+        if (_scrollController.offset >= (maxScroll - 85) ||
             MediaQuery.of(context).size.width >= 1130) {
           setState(() {
             stepsController.promoCheck(true);
@@ -84,23 +84,16 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
     return Scaffold(
       backgroundColor: colorBgB,
       body: (MediaQuery.of(context).size.width > 1130)
-          ? Scrollbar(
-              controller: _watchchecks,
-              thumbVisibility: true,
-              trackVisibility: true,
-              child: SingleChildScrollView(
-                controller: _watchchecks,
-                child: _WebView(
-                    street: widget.street,
-                    city: widget.city,
-                    state: widget.state,
-                    zipcode: widget.zipcode),
-              ))
+          ? _WebView(
+              street: widget.street,
+              city: widget.city,
+              state: widget.state,
+              zipcode: widget.zipcode)
           :
 
           ///CLASS JAIL HERE
           SingleChildScrollView(
-              controller: _watchchecks,
+              controller: _scrollController,
               child: Column(
                 children: [
                   const SizedBox(height: 15),
@@ -113,7 +106,7 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
                     padding: const EdgeInsets.all(15.0),
                     child: Container(
                         key: itemKey,
-                        child: CustomerPersonalDetailsForm(dir: widget.street)),
+                        child: Step1PersonalDetailsForm(dir: widget.street)),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(15.0),
@@ -251,7 +244,7 @@ class _WebViewState extends State<_WebView> {
     final customerInfo = Provider.of<CustomerInfoProvider>(context);
     final bool isRep = customerInfo.customerInfo.customerRep != '';
     return SingleChildScrollView(
-        primary: false,
+        controller: ScrollController(),
         padding: const EdgeInsets.all(0),
         child: Container(
           padding: const EdgeInsets.fromLTRB(50, 25, 50, 0),
@@ -264,20 +257,13 @@ class _WebViewState extends State<_WebView> {
                 ),
               ),
               const SizedBox(height: 25),
-              Wrap(
-                alignment: WrapAlignment.start,
-                crossAxisAlignment: WrapCrossAlignment.start,
-                children: [
-                  CustomerPersonalDetailsForm(dir: widget.street),
-                  const SizedBox(height: 30),
-                  CustomerLocationDisplay(
-                    street: widget.street,
-                    city: widget.city,
-                    state: widget.state,
-                    zcode: widget.zipcode,
-                  ),
-                  
-                ],
+              Step1PersonalDetailsForm(dir: widget.street),
+              const SizedBox(height: 30),
+              CustomerLocationDisplay(
+                street: widget.street,
+                city: widget.city,
+                state: widget.state,
+                zcode: widget.zipcode,
               ),
             ],
           ),

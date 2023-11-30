@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import 'package:uwifi_map_services/classes/customer_info.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
-import 'package:uwifi_map_services/providers/plan_controller.dart';
 
 import 'package:uwifi_map_services/providers/tracking_provider.dart' as track;
 import 'package:uwifi_map_services/theme/theme_data.dart';
@@ -28,20 +27,12 @@ class SalesLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String? custAddress = "${customerInfo.street}, ${customerInfo.zipcode}";
+    String? custAddress = "${customerInfo.street}, ${customerInfo.city} ${customerInfo.state} ${customerInfo.zipcode}";
 
     final tracking = Provider.of<track.TrackingProvider>(context);
 
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider<PlanController>(
-            create: (_) => PlanController(
-              customerInfo.coverageType,
-              customerInfo.serviceType,
-              customerInfo.locationGroup,
-            ),
-            lazy: false,
-          ),
           ChangeNotifierProvider<StepsController>(
             create: (_) => StepsController(customerInfo),
           ),
@@ -76,11 +67,6 @@ class SalesLayout extends StatelessWidget {
                     //Con este parámatro se ajusta la posición del Shopping Cart
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    //Despliegue de Promos list
-                    // if (isRep)
-                    //   if (stepsController.repCurrentStep == RepViews.customerInfoView)
-                    //     const PromosListBox(),
-
                     //Despliegue de contenido de página en Stepper
                     Flexible(
                         child: stepsController

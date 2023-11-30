@@ -12,15 +12,6 @@ class Flurorouter {
 
   static String formRoute = '/form';
 
-  static String repSalesRoute = 'salespromo/:promo';
-
-  static String prefillRoute = 'prefill/:address';
-
-  static String repRouteTemp = 'rep';
-
-  static String repRoute = 'rep/:rep';
-
-  static String originRoute = 'origin/:origin';
 
   static void configureRoutes() {
     // Auth Routes
@@ -31,38 +22,8 @@ class Flurorouter {
     );
 
     router.define(
-      prefillRoute,
-      handler: AdminHandlers.prefillHomePage,
-      transitionType: TransitionType.none,
-    );
-
-    router.define(
-      repRoute,
-      handler: AdminHandlers.prefillRep,
-      transitionType: TransitionType.none,
-    );
-
-    router.define(
-      repRouteTemp,
-      handler: AdminHandlers.prefillRepTemp,
-      transitionType: TransitionType.none,
-    );
-
-    router.define(
       salesRoute,
       handler: AdminHandlers.productPage,
-      transitionType: TransitionType.none,
-    );
-
-    router.define(
-      repSalesRoute,
-      handler: AdminHandlers.repProductPage,
-      transitionType: TransitionType.none,
-    );
-
-    router.define(
-      originRoute,
-      handler: AdminHandlers.prefillOrigin,
       transitionType: TransitionType.none,
     );
 
