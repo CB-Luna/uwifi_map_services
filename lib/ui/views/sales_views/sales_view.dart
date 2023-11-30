@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 import 'package:uwifi_map_services/providers/plan_controller.dart';
 import 'package:uwifi_map_services/ui/views/sales_views/version_customer/step_plans/plans_listview_customer.dart';
-import 'package:uwifi_map_services/ui/views/stepsViews/widgets/plans_listview.dart';
 import '../../../data/constants.dart';
 
 class SalesView extends StatefulWidget {
@@ -53,8 +52,6 @@ class _SalesViewState extends State<SalesView> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          for (var category in controller.plansCategories)
-                            PlansListView(category: category)
                         ],
                       )
                     : Wrap(

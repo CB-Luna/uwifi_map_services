@@ -9,7 +9,6 @@ import 'package:intl/intl.dart';
 import 'package:uwifi_map_services/classes/product.dart';
 import 'package:uwifi_map_services/classes/validate_loa_signed.dart';
 import 'package:uwifi_map_services/data/constants.dart';
-import 'package:uwifi_map_services/ui/views/stepsViews/widgets/tv_popup/layouts/mobile/model/option_portability.dart';
 import 'package:uuid/uuid.dart';
 
 class PortabilityFormProvider extends ChangeNotifier {
@@ -229,17 +228,6 @@ class PortabilityFormProvider extends ChangeNotifier {
     return formattedDate;
   }
 
-  void selectedOptionsPortability(int index) {
-    for (int i = 0; i < optionsPortability.length; i++) {
-      if (index == i) {
-        optionsPortability[i].isSelected = true;
-        indexContainer = index;
-      } else {
-        optionsPortability[i].isSelected = false;
-      }
-    }
-    notifyListeners();
-  }
 
   void clearInformationPortability() {
     final maxFields = fields.length;

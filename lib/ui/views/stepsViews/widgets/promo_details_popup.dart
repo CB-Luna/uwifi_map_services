@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../classes/popup.dart';
-import '../../../buttons/custom_outlined_button.dart';
 
 class PromoDetailsPopup extends StatelessWidget with Popup {
   final String promoName;
@@ -71,16 +70,6 @@ class PromoDetailsPopup extends StatelessWidget with Popup {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(5),
-                child: CustomOutlinedButton(
-                    text: 'Ok',
-                    borderColor: const Color(0xFF2E5899),
-                    bgColor: const Color(0xFF2E5899),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    }),
-              )
             ]),
       ),
     );

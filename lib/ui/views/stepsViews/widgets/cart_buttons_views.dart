@@ -39,41 +39,41 @@ styledButton(context) {
 
 void finalPressed(BuildContext context,
       CustomerShippingInfo controllerCustomer) async {
-         final recordCustomer = await supabase.from('customer').insert(
-          {
-            'first_name': controllerCustomer.firstName,
-            'last_name': controllerCustomer.lastName,
-            'email': controllerCustomer.custEmail,
-            'mobile_phone': controllerCustomer.phone,
-          },
-        ).select<PostgrestList>('customer_id');
-        final recordAddresBilling = await supabase.from('address').insert(
-          {
-            'address_1': "123 1st St.",
-            'address_2': Null,
-            'zipcode': "12345",
-            'city': "Los Angeles",
-            'state_fk': 6,
-            'country': "US",
-            'type': "Billing",
-            'customer_fk': recordCustomer.first['customer_id'],
-          },
-        ).select<PostgrestList>('address_id');
-        final recordAddresPhysical = await supabase.from('address').insert(
-          {
-            'address_1': "123 1st St.",
-            'address_2': Null,
-            'zipcode': "12345",
-            'city': "Los Angeles",
-            'state_fk': 6,
-            'country': "US",
-            'type': "Physical",
-            'customer_fk': recordCustomer.first['customer_id'],
-          },
-        ).select<PostgrestList>('address_id');
+        //  final recordCustomer = await supabase.from('customer').insert(
+        //   {
+        //     'first_name': controllerCustomer.firstName,
+        //     'last_name': controllerCustomer.lastName,
+        //     'email': controllerCustomer.custEmail,
+        //     'mobile_phone': controllerCustomer.phone,
+        //   },
+        // ).select<PostgrestList>('customer_id');
+        // final recordAddresBilling = await supabase.from('address').insert(
+        //   {
+        //     'address_1': "123 1st St.",
+        //     'address_2': Null,
+        //     'zipcode': "12345",
+        //     'city': "Los Angeles",
+        //     'state_fk': 6,
+        //     'country': "US",
+        //     'type': "Billing",
+        //     'customer_fk': recordCustomer.first['customer_id'],
+        //   },
+        // ).select<PostgrestList>('address_id');
+        // final recordAddresPhysical = await supabase.from('address').insert(
+        //   {
+        //     'address_1': "123 1st St.",
+        //     'address_2': Null,
+        //     'zipcode': "12345",
+        //     'city': "Los Angeles",
+        //     'state_fk': 6,
+        //     'country': "US",
+        //     'type': "Physical",
+        //     'customer_fk': recordCustomer.first['customer_id'],
+        //   },
+        // ).select<PostgrestList>('address_id');
 
-        if (recordCustomer.isNotEmpty && recordAddresBilling.isNotEmpty && recordAddresPhysical.isNotEmpty) {
-          // ignore: use_build_context_synchronously
+        // if (recordCustomer.isNotEmpty && recordAddresBilling.isNotEmpty && recordAddresPhysical.isNotEmpty) {
+        //   // ignore: use_build_context_synchronously
           showDialog(
             barrierColor: const Color(0x00022963).withOpacity(0.40),
             barrierDismissible: false,
@@ -82,5 +82,5 @@ void finalPressed(BuildContext context,
               return const FinalPopup();
             },
           );
-        } 
+        // } 
   }

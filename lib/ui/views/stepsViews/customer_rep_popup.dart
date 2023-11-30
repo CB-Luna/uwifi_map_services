@@ -3,7 +3,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:uwifi_map_services/ui/buttons/custom_outlined_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -114,13 +113,6 @@ class CustomerRepPopup extends StatelessWidget with Popup {
               fontWeight: FontWeight.bold,
               letterSpacing: -1.0,
             ),
-          ),
-          CustomOutlinedButton(
-            onPressed: () async {
-              await launchUrl(Uri.parse((link)));
-            },
-            text: 'See Customer Profile',
-            bgColor: const Color(0xFFD20030),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(

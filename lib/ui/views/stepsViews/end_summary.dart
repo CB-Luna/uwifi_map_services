@@ -7,7 +7,6 @@ import 'package:uwifi_map_services/data/constants.dart';
 import 'package:uwifi_map_services/providers/cart_controller.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 import 'package:uwifi_map_services/providers/portability_form_provider.dart';
-import 'package:uwifi_map_services/providers/referal_providers/portability_form_provider_r.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/views/form_and_map_view/wigdets/gradient_button.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/end_sum_add_note.dart';
@@ -42,8 +41,6 @@ class EndSummaryWidgetState extends State<EndSummaryWidget> {
 
     final customerController = Provider.of<CustomerInfoProvider>(context);
     final cartController = Provider.of<Cart>(context, listen: false);
-    final portabilityFormProviderR =
-        Provider.of<PortabilityFormProviderR>(context);
 
     final portabilityFormProvider =
         Provider.of<PortabilityFormProvider>(context);
@@ -144,8 +141,6 @@ class EndSummaryWidgetState extends State<EndSummaryWidget> {
                                     portabilityFormProvider.telephoneNumber,
                                     portabilityFormProvider.billingTelephone);
                               }
-                              finalPressed(customerController,
-                                  cartController, portabilityFormProviderR);
                               if (portabilityFormProvider.fileSelected) {
                                 portabilityFormProvider.uploadFileLastBill();
                               }
@@ -169,7 +164,7 @@ class EndSummaryWidgetState extends State<EndSummaryWidget> {
   }
 
   void finalPressed(CustomerInfoProvider customerController,
-      Cart cartController, PortabilityFormProviderR? portabilityr) async {
+      Cart cartController) async {
     // if (customerController.orderSent) {
     // } else {
       if (formKey.currentState!.validate()) {

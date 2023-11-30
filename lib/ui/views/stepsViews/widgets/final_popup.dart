@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:restart_app/restart_app.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:uwifi_map_services/providers/portability_form_provider.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 
 class FinalPopup extends StatelessWidget {
@@ -13,8 +11,6 @@ class FinalPopup extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final bool mobile = size.width < 950 ? true : false;
-    final portabilityFormProvider =
-        Provider.of<PortabilityFormProvider>(context);
     return AlertDialog(
       clipBehavior: Clip.antiAlias,
       contentPadding: const EdgeInsets.all(0.0),
@@ -53,22 +49,6 @@ class FinalPopup extends StatelessWidget {
                   letterSpacing: -0.50,
                 ),
               ),
-              portabilityFormProvider.fileSelected ||
-                      portabilityFormProvider.portabilityCheck == false
-                  ? const Text(
-                      "",
-                    )
-                  : Text(
-                      "If you don't have your last bill right now you can go to https://uwifi.com/ later to upload",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.poppins(
-                        height: 1.5,
-                        fontSize: mobile ? 14 : 20,
-                        color: colorInversePrimary,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: -0.50,
-                      ),
-                    ),
               const SizedBox(height: 15),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(

@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/data/constants.dart';
-import 'package:uwifi_map_services/theme/theme_data.dart';
-import 'package:uwifi_map_services/ui/buttons/custom_outlined_button.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
-import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
 
 class PromoCheckbox extends StatefulWidget {
   const PromoCheckbox({Key? key}) : super(key: key);
@@ -121,31 +118,7 @@ class AckCheckboxState extends State<AckCheckbox> {
           height: 30,
         ),
         if (ackCheck == true) ...[
-          Padding(
-            padding: const EdgeInsets.all(5),
-            child: CustomOutlinedButton(
-                text: 'Continue',
-                borderColor: const Color(0xFF2E5899),
-                bgColor: const Color(0xFF2E5899),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                }),
-          )
         ] else ...[
-          const Padding(
-            padding: EdgeInsets.all(5),
-            child: Opacity(
-              opacity: 0.5,
-              child: MouseRegion(
-                cursor: SystemMouseCursors.forbidden,
-                child: CustomOutlinedButton(
-                  text: 'Continue',
-                  borderColor: Color(0xFF2E5899),
-                  bgColor: Color(0xFF2E5899),
-                ),
-              ),
-            ),
-          )
         ],
         const Padding(padding: EdgeInsets.only(bottom: 12.0))
       ],

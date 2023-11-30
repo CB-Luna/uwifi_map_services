@@ -5,12 +5,8 @@ import 'package:uwifi_map_services/theme/theme_data.dart';
 
 import '../../../../data/constants.dart';
 import '../../../../providers/cart_controller.dart';
-import '../../../../providers/portability_form_provider.dart';
-import '../../../../providers/referal_providers/portability_form_provider_r.dart';
 import '../../../../providers/search_controller_portability_r.dart';
 import '../../../../providers/steps_controller.dart';
-import '../../../../providers/tv_popup_controller.dart';
-import '../../../../providers/voice_popup_controller.dart';
 import 'package:uwifi_map_services/providers/tracking_provider.dart' as track;
 
 import '../../../views/stepsViews/widgets/custom_stepper.dart';
@@ -26,28 +22,15 @@ class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //DEFINICIÓN DE PROVIDERS
-    final referalController = Provider.of<PortabilityFormProviderR>(context);
-    final searchReferalController =
-        Provider.of<SearchControllerPortabilityR>(context);
     final stepsController = Provider.of<StepsController>(context);
-    final voicePopupController = Provider.of<VoicePopupController>(context);
-    final tvPopupController = Provider.of<TVPopupController>(context);
     final cartController = Provider.of<Cart>(context);
-    final portabilityFormProvider =
-        Provider.of<PortabilityFormProvider>(context);
 
     final tracking = Provider.of<track.TrackingProvider>(context);
 
     // FUNCIÓN PARA DEVOLVER AL STATUS INICIAL LO RELACIONADO A LAS SALES
     setDefault() {
       tracking.setView = track.Views.map;
-      voicePopupController.clearCallToAPIs();
-      tvPopupController.clearCallToAPIs();
       cartController.clearAllProducts();
-      portabilityFormProvider.clearInformationPortability();
-      referalController.clearReferalInfo();
-      searchReferalController.clearReferalInfo();
-      portabilityFormProvider.portabilityCheck = false;
     }
 
     bool onelineDisplay = screenSize(context).width >= 1100;

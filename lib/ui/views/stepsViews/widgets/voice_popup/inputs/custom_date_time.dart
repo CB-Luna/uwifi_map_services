@@ -4,7 +4,6 @@ import 'package:pattern_formatter/pattern_formatter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/providers/portability_form_provider.dart';
-import 'package:uwifi_map_services/ui/buttons/custom_outlined_button.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/voice_popup/inputs/custom_inputs.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -91,22 +90,6 @@ class CustomDateTimeState extends State<CustomDateTime> {
                             ? false
                             : true;
                       },
-                    ),
-                    CustomOutlinedButton(
-                      onPressed: () {
-                        if (selectedDate != null) {
-                          formattedDate =
-                              DateFormat("MM/dd/yyyy").format(selectedDate!);
-                          portabilityFormProvider
-                              .requestedPortDateController.text = formattedDate;
-                          portabilityFormProvider
-                              .changeValueRequestedPortDate();
-                          Navigator.of(context).pop();
-                        }
-                      },
-                      text: 'Accept',
-                      bgColor: const Color(0xff2E5899),
-                      borderColor: const Color(0xff2E5899),
                     ),
                   ],
                 ),

@@ -6,12 +6,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/data/constants.dart';
 import 'package:uwifi_map_services/providers/cart_controller.dart';
-import 'package:uwifi_map_services/providers/plan_controller.dart';
-import 'package:uwifi_map_services/providers/portability_form_provider.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/column_builder.dart';
 import '../../../../providers/remote/boxes_behavior_controller.dart';
-import '../../../../providers/steps_controller.dart';
 import 'cart_buttons_views.dart';
 
 class CartWidget extends StatelessWidget {
@@ -20,12 +17,7 @@ class CartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartController = Provider.of<Cart>(context);
-    final plansController = Provider.of<PlanController>(context);
-
-    final stepsController = Provider.of<StepsController>(context);
     final cartBehavior = Provider.of<BoxesBehavior>(context);
-    final portabilityFormProvider =
-        Provider.of<PortabilityFormProvider>(context);
     final scrollController = ScrollController();
 
     final size = MediaQuery.of(context).size;

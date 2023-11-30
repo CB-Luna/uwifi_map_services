@@ -3,8 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:uwifi_map_services/providers/selector_summary_controller.dart';
-
-import 'package:uwifi_map_services/ui/buttons/custom_outlined_button.dart';
 import 'package:uwifi_map_services/providers/portability_form_provider.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/voice_popup/inputs/custom_date_time.dart';
 
@@ -86,15 +84,6 @@ class PortDateView extends StatelessWidget {
               children: [
                 const SizedBox(
                   width: 5,
-                ),
-                Flexible(
-                  child: CustomOutlinedButton(
-                      onPressed: () {
-                          if (portabilityFormProvider.validatePortDateForm()) {
-                            selectorSummaryController.changePortabilityView(4);
-                          }//
-                      },
-                      text: 'Continue'),
                 ),
               ],
             ),

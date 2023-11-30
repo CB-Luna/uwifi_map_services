@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/providers/cart_controller.dart';
+import 'package:uwifi_map_services/ui/views/sales_views/sales_view.dart';
 
 import '../classes/customer_info.dart';
 import '../ui/views/stepsViews/customer_info_view.dart';
-import '../ui/views/sales_views/sales_view.dart';
 
 enum Views { customerInfoView}
 
