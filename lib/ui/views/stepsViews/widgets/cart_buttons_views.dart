@@ -37,6 +37,7 @@ styledButton(context) {
 
 void finalPressed(BuildContext context,
       CustomerShippingInfo controllerCustomer) async {
+
          final recordCustomer = await supabase.from('customer').insert(
           {
             'first_name': controllerCustomer.parsedFNamePD.text,
@@ -48,7 +49,7 @@ void finalPressed(BuildContext context,
         final recordAddresBilling = await supabase.from('address').insert(
           {
             'address_1': controllerCustomer.parsedAddress1PD.text,
-            'address_2': controllerCustomer.parsedAddress2PD.text,
+            'address_2': controllerCustomer.parsedAddress2PD.text.isEmpty? Null : controllerCustomer.parsedAddress2PD.text,
             'zipcode': controllerCustomer.parsedZipcodePD.text,
             'city': controllerCustomer.parsedCityPD.text,
             'state_fk': 46,
@@ -60,7 +61,7 @@ void finalPressed(BuildContext context,
         final recordAddresPhysical = await supabase.from('address').insert(
           {
             'address_1': controllerCustomer.parsedAddress1SD.text,
-            'address_2': controllerCustomer.parsedAddress2SD.text,
+            'address_2': controllerCustomer.parsedAddress2SD.text.isEmpty? Null : controllerCustomer.parsedAddress2SD.text,
             'zipcode': controllerCustomer.parsedZipcodeSD.text,
             'city': controllerCustomer.parsedCitySD.text,
             'state_fk': 46,
