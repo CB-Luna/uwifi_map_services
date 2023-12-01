@@ -17,7 +17,7 @@ styledButton(context) {
     //Se controla la leyenda del botón del shopping cart, dependiendo la vista actual del proceso.
     case Views.customerInfoView:
       //Se controla la opacidad del botón (que se haga ver habilitado)
-      var opacity = stepsController.promoCheckFlag ? 1.0 : 0.50;
+      var opacity = 1.0;
 
       return CartButtons(
           opacity: opacity,
