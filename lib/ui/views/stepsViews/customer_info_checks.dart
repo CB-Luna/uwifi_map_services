@@ -38,7 +38,7 @@ class PromoCheckboxState extends State<PromoCheckbox> {
               });
               customerController.promoInfobyEmail = emailCheckbox;
             },
-            subtitle: Text(
+            title: Text(
               'I would like to receive promotional messages from UWIFI by E-mail. You can unsubscribe at any time.',
               style: bodyStyle(context),
             ),
@@ -55,7 +55,7 @@ class PromoCheckboxState extends State<PromoCheckbox> {
               });
               customerController.promoInfoibySMS = smsCheckbox;
             },
-            subtitle: Text(
+            title: Text(
                 'I would like to receive promotional messages from UWIFI by SMS.\n\n*Message and data rates may apply to receiving these messages.\n\n*Reply with STOP at any time to opt-out from future messages.',
                 style: bodyStyle(context)),
             activeColor: colorsTheme(context).tertiary,

@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 
 class CustomerShippingInfo with ChangeNotifier {
+  //Bandera Checkbox SD same as PD
+  bool sameAsPD = false;
+
   // Personal Details
   GlobalKey<FormState> formKeyPD = GlobalKey<FormState>();
   final TextEditingController parsedFNamePD = TextEditingController(text: "");
@@ -28,6 +31,31 @@ class CustomerShippingInfo with ChangeNotifier {
 
   bool formValidation() {
     return (formKeyPD.currentState!.validate()) ? true : false;
+  }
+
+  void changeValuesShoppingDetails() {
+    sameAsPD = !sameAsPD;
+    if (sameAsPD) {
+      parsedFNameSD.text = parsedFNamePD.text;
+      parsedLNameSD.text = parsedLNamePD.text;
+      parsedPhoneSD.text = parsedPhonePD.text;
+      parsedAddress1SD.text = parsedAddress1PD.text;
+      parsedAddress2SD.text = parsedAddress2PD.text;
+      parsedZipcodeSD.text = parsedZipcodePD.text;
+      parsedCitySD.text = parsedCityPD.text;
+      parsedStateSD.text = parsedStatePD.text;
+
+    } else {
+      parsedFNameSD.text = "";
+      parsedLNameSD.text = "";
+      parsedPhoneSD.text = "";
+      parsedAddress1SD.text = "";
+      parsedAddress2SD.text = "";
+      parsedZipcodeSD.text = "";
+      parsedCitySD.text = "";
+      parsedStateSD.text = "";
+    }
+    notifyListeners();
   }
 
   //controllers for the Card Info

@@ -26,9 +26,9 @@ class CustomerLocationDisplay extends StatelessWidget with Popup {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const SizedBox(height: 30,),
-          //Checkboxes
+          //Shipping Info
           Container(
-            height: 350,
+            height: 370,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50),
               color: colorBgWhite,
@@ -38,7 +38,7 @@ class CustomerLocationDisplay extends StatelessWidget with Popup {
            const SizedBox(
           height: 30,
         ),
-        //Shipping Info
+        //CheckBoxes
         Container(
           height: 270,
           decoration: BoxDecoration(
