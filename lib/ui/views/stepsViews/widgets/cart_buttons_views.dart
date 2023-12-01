@@ -17,7 +17,7 @@ styledButton(context) {
     //Se controla la leyenda del botón del shopping cart, dependiendo la vista actual del proceso.
     case Views.customerInfoView:
       //Se controla la opacidad del botón (que se haga ver habilitado)
-      var opacity = stepsController.promoCheckFlag ? 1.0 : 0.50;
+      var opacity = 1.0;
 
       return CartButtons(
           opacity: opacity,
@@ -37,48 +37,52 @@ styledButton(context) {
 
 void finalPressed(BuildContext context,
       CustomerShippingInfo controllerCustomer) async {
-         final recordCustomer = await supabase.from('customer').insert(
-          {
-            'first_name': controllerCustomer.parsedFNamePD.text,
-            'last_name': controllerCustomer.parsedLNamePD.text,
-            'email': controllerCustomer.parsedEmailPD.text,
-            'mobile_phone': controllerCustomer.parsedPhonePD.text,
-          },
-        ).select<PostgrestList>('customer_id');
-        final recordAddresBilling = await supabase.from('address').insert(
-          {
-            'address_1': controllerCustomer.parsedAddress1PD.text,
-            'address_2': controllerCustomer.parsedAddress2PD.text,
-            'zipcode': controllerCustomer.parsedZipcodePD.text,
-            'city': controllerCustomer.parsedCityPD.text,
-            'state_fk': 46,
-            'country': "US",
-            'type': "Physical",
-            'customer_fk': recordCustomer.first['customer_id'],
-          },
-        ).select<PostgrestList>('address_id');
-        final recordAddresPhysical = await supabase.from('address').insert(
-          {
-            'address_1': controllerCustomer.parsedAddress1SD.text,
-            'address_2': controllerCustomer.parsedAddress2SD.text,
-            'zipcode': controllerCustomer.parsedZipcodeSD.text,
-            'city': controllerCustomer.parsedCitySD.text,
-            'state_fk': 46,
-            'country': "US",
-            'type': "Billing",
-            'customer_fk': recordCustomer.first['customer_id'],
-          },
-        ).select<PostgrestList>('address_id');
-
-        if (recordCustomer.isNotEmpty && recordAddresBilling.isNotEmpty && recordAddresPhysical.isNotEmpty) {
-          // ignore: use_build_context_synchronously
-          showDialog(
-            barrierColor: const Color(0x00022963).withOpacity(0.40),
-            barrierDismissible: false,
-            context: context,
-            builder: (_) {
-              return const FinalPopup();
+        try {
+          final recordCustomer = await supabase.from('customer').insert(
+            {
+              'first_name': controllerCustomer.parsedFNamePD.text,
+              'last_name': controllerCustomer.parsedLNamePD.text,
+              'email': controllerCustomer.parsedEmailPD.text,
+              'mobile_phone': controllerCustomer.parsedPhonePD.text,
             },
-          );
-        } 
+          ).select<PostgrestList>('customer_id');
+          final recordAddresBilling = await supabase.from('address').insert(
+            {
+              'address_1': controllerCustomer.parsedAddress1PD.text,
+              'address_2': controllerCustomer.parsedAddress2PD.text,
+              'zipcode': controllerCustomer.parsedZipcodePD.text,
+              'city': controllerCustomer.parsedCityPD.text,
+              'state_fk': 46,
+              'country': "US",
+              'type': "Physical",
+              'customer_fk': recordCustomer.first['customer_id'],
+            },
+          ).select<PostgrestList>('address_id');
+          final recordAddresPhysical = await supabase.from('address').insert(
+            {
+              'address_1': controllerCustomer.parsedAddress1SD.text,
+              'address_2': controllerCustomer.parsedAddress2SD.text,
+              'zipcode': controllerCustomer.parsedZipcodeSD.text,
+              'city': controllerCustomer.parsedCitySD.text,
+              'state_fk': 46,
+              'country': "US",
+              'type': "Billing",
+              'customer_fk': recordCustomer.first['customer_id'],
+            },
+          ).select<PostgrestList>('address_id');
+
+          if (recordCustomer.isNotEmpty && recordAddresBilling.isNotEmpty && recordAddresPhysical.isNotEmpty) {
+            // ignore: use_build_context_synchronously
+            showDialog(
+              barrierColor: const Color(0x00022963).withOpacity(0.40),
+              barrierDismissible: false,
+              context: context,
+              builder: (_) {
+                return const FinalPopup();
+              },
+            );
+          } 
+        } catch (error) {
+          print("Error on Final Pressed: '$error'");
+        }
   }

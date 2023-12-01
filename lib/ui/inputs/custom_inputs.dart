@@ -9,7 +9,7 @@ class CustomInputs {
     double maxWidth = double.infinity,
     double maxHeight = double.infinity,
     bool autoSuggest = false,
-    Color labelColor = colorPrimaryLight,
+    Color labelColor = colorPrimary,
     Color hintColor = colorPrimaryLight,
   }) {
     return InputDecoration(

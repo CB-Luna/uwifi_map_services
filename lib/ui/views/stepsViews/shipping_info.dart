@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
+import 'package:uwifi_map_services/data/constants.dart';
 import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
 import 'package:uwifi_map_services/providers/steps_controller.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
@@ -21,7 +22,6 @@ class _ShippingInfoState extends State<ShippingInfo> {
     final stepController = Provider.of<StepsController>(context);
     final validCharacters = RegExp(r'^[a-zA-Z\- ]+$');
     final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
-    final addressChar = RegExp(r'^[a-zA-Z0-9\-()]+$');
     var phoneFormat = MaskTextInputFormatter(
       mask: '(###) ###-####',
       filter: {'#': RegExp(r'[0-9]')},
@@ -39,7 +39,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
               color: colorPrimary,
             ),
             child: const Padding(
-              padding: EdgeInsets.all(25.0),
+              padding: EdgeInsets.all(15.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -72,6 +72,18 @@ class _ShippingInfoState extends State<ShippingInfo> {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
+                    CheckboxListTile(
+                      value: controller.sameAsPD,
+                      onChanged: (smsyes) {
+                        controller.changeValuesShoppingDetails();
+                      },
+                      title: Text(
+                          'Same as Personal Details',
+                          style: bodyStyle(context)),
+                      activeColor: colorTertiary,
+                      dense: false,
+                      controlAffinity: ListTileControlAffinity.trailing,
+                    ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
