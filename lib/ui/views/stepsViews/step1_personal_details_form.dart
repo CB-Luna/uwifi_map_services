@@ -6,7 +6,6 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
-import '../../../providers/steps_controller.dart';
 
 class Step1PersonalDetailsForm extends StatelessWidget {
   final String dir;
@@ -16,10 +15,8 @@ class Step1PersonalDetailsForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<CustomerShippingInfo>(context);
-    final stepsController = Provider.of<StepsController>(context);
     final validCharacters = RegExp(r'^[a-zA-Z\- ]+$');
     final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
-    final addressChar = RegExp(r'^[a-zA-Z0-9\-()]+$');
     // final zcode = widget.zipcode.toString();
     var phoneFormat = MaskTextInputFormatter(
       mask: '(###) ###-####',
@@ -51,7 +48,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
             children: [
               Container(
                 width: 1400,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
                   color: colorPrimary,
                 ),
@@ -64,14 +61,14 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.location_history_outlined,
-                        color: Colors.white,
+                        color: colorInversePrimary,
                         size: 40,
                       ),
-                      const SizedBox(width: 10),
+                      SizedBox(width: 10),
                       Text(
                         'Step 1: Personal Details',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: colorInversePrimary,
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
                           letterSpacing: -0.25,
@@ -88,7 +85,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
               // ),
               Flexible(
                 child: Form(
-                    key: stepsController.formKey,
+                    key: controller.formKeyPD,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           vertical: 20, horizontal: 25),
@@ -104,10 +101,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                                       Expanded(
                                         child: TextFormField(
                                           /// VARIABLE STORAGE
-                                          controller: controller.parsedFName,
-                                          onChanged: (value) {
-                                            controller.setfName(value);
-                                          },
+                                          controller: controller.parsedFNamePD,
 
                                           ///VALIDATION TRIGGER
                                           autovalidateMode: AutovalidateMode
@@ -117,7 +111,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                                           keyboardType: TextInputType.name,
                                           decoration: CustomInputs()
                                               .formInputDecoration(
-                                                  label: 'First Name',
+                                                  label: 'First Name*',
                                                   icon: Icons.person_outlined,
                                                   maxHeight: 60),
 
@@ -136,10 +130,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                                       Expanded(
                                         child: TextFormField(
                                           /// VARIABLE STORAGE
-                                          controller: controller.parsedLName,
-                                          onChanged: (value) {
-                                            controller.setlName(value);
-                                          },
+                                          controller: controller.parsedLNamePD,
 
                                           ///VALIDATION TRIGGER
                                           autovalidateMode: AutovalidateMode
@@ -149,7 +140,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                                           keyboardType: TextInputType.name,
                                           decoration: CustomInputs()
                                               .formInputDecoration(
-                                                  label: 'Last Name',
+                                                  label: 'Last Name*',
                                                   icon: Icons.person_outlined,
                                                   maxHeight: 60),
 
@@ -168,9 +159,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                                 Expanded(
                                   child: TextFormField(
                                     /// VARIABLE STORAGE
-                                    controller: controller.parsedPhone,
-                                    onChanged: (value) =>
-                                        controller.setPhone(value),
+                                    controller: controller.parsedPhonePD,
 
                                     ///VALIDATION TRIGGER
                                     autovalidateMode:
@@ -179,7 +168,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                                     keyboardType: TextInputType.phone,
                                     decoration: CustomInputs()
                                         .formInputDecoration(
-                                            label: 'Phone Number',
+                                            label: 'Phone Number*',
                                             icon: Icons.phone_outlined,
                                             maxHeight: 60),
 
@@ -214,10 +203,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                                             child: TextFormField(
                                               /// VARIABLE STORAGE
                                               controller:
-                                                  controller.parsedFName,
-                                              onChanged: (value) {
-                                                controller.setfName(value);
-                                              },
+                                                  controller.parsedFNamePD,
 
                                               ///VALIDATION TRIGGER
                                               autovalidateMode: AutovalidateMode
@@ -227,7 +213,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                                               keyboardType: TextInputType.name,
                                               decoration: CustomInputs()
                                                   .formInputDecoration(
-                                                      label: 'First Name',
+                                                      label: 'First Name*',
                                                       icon:
                                                           Icons.person_outlined,
                                                       maxHeight: 60),
@@ -248,10 +234,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                                             child: TextFormField(
                                               /// VARIABLE STORAGE
                                               controller:
-                                                  controller.parsedLName,
-                                              onChanged: (value) {
-                                                controller.setlName(value);
-                                              },
+                                                  controller.parsedLNamePD,
 
                                               ///VALIDATION TRIGGER
                                               autovalidateMode: AutovalidateMode
@@ -261,7 +244,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                                               keyboardType: TextInputType.name,
                                               decoration: CustomInputs()
                                                   .formInputDecoration(
-                                                      label: 'Last Name',
+                                                      label: 'Last Name*',
                                                       icon:
                                                           Icons.person_outlined,
                                                       maxHeight: 60),
@@ -282,9 +265,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                                             child: TextFormField(
                                               /// VARIABLE STORAGE
                                               controller:
-                                                  controller.parsedPhone,
-                                              onChanged: (value) =>
-                                                  controller.setPhone(value),
+                                                  controller.parsedPhonePD,
 
                                               ///VALIDATION TRIGGER
                                               autovalidateMode: AutovalidateMode
@@ -293,7 +274,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                                               keyboardType: TextInputType.phone,
                                               decoration: CustomInputs()
                                                   .formInputDecoration(
-                                                      label: 'Phone Number',
+                                                      label: 'Phone Number*',
                                                       icon:
                                                           Icons.phone_outlined,
                                                       maxHeight: 60),
@@ -324,31 +305,24 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: TextFormField(
+                                    readOnly: true,
+                                    enabled: false,
                                     /// VARIABLE STORAGE
-                                    controller: controller.parsedAddress,
-                                    onChanged: (value) =>
-                                        controller.setAddress1(value),
+                                    controller: controller.parsedAddress1PD,
 
                                     ///VALIDATION TRIGGER
-                                    // initialValue: dir,
                                     autovalidateMode:
                                         AutovalidateMode.onUserInteraction,
                                     obscureText: false,
                                     keyboardType: TextInputType.phone,
                                     decoration: CustomInputs()
                                         .formInputDecoration(
-                                            label: 'Address Line 1',
+                                            label: 'Address Line 1*',
                                             icon: Icons.house_outlined,
                                             maxHeight: 60),
                                     style: const TextStyle(
                                       color: colorPrimaryDark,
                                     ),
-                                     validator: (value) {
-                                            return addressChar
-                                                    .hasMatch(value ?? '')
-                                                ? null
-                                                : 'Please enter a valid address';
-                                          },
                                   ),
                                 ),
                                 const SizedBox(
@@ -357,9 +331,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                                 Expanded(
                                   child: TextFormField(
                                     /// VARIABLE STORAGE
-                                    controller: controller.parsedAddress,
-                                    onChanged: (value) =>
-                                        controller.setAddress2(value),
+                                    controller: controller.parsedAddress2PD,
 
                                     ///VALIDATION TRIGGER
                                     // initialValue: dir,
@@ -375,22 +347,13 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                                     style: const TextStyle(
                                       color: colorPrimaryDark,
                                     ),
-                                    validator: (value) {
-                                            return addressChar
-                                                    .hasMatch(value ?? '')
-                                                ? null
-                                                : 'Please enter a valid address';
-                                          },
                                   ),
                                 ),
                                 const SizedBox(width: 15),
                                 Expanded(
                                   child: TextFormField(
                                     /// VARIABLE STORAGE
-                                    controller: controller.parsedEmail,
-                                    onChanged: (value) {
-                                      controller.setEmail(value);
-                                    },
+                                    controller: controller.parsedEmailPD,
 
                                     ///VALIDATION TRIGGER
                                     autovalidateMode:
@@ -399,7 +362,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                                     keyboardType: TextInputType.emailAddress,
                                     decoration: CustomInputs()
                                         .formInputDecoration(
-                                            label: 'E-mail Address',
+                                            label: 'E-mail Address*',
                                             icon: Icons.mail_outlined,
                                             maxHeight: 60),
 
@@ -463,14 +426,14 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.add_card_outlined,
-                          color: Colors.white,
+                          color: colorInversePrimary,
                           size: 40,
                         ),
                         SizedBox(width: 10),
                         Text(
                           'Step 2: Card Information',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: colorInversePrimary,
                             fontSize: 18,
                             fontWeight: FontWeight.w700,
                             letterSpacing: -0.25,

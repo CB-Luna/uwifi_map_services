@@ -107,6 +107,6 @@ class CustomTitle extends StatelessWidget {
 Widget textStepOne([double? bodyFontSize]) {
   return const CustomStep(icon: Icons.my_location_rounded, texts: [
     "Step 1: Find your address",
-    "Enter your address or drag the icon on the map to your location."
+    "Enter your address of your location."
   ]);
 }

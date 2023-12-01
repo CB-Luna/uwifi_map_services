@@ -7,8 +7,6 @@ import 'package:uwifi_map_services/ui/views/stepsViews/widgets/final_popup.dart'
 import '../../../../providers/cart_controller.dart';
 import '../../../../providers/steps_controller.dart';
 import 'cart_buttons.dart';
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:js' as js;
 
 styledButton(context) {
   final cartController = Provider.of<Cart>(context);
@@ -26,7 +24,7 @@ styledButton(context) {
           isVisible: true,
           buttonText: "Save & Finish",
           function: () {
-            if (stepsController.formValidation()) {
+            if (controllerCustomer.formValidation() && stepsController.formValidation()) {
               finalPressed(context, controllerCustomer);
             }
           },
@@ -39,41 +37,41 @@ styledButton(context) {
 
 void finalPressed(BuildContext context,
       CustomerShippingInfo controllerCustomer) async {
-        //  final recordCustomer = await supabase.from('customer').insert(
-        //   {
-        //     'first_name': controllerCustomer.firstName,
-        //     'last_name': controllerCustomer.lastName,
-        //     'email': controllerCustomer.custEmail,
-        //     'mobile_phone': controllerCustomer.phone,
-        //   },
-        // ).select<PostgrestList>('customer_id');
-        // final recordAddresBilling = await supabase.from('address').insert(
-        //   {
-        //     'address_1': "123 1st St.",
-        //     'address_2': Null,
-        //     'zipcode': "12345",
-        //     'city': "Los Angeles",
-        //     'state_fk': 6,
-        //     'country': "US",
-        //     'type': "Billing",
-        //     'customer_fk': recordCustomer.first['customer_id'],
-        //   },
-        // ).select<PostgrestList>('address_id');
-        // final recordAddresPhysical = await supabase.from('address').insert(
-        //   {
-        //     'address_1': "123 1st St.",
-        //     'address_2': Null,
-        //     'zipcode': "12345",
-        //     'city': "Los Angeles",
-        //     'state_fk': 6,
-        //     'country': "US",
-        //     'type': "Physical",
-        //     'customer_fk': recordCustomer.first['customer_id'],
-        //   },
-        // ).select<PostgrestList>('address_id');
+         final recordCustomer = await supabase.from('customer').insert(
+          {
+            'first_name': controllerCustomer.parsedFNamePD.text,
+            'last_name': controllerCustomer.parsedLNamePD.text,
+            'email': controllerCustomer.parsedEmailPD.text,
+            'mobile_phone': controllerCustomer.parsedPhonePD.text,
+          },
+        ).select<PostgrestList>('customer_id');
+        final recordAddresBilling = await supabase.from('address').insert(
+          {
+            'address_1': controllerCustomer.parsedAddress1PD.text,
+            'address_2': controllerCustomer.parsedAddress2PD.text,
+            'zipcode': controllerCustomer.parsedZipcodePD.text,
+            'city': controllerCustomer.parsedCityPD.text,
+            'state_fk': 46,
+            'country': "US",
+            'type': "Physical",
+            'customer_fk': recordCustomer.first['customer_id'],
+          },
+        ).select<PostgrestList>('address_id');
+        final recordAddresPhysical = await supabase.from('address').insert(
+          {
+            'address_1': controllerCustomer.parsedAddress1SD.text,
+            'address_2': controllerCustomer.parsedAddress2SD.text,
+            'zipcode': controllerCustomer.parsedZipcodeSD.text,
+            'city': controllerCustomer.parsedCitySD.text,
+            'state_fk': 46,
+            'country': "US",
+            'type': "Billing",
+            'customer_fk': recordCustomer.first['customer_id'],
+          },
+        ).select<PostgrestList>('address_id');
 
-        // if (recordCustomer.isNotEmpty && recordAddresBilling.isNotEmpty && recordAddresPhysical.isNotEmpty) {
-        //   // ignore: use_build_context_synchronously
+        if (recordCustomer.isNotEmpty && recordAddresBilling.isNotEmpty && recordAddresPhysical.isNotEmpty) {
+          // ignore: use_build_context_synchronously
           showDialog(
             barrierColor: const Color(0x00022963).withOpacity(0.40),
             barrierDismissible: false,
@@ -82,5 +80,5 @@ void finalPressed(BuildContext context,
               return const FinalPopup();
             },
           );
-        // } 
+        } 
   }

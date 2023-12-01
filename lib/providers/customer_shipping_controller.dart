@@ -4,13 +4,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 
 class CustomerShippingInfo with ChangeNotifier {
-  final TextEditingController parsedFName = TextEditingController();
-  final TextEditingController parsedLName = TextEditingController();
-  final TextEditingController parsedPhone = TextEditingController();
-  final TextEditingController parsedEmail = TextEditingController();
-  final TextEditingController parsedAddress = TextEditingController();
+  // Personal Details
+  GlobalKey<FormState> formKeyPD = GlobalKey<FormState>();
+  final TextEditingController parsedFNamePD = TextEditingController(text: "");
+  final TextEditingController parsedLNamePD = TextEditingController(text: "");
+  final TextEditingController parsedPhonePD = TextEditingController(text: "");
+  final TextEditingController parsedEmailPD = TextEditingController(text: "");
+  final TextEditingController parsedAddress1PD = TextEditingController(text: "");
+  final TextEditingController parsedAddress2PD = TextEditingController(text: "");
+  final TextEditingController parsedZipcodePD = TextEditingController(text: "");
+  final TextEditingController parsedCityPD = TextEditingController(text: "");
+  final TextEditingController parsedStatePD = TextEditingController(text: "");
+
+  // Shipping Details
+  final TextEditingController parsedFNameSD = TextEditingController(text: "");
+  final TextEditingController parsedLNameSD = TextEditingController(text: "");
+  final TextEditingController parsedPhoneSD = TextEditingController(text: "");
+  final TextEditingController parsedAddress1SD = TextEditingController(text: "");
+  final TextEditingController parsedAddress2SD = TextEditingController(text: "");
+  final TextEditingController parsedZipcodeSD = TextEditingController(text: "");
+  final TextEditingController parsedCitySD = TextEditingController(text: "");
+  final TextEditingController parsedStateSD = TextEditingController(text: "");
+
+  bool formValidation() {
+    return (formKeyPD.currentState!.validate()) ? true : false;
+  }
+
   //controllers for the Card Info
-  final TextEditingController parsedName = TextEditingController();
+  final TextEditingController parsedName = TextEditingController(text: "");
 
   //Card Variables
   String number = '';
@@ -19,108 +40,112 @@ class CustomerShippingInfo with ChangeNotifier {
   String cardName = '';
 
   //Variables de Envio
-  String addressShip = '';
-  String nameShip ='';
-  String lastNameShip ='';
-  String phoneShip='';
-  String zipcode = '';
-  String state = '';
-  String city = '';
+  String address1SD = '';
+  String address2SD = '';
+  String nameSD ='';
+  String lastNameSD ='';
+  String phoneSD ='';
+  String zipcodeSD = '';
+  String stateSD = '';
+  String citySD = '';
 
-  String lastName = '';
-  String firstName = '';
-  String phone = '';
-  String address = '';
-  String address2 = '';
-  String custEmail = '';
+  //Variables de Cliente
+  String lastNamePD = '';
+  String firstNamePD = '';
+  String phonePD = '';
+  String address1PD = '';
+  String address2PD = '';
+  String custEmailPD = '';
 
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  void setlName(String lName) {
-    lastName = lName;
+  // Funciones Personal Details
+  void setlName(String value) {
+    lastNamePD = value;
     notifyListeners();
   }
 
-  void setfName(String fname) {
-    firstName = fname;
+  void setfName(String value) {
+    firstNamePD = value;
     notifyListeners();
   }
 
-  void setPhone(String phone) {
-    this.phone = phone;
-    //notifyListeners();
+  void setPhone(String value) {
+    phonePD = value;
+    // notifyListeners();
   }
-  void setAddress1(String address){
-    this.address = address;
+  void setAddress1(String value){
+    address1PD = value;
     notifyListeners();
   }
 
   void setAddress2(String value){
-    this.address2 = value;
+    address2PD = value;
     notifyListeners();
   }
 
-  void setEmail(String email) {
-    custEmail = email;
+  void setEmail(String value) {
+    custEmailPD = value;
     notifyListeners();
   }
 
   //Functions for the card
-  void setCard(String card){
-    number = card;
+  void setCard(String value){
+    number = value;
     notifyListeners();
   }
   void setCcv(String value){
     ccv=value;
     notifyListeners();
   }
-  void setDate(String date){
-    this.date=date;
+  void setDate(String value){
+    date = value;
     notifyListeners();
   }
-  void setCardName(String name){
-    cardName = name;
-    notifyListeners();
-  }
-  //funciones para envio
-  void setAddressShipping(String value){
-    addressShip = value;
+  void setCardName(String value){
+    cardName = value;
     notifyListeners();
   }
 
-  void setNameShipping(String name){
-    nameShip =name;
+  // Funciones Shipping Details
+  void setAddress1Shipping(String value){
+    address1SD = value;
+    notifyListeners();
+  }
+
+  void setAddress2Shipping(String value){
+    address2SD = value;
+    notifyListeners();
+  }
+
+  void setNameShipping(String value){
+    nameSD = value;
     notifyListeners();
   }
   
-  void setLastNameShipping(String lastName){
-    lastNameShip = lastName;
+  void setLastNameShipping(String value){
+    lastNameSD = value;
     notifyListeners();
   }
 
-  void setphoneShipping(String phone){
-    phoneShip = phone;
-    notifyListeners();
+  void setphoneShipping(String value){
+    phoneSD = value;
+    notifyListeners(); 
   }
 
   void setZipcode(String value){
-    zipcode = value;
+    zipcodeSD = value;
     notifyListeners();
   }
 
-  void setCity(String cit){
-    city = cit;
+  void setCity(String value){
+    citySD = value;
     notifyListeners();
   }
 
-  void setState(String stat){
-    state = stat;
+  void setState(String value){
+    stateSD = value;
     notifyListeners();
   }
 
-  bool formValidation() {
-    return formKey.currentState!.validate() ? true : false;
-  }
 
   
 }

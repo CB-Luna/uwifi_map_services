@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
+import 'package:uwifi_map_services/providers/steps_controller.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
 
@@ -16,9 +18,15 @@ class _ShippingInfoState extends State<ShippingInfo> {
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<CustomerShippingInfo>(context);
+    final stepController = Provider.of<StepsController>(context);
     final validCharacters = RegExp(r'^[a-zA-Z\- ]+$');
     final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
     final addressChar = RegExp(r'^[a-zA-Z0-9\-()]+$');
+    var phoneFormat = MaskTextInputFormatter(
+      mask: '(###) ###-####',
+      filter: {'#': RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.lazy,
+    );
 
     return SizedBox(
       width: 1400,
@@ -58,7 +66,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
           ),
           Flexible(
             child: Form(
-              key: controller.formKey,
+              key: stepController.formKey,
                 child: Container(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
               child: Column(
@@ -71,10 +79,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                         Expanded(
                           child: TextFormField(
                             /// VARIABLE STORAGE
-                            controller: controller.parsedFName,
-                            onChanged: (value) {
-                              controller.setNameShipping(value);
-                            },
+                            controller: controller.parsedFNameSD,
     
                             ///VALIDATION TRIGGER
                             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -82,7 +87,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                             obscureText: false,
                             keyboardType: TextInputType.name,
                             decoration: CustomInputs().formInputDecoration(
-                                label: 'First Name',
+                                label: 'First Name*',
                                 icon: Icons.person_outlined,
                                 maxHeight: 60),
     
@@ -100,18 +105,14 @@ class _ShippingInfoState extends State<ShippingInfo> {
                         Expanded(
                           child: TextFormField(
                             /// VARIABLE STORAGE
-                            controller: controller.parsedLName,
-                            onChanged: (value) {
-                              controller.setLastNameShipping(value);
-                            },
-    
+                            controller: controller.parsedLNameSD,
                             ///VALIDATION TRIGGER
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             autocorrect: false,
                             obscureText: false,
                             keyboardType: TextInputType.name,
                             decoration: CustomInputs().formInputDecoration(
-                                label: 'Last Name',
+                                label: 'Last Name*',
                                 icon: Icons.person_outlined,
                                 maxHeight: 60),
     
@@ -131,16 +132,18 @@ class _ShippingInfoState extends State<ShippingInfo> {
                         Expanded(
                           child: TextFormField(
                             /// VARIABLE STORAGE
-                            controller: controller.parsedPhone,
-                            onChanged: (value) =>
-                                controller.setphoneShipping(value),
+                            controller: controller.parsedPhoneSD,
     
                             ///VALIDATION TRIGGER
                             autovalidateMode: AutovalidateMode.onUserInteraction,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(14),
+                              phoneFormat
+                            ],
                             obscureText: false,
                             keyboardType: TextInputType.phone,
                             decoration: CustomInputs().formInputDecoration(
-                                label: 'Phone Number',
+                                label: 'Phone Number*',
                                 icon: Icons.phone_outlined,
                                 maxHeight: 60),
                             validator: (value) {
@@ -157,7 +160,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                         )
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Row(
@@ -167,8 +170,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                         Expanded(
                           child: TextFormField(
                             /// VARIABLE STORAGE
-                            controller: controller.parsedAddress,
-                            onChanged: (value) => controller.setAddress1(value),
+                            controller: controller.parsedAddress1SD,
     
                             ///VALIDATION TRIGGER
                             // initialValue: dir,
@@ -176,16 +178,17 @@ class _ShippingInfoState extends State<ShippingInfo> {
                             obscureText: false,
                             keyboardType: TextInputType.phone,
                             decoration: CustomInputs().formInputDecoration(
-                                label: 'Address Line 1',
+                                label: 'Address Line 1*',
                                 icon: Icons.house_outlined,
                                 maxHeight: 60),
                             style: const TextStyle(
                               color: colorPrimaryDark,
                             ),
                             validator: (value) {
-                              return addressChar.hasMatch(value ?? '')
-                                  ? null
-                                  : 'Please enter a valid address';
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter a valid address';
+                              }
+                              return null;
                             },
                           ),
                         ),
@@ -195,8 +198,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                         Expanded(
                           child: TextFormField(
                             /// VARIABLE STORAGE
-                            controller: controller.parsedAddress,
-                            onChanged: (value) => controller.setAddress2(value),
+                            controller: controller.parsedAddress2SD,
     
                             ///VALIDATION TRIGGER
                             // initialValue: dir,
@@ -210,29 +212,20 @@ class _ShippingInfoState extends State<ShippingInfo> {
                             style: const TextStyle(
                               color: colorPrimaryDark,
                             ),
-                            validator: (value) {
-                              return addressChar.hasMatch(value ?? '')
-                                  ? null
-                                  : 'Please enter a valid address';
-                            },
                           ),
                         ),
                         const SizedBox(width: 15),
                         Expanded(
                           child: TextFormField(
                             /// VARIABLE STORAGE
-                            controller: controller.parsedEmail,
-                            onChanged: (value) {
-                              controller.setZipcode(value);
-                              // portabilityFormProvider.portEmail = value;
-                            },
+                            controller: controller.parsedZipcodeSD,
     
                             ///VALIDATION TRIGGER
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             obscureText: false,
                             keyboardType: TextInputType.number,
                             decoration: CustomInputs().formInputDecoration(
-                                label: 'Zipcode',
+                                label: 'Zipcode*',
                                 icon: Icons.other_houses_outlined,
                                 maxHeight: 60),
     
@@ -249,7 +242,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Row(
@@ -259,8 +252,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                         Expanded(
                           child: TextFormField(
                             /// VARIABLE STORAGE
-                            controller: controller.parsedAddress,
-                            onChanged: (value) => controller.setCity(value),
+                            controller: controller.parsedCitySD,
     
                             ///VALIDATION TRIGGER
                             // initialValue: dir,
@@ -268,7 +260,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                             obscureText: false,
                             keyboardType: TextInputType.phone,
                             decoration: CustomInputs().formInputDecoration(
-                                label: 'City',
+                                label: 'City*',
                                 icon: Icons.house_outlined,
                                 maxHeight: 60),
                             style: const TextStyle(
@@ -287,8 +279,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                         Expanded(
                           child: TextFormField(
                             /// VARIABLE STORAGE
-                            controller: controller.parsedAddress,
-                            onChanged: (value) => controller.setState(value),
+                            controller: controller.parsedStateSD,
     
                             ///VALIDATION TRIGGER
                             // initialValue: dir,
@@ -296,7 +287,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                             obscureText: false,
                             keyboardType: TextInputType.phone,
                             decoration: CustomInputs().formInputDecoration(
-                                label: 'State',
+                                label: 'State*',
                                 icon: Icons.house_outlined,
                                 maxHeight: 60),
                             style: const TextStyle(

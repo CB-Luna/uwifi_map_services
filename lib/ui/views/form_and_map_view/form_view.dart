@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/classes/home_page.dart';
 import 'package:uwifi_map_services/data/constants.dart';
+import 'package:uwifi_map_services/providers/customer_info_controller.dart';
+import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
 import 'package:uwifi_map_services/providers/search_controller.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/buttons/custom_outlined_button.dart';
@@ -29,6 +31,7 @@ class _FormViewState extends State<FormView> {
     // ignore: undefined_prefixed_name
 
     final tracking = Provider.of<TrackingProvider>(context);
+    final customerShippingInfoProvider = Provider.of<CustomerShippingInfo>(context);
 
     return Builder(
       builder: (context) {
@@ -219,14 +222,14 @@ class _FormViewState extends State<FormView> {
                                 }
 
                                 await widget.showPopup(controller, context);
-                                // portabilityFormProvider.portNumberStreet =
-                                //     controller.street;
-                                // portabilityFormProvider.portCity =
-                                //     controller.city;
-                                // portabilityFormProvider.portState =
-                                //     controller.state;
-                                // portabilityFormProvider.portZipcode =
-                                //     controller.zipcode;
+                                customerShippingInfoProvider.parsedAddress1PD.text =
+                                    controller.street;
+                                customerShippingInfoProvider.parsedCityPD.text =
+                                    controller.city;
+                                customerShippingInfoProvider.parsedStatePD.text =
+                                    controller.state;
+                                customerShippingInfoProvider.parsedZipcodePD.text =
+                                    controller.zipcode;
                                 var customer = controller.fillCustomerInfo();
                                 tracking.setOrigin = controller.origin;
                                 if (!(controller.customerRep != '')) {
