@@ -17,6 +17,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
     final controller = Provider.of<CustomerShippingInfo>(context);
     final validCharacters = RegExp(r'^[a-zA-Z\- ]+$');
     final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     // final zcode = widget.zipcode.toString();
     var phoneFormat = MaskTextInputFormatter(
       mask: '(###) ###-####',
@@ -156,38 +157,39 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                                         ),
                                       ),
                                       const SizedBox(width: 15),
-                                Expanded(
-                                  child: TextFormField(
-                                    /// VARIABLE STORAGE
-                                    controller: controller.parsedPhonePD,
+                                      Expanded(
+                                        child: TextFormField(
+                                          /// VARIABLE STORAGE
+                                          controller: controller.parsedPhonePD,
 
-                                    ///VALIDATION TRIGGER
-                                    autovalidateMode:
-                                        AutovalidateMode.onUserInteraction,
-                                    obscureText: false,
-                                    keyboardType: TextInputType.phone,
-                                    decoration: CustomInputs()
-                                        .formInputDecoration(
-                                            label: 'Phone Number*',
-                                            icon: Icons.phone_outlined,
-                                            maxHeight: 60),
+                                          ///VALIDATION TRIGGER
+                                          autovalidateMode: AutovalidateMode
+                                              .onUserInteraction,
+                                          obscureText: false,
+                                          keyboardType: TextInputType.phone,
+                                          decoration: CustomInputs()
+                                              .formInputDecoration(
+                                                  label: 'Phone Number*',
+                                                  icon: Icons.phone_outlined,
+                                                  maxHeight: 60),
 
-                                    inputFormatters: [
-                                      LengthLimitingTextInputFormatter(14),
-                                      phoneFormat
-                                    ],
-                                    validator: (value) {
-                                      return (phoneCharacters
-                                                  .hasMatch(value ?? '') &&
-                                              value?.length == 14)
-                                          ? null
-                                          : 'Please enter a valid phone number';
-                                    },
-                                    style: const TextStyle(
-                                      color: colorPrimaryDark,
-                                    ),
-                                  ),
-                                ),
+                                          inputFormatters: [
+                                            LengthLimitingTextInputFormatter(
+                                                14),
+                                            phoneFormat
+                                          ],
+                                          validator: (value) {
+                                            return (phoneCharacters.hasMatch(
+                                                        value ?? '') &&
+                                                    value?.length == 14)
+                                                ? null
+                                                : 'Please enter a valid phone number';
+                                          },
+                                          style: const TextStyle(
+                                            color: colorPrimaryDark,
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   )
                                 : SizedBox(
@@ -307,6 +309,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                                   child: TextFormField(
                                     readOnly: true,
                                     enabled: false,
+
                                     /// VARIABLE STORAGE
                                     controller: controller.parsedAddress1PD,
 
@@ -392,7 +395,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
         ),
         Container(
           width: 1400,
-          height: 300,
+          height: 380,
           decoration: BoxDecoration(
             color: colorInversePrimary,
             boxShadow: const [
@@ -445,30 +448,59 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                 ),
                 Row(
                   children: [
+                    //Tarjeta
                     CreditCardWidget(
-                      width: 400,
-                      height: 160,
-                      cardNumber: "12345678979",
-                       expiryDate: "22/15",
-                        cardHolderName: "Luis Fierro", 
-                        cvvCode: "125", 
-                        showBackView: false, 
-                        onCreditCardWidgetChange: (CreditCardBrand creditCardBrand) {}),
-                    // CreditCardForm(
-                    //   cardNumber: controller.number,
-                    //      expiryDate: controller.date,
-                    //       cardHolderName: controller.cardName, 
-                    //       cvvCode: controller.ccv, 
-                    //   onCreditCardModelChange: onCreditCardModelChange, 
-                    //   formKey: formKey)
+                        width: 400,
+                        height: 160,
+                        enableFloatingCard: true,
+                        cardBgColor: colorPrimary,
+                        cardNumber: controller.number,
+                        expiryDate: controller.date,
+                        cardHolderName: controller.cardName,
+                        cvvCode: controller.ccv,
+                        isHolderNameVisible: true,
+                        showBackView: controller.isCvvFocused,
+                        onCreditCardWidgetChange:
+                            (CreditCardBrand creditCardBrand) {}),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: CreditCardForm(
+                          formKey: formKey,
+                          obscureCvv: true,
+                          cardNumber: controller.number,
+                          expiryDate: controller.date,
+                          cardHolderName: controller.cardName,
+                          cvvCode: controller.ccv,
+                          isHolderNameVisible: true,
+                          isCardNumberVisible: true,
+                          isExpiryDateVisible: true,
+                          inputConfiguration: const InputConfiguration(
+                            cardNumberDecoration: InputDecoration(
+                              labelText: 'Number',
+                              hintText: 'XXXX XXXX XXXX XXXX',
+                            ),
+                            expiryDateDecoration: InputDecoration(
+                              labelText: 'Expired Date',
+                              hintText: 'XX/XX',
+                            ),
+                            cvvCodeDecoration: InputDecoration(
+                              labelText: 'CVV',
+                              hintText: 'XXX',
+                            ),
+                            cardHolderDecoration: InputDecoration(
+                              labelText: 'Card Holder',
+                            ),
+                          ),
+                          onCreditCardModelChange:
+                              controller.onCreditCardModelChange,
+                        ),
+                      ),
+                    )
                   ],
                 )
               ]),
         ),
       ],
     );
-    
   }
-  
 }
-

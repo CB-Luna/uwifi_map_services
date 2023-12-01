@@ -38,6 +38,7 @@ class CustomerShippingInfo with ChangeNotifier {
   String ccv = '';
   String date = '';
   String cardName = '';
+  bool isCvvFocused = false;
 
   //Variables de Envio
   String address1SD = '';
@@ -103,6 +104,16 @@ class CustomerShippingInfo with ChangeNotifier {
   void setCardName(String value){
     cardName = value;
     notifyListeners();
+  }
+
+  void onCreditCardModelChange(CreditCardModel creditCardModel) {
+    setState(() {
+      number = creditCardModel.cardNumber;
+      date = creditCardModel.expiryDate;
+      cardName = creditCardModel.cardHolderName;
+      ccv = creditCardModel.cvvCode;
+      isCvvFocused = creditCardModel.isCvvFocused;
+    } as String);
   }
 
   // Funciones Shipping Details
