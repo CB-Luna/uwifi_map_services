@@ -5,8 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/data/constants.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
-import 'package:uwifi_map_services/ui/views/stepsViews/customer_location_display.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/step1_personal_details_form.dart';
+import 'package:uwifi_map_services/ui/views/stepsViews/step3_shipping_details_form.dart';
 
 import '../../../providers/customer_info_controller.dart';
 import '../../../providers/steps_controller.dart';
@@ -101,19 +101,14 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
                     padding: const EdgeInsets.all(15.0),
                     child: Container(
                         key: itemKey,
-                        child: Step1PersonalDetailsForm(dir: widget.street)),
+                        child: const Step1PersonalDetailsForm()),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Container(
-                      key: itemKey2,
-                      child: CustomerLocationDisplay(
-                        street: widget.street,
-                        city: widget.city,
-                        state: widget.state,
-                        zcode: widget.zipcode,
-                      ),
-                    ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Container(
+                    key: itemKey2,
+                    child: const Step3ShippingDetailsForm(),
                   ),
                 ],
               ),
@@ -236,25 +231,19 @@ class _WebView extends StatefulWidget {
 class _WebViewState extends State<_WebView> {
   @override
   Widget build(BuildContext context) {
-    final customerInfo = Provider.of<CustomerInfoProvider>(context);
-    final bool isRep = customerInfo.customerInfo.customerRep != '';
+    // final customerInfo = Provider.of<CustomerInfoProvider>(context);
+    // final bool isRep = customerInfo.customerInfo.customerRep != '';
     return SingleChildScrollView(
         controller: ScrollController(),
         padding: const EdgeInsets.all(0),
         child: Container(
           padding: const EdgeInsets.fromLTRB(50, 25, 50, 0),
-          child: Column(
+          child: const Column(
             children: [
               Center(),
-              const SizedBox(height: 15),
-              Step1PersonalDetailsForm(dir: widget.street),
-              const SizedBox(height: 30),
-              CustomerLocationDisplay(
-                street: widget.street,
-                city: widget.city,
-                state: widget.state,
-                zcode: widget.zipcode,
-              ),
+              Step1PersonalDetailsForm(),
+              SizedBox(height: 30),
+              Step3ShippingDetailsForm(),
             ],
           ),
         ));

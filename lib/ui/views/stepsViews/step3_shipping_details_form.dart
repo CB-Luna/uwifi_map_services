@@ -8,14 +8,14 @@ import 'package:uwifi_map_services/providers/steps_controller.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
 
-class ShippingInfo extends StatefulWidget {
-  const ShippingInfo({Key? key}) : super(key: key);
+class Step3ShippingDetailsForm extends StatefulWidget {
+  const Step3ShippingDetailsForm({Key? key}) : super(key: key);
 
   @override
-  State<ShippingInfo> createState() => _ShippingInfoState();
+  State<Step3ShippingDetailsForm> createState() => _Step3ShippingDetailsFormState();
 }
 
-class _ShippingInfoState extends State<ShippingInfo> {
+class _Step3ShippingDetailsFormState extends State<Step3ShippingDetailsForm> {
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<CustomerShippingInfo>(context);
@@ -28,8 +28,21 @@ class _ShippingInfoState extends State<ShippingInfo> {
       type: MaskAutoCompletionType.lazy,
     );
 
-    return SizedBox(
+    return Container(
       width: 1400,
+      height: 250,
+      decoration: BoxDecoration(
+        color: colorInversePrimary,
+        boxShadow: const [
+          BoxShadow(
+            blurRadius: 15,
+            spreadRadius: -5,
+            color: colorBgB,
+            offset: Offset(0, 15),
+          )
+        ],
+        borderRadius: BorderRadius.circular(40),
+      ),
       child: Column(
         children: [
           Container(
@@ -41,25 +54,53 @@ class _ShippingInfoState extends State<ShippingInfo> {
             child: const Padding(
               padding: EdgeInsets.all(15.0),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
-                    Icons.local_shipping_outlined,
-                    color: Colors.white,
-                    size: 40,
-                  ),
-                  SizedBox(width: 10),
-                  Text(
-                    'Step 3: Shipping Details',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: -0.25,
+                  Flexible(
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.local_shipping_outlined,
+                          color: colorInversePrimary,
+                          size: 40,
+                        ),
+                        Text(
+                          'Step 3: Shipping Details',
+                          style: TextStyle(
+                            color: colorInversePrimary,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+                  // Flexible(
+                  //   child: Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children: [
+                  //       Text(
+                  //         "Current Location",
+                  //         style: GoogleFonts.workSans(
+                  //             fontSize: 16,
+                  //             color: colorInversePrimary,
+                  //             fontWeight: FontWeight.bold),
+                  //       ),
+                  //       Text(
+                  //         "${controller.parsedAddress1PD.text
+                  //         }, ${controller.parsedAddress2PD.text}\n${
+                  //           controller.parsedCityPD.text} ${
+                  //           controller.parsedStatePD.text}\n${
+                  //           controller.parsedZipcodePD.text}",
+                  //         style: GoogleFonts.workSans(
+                  //             fontSize: 12,
+                  //             color: colorInversePrimary,
+                  //             fontWeight: FontWeight.normal),
+                  //         maxLines: 3,
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -68,7 +109,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
             child: Form(
               key: stepController.formKey,
                 child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -91,99 +132,8 @@ class _ShippingInfoState extends State<ShippingInfo> {
                         Expanded(
                           child: TextFormField(
                             /// VARIABLE STORAGE
-                            controller: controller.parsedFNameSD,
-    
-                            ///VALIDATION TRIGGER
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
-                            autocorrect: false,
-                            obscureText: false,
-                            keyboardType: TextInputType.name,
-                            decoration: CustomInputs().formInputDecoration(
-                                label: 'First Name*',
-                                icon: Icons.person_outlined,
-                                maxHeight: 60),
-    
-                            style: const TextStyle(
-                              color: colorPrimaryDark,
-                            ),
-                            validator: (value) {
-                              return validCharacters.hasMatch(value ?? '')
-                                  ? null
-                                  : 'Please enter your name';
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: TextFormField(
-                            /// VARIABLE STORAGE
-                            controller: controller.parsedLNameSD,
-                            ///VALIDATION TRIGGER
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
-                            autocorrect: false,
-                            obscureText: false,
-                            keyboardType: TextInputType.name,
-                            decoration: CustomInputs().formInputDecoration(
-                                label: 'Last Name*',
-                                icon: Icons.person_outlined,
-                                maxHeight: 60),
-    
-                            style: const TextStyle(
-                              color: colorPrimaryDark,
-                            ),
-                            validator: (value) {
-                              return validCharacters.hasMatch(value ?? '')
-                                  ? null
-                                  : 'Please enter your name';
-                            },
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        Expanded(
-                          child: TextFormField(
-                            /// VARIABLE STORAGE
-                            controller: controller.parsedPhoneSD,
-    
-                            ///VALIDATION TRIGGER
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(14),
-                              phoneFormat
-                            ],
-                            obscureText: false,
-                            keyboardType: TextInputType.phone,
-                            decoration: CustomInputs().formInputDecoration(
-                                label: 'Phone Number*',
-                                icon: Icons.phone_outlined,
-                                maxHeight: 60),
-                            validator: (value) {
-                              return (phoneCharacters.hasMatch(value ?? '') &&
-                                      value?.length == 14)
-                                  ? null
-                                  : 'Please enter a valid phone number';
-                            },
-    
-                            style: const TextStyle(
-                              color: colorPrimaryDark,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                            /// VARIABLE STORAGE
                             controller: controller.parsedAddress1SD,
-    
+      
                             ///VALIDATION TRIGGER
                             // initialValue: dir,
                             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -211,7 +161,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                           child: TextFormField(
                             /// VARIABLE STORAGE
                             controller: controller.parsedAddress2SD,
-    
+      
                             ///VALIDATION TRIGGER
                             // initialValue: dir,
                             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -231,7 +181,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                           child: TextFormField(
                             /// VARIABLE STORAGE
                             controller: controller.parsedZipcodeSD,
-    
+      
                             ///VALIDATION TRIGGER
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             obscureText: false,
@@ -240,7 +190,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                                 label: 'Zipcode*',
                                 icon: Icons.other_houses_outlined,
                                 maxHeight: 60),
-    
+      
                             validator: (value) {
                               return (phoneCharacters.hasMatch(value ?? '') &&
                                       value?.length == 5)
@@ -265,7 +215,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                           child: TextFormField(
                             /// VARIABLE STORAGE
                             controller: controller.parsedCitySD,
-    
+      
                             ///VALIDATION TRIGGER
                             // initialValue: dir,
                             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -292,7 +242,7 @@ class _ShippingInfoState extends State<ShippingInfo> {
                           child: TextFormField(
                             /// VARIABLE STORAGE
                             controller: controller.parsedStateSD,
-    
+      
                             ///VALIDATION TRIGGER
                             // initialValue: dir,
                             autovalidateMode: AutovalidateMode.onUserInteraction,
