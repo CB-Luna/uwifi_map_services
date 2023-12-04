@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
@@ -8,8 +9,7 @@ import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
 
 class Step1PersonalDetailsForm extends StatefulWidget {
-  final String dir;
-  const Step1PersonalDetailsForm({Key? key, required this.dir})
+  const Step1PersonalDetailsForm({Key? key})
       : super(key: key);
 
   @override
@@ -41,7 +41,7 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
       children: [
         Container(
           width: 1400,
-          height: 330,
+          height: 250,
           decoration: BoxDecoration(
             color: colorInversePrimary,
             boxShadow: const [
@@ -55,9 +55,6 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
             borderRadius: BorderRadius.circular(40),
           ),
           child: Column(
-            // mainAxisSize: MainAxisSize.min,
-            // mainAxisAlignment: MainAxisAlignment.start,
-            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 width: 1400,
@@ -65,45 +62,68 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                   borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
                   color: colorPrimary,
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.all(25.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(
-                        Icons.location_history_outlined,
-                        color: colorInversePrimary,
-                        size: 40,
+                      const Flexible(
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.location_history_outlined,
+                              color: colorInversePrimary,
+                              size: 40,
+                            ),
+                            Text(
+                              'Step 1: Personal Details',
+                              style: TextStyle(
+                                color: colorInversePrimary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      SizedBox(width: 10),
-                      Text(
-                        'Step 1: Personal Details',
-                        style: TextStyle(
-                          color: colorInversePrimary,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: -0.25,
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Current Location",
+                              style: GoogleFonts.workSans(
+                                  fontSize: 16,
+                                  color: colorInversePrimary,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "${controller.parsedAddress1PD.text
+                              }, ${controller.parsedAddress2PD.text}\n${
+                                controller.parsedCityPD.text} ${
+                                controller.parsedStatePD.text}\n${
+                                controller.parsedZipcodePD.text}",
+                              style: GoogleFonts.workSans(
+                                  fontSize: 12,
+                                  color: colorInversePrimary,
+                                  fontWeight: FontWeight.normal),
+                              maxLines: 3,
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
                 ),
               ),
-              // const Divider(
-              //   height: 1,
-              //   thickness: 1.5,
-              //   color: colorPrimaryDark,
-              // ),
               Flexible(
                 child: Form(
                     key: controller.formKeyPD,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 25),
+                          vertical: 10, horizontal: 30),
                       child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -210,35 +230,11 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                               children: [
                                 Expanded(
                                   child: TextFormField(
-                                    readOnly: true,
-                                    enabled: false,
-
-                                    /// VARIABLE STORAGE
-                                    controller: controller.parsedAddress1PD,
-
-                                    ///VALIDATION TRIGGER
-                                    autovalidateMode:
-                                        AutovalidateMode.onUserInteraction,
-                                    obscureText: false,
-                                    keyboardType: TextInputType.streetAddress,
-                                    decoration: CustomInputs()
-                                        .formInputDecoration(
-                                            label: 'Address Line 1*',
-                                            icon: Icons.house_outlined,
-                                            maxHeight: 60),
-                                    style: const TextStyle(
-                                      color: colorPrimaryDark,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                                Expanded(
-                                  child: TextFormField(
                                     /// VARIABLE STORAGE
                                     controller: controller.parsedAddress2PD,
-
+                                    onChanged:(value) {
+                                      controller.activeNotifyListeners();
+                                    },
                                     ///VALIDATION TRIGGER
                                     // initialValue: dir,
                                     autovalidateMode:
@@ -367,7 +363,7 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                                   ),
                                 ),
                               ],
-                            )
+                            ),
                           ]),
                     )),
               ),
@@ -393,9 +389,6 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
             borderRadius: BorderRadius.circular(40),
           ),
           child: Column(
-              // mainAxisSize: MainAxisSize.min,
-              // mainAxisAlignment: MainAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   width: 1400,
@@ -405,25 +398,27 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                     color: colorPrimary,
                   ),
                   child: const Padding(
-                    padding: EdgeInsets.all(25.0),
+                    padding: EdgeInsets.all(15.0),
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Icon(
-                          Icons.add_card_outlined,
-                          color: colorInversePrimary,
-                          size: 40,
-                        ),
-                        SizedBox(width: 10),
-                        Text(
-                          'Step 2: Card Information',
-                          style: TextStyle(
-                            color: colorInversePrimary,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: -0.25,
+                        Flexible(
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.add_card_outlined,
+                                color: colorInversePrimary,
+                                size: 40,
+                              ),
+                              Text(
+                                'Step 2: Card Information',
+                                style: TextStyle(
+                                  color: colorInversePrimary,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],

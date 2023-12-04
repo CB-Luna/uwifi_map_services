@@ -32,7 +32,10 @@ class CustomerShippingInfo with ChangeNotifier {
   bool formValidation() {
     return (formKeyPD.currentState!.validate()) ? true : false;
   }
-
+  void activeNotifyListeners() {
+    notifyListeners();
+  }
+  
   void changeValuesShoppingDetails() {
     sameAsPD = !sameAsPD;
     if (sameAsPD) {

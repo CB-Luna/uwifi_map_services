@@ -45,82 +45,39 @@ class TopBar extends StatelessWidget {
         )
       ], color: colorBgBlack),
       padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-      child: Wrap(
-        runSpacing: 20,
-        spacing: 20,
-        direction: Axis.horizontal,
-        alignment:
-            onelineDisplay ? WrapAlignment.spaceBetween : WrapAlignment.center,
-        crossAxisAlignment: WrapCrossAlignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: onelineDisplay ? MainAxisSize.min : MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: onelineDisplay ? MainAxisSize.min : MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 230,
-                child: Wrap(children: [
-                  Container(
-                    height: 35,
-                    width: 35,
-                    decoration: BoxDecoration(
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(25.0)),
-                      border: Border.all(
-                        color: colorBgWhite,
-                        width: 2.0,
-                      ),
-                    ),
-                    child: IconButton(
-                      padding: const EdgeInsets.all(0),
-                      iconSize: 18,
-                      color: colorBgWhite,
-                      icon: const Icon(Icons.arrow_back),
-                      onPressed: () {
-                        Navigator.pop(context);
-                        setDefault();
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
-                    child: Image.asset('images/you-pointer.png',
-                        width: 35, height: 35),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Current Location",
-                        style: GoogleFonts.workSans(
-                            fontSize: 16,
-                            color: colorInversePrimary,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: -0.5),
-                      ),
-                      Text(
-                        custAddress,
-                        style: GoogleFonts.workSans(
-                            fontSize: 12,
-                            color: colorInversePrimary,
-                            fontWeight: FontWeight.normal),
-                      ),
-                    ],
-                  )
-                ]),
+          Container(
+            height: 35,
+            width: 35,
+            decoration: BoxDecoration(
+              borderRadius:
+                  const BorderRadius.all(Radius.circular(25.0)),
+              border: Border.all(
+                color: colorBgWhite,
+                width: 2.0,
               ),
-              const Spacer(),
-              StepperWidget(
-                width: 50,
-                curStep: stepsController.currentStep.index,
-                activeColor: colorsTheme(context).primary),
-              const Spacer()
-            ],
+            ),
+            child: IconButton(
+              padding: const EdgeInsets.all(0),
+              iconSize: 18,
+              color: colorBgWhite,
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context);
+                setDefault();
+              },
+            ),
           ),
-          // if (onelineDisplay) const SizedBox(width: 230)
+          const Spacer(),
+          StepperWidget(
+            width: 50,
+            curStep: stepsController.currentStep.index,
+            activeColor: colorsTheme(context).primary),
+          const Spacer()
         ],
       ),
     );
