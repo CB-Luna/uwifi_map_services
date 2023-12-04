@@ -80,7 +80,7 @@ class SalesLayout extends StatelessWidget {
                         //CheckBoxes
                         Container(
                           width: cartWidth,
-                          height: MediaQuery.of(context).size.height * 0.3,
+                          height: MediaQuery.of(context).size.height * 0.28,
                           decoration: BoxDecoration(
                             color: colorInversePrimary,
                             boxShadow: const [

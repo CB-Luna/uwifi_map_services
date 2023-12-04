@@ -7,11 +7,21 @@ import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
 
-class Step1PersonalDetailsForm extends StatelessWidget {
+class Step1PersonalDetailsForm extends StatefulWidget {
   final String dir;
   const Step1PersonalDetailsForm({Key? key, required this.dir})
       : super(key: key);
 
+  @override
+  State<Step1PersonalDetailsForm> createState() => _Step1PersonalDetailsFormState();
+}
+
+class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
+  TextEditingController number = TextEditingController(text:"");
+  TextEditingController ccv = TextEditingController(text:"");
+  TextEditingController date = TextEditingController(text:"");
+  TextEditingController cardName = TextEditingController(text:"");
+  bool isCvvFocused = false;
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<CustomerShippingInfo>(context);
@@ -24,6 +34,8 @@ class Step1PersonalDetailsForm extends StatelessWidget {
       filter: {'#': RegExp(r'[0-9]')},
       type: MaskAutoCompletionType.lazy,
     );
+
+    
 
     return Column(
       children: [
@@ -93,103 +105,101 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                              Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Expanded(
-                                        child: TextFormField(
-                                          /// VARIABLE STORAGE
-                                          controller: controller.parsedFNamePD,
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Expanded(
+                                  child: TextFormField(
+                                    /// VARIABLE STORAGE
+                                    controller: controller.parsedFNamePD,
 
-                                          ///VALIDATION TRIGGER
-                                          autovalidateMode: AutovalidateMode
-                                              .onUserInteraction,
-                                          autocorrect: false,
-                                          obscureText: false,
-                                          keyboardType: TextInputType.name,
-                                          decoration: CustomInputs()
-                                              .formInputDecoration(
-                                                  label: 'First Name*',
-                                                  icon: Icons.person_outlined,
-                                                  maxHeight: 60),
+                                    ///VALIDATION TRIGGER
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
+                                    autocorrect: false,
+                                    obscureText: false,
+                                    keyboardType: TextInputType.name,
+                                    decoration: CustomInputs()
+                                        .formInputDecoration(
+                                            label: 'First Name*',
+                                            icon: Icons.person_outlined,
+                                            maxHeight: 60),
 
-                                          validator: (value) {
-                                            return validCharacters
-                                                    .hasMatch(value ?? '')
-                                                ? null
-                                                : 'Please enter your name';
-                                          },
-                                          style: const TextStyle(
-                                            color: colorPrimaryDark,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 15),
-                                      Expanded(
-                                        child: TextFormField(
-                                          /// VARIABLE STORAGE
-                                          controller: controller.parsedLNamePD,
+                                    validator: (value) {
+                                      return validCharacters
+                                              .hasMatch(value ?? '')
+                                          ? null
+                                          : 'Please enter your name';
+                                    },
+                                    style: const TextStyle(
+                                      color: colorPrimaryDark,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 15),
+                                Expanded(
+                                  child: TextFormField(
+                                    /// VARIABLE STORAGE
+                                    controller: controller.parsedLNamePD,
 
-                                          ///VALIDATION TRIGGER
-                                          autovalidateMode: AutovalidateMode
-                                              .onUserInteraction,
-                                          autocorrect: false,
-                                          obscureText: false,
-                                          keyboardType: TextInputType.name,
-                                          decoration: CustomInputs()
-                                              .formInputDecoration(
-                                                  label: 'Last Name*',
-                                                  icon: Icons.person_outlined,
-                                                  maxHeight: 60),
+                                    ///VALIDATION TRIGGER
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
+                                    autocorrect: false,
+                                    obscureText: false,
+                                    keyboardType: TextInputType.name,
+                                    decoration: CustomInputs()
+                                        .formInputDecoration(
+                                            label: 'Last Name*',
+                                            icon: Icons.person_outlined,
+                                            maxHeight: 60),
 
-                                          validator: (value) {
-                                            return validCharacters
-                                                    .hasMatch(value ?? '')
-                                                ? null
-                                                : 'Please enter your name';
-                                          },
-                                          style: const TextStyle(
-                                            color: colorPrimaryDark,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 15),
-                                      Expanded(
-                                        child: TextFormField(
-                                          /// VARIABLE STORAGE
-                                          controller: controller.parsedPhonePD,
+                                    validator: (value) {
+                                      return validCharacters
+                                              .hasMatch(value ?? '')
+                                          ? null
+                                          : 'Please enter your name';
+                                    },
+                                    style: const TextStyle(
+                                      color: colorPrimaryDark,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 15),
+                                Expanded(
+                                  child: TextFormField(
+                                    /// VARIABLE STORAGE
+                                    controller: controller.parsedPhonePD,
 
-                                          ///VALIDATION TRIGGER
-                                          autovalidateMode: AutovalidateMode
-                                              .onUserInteraction,
-                                          obscureText: false,
-                                          keyboardType: TextInputType.phone,
-                                          decoration: CustomInputs()
-                                              .formInputDecoration(
-                                                  label: 'Phone Number*',
-                                                  icon: Icons.phone_outlined,
-                                                  maxHeight: 60),
+                                    ///VALIDATION TRIGGER
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
+                                    obscureText: false,
+                                    keyboardType: TextInputType.phone,
+                                    decoration: CustomInputs()
+                                        .formInputDecoration(
+                                            label: 'Phone Number*',
+                                            icon: Icons.phone_outlined,
+                                            maxHeight: 60),
 
-                                          inputFormatters: [
-                                            LengthLimitingTextInputFormatter(
-                                                14),
-                                            phoneFormat
-                                          ],
-                                          validator: (value) {
-                                            return (phoneCharacters.hasMatch(
-                                                        value ?? '') &&
-                                                    value?.length == 14)
-                                                ? null
-                                                : 'Please enter a valid phone number';
-                                          },
-                                          style: const TextStyle(
-                                            color: colorPrimaryDark,
-                                          ),
-                                        ),
-                                      ),
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(14),
+                                      phoneFormat
                                     ],
+                                    validator: (value) {
+                                      return (phoneCharacters
+                                                  .hasMatch(value ?? '') &&
+                                              value?.length == 14)
+                                          ? null
+                                          : 'Please enter a valid phone number';
+                                    },
+                                    style: const TextStyle(
+                                      color: colorPrimaryDark,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                             const SizedBox(
                               height: 15,
@@ -250,6 +260,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                                   child: TextFormField(
                                     readOnly: true,
                                     enabled: false,
+
                                     /// VARIABLE STORAGE
                                     controller: controller.parsedZipcodePD,
 
@@ -281,6 +292,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                                   child: TextFormField(
                                     readOnly: true,
                                     enabled: false,
+
                                     /// VARIABLE STORAGE
                                     controller: controller.parsedCityPD,
 
@@ -305,6 +317,7 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                                   child: TextFormField(
                                     readOnly: true,
                                     enabled: false,
+
                                     /// VARIABLE STORAGE
                                     controller: controller.parsedStatePD,
 
@@ -417,20 +430,22 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                     ),
                   ),
                 ),
+                //  (MediaQuery.of(context).size.width > 1130) ?
                 Row(
                   children: [
                     //Tarjeta
                     CreditCardWidget(
                         width: 400,
-                        height: 160,
+                        height: 200,
+                        key: formKey,
                         enableFloatingCard: true,
                         cardBgColor: colorPrimary,
-                        cardNumber: controller.number,
-                        expiryDate: controller.date,
-                        cardHolderName: controller.cardName,
-                        cvvCode: controller.ccv,
+                        cardNumber: number.text,
+                        expiryDate: date.text,
+                        cardHolderName: cardName.text,
+                        cvvCode: ccv.text,
                         isHolderNameVisible: true,
-                        showBackView: controller.isCvvFocused,
+                        showBackView: isCvvFocused,
                         onCreditCardWidgetChange:
                             (CreditCardBrand creditCardBrand) {}),
                     Expanded(
@@ -438,37 +453,119 @@ class Step1PersonalDetailsForm extends StatelessWidget {
                         child: CreditCardForm(
                           formKey: formKey,
                           obscureCvv: true,
-                          cardNumber: controller.number,
-                          expiryDate: controller.date,
-                          cardHolderName: controller.cardName,
-                          cvvCode: controller.ccv,
+                          cardNumber: number.text,
+                          expiryDate: date.text,
+                          cardHolderName: cardName.text,
+                          cvvCode: ccv.text,
                           isHolderNameVisible: true,
                           isCardNumberVisible: true,
                           isExpiryDateVisible: true,
-                          inputConfiguration: const InputConfiguration(
-                            cardNumberDecoration: InputDecoration(
-                              labelText: 'Number',
-                              hintText: 'XXXX XXXX XXXX XXXX',
-                            ),
-                            expiryDateDecoration: InputDecoration(
-                              labelText: 'Expired Date',
-                              hintText: 'XX/XX',
-                            ),
-                            cvvCodeDecoration: InputDecoration(
-                              labelText: 'CVV',
-                              hintText: 'XXX',
-                            ),
-                            cardHolderDecoration: InputDecoration(
-                              labelText: 'Card Holder',
-                            ),
+                          inputConfiguration: InputConfiguration(
+                            cardNumberDecoration: CustomInputs()
+                                .formInputDecoration(
+                                    label: 'Number*',
+                                    icon: Icons.credit_card_outlined,
+                                    maxHeight: 60),
+                            expiryDateDecoration: CustomInputs()
+                                .formInputDecoration(
+                                    label: 'Expiry Date*',
+                                    icon: Icons.calendar_month_outlined,
+                                    maxHeight: 60),
+                            cvvCodeDecoration: CustomInputs()
+                                .formInputDecoration(
+                                    label: 'CVV**',
+                                    icon: Icons.lock_outlined,
+                                    maxHeight: 60),
+                            cardHolderDecoration: CustomInputs()
+                                .formInputDecoration(
+                                    label: 'Card Holder*',
+                                    icon: Icons.person,
+                                    maxHeight: 60),
                           ),
-                          onCreditCardModelChange:
-                              controller.onCreditCardModelChange,
+                          onCreditCardModelChange: (creditCardModel) {
+                            setState(() {
+                              number.text =
+                                  creditCardModel.cardNumber;
+                              date.text = creditCardModel.expiryDate;
+                              cardName.text =
+                                  creditCardModel.cardHolderName;
+                              ccv.text = creditCardModel.cvvCode;
+                              isCvvFocused =
+                                  creditCardModel.isCvvFocused;
+                            });
+                          },
                         ),
                       ),
                     )
                   ],
                 )
+                // : Column(
+                //   children: [
+                //     CreditCardWidget(
+                //         width: 400,
+                //         height: 200,
+                //         key: formKey,
+                //         enableFloatingCard: true,
+                //         cardBgColor: colorPrimary,
+                //         cardNumber: number.text,
+                //         expiryDate: date.text,
+                //         cardHolderName: cardName.text,
+                //         cvvCode: ccv.text,
+                //         isHolderNameVisible: true,
+                //         showBackView: isCvvFocused,
+                //         onCreditCardWidgetChange:
+                //             (CreditCardBrand creditCardBrand) {}),
+                //     Expanded(
+                //       child: SingleChildScrollView(
+                //         child: CreditCardForm(
+                //           formKey: formKey,
+                //           obscureCvv: true,
+                //           cardNumber: number.text,
+                //           expiryDate: date.text,
+                //           cardHolderName: cardName.text,
+                //           cvvCode: ccv.text,
+                //           isHolderNameVisible: true,
+                //           isCardNumberVisible: true,
+                //           isExpiryDateVisible: true,
+                //           inputConfiguration: InputConfiguration(
+                //             cardNumberDecoration: CustomInputs()
+                //                 .formInputDecoration(
+                //                     label: 'Number*',
+                //                     icon: Icons.credit_card_outlined,
+                //                     maxHeight: 60),
+                //             expiryDateDecoration: CustomInputs()
+                //                 .formInputDecoration(
+                //                     label: 'Expiry Date*',
+                //                     icon: Icons.calendar_month_outlined,
+                //                     maxHeight: 60),
+                //             cvvCodeDecoration: CustomInputs()
+                //                 .formInputDecoration(
+                //                     label: 'CVV**',
+                //                     icon: Icons.lock_outlined,
+                //                     maxHeight: 60),
+                //             cardHolderDecoration: CustomInputs()
+                //                 .formInputDecoration(
+                //                     label: 'Card Holder*',
+                //                     icon: Icons.person,
+                //                     maxHeight: 60),
+                //           ),
+                //           onCreditCardModelChange: (creditCardModel) {
+                //             setState(() {
+                //               number.text =
+                //                   creditCardModel.cardNumber;
+                //               date.text = creditCardModel.expiryDate;
+                //               cardName.text =
+                //                   creditCardModel.cardHolderName;
+                //               ccv.text = creditCardModel.cvvCode;
+                //               isCvvFocused =
+                //                   creditCardModel.isCvvFocused;
+                //             });
+                //           },
+                //         ),
+                //       ),
+                //     )
+                //   ],
+                // ),
               ]),
         ),
       ],
