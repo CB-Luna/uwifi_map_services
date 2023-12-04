@@ -36,26 +36,8 @@ class CustomerLocationDisplay extends StatelessWidget with Popup {
             child: const ShippingInfo(),
           ),
            const SizedBox(
-          height: 30,
-        ),
-        //CheckBoxes
-        Container(
-          height: 270,
-          decoration: BoxDecoration(
-            color: colorInversePrimary,
-            boxShadow: const [
-              BoxShadow(
-                blurRadius: 15,
-                spreadRadius: -5,
-                color: colorBgB,
-                offset: Offset(0, 15),
-              )
-            ],
-            borderRadius: BorderRadius.circular(40),
+            height: 30,
           ),
-          child:const PromoCheckbox(),
-        ),
-        
         ],
       ),
     );

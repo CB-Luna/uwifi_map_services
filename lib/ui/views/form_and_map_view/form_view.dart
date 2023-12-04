@@ -67,129 +67,91 @@ class _FormViewState extends State<FormView> {
                             }
                           });
 
-                          return Column(
-                            children: [
-                              //Street
-                              Row(
-                                children: [
-                                  Flexible(
-                                    flex: 1,
-                                    child: TextFormField(
-                                      key: const ObjectKey('street'),
-                                      autofocus: true,
-                                      controller: controller.streetController,
-                                      onChanged: (value) {
-                                        controller.street = value;
-                                        controller.onAddressChanged(value);
-                                      },
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Please enter a valid address';
-                                        }
-                                        return null;
-                                      },
-                                      style: const TextStyle(
-                                          color: colorPrimaryDark),
-                                      decoration:
-                                          CustomInputs().formInputDecoration(
-                                        label: 'Address Search',
-                                        icon: Icons.location_pin,
+                          return SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.6,
+                            child: Column(
+                              children: [
+                                //Street
+                                Row(
+                                  children: [
+                                    Flexible(
+                                      flex: 1,
+                                      child: TextFormField(
+                                        key: const ObjectKey('street'),
+                                        autofocus: true,
+                                        controller: controller.streetController,
+                                        onChanged: (value) {
+                                          controller.street = value;
+                                          controller.onAddressChanged(value);
+                                        },
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please enter a valid address';
+                                          }
+                                          return null;
+                                        },
+                                        style: const TextStyle(
+                                            color: colorPrimaryDark),
+                                        decoration:
+                                            CustomInputs().formInputDecoration(
+                                          label: 'Address Search',
+                                          icon: Icons.location_pin,
+                                        ),
                                       ),
                                     ),
-                                  ),
-
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-
-                                  //Zipcode
-                                  Flexible(
-                                    flex: 1,
-                                    child: TextFormField(
-                                      key: const ObjectKey('zipcode'),
-                                      controller: controller.zipcodeController,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Please enter a zipcode';
-                                        }
-                                        return null;
-                                      },
-                                      style: const TextStyle(
-                                          color: colorPrimaryDark),
-                                      decoration:
-                                          CustomInputs().formInputDecoration(
-                                        label: 'Zipcode',
-                                        icon: Icons.house,
+                          
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                          
+                                    //Zipcode
+                                    Flexible(
+                                      flex: 1,
+                                      child: TextFormField(
+                                        key: const ObjectKey('zipcode'),
+                                        controller: controller.zipcodeController,
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please enter a zipcode';
+                                          }
+                                          return null;
+                                        },
+                                        style: const TextStyle(
+                                            color: colorPrimaryDark),
+                                        decoration:
+                                            CustomInputs().formInputDecoration(
+                                          label: 'Zipcode',
+                                          icon: Icons.house,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-
-                              const SizedBox(
-                                height: 20,
-                              ),
-
-                              // Row(
-                              //   children: [
-                              //     //City
-                              //     Flexible(
-                              //       child: TextFormField(
-                              //         key: const ObjectKey('city'),
-                              //         readOnly: true,
-                              //         enabled: false,
-                              //         controller: controller.cityController,
-                              //         style: const TextStyle(
-                              //             color: Color(0xff324057)),
-                              //         decoration:
-                              //             CustomInputs().formInputDecoration(
-                              //           label: 'City',
-                              //           icon: Icons.business,
-                              //         ),
-                              //       ),
-                              //     ),
-
-                              //     const SizedBox(
-                              //       width: 10,
-                              //     ),
-
-                              //     //State
-                              //     Flexible(
-                              //       child: TextFormField(
-                              //         key: const ObjectKey('state'),
-                              //         readOnly: true,
-                              //         enabled: false,
-                              //         controller: controller.stateController,
-                              //         style: const TextStyle(
-                              //             color: Color(0xff324057)),
-                              //         decoration:
-                              //             CustomInputs().formInputDecoration(
-                              //           label: 'State',
-                              //           icon: Icons.assistant_photo_outlined,
-                              //         ),
-                              //       ),
-                              //     ),
-                              //   ],
-                              // ),
-
-                              mobile ? Container() : const SizedBox(height: 10),
-
-                              // Se usa material para que se dibuje encima del
-                              // contenedor padre (con BoxDecoration)
-                              Material(
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: places.length,
-                                  itemBuilder: (_, index) {
-                                    final place = places[index];
-                                    return CustomListTile(
-                                      place: place,
-                                      controller: controller,
-                                    );
-                                  },
+                                  ],
                                 ),
-                              ),
-                            ],
+                          
+                                const SizedBox(
+                                  height: 20,
+                                ),
+
+                                
+                                mobile ? Container() : const SizedBox(height: 10),
+                          
+                                // Se usa material para que se dibuje encima del
+                                // contenedor padre (con BoxDecoration)
+                                Material(
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: places.length,
+                                    itemBuilder: (_, index) {
+                                      final place = places[index];
+                                      return CustomListTile(
+                                        place: place,
+                                        controller: controller,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
                           );
                         },
                       ),

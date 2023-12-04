@@ -57,7 +57,7 @@ class StepsController with ChangeNotifier {
         );
 
       default:
-        return const FormView();
+        return const SizedBox();
     }
   }
 

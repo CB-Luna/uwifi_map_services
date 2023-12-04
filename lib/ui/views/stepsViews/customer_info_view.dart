@@ -97,11 +97,6 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
               child: Column(
                 children: [
                   const SizedBox(height: 15),
-                  Text(
-                    isRep ? 'Customer Information' : 'Your Information',
-                    style: subtitleStyle(context),
-                  ),
-                  const SizedBox(height: 25),
                   Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Container(
@@ -250,13 +245,8 @@ class _WebViewState extends State<_WebView> {
           padding: const EdgeInsets.fromLTRB(50, 25, 50, 0),
           child: Column(
             children: [
-              Center(
-                child: Text(
-                  isRep ? 'Customer Information' : 'Your Information',
-                  style: subtitleStyle(context),
-                ),
-              ),
-              const SizedBox(height: 25),
+              Center(),
+              const SizedBox(height: 15),
               Step1PersonalDetailsForm(dir: widget.street),
               const SizedBox(height: 30),
               CustomerLocationDisplay(

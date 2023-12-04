@@ -6,6 +6,7 @@ import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 
 import 'package:uwifi_map_services/providers/tracking_provider.dart' as track;
 import 'package:uwifi_map_services/theme/theme_data.dart';
+import 'package:uwifi_map_services/ui/views/stepsViews/customer_info_checks.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/cart.dart';
 
 import '../../../data/constants.dart';
@@ -73,7 +74,29 @@ class SalesLayout extends StatelessWidget {
                           .changeStep(stepsController.currentStep)),
 
                     //Despliegue de Shopping Cart
-                    if (!mobile(context)) const CartWidget()
+                    if (!mobile(context)) Column(
+                      children: [
+                        const CartWidget(),
+                        //CheckBoxes
+                        Container(
+                          width: cartWidth,
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          decoration: BoxDecoration(
+                            color: colorInversePrimary,
+                            boxShadow: const [
+                              BoxShadow(
+                                blurRadius: 15,
+                                spreadRadius: -5,
+                                color: colorBgB,
+                                offset: Offset(0, 15),
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          child:const PromoCheckbox(),
+                        ),
+                      ],
+                    )
                   ]),
                 )
               ],
