@@ -34,6 +34,7 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
       filter: {'#': RegExp(r'[0-9]')},
       type: MaskAutoCompletionType.lazy,
     );
+    final isMobile = MediaQuery.of(context).size.width > 1130 ? true : false;
 
     
 
@@ -67,16 +68,29 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Flexible(
+                      Flexible(
                         child: Row(
                           children: [
-                            Icon(
-                              Icons.location_history_outlined,
-                              color: colorInversePrimary,
-                              size: 40,
+                            const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Icon(
+                                Icons.location_history_outlined,
+                                color: colorInversePrimary,
+                                size: 40,
+                              ),
                             ),
-                            Text(
+                            isMobile ?
+                            const Text(
                               'Step 1: Personal Details',
+                              style: TextStyle(
+                                color: colorInversePrimary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            )
+                            :
+                            const Text(
+                              'Step 1:\nPersonal Details',
                               style: TextStyle(
                                 color: colorInversePrimary,
                                 fontSize: 18,
@@ -90,12 +104,21 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "Current Location",
-                              style: GoogleFonts.workSans(
-                                  fontSize: 16,
+                            Wrap(
+                              children: [
+                                const Icon(
+                                  Icons.location_pin,
                                   color: colorInversePrimary,
-                                  fontWeight: FontWeight.bold),
+                                  size: 20,
+                                ),
+                                Text(
+                                  "Current Location",
+                                  style: GoogleFonts.workSans(
+                                      fontSize: 16,
+                                      color: colorInversePrimary,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
                             ),
                             Text(
                               "${controller.parsedAddress1PD.text
@@ -125,26 +148,29 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Expanded(
-                                  child: TextFormField(
-                                    /// VARIABLE STORAGE
-                                    controller: controller.parsedFNamePD,
-
-                                    ///VALIDATION TRIGGER
-                                    autovalidateMode:
-                                        AutovalidateMode.onUserInteraction,
-                                    autocorrect: false,
-                                    obscureText: false,
-                                    keyboardType: TextInputType.name,
-                                    decoration: CustomInputs()
-                                        .formInputDecoration(
-                                            label: 'First Name*',
-                                            icon: Icons.person_outlined,
-                                            maxHeight: 60),
+                              Row(
+                                crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Expanded(
+                                    child: TextFormField(
+                                      /// VARIABLE STORAGE
+                                      controller: controller.parsedFNamePD,
+                                      onChanged: (value) {
+                                        controller.activeNotifyListeners();
+                                      },
+                                      ///VALIDATION TRIGGER
+                                      autovalidateMode: AutovalidateMode
+                                          .onUserInteraction,
+                                      autocorrect: false,
+                                      obscureText: false,
+                                      keyboardType: TextInputType.name,
+                                      decoration: CustomInputs()
+                                          .formInputDecoration(
+                                              label: 'First Name*',
+                                              icon: Icons.person_outlined,
+                                              maxHeight: 60),
 
                                     validator: (value) {
                                       return validCharacters
@@ -156,24 +182,26 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                                       color: colorPrimaryDark,
                                     ),
                                   ),
-                                ),
-                                const SizedBox(width: 15),
-                                Expanded(
-                                  child: TextFormField(
-                                    /// VARIABLE STORAGE
-                                    controller: controller.parsedLNamePD,
-
-                                    ///VALIDATION TRIGGER
-                                    autovalidateMode:
-                                        AutovalidateMode.onUserInteraction,
-                                    autocorrect: false,
-                                    obscureText: false,
-                                    keyboardType: TextInputType.name,
-                                    decoration: CustomInputs()
-                                        .formInputDecoration(
-                                            label: 'Last Name*',
-                                            icon: Icons.person_outlined,
-                                            maxHeight: 60),
+                                  ),
+                                  const SizedBox(width: 15),
+                                  Expanded(
+                                    child: TextFormField(
+                                      /// VARIABLE STORAGE
+                                      controller: controller.parsedLNamePD,
+                                      onChanged: (value) {
+                                        controller.activeNotifyListeners();
+                                      },
+                                      ///VALIDATION TRIGGER
+                                      autovalidateMode: AutovalidateMode
+                                          .onUserInteraction,
+                                      autocorrect: false,
+                                      obscureText: false,
+                                      keyboardType: TextInputType.name,
+                                      decoration: CustomInputs()
+                                          .formInputDecoration(
+                                              label: 'Last Name*',
+                                              icon: Icons.person_outlined,
+                                              maxHeight: 60),
 
                                     validator: (value) {
                                       return validCharacters
@@ -397,21 +425,34 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                         BorderRadius.vertical(top: Radius.circular(30)),
                     color: colorPrimary,
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(15.0),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Flexible(
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.add_card_outlined,
-                                color: colorInversePrimary,
-                                size: 40,
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Icon(
+                                  Icons.add_card_outlined,
+                                  color: colorInversePrimary,
+                                  size: 40,
+                                ),
                               ),
-                              Text(
+                              isMobile ?
+                              const Text(
                                 'Step 2: Card Information',
+                                style: TextStyle(
+                                  color: colorInversePrimary,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              )
+                              :
+                              const Text(
+                                'Step 2:\nCard Information',
                                 style: TextStyle(
                                   color: colorInversePrimary,
                                   fontSize: 18,

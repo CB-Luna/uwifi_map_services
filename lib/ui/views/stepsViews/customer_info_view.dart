@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:uwifi_map_services/data/constants.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/step1_personal_details_form.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/step3_shipping_details_form.dart';
@@ -84,11 +83,7 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
     return Scaffold(
       backgroundColor: colorBgB,
       body: (MediaQuery.of(context).size.width > 1130)
-          ? _WebView(
-              street: widget.street,
-              city: widget.city,
-              state: widget.state,
-              zipcode: widget.zipcode)
+          ? const _WebView()
           :
 
           ///CLASS JAIL HERE
@@ -212,16 +207,8 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
 }
 
 class _WebView extends StatefulWidget {
-  final String street;
-  final String city;
-  final String state;
-  final String zipcode;
   const _WebView(
-      {Key? key,
-      required this.street,
-      required this.city,
-      required this.state,
-      required this.zipcode})
+      {Key? key})
       : super(key: key);
 
   @override
@@ -231,8 +218,6 @@ class _WebView extends StatefulWidget {
 class _WebViewState extends State<_WebView> {
   @override
   Widget build(BuildContext context) {
-    // final customerInfo = Provider.of<CustomerInfoProvider>(context);
-    // final bool isRep = customerInfo.customerInfo.customerRep != '';
     return SingleChildScrollView(
         controller: ScrollController(),
         padding: const EdgeInsets.all(0),

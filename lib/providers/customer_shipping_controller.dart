@@ -5,7 +5,7 @@ import 'package:flutter_credit_card/flutter_credit_card.dart';
 
 class CustomerShippingInfo with ChangeNotifier {
   //Bandera Checkbox SD same as PD
-  bool sameAsPD = false;
+  bool sameAsPD = true;
 
   // Personal Details
   GlobalKey<FormState> formKeyPD = GlobalKey<FormState>();
@@ -35,8 +35,8 @@ class CustomerShippingInfo with ChangeNotifier {
   void activeNotifyListeners() {
     notifyListeners();
   }
-  
-  void changeValuesShoppingDetails() {
+
+  void changeValuesShippingDetails() {
     sameAsPD = !sameAsPD;
     if (sameAsPD) {
       parsedFNameSD.text = parsedFNamePD.text;

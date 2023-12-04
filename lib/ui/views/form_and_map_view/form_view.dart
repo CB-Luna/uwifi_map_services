@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/classes/home_page.dart';
 import 'package:uwifi_map_services/data/constants.dart';
-import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
 import 'package:uwifi_map_services/providers/search_controller.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
@@ -192,6 +191,14 @@ class _FormViewState extends State<FormView> {
                                     controller.state;
                                 customerShippingInfoProvider.parsedZipcodePD.text =
                                     controller.zipcode;
+                                customerShippingInfoProvider.parsedAddress1SD.text = 
+                                    controller.street;
+                                customerShippingInfoProvider.parsedZipcodeSD.text = 
+                                    controller.zipcode;
+                                customerShippingInfoProvider.parsedCitySD.text = 
+                                    controller.city;
+                                customerShippingInfoProvider.parsedStateSD.text = 
+                                    controller.state;
                                 var customer = controller.fillCustomerInfo();
                                 tracking.setOrigin = controller.origin;
                                 if (!(controller.customerRep != '')) {

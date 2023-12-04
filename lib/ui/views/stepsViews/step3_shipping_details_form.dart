@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:uwifi_map_services/data/constants.dart';
 import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
 import 'package:uwifi_map_services/providers/steps_controller.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
@@ -22,11 +20,7 @@ class _Step3ShippingDetailsFormState extends State<Step3ShippingDetailsForm> {
     final stepController = Provider.of<StepsController>(context);
     final validCharacters = RegExp(r'^[a-zA-Z\- ]+$');
     final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
-    var phoneFormat = MaskTextInputFormatter(
-      mask: '(###) ###-####',
-      filter: {'#': RegExp(r'[0-9]')},
-      type: MaskAutoCompletionType.lazy,
-    );
+    final isMobile = MediaQuery.of(context).size.width > 1130 ? true : false;
 
     return Container(
       width: 1400,
@@ -51,21 +45,34 @@ class _Step3ShippingDetailsFormState extends State<Step3ShippingDetailsForm> {
               borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
               color: colorPrimary,
             ),
-            child: const Padding(
-              padding: EdgeInsets.all(15.0),
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Flexible(
                     child: Row(
                       children: [
-                        Icon(
-                          Icons.local_shipping_outlined,
-                          color: colorInversePrimary,
-                          size: 40,
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.local_shipping_outlined,
+                            color: colorInversePrimary,
+                            size: 40,
+                          ),
                         ),
-                        Text(
+                        isMobile ?
+                        const Text(
                           'Step 3: Shipping Details',
+                          style: TextStyle(
+                            color: colorInversePrimary,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        )
+                        :
+                        const Text(
+                          'Step 3:\nShipping Details',
                           style: TextStyle(
                             color: colorInversePrimary,
                             fontSize: 18,
@@ -75,32 +82,50 @@ class _Step3ShippingDetailsFormState extends State<Step3ShippingDetailsForm> {
                       ],
                     ),
                   ),
-                  // Flexible(
-                  //   child: Column(
-                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                  //     children: [
-                  //       Text(
-                  //         "Current Location",
-                  //         style: GoogleFonts.workSans(
-                  //             fontSize: 16,
-                  //             color: colorInversePrimary,
-                  //             fontWeight: FontWeight.bold),
-                  //       ),
-                  //       Text(
-                  //         "${controller.parsedAddress1PD.text
-                  //         }, ${controller.parsedAddress2PD.text}\n${
-                  //           controller.parsedCityPD.text} ${
-                  //           controller.parsedStatePD.text}\n${
-                  //           controller.parsedZipcodePD.text}",
-                  //         style: GoogleFonts.workSans(
-                  //             fontSize: 12,
-                  //             color: colorInversePrimary,
-                  //             fontWeight: FontWeight.normal),
-                  //         maxLines: 3,
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Wrap(
+                          children: [
+                            const Icon(
+                              Icons.person_outlined,
+                              color: colorInversePrimary,
+                              size: 20,
+                            ),
+                            Text(
+                              "${controller.parsedFNamePD.text} ${controller.parsedLNamePD.text}",
+                              style: GoogleFonts.workSans(
+                                  fontSize: 16,
+                                  color: colorInversePrimary,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              'Same as Personal Details',
+                              style: GoogleFonts.workSans(
+                              fontSize: 12,
+                              color: colorInversePrimary,
+                              fontWeight: FontWeight.normal)),
+                            Checkbox(
+                              side: const BorderSide(
+                                color: colorBgWhite,
+                                width: 2.0
+                              ),
+                              value: controller.sameAsPD,
+                              onChanged: (bool? value) {
+                                controller.changeValuesShippingDetails();
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -111,20 +136,8 @@ class _Step3ShippingDetailsFormState extends State<Step3ShippingDetailsForm> {
                 child: Container(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
               child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    CheckboxListTile(
-                      value: controller.sameAsPD,
-                      onChanged: (smsyes) {
-                        controller.changeValuesShoppingDetails();
-                      },
-                      title: Text(
-                          'Same as Personal Details',
-                          style: bodyStyle(context)),
-                      activeColor: colorTertiary,
-                      dense: false,
-                      controlAffinity: ListTileControlAffinity.trailing,
-                    ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
