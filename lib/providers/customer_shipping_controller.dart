@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:google_maps/google_maps.dart';
 
 class CustomerShippingInfo with ChangeNotifier {
   //Bandera Checkbox SD same as PD
@@ -19,6 +19,9 @@ class CustomerShippingInfo with ChangeNotifier {
   final TextEditingController parsedCityPD = TextEditingController(text: "");
   final TextEditingController parsedStatePD = TextEditingController(text: "");
 
+  LatLng? locatizationPD;
+  
+
   // Shipping Details
   final TextEditingController parsedFNameSD = TextEditingController(text: "");
   final TextEditingController parsedLNameSD = TextEditingController(text: "");
@@ -28,6 +31,8 @@ class CustomerShippingInfo with ChangeNotifier {
   final TextEditingController parsedZipcodeSD = TextEditingController(text: "");
   final TextEditingController parsedCitySD = TextEditingController(text: "");
   final TextEditingController parsedStateSD = TextEditingController(text: "");
+
+  LatLng? locatizationSD;
 
   bool formValidation() {
     return (formKeyPD.currentState!.validate()) ? true : false;

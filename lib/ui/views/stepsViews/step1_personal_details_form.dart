@@ -27,7 +27,8 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
     final controller = Provider.of<CustomerShippingInfo>(context);
     final validCharacters = RegExp(r'^[a-zA-Z\- ]+$');
     final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey1 = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
     // final zcode = widget.zipcode.toString();
     var phoneFormat = MaskTextInputFormatter(
       mask: '(###) ###-####',
@@ -392,7 +393,7 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                     CreditCardWidget(
                         width: 400,
                         height: 200,
-                        key: formKey,
+                        key: formKey1,
                         enableFloatingCard: true,
                         cardBgColor: colorPrimary,
                         cardNumber: number.text,
@@ -406,7 +407,7 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                     Expanded(
                       child: SingleChildScrollView(
                         child: CreditCardForm(
-                          formKey: formKey,
+                          formKey: formKey2,
                           obscureCvv: true,
                           cardNumber: number.text,
                           expiryDate: date.text,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uwifi_map_services/data/constants.dart';
-import 'package:uwifi_map_services/ui/layouts/map/widgets/step_widget.dart';
 
 class CustomTitle extends StatelessWidget {
   final bool mobile;
@@ -50,7 +49,6 @@ class CustomTitle extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 50),
-          textStepOne()
         ],
       ),
     );
@@ -97,16 +95,9 @@ class CustomTitle extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 50),
-          textStepOne()
         ],
       ),
     );
   }
 }
 
-Widget textStepOne([double? bodyFontSize]) {
-  return const CustomStep(icon: Icons.my_location_rounded, texts: [
-    "Step 1: Find your address",
-    "Enter your address of your location."
-  ]);
-}

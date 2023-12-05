@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps/google_maps.dart' as LatLng;
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/classes/home_page.dart';
 import 'package:uwifi_map_services/data/constants.dart';
@@ -25,8 +26,7 @@ class _FormViewState extends State<FormView> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final bool mobile = size.width < 600 ? true : false;
+    final bool mobile = MediaQuery.of(context).size.width >= 1130 ? true : false;
     // ignore: undefined_prefixed_name
 
     final tracking = Provider.of<TrackingProvider>(context);
@@ -66,91 +66,153 @@ class _FormViewState extends State<FormView> {
                             }
                           });
 
-                          return SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.6,
-                            child: Column(
-                              children: [
-                                //Street
-                                Row(
+                          return Column(
+                            children: [
+                              Container(
+                                width: mobile ? MediaQuery.of(context).size.width * 0.4 : MediaQuery.of(context).size.width * 0.8,
+                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                                decoration: ShapeDecoration(
+                                  gradient: const LinearGradient(
+                                    begin: Alignment(-0.02, 1.00),
+                                    end: Alignment(0.02, -1),
+                                    colors: [colorPrimaryDark, colorPrimaryLight],
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    side: const BorderSide(
+                                      width: 1,
+                                      strokeAlign: BorderSide.strokeAlignOutside,
+                                      color: colorPrimary,
+                                    ),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Flexible(
-                                      flex: 1,
-                                      child: TextFormField(
-                                        key: const ObjectKey('street'),
-                                        autofocus: true,
-                                        controller: controller.streetController,
-                                        onChanged: (value) {
-                                          controller.street = value;
-                                          controller.onAddressChanged(value);
-                                        },
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return 'Please enter a valid address';
-                                          }
-                                          return null;
-                                        },
-                                        style: const TextStyle(
-                                            color: colorPrimaryDark),
-                                        decoration:
-                                            CustomInputs().formInputDecoration(
-                                          label: 'Address Search',
-                                          icon: Icons.location_pin,
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.all(5),
+                                          margin: const EdgeInsets.only(right: 10),
+                                          decoration: BoxDecoration(
+                                            color: colorsTheme(context).secondary,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Icon(Icons.my_location_rounded,
+                                              size: mobile ? 32 : 16, color: colorsTheme(context).inversePrimary),
                                         ),
-                                      ),
-                                    ),
-                          
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                          
-                                    //Zipcode
-                                    Flexible(
-                                      flex: 1,
-                                      child: TextFormField(
-                                        key: const ObjectKey('zipcode'),
-                                        controller: controller.zipcodeController,
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return 'Please enter a zipcode';
-                                          }
-                                          return null;
-                                        },
-                                        style: const TextStyle(
-                                            color: colorPrimaryDark),
-                                        decoration:
-                                            CustomInputs().formInputDecoration(
-                                          label: 'Zipcode',
-                                          icon: Icons.house,
+                                        Flexible(
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                'Step 1: Find your Address',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: colorInversePrimary,
+                                                  fontSize: mobile ? 32 : 20,
+                                                  fontFamily: 'Quicksand',
+                                                  fontWeight: FontWeight.w700,
+                                                  height: 0,
+                                                ),
+                                              ),
+                                              const SizedBox(height: 15),
+                                              Text(
+                                                'Enter your address location',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: colorInversePrimary,
+                                                  fontSize: mobile ? 20 : 14,
+                                                  fontFamily: 'Quicksand',
+                                                  fontWeight: FontWeight.w500,
+                                                  height: 0,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 30),
+                                    Column(
+                                      children: [
+                                        //Street
+                                        TextFormField(
+                                          key: const ObjectKey('street'),
+                                          autofocus: true,
+                                          controller: controller.streetController,
+                                          onChanged: (value) {
+                                            controller.street = value;
+                                            controller.onAddressChanged(value);
+                                          },
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              return 'Please enter a valid address';
+                                            }
+                                            return null;
+                                          },
+                                          style: const TextStyle(
+                                              color: colorPrimaryDark),
+                                          decoration:
+                                              CustomInputs().formInputDecoration(
+                                            label: 'Address Search',
+                                            icon: Icons.location_pin,
+                                          ),
+                                        ),
+                                    
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                    
+                                        //Zipcode
+                                        TextFormField(
+                                          key: const ObjectKey('zipcode'),
+                                          controller: controller.zipcodeController,
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              return 'Please enter a zipcode';
+                                            }
+                                            return null;
+                                          },
+                                          style: const TextStyle(
+                                              color: colorPrimaryDark),
+                                          decoration:
+                                              CustomInputs().formInputDecoration(
+                                            label: 'Zipcode',
+                                            icon: Icons.house,
+                                          ),
+                                        ),
+                                    
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+
+                                        
+                                        mobile ? Container() : const SizedBox(height: 10),
+                                    
+                                        // Se usa material para que se dibuje encima del
+                                        // contenedor padre (con BoxDecoration)
+                                        Material(
+                                          child: ListView.builder(
+                                            shrinkWrap: true,
+                                            itemCount: places.length,
+                                            itemBuilder: (_, index) {
+                                              final place = places[index];
+                                              return CustomListTile(
+                                                place: place,
+                                                controller: controller,
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                          
-                                const SizedBox(
-                                  height: 20,
-                                ),
-
-                                
-                                mobile ? Container() : const SizedBox(height: 10),
-                          
-                                // Se usa material para que se dibuje encima del
-                                // contenedor padre (con BoxDecoration)
-                                Material(
-                                  child: ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: places.length,
-                                    itemBuilder: (_, index) {
-                                      final place = places[index];
-                                      return CustomListTile(
-                                        place: place,
-                                        controller: controller,
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           );
                         },
                       ),
@@ -182,6 +244,7 @@ class _FormViewState extends State<FormView> {
                                   controller.changeLocation(location.position);
                                 }
 
+                                // ignore: use_build_context_synchronously
                                 await widget.showPopup(controller, context);
                                 customerShippingInfoProvider.parsedAddress1PD.text =
                                     controller.street;
@@ -191,6 +254,8 @@ class _FormViewState extends State<FormView> {
                                     controller.state;
                                 customerShippingInfoProvider.parsedZipcodePD.text =
                                     controller.zipcode;
+                                customerShippingInfoProvider.locatizationPD = 
+                                    controller.currentLocation;
                                 customerShippingInfoProvider.parsedAddress1SD.text = 
                                     controller.street;
                                 customerShippingInfoProvider.parsedZipcodeSD.text = 
@@ -199,28 +264,14 @@ class _FormViewState extends State<FormView> {
                                     controller.city;
                                 customerShippingInfoProvider.parsedStateSD.text = 
                                     controller.state;
+                                customerShippingInfoProvider.locatizationSD = 
+                                    controller.currentLocation;
                                 var customer = controller.fillCustomerInfo();
                                 tracking.setOrigin = controller.origin;
                                 if (!(controller.customerRep != '')) {
                                   tracking.recordTrack(customerInfo: customer);
                                 }
                               }
-                              // var leadInfo = CustomerInfo(
-                              //   street: controller.street,
-                              //   city: controller.city,
-                              //   state: controller.state,
-                              //   zipcode: controller.zipcode,
-                              //   coverageType: controller.coverageType,
-                              //   locationGroup: controller.locationgroup,
-                              //   customerRep: '',
-                              //   location: location!.position, origin: '',
-                              // );
-
-                              // if (!(controller.customerRep != '')) {
-                              //   var customer = controller.fillCustomerInfo();
-                              //   tracking.setOrigin = controller.origin;
-                              //   tracking.recordTrack(customerInfo: customer);
-                              // }
                             }
                             // ignore: use_build_context_synchronously
                             FocusScope.of(context).requestFocus(FocusNode());
@@ -233,38 +284,6 @@ class _FormViewState extends State<FormView> {
                       mobile
                           ? const SizedBox(height: 5)
                           : const SizedBox(height: 20),
-                      // Column(
-                      //   children: [
-                      // Text("Questions?",
-                      //     style: GoogleFonts.workSans(
-                      //       color: const Color(0xFF8aa7d2),
-                      //     )),
-                      // const SizedBox(height: 5),
-                      // GradientButtonWidget(
-                      //     function: () => showGeneralDialog(
-                      //         context: context,
-                      //         barrierColor:
-                      //             const Color(0x00022963).withOpacity(0.40),
-                      //         barrierDismissible: true,
-                      //         barrierLabel: "",
-                      //         transitionDuration:
-                      //             const Duration(milliseconds: 500),
-                      //         transitionBuilder: (context, animation,
-                      //             secondaryAnimation, child) {
-                      //           var curve = Curves.decelerate
-                      //               .transform(animation.value);
-                      //           return Transform.scale(
-                      //               scale: curve, child: PopupFormZip());
-                      //         },
-                      //         pageBuilder: (context, animation,
-                      //                 secondaryAnimation) =>
-                      //             const SizedBox()),
-                      //     text: "Call to your local office",
-                      //     fontSize: 14)
-                      //   ],
-                      // ),
-
-                      //
                     ],
                   ),
                   Builder(builder: (context) {
