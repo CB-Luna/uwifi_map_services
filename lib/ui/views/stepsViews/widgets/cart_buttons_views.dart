@@ -79,7 +79,9 @@ void finalPressed(BuildContext context,
 
           res = await supabase.rpc(
             'create_lead',
-            params: json
+            params: {
+              "data" : json
+            }
           );
 
           if (res != null) {
