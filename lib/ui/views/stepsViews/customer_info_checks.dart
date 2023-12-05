@@ -20,7 +20,8 @@ class PromoCheckboxState extends State<PromoCheckbox> {
     final customerController =
         Provider.of<CustomerInfoProvider>(context, listen: false);
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.symmetric(
+                            vertical: 15.0, horizontal: 25),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         mainAxisSize: MainAxisSize.min,

@@ -23,7 +23,7 @@ class CustomRadioButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final bool mobile = size.width < 600 ? true : false;
+    final bool mobile = size.width < 1024 ? true : false;
 
     return Container(
       height: mobile ? 130 : 170,

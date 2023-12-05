@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +36,7 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
       filter: {'#': RegExp(r'[0-9]')},
       type: MaskAutoCompletionType.lazy,
     );
-    final isMobile = MediaQuery.of(context).size.width > 1130 ? true : false;
+    final isMobile = MediaQuery.of(context).size.width > 1024 ? true : false;
 
     
 
@@ -394,7 +395,6 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                         width: 400,
                         height: 200,
                         key: formKey1,
-                        enableFloatingCard: true,
                         cardBgColor: colorPrimary,
                         cardNumber: number.text,
                         expiryDate: date.text,
@@ -406,51 +406,54 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                             (CreditCardBrand creditCardBrand) {}),
                     Expanded(
                       child: SingleChildScrollView(
-                        child: CreditCardForm(
-                          formKey: formKey2,
-                          obscureCvv: true,
-                          cardNumber: number.text,
-                          expiryDate: date.text,
-                          cardHolderName: cardName.text,
-                          cvvCode: ccv.text,
-                          isHolderNameVisible: true,
-                          isCardNumberVisible: true,
-                          isExpiryDateVisible: true,
-                          inputConfiguration: InputConfiguration(
-                            cardNumberDecoration: CustomInputs()
-                                .formInputDecoration(
-                                    label: 'Number*',
-                                    icon: Icons.credit_card_outlined,
-                                    maxHeight: 60),
-                            expiryDateDecoration: CustomInputs()
-                                .formInputDecoration(
-                                    label: 'Expiry Date*',
-                                    icon: Icons.calendar_month_outlined,
-                                    maxHeight: 60),
-                            cvvCodeDecoration: CustomInputs()
-                                .formInputDecoration(
-                                    label: 'CVV**',
-                                    icon: Icons.lock_outlined,
-                                    maxHeight: 60),
-                            cardHolderDecoration: CustomInputs()
-                                .formInputDecoration(
-                                    label: 'Card Holder*',
-                                    icon: Icons.person,
-                                    maxHeight: 60),
-                          ),
-                          onCreditCardModelChange: (creditCardModel) {
-                            setState(() {
-                              number.text =
-                                  creditCardModel.cardNumber;
-                              date.text = creditCardModel.expiryDate;
-                              cardName.text =
-                                  creditCardModel.cardHolderName;
-                              ccv.text = creditCardModel.cvvCode;
-                              isCvvFocused =
-                                  creditCardModel.isCvvFocused;
-                            });
-                          },
+                        child: Form(
+                          child: Container(),
                         ),
+                        // CreditCardForm(
+                        //   formKey: formKey2,
+                        //   obscureCvv: true,
+                        //   cardNumber: number.text,
+                        //   expiryDate: date.text,
+                        //   cardHolderName: cardName.text,
+                        //   cvvCode: ccv.text,
+                        //   isHolderNameVisible: true,
+                        //   isCardNumberVisible: true,
+                        //   isExpiryDateVisible: true,
+                        //   inputConfiguration: InputConfiguration(
+                        //     cardNumberDecoration: CustomInputs()
+                        //         .formInputDecoration(
+                        //             label: 'Number*',
+                        //             icon: Icons.credit_card_outlined,
+                        //             maxHeight: 60),
+                        //     expiryDateDecoration: CustomInputs()
+                        //         .formInputDecoration(
+                        //             label: 'Expiry Date*',
+                        //             icon: Icons.calendar_month_outlined,
+                        //             maxHeight: 60),
+                        //     cvvCodeDecoration: CustomInputs()
+                        //         .formInputDecoration(
+                        //             label: 'CVV**',
+                        //             icon: Icons.lock_outlined,
+                        //             maxHeight: 60),
+                        //     cardHolderDecoration: CustomInputs()
+                        //         .formInputDecoration(
+                        //             label: 'Card Holder*',
+                        //             icon: Icons.person,
+                        //             maxHeight: 60),
+                        //   ),
+                        //   onCreditCardModelChange: (creditCardModel) {
+                        //     setState(() {
+                        //       number.text =
+                        //           creditCardModel.cardNumber;
+                        //       date.text = creditCardModel.expiryDate;
+                        //       cardName.text =
+                        //           creditCardModel.cardHolderName;
+                        //       ccv.text = creditCardModel.cvvCode;
+                        //       isCvvFocused =
+                        //           creditCardModel.isCvvFocused;
+                        //     });
+                        //   },
+                        // ),
                       ),
                     )
                   ],

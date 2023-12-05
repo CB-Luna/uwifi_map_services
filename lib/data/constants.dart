@@ -23,7 +23,7 @@ const Color iconBackgroundColorPortability = Color.fromARGB(255, 8, 43, 95);
 // D I M E N S I O N S
 
 // D e s k t o p
-const double minWidth = 900.0;
+const double minWidth = 1024;
 const double maxWidth = 2600;
 const double maxRangeValue = maxWidth - minWidth;
 

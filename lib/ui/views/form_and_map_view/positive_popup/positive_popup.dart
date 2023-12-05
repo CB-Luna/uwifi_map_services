@@ -15,7 +15,7 @@ class PositivePopup extends StatelessWidget with Popup {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final bool mobile = size.width < 600 ? true : false;
+    final bool mobile = size.width < 1024 ? true : false;
 
     return PointerInterceptor(
       child: AlertDialog(

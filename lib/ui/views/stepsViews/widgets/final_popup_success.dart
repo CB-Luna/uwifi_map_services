@@ -10,7 +10,7 @@ class FinalPopupSuccess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final bool mobile = size.width < 950 ? true : false;
+    final bool mobile = size.width < 1024 ? true : false;
     return AlertDialog(
       clipBehavior: Clip.antiAlias,
       contentPadding: const EdgeInsets.all(0.0),

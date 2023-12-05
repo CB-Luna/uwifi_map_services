@@ -20,7 +20,7 @@ class _Step3ShippingDetailsFormState extends State<Step3ShippingDetailsForm> {
     final stepController = Provider.of<StepsController>(context);
     final validCharacters = RegExp(r'^[a-zA-Z\- ]+$');
     final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
-    final isMobile = MediaQuery.of(context).size.width > 1130 ? true : false;
+    final isMobile = MediaQuery.of(context).size.width > 1024 ? true : false;
 
     return Container(
       width: 1400,
@@ -46,9 +46,10 @@ class _Step3ShippingDetailsFormState extends State<Step3ShippingDetailsForm> {
               color: colorPrimary,
             ),
             child: Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(8.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Flexible(
                     child: Row(
@@ -84,7 +85,7 @@ class _Step3ShippingDetailsFormState extends State<Step3ShippingDetailsForm> {
                   ),
                   Flexible(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Wrap(
                           children: [
@@ -96,19 +97,19 @@ class _Step3ShippingDetailsFormState extends State<Step3ShippingDetailsForm> {
                             Text(
                               "${controller.parsedFNamePD.text} ${controller.parsedLNamePD.text}",
                               style: GoogleFonts.workSans(
-                                  fontSize: 16,
+                                  fontSize: isMobile ? 16 : 25,
                                   color: colorInversePrimary,
                                   fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
                               'Same as Personal Details',
                               style: GoogleFonts.workSans(
-                              fontSize: 12,
+                              fontSize: isMobile ? 12 : 18,
                               color: colorInversePrimary,
                               fontWeight: FontWeight.normal)),
                             Checkbox(

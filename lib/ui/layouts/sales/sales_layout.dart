@@ -76,24 +76,30 @@ class SalesLayout extends StatelessWidget {
                     //Despliegue de Shopping Cart
                     if (!mobile(context)) Column(
                       children: [
-                        const CartWidget(),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: CartWidget(),
+                        ),
                         //CheckBoxes
-                        Container(
-                          width: cartWidth,
-                          height: MediaQuery.of(context).size.height * 0.28,
-                          decoration: BoxDecoration(
-                            color: colorInversePrimary,
-                            boxShadow: const [
-                              BoxShadow(
-                                blurRadius: 15,
-                                spreadRadius: -5,
-                                color: colorBgB,
-                                offset: Offset(0, 15),
-                              )
-                            ],
-                            borderRadius: BorderRadius.circular(40),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: cartWidth,
+                            height: MediaQuery.of(context).size.height * 0.28,
+                            decoration: BoxDecoration(
+                              color: colorInversePrimary,
+                              boxShadow: const [
+                                BoxShadow(
+                                  blurRadius: 15,
+                                  spreadRadius: -5,
+                                  color: colorBgB,
+                                  offset: Offset(0, 15),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                            child:const PromoCheckbox(),
                           ),
-                          child:const PromoCheckbox(),
                         ),
                       ],
                     )

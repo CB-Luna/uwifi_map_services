@@ -21,7 +21,7 @@ class CartWidget extends StatelessWidget {
     final scrollController = ScrollController();
 
     final size = MediaQuery.of(context).size;
-    final bool mobile = size.width < 950 ? true : false;
+    final bool mobile = size.width < 1024 ? true : false;
 
     return cartBehavior.isCartVisible
         ? Visibility(
@@ -31,7 +31,6 @@ class CartWidget extends StatelessWidget {
               curve: Curves.easeInOut,
               width: cartWidth,
               height: MediaQuery.of(context).size.height * 0.5,
-              margin: EdgeInsets.fromLTRB(mobile ? 25 : 0, 25, 25, 25),
               decoration: BoxDecoration(boxShadow: const [
                 BoxShadow(
                   blurRadius: 15,

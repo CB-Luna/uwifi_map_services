@@ -26,7 +26,7 @@ class _FormViewState extends State<FormView> {
 
   @override
   Widget build(BuildContext context) {
-    final bool mobile = MediaQuery.of(context).size.width >= 1130 ? true : false;
+    final bool mobile = MediaQuery.of(context).size.width >= 1024 ? true : false;
     // ignore: undefined_prefixed_name
 
     final tracking = Provider.of<TrackingProvider>(context);

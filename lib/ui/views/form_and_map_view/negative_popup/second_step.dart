@@ -24,7 +24,7 @@ class SecondStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final bool mobile = size.width < 600 ? true : false;
+    final bool mobile = size.width < 1024 ? true : false;
     final controller = Provider.of<PopupController>(context);
     var phoneFormat = MaskTextInputFormatter(
       mask: '(###) ###-####',
