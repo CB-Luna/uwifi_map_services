@@ -20,7 +20,7 @@ class _Step3ShippingDetailsFormState extends State<Step3ShippingDetailsForm> {
     final stepController = Provider.of<StepsController>(context);
     final validCharacters = RegExp(r'^[a-zA-Z\- ]+$');
     final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
-    final isMobile = MediaQuery.of(context).size.width > 1024 ? true : false;
+    final isMobile = MediaQuery.of(context).size.width < 1024 ? true : false;
 
     return Container(
       width: 1400,
@@ -48,35 +48,25 @@ class _Step3ShippingDetailsFormState extends State<Step3ShippingDetailsForm> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Flexible(
-                    child: Row(
+                    child: Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
                           child: Icon(
                             Icons.local_shipping_outlined,
                             color: colorInversePrimary,
-                            size: 40,
+                            size: isMobile ? 25 : 40,
                           ),
                         ),
-                        isMobile ?
-                        const Text(
+                        Text(
                           'Step 3: Shipping Details',
                           style: TextStyle(
                             color: colorInversePrimary,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        )
-                        :
-                        const Text(
-                          'Step 3:\nShipping Details',
-                          style: TextStyle(
-                            color: colorInversePrimary,
-                            fontSize: 18,
+                            fontSize: isMobile ? 14 : 18,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -85,14 +75,14 @@ class _Step3ShippingDetailsFormState extends State<Step3ShippingDetailsForm> {
                   ),
                   Flexible(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Wrap(
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.person_outlined,
                               color: colorInversePrimary,
-                              size: 20,
+                              size: isMobile ? 15 : 25,
                             ),
                             Text(
                               "${controller.parsedFNamePD.text} ${controller.parsedLNamePD.text}",
@@ -104,12 +94,12 @@ class _Step3ShippingDetailsFormState extends State<Step3ShippingDetailsForm> {
                           ],
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               'Same as Personal Details',
                               style: GoogleFonts.workSans(
-                              fontSize: isMobile ? 12 : 18,
+                              fontSize: isMobile ? 12 : 20,
                               color: colorInversePrimary,
                               fontWeight: FontWeight.normal)),
                             Checkbox(

@@ -85,7 +85,7 @@ class SalesLayout extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
                             width: cartWidth,
-                            height: MediaQuery.of(context).size.height * 0.28,
+                            height: MediaQuery.of(context).size.height * 0.35,
                             decoration: BoxDecoration(
                               color: colorInversePrimary,
                               boxShadow: const [
@@ -98,7 +98,9 @@ class SalesLayout extends StatelessWidget {
                               ],
                               borderRadius: BorderRadius.circular(40),
                             ),
-                            child:const PromoCheckbox(),
+                            child:SingleChildScrollView(
+                              controller: ScrollController(),
+                              child: const PromoCheckbox()),
                           ),
                         ),
                       ],

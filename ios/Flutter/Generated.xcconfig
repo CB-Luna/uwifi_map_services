@@ -1,6 +1,6 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=/Users/carolinaroblero/Documents/development/flutter
-FLUTTER_APPLICATION_PATH=/Users/carolinaroblero/Projects/uwifi_map_services
+FLUTTER_ROOT=/Users/uzzie/Development/flutter
+FLUTTER_APPLICATION_PATH=/Users/uzzie/Documents/Trabajo/UWIFI/uwifi_map_services
 COCOAPODS_PARALLEL_CODE_SIGN=true
 FLUTTER_TARGET=lib/main.dart
 FLUTTER_BUILD_DIR=build

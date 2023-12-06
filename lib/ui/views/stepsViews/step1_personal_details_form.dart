@@ -28,15 +28,14 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
     final controller = Provider.of<CustomerShippingInfo>(context);
     final validCharacters = RegExp(r'^[a-zA-Z\- ]+$');
     final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
-    final GlobalKey<FormState> formKey1 = GlobalKey<FormState>();
-    final GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     // final zcode = widget.zipcode.toString();
     var phoneFormat = MaskTextInputFormatter(
       mask: '(###) ###-####',
       filter: {'#': RegExp(r'[0-9]')},
       type: MaskAutoCompletionType.lazy,
     );
-    final isMobile = MediaQuery.of(context).size.width > 1024 ? true : false;
+    final isMobile = MediaQuery.of(context).size.width < 1024 ? true : false;
 
     
 
@@ -44,7 +43,7 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
       children: [
         Container(
           width: 1400,
-          height: 250,
+          height: 260,
           decoration: BoxDecoration(
             color: colorInversePrimary,
             boxShadow: const [
@@ -71,31 +70,22 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Flexible(
-                        child: Row(
+                        child: Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
-                            const Padding(
-                              padding: EdgeInsets.all(8.0),
+                            Padding(
+                              padding: const EdgeInsets.all(5.0),
                               child: Icon(
                                 Icons.location_history_outlined,
                                 color: colorInversePrimary,
-                                size: 40,
+                                size: isMobile ? 25 : 40,
                               ),
                             ),
-                            isMobile ?
-                            const Text(
+                            Text(
                               'Step 1: Personal Details',
                               style: TextStyle(
                                 color: colorInversePrimary,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            )
-                            :
-                            const Text(
-                              'Step 1:\nPersonal Details',
-                              style: TextStyle(
-                                color: colorInversePrimary,
-                                fontSize: 18,
+                                fontSize: isMobile ? 14 : 18,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
@@ -103,36 +93,44 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                         ),
                       ),
                       Flexible(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Text(
+                          "Service is Available!",
+                          style: GoogleFonts.workSans(
+                              fontSize: isMobile ? 18 : 25,
+                              color: colorInversePrimary,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Flexible(
+                        child: Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
-                            Wrap(
-                              children: [
-                                const Icon(
-                                  Icons.location_pin,
-                                  color: colorInversePrimary,
-                                  size: 20,
-                                ),
-                                Text(
-                                  "Current Location",
-                                  style: GoogleFonts.workSans(
-                                      fontSize: 16,
-                                      color: colorInversePrimary,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                            Text(
-                              "${controller.parsedAddress1PD.text
-                              }, ${controller.parsedAddress2PD.text}\n${
-                                controller.parsedCityPD.text} ${
-                                controller.parsedStatePD.text}\n${
-                                controller.parsedZipcodePD.text}",
-                              style: GoogleFonts.workSans(
-                                  fontSize: 12,
-                                  color: colorInversePrimary,
-                                  fontWeight: FontWeight.normal),
-                              maxLines: 3,
+                            const Icon(
+                                Icons.location_pin,
+                                color: colorInversePrimary,
+                                size: 20,
+                              ),
+                              Text(
+                                "Current\nLocation",
+                                style: GoogleFonts.workSans(
+                                    fontSize: isMobile ? 12 : 16,
+                                    color: colorInversePrimary,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Text(
+                                "${controller.parsedAddress1PD.text
+                                }, ${controller.parsedAddress2PD.text}\n${
+                                  controller.parsedCityPD.text} ${
+                                  controller.parsedStatePD.text}\n${
+                                  controller.parsedZipcodePD.text}",
+                                style: GoogleFonts.workSans(
+                                    fontSize: isMobile ? 10 : 12,
+                                    color: colorInversePrimary,
+                                    fontWeight: FontWeight.normal),
+                                maxLines: 3,
+                              ),
                             ),
                           ],
                         ),
@@ -352,31 +350,22 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Flexible(
-                          child: Row(
+                          child: Wrap(
+                            crossAxisAlignment: WrapCrossAlignment.center,
                             children: [
-                              const Padding(
-                                padding: EdgeInsets.all(8.0),
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
                                 child: Icon(
                                   Icons.add_card_outlined,
                                   color: colorInversePrimary,
-                                  size: 40,
+                                  size: isMobile ? 25 : 40,
                                 ),
                               ),
-                              isMobile ?
-                              const Text(
+                              Text(
                                 'Step 2: Card Information',
                                 style: TextStyle(
                                   color: colorInversePrimary,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              )
-                              :
-                              const Text(
-                                'Step 2:\nCard Information',
-                                style: TextStyle(
-                                  color: colorInversePrimary,
-                                  fontSize: 18,
+                                  fontSize: isMobile ? 14 : 18,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
@@ -387,144 +376,73 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                     ),
                   ),
                 ),
-                //  (MediaQuery.of(context).size.width > 1130) ?
-                Row(
-                  children: [
-                    //Tarjeta
-                    CreditCardWidget(
-                        width: 400,
-                        height: 200,
-                        key: formKey1,
-                        cardBgColor: colorPrimary,
-                        cardNumber: number.text,
-                        expiryDate: date.text,
-                        cardHolderName: cardName.text,
-                        cvvCode: ccv.text,
-                        isHolderNameVisible: true,
-                        showBackView: isCvvFocused,
-                        onCreditCardWidgetChange:
-                            (CreditCardBrand creditCardBrand) {}),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Form(
-                          child: Container(),
+                Flexible(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 30),
+                    child: Row(
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          child: CreditCardWidget(
+                            height: 200,
+                            cardBgColor: colorPrimary,
+                            cardNumber: number.text,
+                            expiryDate: date.text,
+                            cardHolderName: cardName.text,
+                            cvvCode: ccv.text,
+                            isHolderNameVisible: true,
+                            showBackView: isCvvFocused,
+                            onCreditCardWidgetChange:
+                                (CreditCardBrand creditCardBrand) {}),
                         ),
-                        // CreditCardForm(
-                        //   formKey: formKey2,
-                        //   obscureCvv: true,
-                        //   cardNumber: number.text,
-                        //   expiryDate: date.text,
-                        //   cardHolderName: cardName.text,
-                        //   cvvCode: ccv.text,
-                        //   isHolderNameVisible: true,
-                        //   isCardNumberVisible: true,
-                        //   isExpiryDateVisible: true,
-                        //   inputConfiguration: InputConfiguration(
-                        //     cardNumberDecoration: CustomInputs()
-                        //         .formInputDecoration(
-                        //             label: 'Number*',
-                        //             icon: Icons.credit_card_outlined,
-                        //             maxHeight: 60),
-                        //     expiryDateDecoration: CustomInputs()
-                        //         .formInputDecoration(
-                        //             label: 'Expiry Date*',
-                        //             icon: Icons.calendar_month_outlined,
-                        //             maxHeight: 60),
-                        //     cvvCodeDecoration: CustomInputs()
-                        //         .formInputDecoration(
-                        //             label: 'CVV**',
-                        //             icon: Icons.lock_outlined,
-                        //             maxHeight: 60),
-                        //     cardHolderDecoration: CustomInputs()
-                        //         .formInputDecoration(
-                        //             label: 'Card Holder*',
-                        //             icon: Icons.person,
-                        //             maxHeight: 60),
-                        //   ),
-                        //   onCreditCardModelChange: (creditCardModel) {
-                        //     setState(() {
-                        //       number.text =
-                        //           creditCardModel.cardNumber;
-                        //       date.text = creditCardModel.expiryDate;
-                        //       cardName.text =
-                        //           creditCardModel.cardHolderName;
-                        //       ccv.text = creditCardModel.cvvCode;
-                        //       isCvvFocused =
-                        //           creditCardModel.isCvvFocused;
-                        //     });
-                        //   },
-                        // ),
-                      ),
-                    )
-                  ],
-                )
-                // : Column(
-                //   children: [
-                //     CreditCardWidget(
-                //         width: 400,
-                //         height: 200,
-                //         key: formKey,
-                //         enableFloatingCard: true,
-                //         cardBgColor: colorPrimary,
-                //         cardNumber: number.text,
-                //         expiryDate: date.text,
-                //         cardHolderName: cardName.text,
-                //         cvvCode: ccv.text,
-                //         isHolderNameVisible: true,
-                //         showBackView: isCvvFocused,
-                //         onCreditCardWidgetChange:
-                //             (CreditCardBrand creditCardBrand) {}),
-                //     Expanded(
-                //       child: SingleChildScrollView(
-                //         child: CreditCardForm(
-                //           formKey: formKey,
-                //           obscureCvv: true,
-                //           cardNumber: number.text,
-                //           expiryDate: date.text,
-                //           cardHolderName: cardName.text,
-                //           cvvCode: ccv.text,
-                //           isHolderNameVisible: true,
-                //           isCardNumberVisible: true,
-                //           isExpiryDateVisible: true,
-                //           inputConfiguration: InputConfiguration(
-                //             cardNumberDecoration: CustomInputs()
-                //                 .formInputDecoration(
-                //                     label: 'Number*',
-                //                     icon: Icons.credit_card_outlined,
-                //                     maxHeight: 60),
-                //             expiryDateDecoration: CustomInputs()
-                //                 .formInputDecoration(
-                //                     label: 'Expiry Date*',
-                //                     icon: Icons.calendar_month_outlined,
-                //                     maxHeight: 60),
-                //             cvvCodeDecoration: CustomInputs()
-                //                 .formInputDecoration(
-                //                     label: 'CVV**',
-                //                     icon: Icons.lock_outlined,
-                //                     maxHeight: 60),
-                //             cardHolderDecoration: CustomInputs()
-                //                 .formInputDecoration(
-                //                     label: 'Card Holder*',
-                //                     icon: Icons.person,
-                //                     maxHeight: 60),
-                //           ),
-                //           onCreditCardModelChange: (creditCardModel) {
-                //             setState(() {
-                //               number.text =
-                //                   creditCardModel.cardNumber;
-                //               date.text = creditCardModel.expiryDate;
-                //               cardName.text =
-                //                   creditCardModel.cardHolderName;
-                //               ccv.text = creditCardModel.cvvCode;
-                //               isCvvFocused =
-                //                   creditCardModel.isCvvFocused;
-                //             });
-                //           },
-                //         ),
-                //       ),
-                //     )
-                //   ],
-                // ),
+                        Expanded(
+                          flex: 2,
+                          child: CreditCardForm(
+                            formKey: formKey,
+                            obscureCvv: true,
+                            cardNumber: controller.number.text,
+                            expiryDate: controller.date.text,
+                            cardHolderName: controller.cardName.text,
+                            cvvCode: controller.ccv.text,
+                            isHolderNameVisible: true,
+                            isCardNumberVisible: true,
+                            isExpiryDateVisible: true,
+                            cardNumberDecoration: CustomInputs()
+                            .formInputDecoration(
+                                label: 'Number*',
+                                icon: Icons.credit_card_outlined,
+                                maxHeight: 60),
+                            expiryDateDecoration: CustomInputs()
+                            .formInputDecoration(
+                                label: 'Expiry Date*',
+                                icon: Icons.calendar_month_outlined,
+                                maxHeight: 60),
+                            cvvCodeDecoration: CustomInputs()
+                            .formInputDecoration(
+                                label: 'CVV*',
+                                icon: Icons.lock_outlined,
+                                maxHeight: 60),
+                            cardHolderDecoration: CustomInputs()
+                            .formInputDecoration(
+                                label: 'Card Holder*',
+                                icon: Icons.person,
+                                maxHeight: 60),
+                            onCreditCardModelChange: (creditCardModel) {
+                                controller.number.text =
+                                    creditCardModel.cardNumber;
+                                controller.date.text = creditCardModel.expiryDate;
+                                controller.cardName.text =
+                                    creditCardModel.cardHolderName;
+                                controller.ccv.text = creditCardModel.cvvCode;
+                            }, 
+                            themeColor: colorPrimary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ]),
         ),
       ],

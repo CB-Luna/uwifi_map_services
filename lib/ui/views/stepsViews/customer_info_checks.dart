@@ -20,10 +20,8 @@ class PromoCheckboxState extends State<PromoCheckbox> {
     final customerController =
         Provider.of<CustomerInfoProvider>(context, listen: false);
     return Padding(
-      padding: const EdgeInsets.symmetric(
-                            vertical: 15.0, horizontal: 25),
+      padding: const EdgeInsets.all(15),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         mainAxisSize: MainAxisSize.min,
         children: [
           Row(
@@ -32,7 +30,7 @@ class PromoCheckboxState extends State<PromoCheckbox> {
                 child: Text(
                   'I would like to receive promotional messages from UWIFI by E-mail. You can unsubscribe at any time.',
                   style: GoogleFonts.workSans(
-                  fontSize: 12,
+                  fontSize: 15,
                   color: colorPrimary,
                   fontWeight: FontWeight.normal)),
               ),
@@ -57,7 +55,7 @@ class PromoCheckboxState extends State<PromoCheckbox> {
                 child: Text(
                   'I would like to receive promotional messages from UWIFI by SMS.\n\n*Message and data rates may apply to receiving these messages.\n\n*Reply with STOP at any time to opt-out from future messages.',
                   style: GoogleFonts.workSans(
-                  fontSize: 12,
+                  fontSize: 15,
                   color: colorPrimary,
                   fontWeight: FontWeight.normal)),
               ),

@@ -26,7 +26,7 @@ class _FormViewState extends State<FormView> {
 
   @override
   Widget build(BuildContext context) {
-    final bool mobile = MediaQuery.of(context).size.width >= 1024 ? true : false;
+    final bool mobile = MediaQuery.of(context).size.width >= 1130 ? true : false;
     // ignore: undefined_prefixed_name
 
     final tracking = Provider.of<TrackingProvider>(context);
@@ -244,7 +244,7 @@ class _FormViewState extends State<FormView> {
                                   controller.changeLocation(location.position);
                                 }
 
-                                // ignore: use_build_context_synchronously
+                                if(!mounted) return;
                                 await widget.showPopup(controller, context);
                                 customerShippingInfoProvider.parsedAddress1PD.text =
                                     controller.street;
@@ -266,14 +266,10 @@ class _FormViewState extends State<FormView> {
                                     controller.state;
                                 customerShippingInfoProvider.locatizationSD = 
                                     controller.currentLocation;
-                                var customer = controller.fillCustomerInfo();
                                 tracking.setOrigin = controller.origin;
-                                if (!(controller.customerRep != '')) {
-                                  tracking.recordTrack(customerInfo: customer);
-                                }
                               }
                             }
-                            // ignore: use_build_context_synchronously
+                            if(!mounted) return;
                             FocusScope.of(context).requestFocus(FocusNode());
                           },
                           text: 'Check for services',
