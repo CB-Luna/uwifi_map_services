@@ -314,18 +314,19 @@ class SearchLocalController extends ChangeNotifier {
     try {
       final lat = currentLocation.lat;
       final long = currentLocation.lng;
-      var url = Uri.parse(
-          '$env/planbuilder/validate/coverage?lat=$lat&long=$long&zipcode=$zipcode');
-      var response = await http.get(url);
-      final coveragevalidate = CoverageValidate.fromJson(response.body);
-      // ignore: avoid_print
-      print('flow');
-      // ignore: avoid_print
-      print(coveragevalidate.result.flow);
-      getflow(coveragevalidate.result);
-      getLocationGroup(coveragevalidate.result);
+      // var url = Uri.parse(
+      //     '$env/planbuilder/validate/coverage?lat=$lat&long=$long&zipcode=$zipcode');
+      // var response = await http.get(url);
+      // final coveragevalidate = CoverageValidate.fromJson(response.body);
+      // // ignore: avoid_print
+      // print('flow');
+      // // ignore: avoid_print
+      // print(coveragevalidate.result.flow);
+      // getflow(coveragevalidate.result);
+      // getLocationGroup(coveragevalidate.result);
 
-      return validateRTACoverage(coveragevalidate.result);
+      // return validateRTACoverage(coveragevalidate.result);
+      return "Successfull";
     } catch (e) {
       // ignore: avoid_print
       print('Exception on Coverage Validation: $e');

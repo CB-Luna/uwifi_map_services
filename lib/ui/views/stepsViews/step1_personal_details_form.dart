@@ -28,7 +28,6 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
     final controller = Provider.of<CustomerShippingInfo>(context);
     final validCharacters = RegExp(r'^[a-zA-Z\- ]+$');
     final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     // final zcode = widget.zipcode.toString();
     var phoneFormat = MaskTextInputFormatter(
       mask: '(###) ###-####',
@@ -386,28 +385,34 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                           flex: 1,
                           child: CreditCardWidget(
                             height: 200,
-                            cardBgColor: colorPrimary,
-                            cardNumber: number.text,
-                            expiryDate: date.text,
-                            cardHolderName: cardName.text,
-                            cvvCode: ccv.text,
+                            width: 400,
+                            cardBgColor: colorSecondary,
+                            cardNumber: controller.number.text,
+                            expiryDate: controller.date.text,
+                            cardHolderName: controller.cardName.text,
+                            cvvCode: controller.cvv.text,
                             isHolderNameVisible: true,
                             showBackView: isCvvFocused,
                             onCreditCardWidgetChange:
-                                (CreditCardBrand creditCardBrand) {}),
+                                (CreditCardBrand creditCardBrand) {
+                                }),
                         ),
                         Expanded(
                           flex: 2,
                           child: CreditCardForm(
-                            formKey: formKey,
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            formKey: controller.formKeyCC,
                             obscureCvv: true,
                             cardNumber: controller.number.text,
                             expiryDate: controller.date.text,
                             cardHolderName: controller.cardName.text,
-                            cvvCode: controller.ccv.text,
+                            cvvCode: controller.cvv.text,
                             isHolderNameVisible: true,
                             isCardNumberVisible: true,
                             isExpiryDateVisible: true,
+                            numberValidationMessage: "Please enter a valid number",
+                            dateValidationMessage: "Please enter a valid date",
+                            cvvValidationMessage: "Please enter a valid CVV",
                             cardNumberDecoration: CustomInputs()
                             .formInputDecoration(
                                 label: 'Number*',
@@ -429,12 +434,7 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                                 icon: Icons.person,
                                 maxHeight: 60),
                             onCreditCardModelChange: (creditCardModel) {
-                                controller.number.text =
-                                    creditCardModel.cardNumber;
-                                controller.date.text = creditCardModel.expiryDate;
-                                controller.cardName.text =
-                                    creditCardModel.cardHolderName;
-                                controller.ccv.text = creditCardModel.cvvCode;
+                                controller.onCreditCardModelChange(creditCardModel);
                             }, 
                             themeColor: colorPrimary,
                           ),

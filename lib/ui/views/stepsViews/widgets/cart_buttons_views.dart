@@ -28,8 +28,10 @@ styledButton(context) {
           isVisible: true,
           buttonText: "Save & Finish",
           function: () {
-            if (controllerCustomer.formValidation() && stepsController.formValidation()) {
-              finalPressed(context, controllerCustomer);
+            bool boolPD = controllerCustomer.formValidationPD();
+            bool boolCC = controllerCustomer.formValidationCC();
+            if (boolPD && stepsController.formValidation() && boolCC) {
+              // finalPressed(context, controllerCustomer);
             }
           },
           cartContains: cartController.products.isNotEmpty);

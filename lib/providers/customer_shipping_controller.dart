@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:google_maps/google_maps.dart';
 
 class CustomerShippingInfo with ChangeNotifier {
@@ -9,6 +10,7 @@ class CustomerShippingInfo with ChangeNotifier {
 
   // Personal Details
   GlobalKey<FormState> formKeyPD = GlobalKey<FormState>();
+  GlobalKey<FormState> formKeyCC = GlobalKey<FormState>();
   final TextEditingController parsedFNamePD = TextEditingController(text: "");
   final TextEditingController parsedLNamePD = TextEditingController(text: "");
   final TextEditingController parsedPhonePD = TextEditingController(text: "");
@@ -34,9 +36,14 @@ class CustomerShippingInfo with ChangeNotifier {
 
   LatLng? locatizationSD;
 
-  bool formValidation() {
+  bool formValidationPD() {
     return (formKeyPD.currentState!.validate()) ? true : false;
   }
+
+  bool formValidationCC() {
+    return (formKeyCC.currentState!.validate()) ? true : false;
+  }
+
   void activeNotifyListeners() {
     notifyListeners();
   }
@@ -71,15 +78,19 @@ class CustomerShippingInfo with ChangeNotifier {
 
   //Card Variables
   TextEditingController number = TextEditingController(text:"");
-  TextEditingController ccv = TextEditingController(text:"");
+  TextEditingController cvv = TextEditingController(text:"");
   TextEditingController date = TextEditingController(text:"");
   TextEditingController cardName = TextEditingController(text:"");
   bool isCvvFocused = false;
 
-  void onCreditCardModelChange() {
+  void onCreditCardModelChange(CreditCardModel creditCardModel) {
+    number.text = creditCardModel.cardNumber;
+    date.text = creditCardModel.expiryDate;
+    cardName.text = creditCardModel.cardHolderName;
+    cvv.text = creditCardModel.cvvCode;
+    isCvvFocused = creditCardModel.isCvvFocused;
     notifyListeners();
   }
-
   
 
   

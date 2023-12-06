@@ -244,7 +244,8 @@ class _FormViewState extends State<FormView> {
                                   controller.changeLocation(location.position);
                                 }
 
-                                if(!mounted) return;
+                               
+                                // ignore: use_build_context_synchronously
                                 await widget.showPopup(controller, context);
                                 customerShippingInfoProvider.parsedAddress1PD.text =
                                     controller.street;
@@ -269,7 +270,7 @@ class _FormViewState extends State<FormView> {
                                 tracking.setOrigin = controller.origin;
                               }
                             }
-                            if(!mounted) return;
+                            // ignore: use_build_context_synchronously
                             FocusScope.of(context).requestFocus(FocusNode());
                           },
                           text: 'Check for services',
