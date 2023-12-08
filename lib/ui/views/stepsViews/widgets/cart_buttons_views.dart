@@ -31,7 +31,7 @@ styledButton(context) {
             bool boolPD = controllerCustomer.formValidationPD();
             bool boolCC = controllerCustomer.formValidationCC();
             if (boolPD && stepsController.formValidation() && boolCC) {
-              // finalPressed(context, controllerCustomer);
+              finalPressed(context, controllerCustomer);
             }
           },
           cartContains: cartController.products.isNotEmpty);

@@ -6,6 +6,7 @@ import 'package:google_maps/google_maps.dart' as LatLng;
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/classes/home_page.dart';
 import 'package:uwifi_map_services/data/constants.dart';
+import 'package:uwifi_map_services/providers/cart_controller.dart';
 import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
 import 'package:uwifi_map_services/providers/search_controller.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
@@ -31,6 +32,7 @@ class _FormViewState extends State<FormView> {
 
     final tracking = Provider.of<TrackingProvider>(context);
     final customerShippingInfoProvider = Provider.of<CustomerShippingInfo>(context);
+    final cartController = Provider.of<Cart>(context);
 
     return Builder(
       builder: (context) {
@@ -62,7 +64,7 @@ class _FormViewState extends State<FormView> {
                               controller.fillCustomerInfo();
                               tracking.setOrigin = controller.origin;
                               // ignore: use_build_context_synchronously
-                              await widget.showPopup(controller, context);
+                              await widget.showPopup(controller, tracking, cartController, context);
                             }
                           });
 
@@ -244,9 +246,6 @@ class _FormViewState extends State<FormView> {
                                   controller.changeLocation(location.position);
                                 }
 
-                               
-                                // ignore: use_build_context_synchronously
-                                await widget.showPopup(controller, context);
                                 customerShippingInfoProvider.parsedAddress1PD.text =
                                     controller.street;
                                 customerShippingInfoProvider.parsedCityPD.text =
@@ -268,8 +267,12 @@ class _FormViewState extends State<FormView> {
                                 customerShippingInfoProvider.locatizationSD = 
                                     controller.currentLocation;
                                 tracking.setOrigin = controller.origin;
+                                
+                                // ignore: use_build_context_synchronously
+                                await widget.showPopup(controller, tracking, cartController, context);
                               }
                             }
+                            
                             // ignore: use_build_context_synchronously
                             FocusScope.of(context).requestFocus(FocusNode());
                           },

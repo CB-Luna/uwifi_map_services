@@ -58,7 +58,7 @@ class FinalPopupSuccess extends StatelessWidget {
                   backgroundColor: colorSecondary,
                   minimumSize: const Size.fromHeight(50),
                 ),
-                onPressed: () => Restart.restartApp(webOrigin: '/'),
+                onPressed: () => Restart.restartApp(webOrigin: '/uwifi_map_services-build/'),
                 child: Text(
                   'Close',
                   style: GoogleFonts.workSans(
