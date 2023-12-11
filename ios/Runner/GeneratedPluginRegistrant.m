@@ -24,6 +24,12 @@
 @import file_picker;
 #endif
 
+#if __has_include(<flutter_credit_card/FlutterCreditCardPlugin.h>)
+#import <flutter_credit_card/FlutterCreditCardPlugin.h>
+#else
+@import flutter_credit_card;
+#endif
+
 #if __has_include(<open_document/OpenDocumentPlugin.h>)
 #import <open_document/OpenDocumentPlugin.h>
 #else
@@ -96,6 +102,7 @@
   [AppLinksPlugin registerWithRegistrar:[registry registrarForPlugin:@"AppLinksPlugin"]];
   [CameraPlugin registerWithRegistrar:[registry registrarForPlugin:@"CameraPlugin"]];
   [FilePickerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FilePickerPlugin"]];
+  [FlutterCreditCardPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterCreditCardPlugin"]];
   [OpenDocumentPlugin registerWithRegistrar:[registry registrarForPlugin:@"OpenDocumentPlugin"]];
   [OpenFilePlugin registerWithRegistrar:[registry registrarForPlugin:@"OpenFilePlugin"]];
   [PathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"PathProviderPlugin"]];

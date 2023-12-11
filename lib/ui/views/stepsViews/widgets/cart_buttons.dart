@@ -32,8 +32,6 @@ class CartButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final stepsController = Provider.of<StepsController>(context);
-    final customerController = Provider.of<CustomerInfoProvider>(context);
-    final customerRep = customerController.customerInfo.customerRep;
 
     final tracking = Provider.of<track.TrackingProvider>(context);
     final cartController = Provider.of<Cart>(context);
@@ -43,7 +41,7 @@ class CartButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Visibility(
-          visible: isBackPossible(customerRep, stepsController),
+          visible: isBackPossible(stepsController),
           child: Flexible(
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -54,16 +52,16 @@ class CartButtons extends StatelessWidget {
                   ),
                   minimumSize: const Size.fromHeight(50)),
               onPressed: () {
-                if (customerController.customerInfo.customerRep != "") {
-                  stepsController.repCurrentStep =
-                      RepViews.values[stepsController.repCurrentStep.index - 1];
-                } else {
+                // if (customerController.customerInfo.customerRep != "") {
+                //   stepsController.repCurrentStep =
+                //       RepViews.values[stepsController.repCurrentStep.index - 1];
+                // } else {
                   stepsController.currentStep =
                       Views.values[stepsController.currentStep.index - 1];
 
                   tracking.setView =
                       track.Views.values[tracking.currentView.index - 1];
-                }
+                // }
                 stepsController.changeStep(stepsController.currentStep);
               },
               child: Text("Back",
@@ -77,7 +75,7 @@ class CartButtons extends StatelessWidget {
           ),
         ),
         SizedBox(
-            width: isVisible && isBackPossible(customerRep, stepsController)
+            width: isVisible && isBackPossible(stepsController)
                 ? 15.0
                 : 0.0),
         Visibility(
@@ -101,11 +99,6 @@ class CartButtons extends StatelessWidget {
                   else
                     {
                       tracking.changeViewIndex(),
-                      tracking.recordTrack(
-                          services: cartController.products,
-                          firstName: customer.firstName,
-                          lastName: customer.lastName,
-                          email: customer.custEmail)
                     },
                   stepsController.validateStep(cartContains, context),
                   if (function != null) function!()
@@ -125,17 +118,10 @@ class CartButtons extends StatelessWidget {
     );
   }
 
-  isBackPossible(customerRep, stepsController) {
+  isBackPossible(stepsController) {
     bool isPossible = false;
-    if (customerRep != "") {
-      isPossible = stepsController.repCurrentStep == RepViews.customerInfoView
-          ? false
-          : true;
-    } else {
       isPossible =
           stepsController.currentStep == Views.customerInfoView ? false : true;
-    }
-
     return isPossible;
   }
 }

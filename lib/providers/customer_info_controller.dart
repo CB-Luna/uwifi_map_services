@@ -72,6 +72,11 @@ class CustomerInfoProvider with ChangeNotifier {
   final TextEditingController engageSelect = TextEditingController();
   CustomerInfo customerInfo;
 
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  bool formValidation() {
+    return (formKey.currentState!.validate()) ? true : false;
+  }
+
   CustomerInfoProvider(this.origin, {required this.customerInfo}) {
     // print('controller Customer created');
     //initialize

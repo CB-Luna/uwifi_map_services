@@ -23,7 +23,7 @@ class CustomTitleR extends StatelessWidget {
           ConstrainedBox(
             constraints: const BoxConstraints(
               maxWidth: 50,
-              maxHeight: 50,
+              maxHeight: 55,
             ),
             child: const Image(
               fit: BoxFit.contain,
