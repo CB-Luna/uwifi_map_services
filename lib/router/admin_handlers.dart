@@ -85,10 +85,10 @@ class AdminHandlers {
     final args = context?.settings?.arguments as CustomerInfo?;
     if (args != null) {
       return SalesLayout(
-        customerInfo: args,
       );
     } else {
-      return const AuthLayout();
+      // return const AuthLayout();
+      return SalesLayout();
     }
   });
 
@@ -100,7 +100,6 @@ class AdminHandlers {
     }
     if (args != null) {
       return SalesLayout(
-        customerInfo: args,
       );
     } else {
       return const AuthLayout();
@@ -124,8 +123,6 @@ class AdminHandlers {
 }
 
 setOrigin(context, origin) {
-  final tracking = Provider.of<TrackingProvider>(context!, listen: false);
-  tracking.recordTrack(initialOrigin: origin, view: "CoverageMapLanding");
 
   if (origin.contains("social")) {
     js.context.callMethod('fbq', ['track', 'PageView']);

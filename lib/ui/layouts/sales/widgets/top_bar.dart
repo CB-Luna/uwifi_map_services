@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 
@@ -13,10 +12,8 @@ import '../../../views/stepsViews/widgets/custom_stepper.dart';
 class TopBar extends StatelessWidget {
   const TopBar({
     Key? key,
-    required this.custAddress,
   }) : super(key: key);
 
-  final String custAddress;
 
   @override
   Widget build(BuildContext context) {
@@ -67,8 +64,6 @@ class TopBar extends StatelessWidget {
               color: colorBgWhite,
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
-                Navigator.pop(context);
-                setDefault();
               },
             ),
           ),

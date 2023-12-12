@@ -5,6 +5,7 @@ import 'package:uwifi_map_services/helpers/constants.dart';
 import 'package:uwifi_map_services/helpers/globals.dart';
 import 'package:uwifi_map_services/providers/cart_controller.dart';
 import 'package:url_strategy/url_strategy.dart';
+import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
 import 'package:uwifi_map_services/router/router.dart';
 import 'package:uwifi_map_services/services/navigation_service.dart';
@@ -45,6 +46,10 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider<Cart>(create: (_) => Cart()),
         //Provider para customer y shipping
         ChangeNotifierProvider(create: (_) => CustomerShippingInfo()),
+        ChangeNotifierProvider<CustomerInfoProvider>(
+          create: (_) => CustomerInfoProvider(
+          ),
+        ),
       ],
       child: const MyApp(),
     );

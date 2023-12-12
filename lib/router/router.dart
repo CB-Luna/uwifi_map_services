@@ -17,7 +17,7 @@ class Flurorouter {
     // Auth Routes
     router.define(
       rootRoute,
-      handler: AdminHandlers.homePage,
+      handler: AdminHandlers.productPage,
       transitionType: TransitionType.none,
     );
 

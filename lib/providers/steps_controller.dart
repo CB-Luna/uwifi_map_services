@@ -37,11 +37,11 @@ class StepsController with ChangeNotifier {
     notifyListeners();
   }
 
-  StepsController(CustomerInfo customer) {
-    _street = customer.street;
-    _state = customer.state;
-    _city = customer.city;
-    _zipcode = customer.zipcode;
+  StepsController() {
+    // _street = customer.street;
+    // _state = customer.state;
+    // _city = customer.city;
+    // _zipcode = customer.zipcode;
     notifyListeners();
   }
 

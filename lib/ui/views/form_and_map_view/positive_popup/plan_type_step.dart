@@ -61,7 +61,6 @@ class PlanTypeStep extends StatelessWidget {
               if (customerInfo != null) {
                 if (!(customerInfo!.customerRep != '')) {
                   tracking.changeViewIndex();
-                  tracking.recordTrack();
                 }
               }
             },

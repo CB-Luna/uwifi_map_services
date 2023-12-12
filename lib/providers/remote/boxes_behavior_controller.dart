@@ -4,9 +4,9 @@ class BoxesBehavior extends ChangeNotifier {
   bool isCartVisible = true;
   bool isPromosListVisible = true;
 
-  BoxesBehavior(bool mobile, isRep) {
+  BoxesBehavior(bool mobile) {
     mobile ? isCartVisible = false : isCartVisible = true;
-    if (mobile || isRep == "") isPromosListVisible = false;
+    if (mobile) isPromosListVisible = false;
     notifyListeners();
   }
 

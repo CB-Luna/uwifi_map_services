@@ -20,7 +20,6 @@ abstract class HomePage {
       cartController.clearAllProducts();
       if (!(customerInfo.customerRep != '')) {
         trackingController.changeViewIndex();
-        trackingController.recordTrack();
       }
       Flurorouter.router.navigateTo(
         context,
@@ -43,7 +42,6 @@ abstract class HomePage {
       cartController.clearAllProducts();
       if (!(customerInfo.customerRep != '')) {
         trackingController.changeViewIndex();
-        trackingController.recordTrack();
       }
       Flurorouter.router.navigateTo(
         context,

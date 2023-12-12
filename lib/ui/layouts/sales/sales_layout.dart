@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'package:uwifi_map_services/classes/customer_info.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 
 import 'package:uwifi_map_services/providers/tracking_provider.dart' as track;
@@ -17,35 +15,26 @@ import 'widgets/navigation_bar_mobile.dart';
 import 'widgets/top_bar.dart';
 
 class SalesLayout extends StatelessWidget {
-  final CustomerInfo customerInfo;
 
   SalesLayout({
     Key? key,
-    required this.customerInfo,
   }) : super(key: key);
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    String? custAddress = "${customerInfo.street}, ${customerInfo.city} ${customerInfo.state} ${customerInfo.zipcode}";
+    // String? custAddress = "${customerInfo.street}, ${customerInfo.city} ${customerInfo.state} ${customerInfo.zipcode}";
 
-    final tracking = Provider.of<track.TrackingProvider>(context);
 
     return MultiProvider(
         providers: [
           ChangeNotifierProvider<StepsController>(
-            create: (_) => StepsController(customerInfo),
-          ),
-          ChangeNotifierProvider<CustomerInfoProvider>(
-            create: (_) => CustomerInfoProvider(
-              tracking.origin,
-              customerInfo: customerInfo,
-            ),
+            create: (_) => StepsController(),
           ),
           ChangeNotifierProvider<BoxesBehavior>(
             create: (_) =>
-                BoxesBehavior(mobile(context), customerInfo.customerRep),
+                BoxesBehavior(mobile(context)),
           ),
         ],
         builder: (context, child) {
@@ -62,7 +51,7 @@ class SalesLayout extends StatelessWidget {
             body: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                TopBar(custAddress: custAddress),
+                TopBar(),
                 Expanded(
                   child: Row(
                     //Con este parámatro se ajusta la posición del Shopping Cart

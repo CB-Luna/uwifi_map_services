@@ -217,11 +217,6 @@ class SecondStep extends StatelessWidget {
 
                   if (customerInfo != null) {
                     if (!(customerInfo!.customerRep != "")) {
-                      tracking.recordTrack(
-                          view: "NoCoverageSubmit",
-                          firstName: controller.firstName,
-                          lastName: controller.lastName,
-                          email: controller.email);
                     }
                   }
                 }
