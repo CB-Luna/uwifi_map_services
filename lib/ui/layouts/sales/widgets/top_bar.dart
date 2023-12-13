@@ -47,26 +47,6 @@ class TopBar extends StatelessWidget {
         mainAxisSize: onelineDisplay ? MainAxisSize.min : MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            height: 35,
-            width: 35,
-            decoration: BoxDecoration(
-              borderRadius:
-                  const BorderRadius.all(Radius.circular(25.0)),
-              border: Border.all(
-                color: colorBgWhite,
-                width: 2.0,
-              ),
-            ),
-            child: IconButton(
-              padding: const EdgeInsets.all(0),
-              iconSize: 18,
-              color: colorBgWhite,
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () {
-              },
-            ),
-          ),
           const Spacer(),
           StepperWidget(
             width: 50,

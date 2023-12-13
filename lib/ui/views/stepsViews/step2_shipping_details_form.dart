@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
+import 'package:uwifi_map_services/providers/customer_pd_sd_cc_provider.dart';
 import 'package:uwifi_map_services/providers/steps_controller.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
@@ -16,7 +15,7 @@ class Step2ShippingDetailsForm extends StatefulWidget {
 class _Step2ShippingDetailsFormState extends State<Step2ShippingDetailsForm> {
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<CustomerShippingInfo>(context);
+    final customerPDSDCCController = Provider.of<CustomerPDSDCCProvider>(context);
     final stepController = Provider.of<StepsController>(context);
     final validCharacters = RegExp(r'^[a-zA-Z\- ]+$');
     final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
@@ -92,7 +91,7 @@ class _Step2ShippingDetailsFormState extends State<Step2ShippingDetailsForm> {
                         Expanded(
                           child: TextFormField(
                             /// VARIABLE STORAGE
-                            controller: controller.parsedAddress1SD,
+                            controller: customerPDSDCCController.parsedAddress1SD,
       
                             ///VALIDATION TRIGGER
                             // initialValue: dir,
@@ -120,7 +119,7 @@ class _Step2ShippingDetailsFormState extends State<Step2ShippingDetailsForm> {
                         Expanded(
                           child: TextFormField(
                             /// VARIABLE STORAGE
-                            controller: controller.parsedAddress2SD,
+                            controller: customerPDSDCCController.parsedAddress2SD,
       
                             ///VALIDATION TRIGGER
                             // initialValue: dir,
@@ -140,7 +139,7 @@ class _Step2ShippingDetailsFormState extends State<Step2ShippingDetailsForm> {
                         Expanded(
                           child: TextFormField(
                             /// VARIABLE STORAGE
-                            controller: controller.parsedZipcodeSD,
+                            controller: customerPDSDCCController.parsedZipcodeSD,
       
                             ///VALIDATION TRIGGER
                             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -174,7 +173,7 @@ class _Step2ShippingDetailsFormState extends State<Step2ShippingDetailsForm> {
                         Expanded(
                           child: TextFormField(
                             /// VARIABLE STORAGE
-                            controller: controller.parsedCitySD,
+                            controller: customerPDSDCCController.parsedCitySD,
       
                             ///VALIDATION TRIGGER
                             // initialValue: dir,
@@ -201,7 +200,7 @@ class _Step2ShippingDetailsFormState extends State<Step2ShippingDetailsForm> {
                         Expanded(
                           child: TextFormField(
                             /// VARIABLE STORAGE
-                            controller: controller.parsedStateSD,
+                            controller: customerPDSDCCController.parsedStateSD,
       
                             ///VALIDATION TRIGGER
                             // initialValue: dir,

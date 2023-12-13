@@ -3,7 +3,7 @@ import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
-import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
+import 'package:uwifi_map_services/providers/customer_pd_sd_cc_provider.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
 
@@ -23,7 +23,7 @@ class _Step3BillingInformationFormState extends State<Step3BillingInformationFor
 
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<CustomerShippingInfo>(context);
+    final customerPDSDCCController = Provider.of<CustomerPDSDCCProvider>(context);
     final customerInfoController = Provider.of<CustomerInfoProvider>(context);
     final validCharacters = RegExp(r'^[a-zA-Z\- ]+$');
     final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
@@ -97,9 +97,9 @@ class _Step3BillingInformationFormState extends State<Step3BillingInformationFor
                                       color: colorBgWhite,
                                       width: 2.0
                                     ),
-                                    value: controller.sameAsPD,
+                                    value: customerPDSDCCController.sameAsPD,
                                     onChanged: (bool? value) {
-                                      controller.changeValuesShippingDetails();
+                                      customerPDSDCCController.changeValuesShippingDetails();
                                     },
                                   ),
                                 ],
@@ -121,10 +121,10 @@ class _Step3BillingInformationFormState extends State<Step3BillingInformationFor
                                 height: 200,
                                 width: 400,
                                 cardBgColor: colorSecondary,
-                                cardNumber: controller.number.text,
-                                expiryDate: controller.date.text,
-                                cardHolderName: controller.cardName.text,
-                                cvvCode: controller.cvv.text,
+                                cardNumber: customerPDSDCCController.number.text,
+                                expiryDate: customerPDSDCCController.date.text,
+                                cardHolderName: customerPDSDCCController.cardName.text,
+                                cvvCode: customerPDSDCCController.cvv.text,
                                 isHolderNameVisible: true,
                                 showBackView: isCvvFocused,
                                 onCreditCardWidgetChange:
@@ -170,7 +170,7 @@ class _Step3BillingInformationFormState extends State<Step3BillingInformationFor
                                                   Expanded(
                                                     child: TextFormField(
                                                       /// VARIABLE STORAGE
-                                                      controller: controller.parsedAddress1PD,
+                                                      controller: customerPDSDCCController.parsedAddress1BD,
                                                                   
                                                       ///VALIDATION TRIGGER
                                                       // initialValue: dir,
@@ -198,7 +198,7 @@ class _Step3BillingInformationFormState extends State<Step3BillingInformationFor
                                                   Expanded(
                                                     child: TextFormField(
                                                       /// VARIABLE STORAGE
-                                                      controller: controller.parsedAddress2PD,
+                                                      controller: customerPDSDCCController.parsedAddress2BD,
                                                                   
                                                       ///VALIDATION TRIGGER
                                                       // initialValue: dir,
@@ -218,7 +218,7 @@ class _Step3BillingInformationFormState extends State<Step3BillingInformationFor
                                                   Expanded(
                                                     child: TextFormField(
                                                       /// VARIABLE STORAGE
-                                                      controller: controller.parsedZipcodePD,
+                                                      controller: customerPDSDCCController.parsedZipcodeBD,
                                                                   
                                                       ///VALIDATION TRIGGER
                                                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -252,7 +252,7 @@ class _Step3BillingInformationFormState extends State<Step3BillingInformationFor
                                                   Expanded(
                                                     child: TextFormField(
                                                       /// VARIABLE STORAGE
-                                                      controller: controller.parsedCityPD,
+                                                      controller: customerPDSDCCController.parsedCityBD,
                                                                   
                                                       ///VALIDATION TRIGGER
                                                       // initialValue: dir,
@@ -279,7 +279,7 @@ class _Step3BillingInformationFormState extends State<Step3BillingInformationFor
                                                   Expanded(
                                                     child: TextFormField(
                                                       /// VARIABLE STORAGE
-                                                      controller: controller.parsedStatePD,
+                                                      controller: customerPDSDCCController.parsedStateBD,
                                                                   
                                                       ///VALIDATION TRIGGER
                                                       // initialValue: dir,
@@ -306,12 +306,12 @@ class _Step3BillingInformationFormState extends State<Step3BillingInformationFor
                                       )),
                                   CreditCardForm(
                                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                                    formKey: controller.formKeyCC,
+                                    formKey: customerPDSDCCController.formKeyCC,
                                     obscureCvv: true,
-                                    cardNumber: controller.number.text,
-                                    expiryDate: controller.date.text,
-                                    cardHolderName: controller.cardName.text,
-                                    cvvCode: controller.cvv.text,
+                                    cardNumber: customerPDSDCCController.number.text,
+                                    expiryDate:customerPDSDCCController.date.text,
+                                    cardHolderName:customerPDSDCCController.cardName.text,
+                                    cvvCode:customerPDSDCCController.cvv.text,
                                     isHolderNameVisible: true,
                                     isCardNumberVisible: true,
                                     isExpiryDateVisible: true,
@@ -341,7 +341,7 @@ class _Step3BillingInformationFormState extends State<Step3BillingInformationFor
                                         maxHeight: 55),
                                     ),
                                     onCreditCardModelChange: (creditCardModel) {
-                                        controller.onCreditCardModelChange(creditCardModel);
+                                        customerPDSDCCController.onCreditCardModelChange(creditCardModel);
                                     }, 
                                   ),
                                 ],

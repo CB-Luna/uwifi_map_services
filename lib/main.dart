@@ -6,7 +6,7 @@ import 'package:uwifi_map_services/helpers/globals.dart';
 import 'package:uwifi_map_services/providers/cart_controller.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
-import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
+import 'package:uwifi_map_services/providers/customer_pd_sd_cc_provider.dart';
 import 'package:uwifi_map_services/router/router.dart';
 import 'package:uwifi_map_services/services/navigation_service.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
@@ -44,8 +44,8 @@ class AppState extends StatelessWidget {
         ),
         //Provider para carrito de compras
         ChangeNotifierProvider<Cart>(create: (_) => Cart()),
-        //Provider para customer y shipping
-        ChangeNotifierProvider(create: (_) => CustomerShippingInfo()),
+        //Provider para customer Personal Details, Shipping Details y Credit Card
+        ChangeNotifierProvider(create: (_) => CustomerPDSDCCProvider()),
         ChangeNotifierProvider<CustomerInfoProvider>(
           create: (_) => CustomerInfoProvider(
           ),

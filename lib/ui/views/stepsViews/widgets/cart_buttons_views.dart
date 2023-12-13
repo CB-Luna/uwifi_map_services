@@ -1,11 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:google_maps/google_maps.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide Provider;
 import 'package:uwifi_map_services/helpers/globals.dart';
-import 'package:uwifi_map_services/providers/customer_shipping_controller.dart';
+import 'package:uwifi_map_services/providers/customer_info_controller.dart';
+import 'package:uwifi_map_services/providers/customer_pd_sd_cc_provider.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/final_popup_fail.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/final_popup_success.dart';
 import '../../../../providers/cart_controller.dart';
@@ -15,8 +13,8 @@ import 'cart_buttons.dart';
 styledButton(context) {
   final cartController = Provider.of<Cart>(context);
   final stepsController = Provider.of<StepsController>(context);
-  final controllerCustomer = Provider.of<CustomerShippingInfo>(context);
-
+  final customerPDSDCCController = Provider.of<CustomerPDSDCCProvider>(context);
+  final customerInfoController = Provider.of<CustomerInfoProvider>(context);
   switch (stepsController.currentStep) {
     //Se controla la leyenda del botón del shopping cart, dependiendo la vista actual del proceso.
     case Views.customerInfoView:
@@ -26,12 +24,14 @@ styledButton(context) {
       return CartButtons(
           opacity: opacity,
           isVisible: true,
-          buttonText: "Save & Finish",
+          buttonText: "Check for Services",
           function: () {
-            bool boolPD = controllerCustomer.formValidationPD();
-            bool boolCC = controllerCustomer.formValidationCC();
-            if (boolPD && stepsController.formValidation() && boolCC) {
-              finalPressed(context, controllerCustomer);
+            bool boolPD = customerPDSDCCController.formValidationPD();
+            bool boolSD = stepsController.formValidation();
+            bool boolACC = customerInfoController.formValidation();
+            bool boolCC = customerPDSDCCController.formValidationCC();
+            if (boolPD && boolSD && boolACC && boolCC) {
+              finalPressed(context, customerPDSDCCController);
             }
           },
           cartContains: cartController.products.isNotEmpty);
@@ -42,34 +42,34 @@ styledButton(context) {
 }
 
 void finalPressed(BuildContext context,
-      CustomerShippingInfo controllerCustomer) async {
+      CustomerPDSDCCProvider customerPDSDCCController) async {
         try {
           dynamic res;
           var json = {
-            "first_name": controllerCustomer.parsedFNamePD.text,
-              "last_name": controllerCustomer.parsedLNamePD.text,
-              "email": controllerCustomer.parsedEmailPD.text,
-              "mobile_phone": controllerCustomer.parsedPhonePD.text,
+            "first_name": customerPDSDCCController.parsedFNamePD.text,
+              "last_name": customerPDSDCCController.parsedLNamePD.text,
+              "email": customerPDSDCCController.parsedEmailPD.text,
+              "mobile_phone": customerPDSDCCController.parsedPhonePD.text,
               "address": [
                   {
-                      "address_1": controllerCustomer.parsedAddress1PD.text,
+                      "address_1": customerPDSDCCController.parsedAddress1SD.text,
                       "address_2": null,
-                      "zipcode": controllerCustomer.parsedZipcodePD.text,
-                      "city": controllerCustomer.parsedCityPD.text,
+                      "zipcode": customerPDSDCCController.parsedZipcodeSD.text,
+                      "city": customerPDSDCCController.parsedCitySD.text,
                       "state_code": "TX",
                       "type": "Physical",
-                      "latitude": controllerCustomer.locatizationPD?.lat.toString(),
-                      "longitude": controllerCustomer.locatizationPD?.lng.toString()
+                      "latitude": "29.87403",
+                      "longitude": "-94.14245"
                   },
                   {
-                      "address_1": controllerCustomer.parsedAddress1SD.text,
+                      "address_1": customerPDSDCCController.parsedAddress1BD.text,
                       "address_2": null,
-                      "zipcode": int.parse(controllerCustomer.parsedZipcodeSD.text),
-                      "city": controllerCustomer.parsedCitySD.text,
+                      "zipcode": int.parse(customerPDSDCCController.parsedZipcodeBD.text),
+                      "city": customerPDSDCCController.parsedCityBD.text,
                       "state_code": "TX",
                       "type": "Billing",
-                      "latitude": controllerCustomer.locatizationSD?.lat.toString(),
-                      "longitude": controllerCustomer.locatizationSD?.lng.toString()
+                      "latitude": "29.87403",
+                      "longitude": "-94.14245"
                   }
               ],
               "services": [
