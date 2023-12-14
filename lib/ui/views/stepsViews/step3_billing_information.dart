@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 import 'package:uwifi_map_services/providers/customer_pd_sd_cc_provider.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
+import 'package:uwifi_map_services/ui/views/stepsViews/widgets/custom_drop_down.dart';
 
 class Step3BillingInformationForm extends StatefulWidget {
   const Step3BillingInformationForm({Key? key}) : super(key: key);
@@ -26,7 +29,12 @@ class _Step3BillingInformationFormState extends State<Step3BillingInformationFor
     final customerPDSDCCController = Provider.of<CustomerPDSDCCProvider>(context);
     final customerInfoController = Provider.of<CustomerInfoProvider>(context);
     final validCharacters = RegExp(r'^[a-zA-Z\- ]+$');
-    final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
+    final zipcodeCharacters = RegExp(r'^[0-9\-() ]+$');
+    var zipcodeFormat = MaskTextInputFormatter(
+      mask: '######',
+      filter: {'#': RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.lazy,
+    );
     final isMobile = MediaQuery.of(context).size.width < 1024 ? true : false;
     return Column(
       children: [
@@ -229,11 +237,16 @@ class _Step3BillingInformationFormState extends State<Step3BillingInformationFor
                                                           icon: Icons.other_houses_outlined,
                                                           maxHeight: 55),
                                                                   
+                                                      inputFormatters: [
+                                                        LengthLimitingTextInputFormatter(5),
+                                                        zipcodeFormat
+                                                      ],
                                                       validator: (value) {
-                                                        return (phoneCharacters.hasMatch(value ?? '') &&
+                                                        return (zipcodeCharacters
+                                                                    .hasMatch(value ?? '') &&
                                                                 value?.length == 5)
                                                             ? null
-                                                            : 'Please enter a valid Zipcode';
+                                                            : 'Please enter a valid zipcode';
                                                       },
                                                       style: const TextStyle(
                                                         color: colorPrimaryDark,
@@ -277,26 +290,18 @@ class _Step3BillingInformationFormState extends State<Step3BillingInformationFor
                                                     width: 15,
                                                   ),
                                                   Expanded(
-                                                    child: TextFormField(
-                                                      /// VARIABLE STORAGE
-                                                      controller: customerPDSDCCController.parsedStateBD,
-                                                                  
-                                                      ///VALIDATION TRIGGER
-                                                      // initialValue: dir,
-                                                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                                                      obscureText: false,
-                                                      keyboardType: TextInputType.phone,
-                                                      decoration: CustomInputs().formInputDecoration(
-                                                          label: 'State*',
-                                                          icon: Icons.house_outlined,
-                                                          maxHeight: 55),
-                                                      style: const TextStyle(
-                                                        color: colorPrimaryDark,
-                                                      ),
-                                                      validator: (value) {
-                                                        return validCharacters.hasMatch(value ?? '')
-                                                            ? null
-                                                            : 'Please enter a State';
+                                                    child: CustomDropDown(
+                                                      maxHeight: 55,
+                                                      icon: Icons.house_outlined,
+                                                      hint: "Select one",
+                                                      label: 'State*',
+                                                      width: double.infinity,
+                                                      list: customerPDSDCCController.stateCodes.values.toList(),
+                                                      dropdownValue: customerPDSDCCController.parsedStateBD.text == "" ? null : 
+                                                        customerPDSDCCController.parsedStateBD.text,
+                                                      onChanged: (newState) {
+                                                        if (newState == null) return;
+                                                        customerPDSDCCController.selectStateUpdateBD(newState);
                                                       },
                                                     ),
                                                   ),

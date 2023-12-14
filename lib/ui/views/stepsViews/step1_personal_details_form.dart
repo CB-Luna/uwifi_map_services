@@ -23,7 +23,7 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
   @override
   Widget build(BuildContext context) {
     final customerPDSDCCController = Provider.of<CustomerPDSDCCProvider>(context);
-    final validCharacters = RegExp(r'^[a-zA-Z\- ]+$');
+    final nombreCharacters = RegExp(r'^(([A-Z]{1}|[ÁÉÍÓÚÑ]{1})[a-zá-ÿ]+[ ]?)+$');
     final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
     // final zcode = widget.zipcode.toString();
     var phoneFormat = MaskTextInputFormatter(
@@ -126,10 +126,9 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                                               maxHeight: 55),
 
                                     validator: (value) {
-                                      return validCharacters
-                                              .hasMatch(value ?? '')
-                                          ? null
-                                          : 'Please enter your name';
+                                        return (nombreCharacters.hasMatch(value ?? ''))
+                                        ? null
+                                        : 'Please enter your name, the name should be capitalized.';
                                     },
                                     style: const TextStyle(
                                       color: colorPrimaryDark,
@@ -156,11 +155,10 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                                               icon: Icons.person_outlined,
                                               maxHeight: 55),
 
-                                    validator: (value) {
-                                      return validCharacters
-                                              .hasMatch(value ?? '')
-                                          ? null
-                                          : 'Please enter your name';
+                                     validator: (value) {
+                                        return (nombreCharacters.hasMatch(value ?? ''))
+                                        ? null
+                                        : 'Please enter your last name, the last name should be capitalized.';
                                     },
                                     style: const TextStyle(
                                       color: colorPrimaryDark,

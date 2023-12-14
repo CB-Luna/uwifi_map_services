@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/providers/customer_pd_sd_cc_provider.dart';
 import 'package:uwifi_map_services/providers/steps_controller.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
+import 'package:uwifi_map_services/ui/views/stepsViews/widgets/custom_drop_down.dart';
 
 class Step2ShippingDetailsForm extends StatefulWidget {
   const Step2ShippingDetailsForm({Key? key}) : super(key: key);
@@ -18,9 +21,13 @@ class _Step2ShippingDetailsFormState extends State<Step2ShippingDetailsForm> {
     final customerPDSDCCController = Provider.of<CustomerPDSDCCProvider>(context);
     final stepController = Provider.of<StepsController>(context);
     final validCharacters = RegExp(r'^[a-zA-Z\- ]+$');
-    final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
+    final zipcodeCharacters = RegExp(r'^[0-9\-() ]+$');
+    var zipcodeFormat = MaskTextInputFormatter(
+      mask: '######',
+      filter: {'#': RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.lazy,
+    );
     final isMobile = MediaQuery.of(context).size.width < 1024 ? true : false;
-
     return Container(
       width: 1400,
       height: 250,
@@ -150,11 +157,16 @@ class _Step2ShippingDetailsFormState extends State<Step2ShippingDetailsForm> {
                                 icon: Icons.other_houses_outlined,
                                 maxHeight: 55),
       
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(5),
+                              zipcodeFormat
+                            ],
                             validator: (value) {
-                              return (phoneCharacters.hasMatch(value ?? '') &&
+                              return (zipcodeCharacters
+                                          .hasMatch(value ?? '') &&
                                       value?.length == 5)
                                   ? null
-                                  : 'Please enter a valid Zipcode';
+                                  : 'Please enter a valid zipcode';
                             },
                             style: const TextStyle(
                               color: colorPrimaryDark,
@@ -198,26 +210,18 @@ class _Step2ShippingDetailsFormState extends State<Step2ShippingDetailsForm> {
                           width: 15,
                         ),
                         Expanded(
-                          child: TextFormField(
-                            /// VARIABLE STORAGE
-                            controller: customerPDSDCCController.parsedStateSD,
-      
-                            ///VALIDATION TRIGGER
-                            // initialValue: dir,
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
-                            obscureText: false,
-                            keyboardType: TextInputType.phone,
-                            decoration: CustomInputs().formInputDecoration(
-                                label: 'State*',
-                                icon: Icons.house_outlined,
-                                maxHeight: 55),
-                            style: const TextStyle(
-                              color: colorPrimaryDark,
-                            ),
-                            validator: (value) {
-                              return validCharacters.hasMatch(value ?? '')
-                                  ? null
-                                  : 'Please enter a State';
+                          child: CustomDropDown(
+                            maxHeight: 55,
+                            icon: Icons.house_outlined,
+                            hint: "Select one",
+                            label: 'State*',
+                            width: double.infinity,
+                            list: customerPDSDCCController.stateCodes.values.toList(),
+                            dropdownValue: customerPDSDCCController.parsedStateSD.text == "" ? null : 
+                              customerPDSDCCController.parsedStateSD.text,
+                            onChanged: (newState) {
+                              if (newState == null) return;
+                              customerPDSDCCController.selectStateUpdateSD(newState);
                             },
                           ),
                         ),

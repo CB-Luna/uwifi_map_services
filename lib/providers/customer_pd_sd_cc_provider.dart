@@ -1,10 +1,47 @@
 
 
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:google_maps/google_maps.dart';
+import 'package:uwifi_map_services/helpers/globals.dart';
+import 'package:uwifi_map_services/models/state.dart';
 
 class CustomerPDSDCCProvider with ChangeNotifier {
+
+  List<States> states = [];
+  Map<String, String> stateCodes = {};
+
+  CustomerPDSDCCProvider({bool notify = true}) {
+    getStates(notify: notify);
+  }
+
+  //Función para recuperar el código del catálogo de "state"
+  Future<void> getStates({bool notify = true}) async {
+    try {
+      states.clear();
+
+      final res = await supabase.from('state').select().order(
+            'code',
+            ascending: true,
+          );
+
+      states = (res as List<dynamic>).map((state) => States.fromJson(jsonEncode(state))).toList();
+
+      for (var state in states) {
+        final newState = <String, String>{state.code : state.name};
+        stateCodes.addAll(newState);
+      }
+
+      if (notify) notifyListeners();
+    } catch (e) {
+      log('Error en getStates() -$e');
+    }
+  }
+
+
   //Bandera Checkbox SD same as PD
   bool sameAsPD = false;
 
@@ -20,6 +57,7 @@ class CustomerPDSDCCProvider with ChangeNotifier {
   final TextEditingController parsedZipcodeSD = TextEditingController(text: "");
   final TextEditingController parsedCitySD = TextEditingController(text: "");
   final TextEditingController parsedStateSD = TextEditingController(text: "");
+  final TextEditingController parsedStateCodeSD = TextEditingController(text: "");
 
   LatLng? locatizationPDSD;
   
@@ -31,6 +69,7 @@ class CustomerPDSDCCProvider with ChangeNotifier {
   final TextEditingController parsedZipcodeBD = TextEditingController(text: "");
   final TextEditingController parsedCityBD = TextEditingController(text: "");
   final TextEditingController parsedStateBD = TextEditingController(text: "");
+  final TextEditingController parsedStateCodeBD = TextEditingController(text: "");
 
   //Card Variables
   TextEditingController number = TextEditingController(text:"");
@@ -38,6 +77,19 @@ class CustomerPDSDCCProvider with ChangeNotifier {
   TextEditingController date = TextEditingController(text:"");
   TextEditingController cardName = TextEditingController(text:"");
   bool isCvvFocused = false;
+
+
+  void selectStateUpdateSD(String newState) {
+    parsedStateSD.text = newState; 
+    parsedStateCodeSD.text = stateCodes[newState] ?? "";
+    notifyListeners();
+  }
+
+  void selectStateUpdateBD(String newState) {
+    parsedStateBD.text = newState; 
+    parsedStateCodeBD.text = stateCodes[newState] ?? "";
+    notifyListeners();
+  }
 
   void onCreditCardModelChange(CreditCardModel creditCardModel) {
     number.text = creditCardModel.cardNumber;
@@ -71,6 +123,7 @@ class CustomerPDSDCCProvider with ChangeNotifier {
       parsedZipcodeBD.text = parsedZipcodeSD.text;
       parsedCityBD.text = parsedCitySD.text;
       parsedStateBD.text = parsedStateSD.text;
+      parsedStateCodeBD.text = parsedStateCodeSD.text;
 
     } else {
       parsedAddress1BD.text = "";
@@ -78,6 +131,7 @@ class CustomerPDSDCCProvider with ChangeNotifier {
       parsedZipcodeBD.text = "";
       parsedCityBD.text = "";
       parsedStateBD.text = "";
+      parsedStateCodeBD.text = "";
     }
     notifyListeners();
   }

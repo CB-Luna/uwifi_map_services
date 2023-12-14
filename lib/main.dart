@@ -45,7 +45,7 @@ class AppState extends StatelessWidget {
         //Provider para carrito de compras
         ChangeNotifierProvider<Cart>(create: (_) => Cart()),
         //Provider para customer Personal Details, Shipping Details y Credit Card
-        ChangeNotifierProvider(create: (_) => CustomerPDSDCCProvider()),
+        ChangeNotifierProvider(create: (_) => CustomerPDSDCCProvider(notify: false)),
         ChangeNotifierProvider<CustomerInfoProvider>(
           create: (_) => CustomerInfoProvider(
           ),
