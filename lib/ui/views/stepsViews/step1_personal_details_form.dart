@@ -23,7 +23,7 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
   @override
   Widget build(BuildContext context) {
     final customerPDSDCCController = Provider.of<CustomerPDSDCCProvider>(context);
-    final nombreCharacters = RegExp(r'^(([A-Z]{1}|[ÁÉÍÓÚÑ]{1})[a-zá-ÿ]+[ ]?)+$');
+    final nameCharacters = RegExp(r'^(([A-Z]{1}|[ÁÉÍÓÚÑ]{1})[a-zá-ÿ]+[ ]?)+$');
     final phoneCharacters = RegExp(r'^[0-9\-() ]+$');
     // final zcode = widget.zipcode.toString();
     var phoneFormat = MaskTextInputFormatter(
@@ -126,7 +126,7 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                                               maxHeight: 55),
 
                                     validator: (value) {
-                                        return (nombreCharacters.hasMatch(value ?? ''))
+                                        return (nameCharacters.hasMatch(value ?? ''))
                                         ? null
                                         : 'Please enter your name, the name should be capitalized.';
                                     },
@@ -156,7 +156,7 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                                               maxHeight: 55),
 
                                      validator: (value) {
-                                        return (nombreCharacters.hasMatch(value ?? ''))
+                                        return (nameCharacters.hasMatch(value ?? ''))
                                         ? null
                                         : 'Please enter your last name, the last name should be capitalized.';
                                     },
