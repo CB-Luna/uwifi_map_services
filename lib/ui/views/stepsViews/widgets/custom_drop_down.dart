@@ -37,21 +37,15 @@ class _CustomDropDownState extends State<CustomDropDown> {
         icon: widget.icon,
         maxHeight: widget.maxHeight),
       child: DropdownButton<String>(
+        isExpanded: true,
         hint: Text(
           widget.hint ?? '',
           style: const TextStyle(color: colorPrimary),
         ),
-        icon: const Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Icon(
-                Icons.arrow_drop_down,
-                color: colorPrimary,
-                size: 15,
-              )
-            ],
-          ),
+        icon: const Icon(
+          Icons.arrow_drop_down,
+          color: colorPrimary,
+          size: 20,
         ),
         borderRadius: BorderRadius.circular(5),
         elevation: 0,
