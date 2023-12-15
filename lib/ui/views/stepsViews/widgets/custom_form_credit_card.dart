@@ -154,9 +154,13 @@ class CustomFormCreditCard extends StatelessWidget {
                         ),
                         Flexible(
                           child: CustomDropDown(
+                            validator: (value) {
+                              return (value == "" || value == null)
+                                ? 'Please select a state.'
+                                : null;
+                            },
                             maxHeight: 55,
                             icon: Icons.house_outlined,
-                            hint: "Select one",
                             label: 'State*',
                             width: double.infinity,
                             list: customerPDSDCCController.stateCodes.values.toList(),

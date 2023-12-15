@@ -12,7 +12,7 @@ class CustomDropDown extends StatefulWidget {
     required this.width,
     required this.maxHeight,
     required this.icon,
-    this.hint,
+    required this.validator,
   });
 
   final double width;
@@ -22,7 +22,7 @@ class CustomDropDown extends StatefulWidget {
   final String? dropdownValue;
   final Function(String?) onChanged;
   final IconData icon;
-  final String? hint;
+  final String? Function(String?) validator;
 
   @override
   State<CustomDropDown> createState() => _CustomDropDownState();
@@ -31,42 +31,37 @@ class CustomDropDown extends StatefulWidget {
 class _CustomDropDownState extends State<CustomDropDown> {
   @override
   Widget build(BuildContext context) {
-    return InputDecorator(
+    return DropdownButtonFormField<String>(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: CustomInputs().formInputDecoration(
-        label: widget.label,
-        icon: widget.icon,
-        maxHeight: widget.maxHeight),
-      child: DropdownButton<String>(
-        isExpanded: true,
-        hint: Text(
-          widget.hint ?? '',
-          style: const TextStyle(color: colorPrimary),
-        ),
-        icon: const Icon(
-          Icons.arrow_drop_down,
-          color: colorPrimary,
-          size: 20,
-        ),
-        borderRadius: BorderRadius.circular(5),
-        elevation: 0,
-        dropdownColor: colorBgWhite,
-        style: const TextStyle(color: colorPrimary),
-        underline: const SizedBox.shrink(),
-        onChanged: widget.onChanged,
-        value: widget.dropdownValue,
-        items: widget.list.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(
-              value,
-              style: const TextStyle(
-                color: colorPrimary,
-                fontFamily: 'Bicyclette-Thin',
-              ),
-            ),
-          );
-        }).toList(),
+      label: widget.label,
+      icon: widget.icon,
+      maxHeight: widget.maxHeight) ,
+      validator: widget.validator,
+      isExpanded: true,
+      icon: const Icon(
+        Icons.arrow_drop_down,
+        color: colorPrimary,
+        size: 20,
       ),
+      borderRadius: BorderRadius.circular(5),
+      elevation: 0,
+      dropdownColor: colorBgWhite,
+      style: const TextStyle(color: colorPrimary),
+      onChanged: widget.onChanged,
+      value: widget.dropdownValue,
+      items: widget.list.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(
+            value,
+            style: const TextStyle(
+              color: colorPrimary,
+              fontFamily: 'Bicyclette-Thin',
+            ),
+          ),
+        );
+      }).toList(),
     );
   }
 }
