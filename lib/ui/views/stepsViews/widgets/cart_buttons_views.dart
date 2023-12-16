@@ -44,10 +44,6 @@ styledButton(context) {
 void finalPressed(BuildContext context,
       CustomerPDSDCCProvider customerPDSDCCController) async {
         try {
-          print(customerPDSDCCController.positionSD?.toJSON()?.lat);
-          print(customerPDSDCCController.positionSD?.toJSON()?.lng);
-          print(customerPDSDCCController.parsedStateCodeSD.text);
-          print(customerPDSDCCController.parsedStateCodeBD.text);
           dynamic res;
           var json = {
             "first_name": customerPDSDCCController.parsedFNamePD.text,
