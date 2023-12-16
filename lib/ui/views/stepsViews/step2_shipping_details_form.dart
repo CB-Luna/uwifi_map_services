@@ -7,7 +7,7 @@ import 'package:uwifi_map_services/providers/steps_controller.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/custom_drop_down.dart';
-
+import 'package:uwifi_map_services/ui/views/widgets/custom_list_tile.dart';
 class Step2ShippingDetailsForm extends StatefulWidget {
   const Step2ShippingDetailsForm({Key? key}) : super(key: key);
 
@@ -28,9 +28,15 @@ class _Step2ShippingDetailsFormState extends State<Step2ShippingDetailsForm> {
       type: MaskAutoCompletionType.lazy,
     );
     final isMobile = MediaQuery.of(context).size.width < 1024 ? true : false;
+    final placesSD = customerPDSDCCController.placesSD ?? [];
+    if (placesSD.isNotEmpty) {
+      customerPDSDCCController.hasSuggestionsSD = true;
+    } else {
+      customerPDSDCCController.hasSuggestionsSD = false;
+    }
+
     return Container(
       width: 1400,
-      height: 250,
       decoration: BoxDecoration(
         color: colorInversePrimary,
         boxShadow: const [
@@ -83,157 +89,182 @@ class _Step2ShippingDetailsFormState extends State<Step2ShippingDetailsForm> {
               ),
             ),
           ),
-          Flexible(
-            child: Form(
-              key: stepController.formKey,
-                child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                            /// VARIABLE STORAGE
-                            controller: customerPDSDCCController.parsedAddress1SD,
+          Form(
+            key: stepController.formKey,
+              child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          /// VARIABLE STORAGE
+                          controller: customerPDSDCCController.parsedAddress1SD,
+                          onChanged: (value) {
+                            customerPDSDCCController.onAddressChangedSD(value);
+                          },
       
-                            ///VALIDATION TRIGGER
-                            // initialValue: dir,
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
-                            obscureText: false,
-                            keyboardType: TextInputType.phone,
-                            decoration: CustomInputs().formInputDecoration(
-                                label: 'Address Line 1*',
-                                icon: Icons.house_outlined,
-                                maxHeight: 55),
-                            style: const TextStyle(
-                              color: colorPrimaryDark,
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter a valid address';
-                              }
-                              return null;
-                            },
+      
+                          ///VALIDATION TRIGGER
+                          // initialValue: dir,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          obscureText: false,
+                          keyboardType: TextInputType.phone,
+                          decoration: CustomInputs().formInputDecoration(
+                              label: 'Address Line 1*',
+                              icon: Icons.house_outlined,
+                              maxHeight: 55),
+                          style: const TextStyle(
+                            color: colorPrimaryDark,
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a valid address';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      Expanded(
+                        child: TextFormField(
+                          /// VARIABLE STORAGE
+                          controller: customerPDSDCCController.parsedAddress2SD,
+      
+                          ///VALIDATION TRIGGER
+                          // initialValue: dir,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          obscureText: false,
+                          keyboardType: TextInputType.phone,
+                          decoration: CustomInputs().formInputDecoration(
+                              label: 'Address Line 2',
+                              icon: Icons.house_outlined,
+                              maxHeight: 55),
+                          style: const TextStyle(
+                            color: colorPrimaryDark,
                           ),
                         ),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        Expanded(
-                          child: TextFormField(
-                            /// VARIABLE STORAGE
-                            controller: customerPDSDCCController.parsedAddress2SD,
+                      ),
+                      const SizedBox(width: 15),
+                      Expanded(
+                        child: TextFormField(
+                          /// VARIABLE STORAGE
+                          controller: customerPDSDCCController.parsedZipcodeSD,
       
-                            ///VALIDATION TRIGGER
-                            // initialValue: dir,
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
-                            obscureText: false,
-                            keyboardType: TextInputType.phone,
-                            decoration: CustomInputs().formInputDecoration(
-                                label: 'Address Line 2',
-                                icon: Icons.house_outlined,
-                                maxHeight: 55),
-                            style: const TextStyle(
-                              color: colorPrimaryDark,
-                            ),
+                          ///VALIDATION TRIGGER
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          obscureText: false,
+                          keyboardType: TextInputType.number,
+                          decoration: CustomInputs().formInputDecoration(
+                              label: 'Zipcode*',
+                              icon: Icons.other_houses_outlined,
+                              maxHeight: 55),
+      
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(5),
+                            zipcodeFormat
+                          ],
+                          validator: (value) {
+                            return (zipcodeCharacters
+                                        .hasMatch(value ?? '') &&
+                                    value?.length == 5)
+                                ? null
+                                : 'Please enter a valid zipcode';
+                          },
+                          style: const TextStyle(
+                            color: colorPrimaryDark,
                           ),
                         ),
-                        const SizedBox(width: 15),
-                        Expanded(
-                          child: TextFormField(
-                            /// VARIABLE STORAGE
-                            controller: customerPDSDCCController.parsedZipcodeSD,
-      
-                            ///VALIDATION TRIGGER
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
-                            obscureText: false,
-                            keyboardType: TextInputType.number,
-                            decoration: CustomInputs().formInputDecoration(
-                                label: 'Zipcode*',
-                                icon: Icons.other_houses_outlined,
-                                maxHeight: 55),
-      
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(5),
-                              zipcodeFormat
-                            ],
-                            validator: (value) {
-                              return (zipcodeCharacters
-                                          .hasMatch(value ?? '') &&
-                                      value?.length == 5)
-                                  ? null
-                                  : 'Please enter a valid zipcode';
-                            },
-                            style: const TextStyle(
-                              color: colorPrimaryDark,
-                            ),
-                          ),
+                      ),
+                    ],
+                  ),
+                  // Se usa material para que se dibuje encima del
+                  // contenedor padre (con BoxDecoration)
+                  Visibility(
+                    visible: placesSD.length > 1 ? true : false,
+                    child: SizedBox(
+                      height: isMobile ? 120 : 150,
+                      child: Material(
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: placesSD.length,
+                          itemBuilder: (_, index) {
+                            final place = placesSD[index];
+                            return CustomListTileSD(
+                              place: place,
+                            );
+                          },
                         ),
-                      ],
+                      ),
                     ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                            /// VARIABLE STORAGE
-                            controller: customerPDSDCCController.parsedCitySD,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          readOnly: true,
+                          enabled: false,
+                          /// VARIABLE STORAGE
+                          controller: customerPDSDCCController.parsedCitySD,
       
-                            ///VALIDATION TRIGGER
-                            // initialValue: dir,
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
-                            obscureText: false,
-                            keyboardType: TextInputType.phone,
-                            decoration: CustomInputs().formInputDecoration(
-                                label: 'City*',
-                                icon: Icons.house_outlined,
-                                maxHeight: 55),
-                            style: const TextStyle(
-                              color: colorPrimaryDark,
-                            ),
-                            validator: (value) {
-                              return validCharacters.hasMatch(value ?? '')
-                                  ? null
-                                  : 'Please enter a City';
-                            },
+                          ///VALIDATION TRIGGER
+                          // initialValue: dir,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          obscureText: false,
+                          keyboardType: TextInputType.phone,
+                          decoration: CustomInputs().formInputDecoration(
+                              label: 'City*',
+                              icon: Icons.house_outlined,
+                              maxHeight: 55,
+                              isAvailable: false),
+                          style: const TextStyle(
+                            color: colorPrimaryDark,
                           ),
+                          validator: (value) {
+                            return validCharacters.hasMatch(value ?? '')
+                                ? null
+                                : 'Please enter a City';
+                          },
                         ),
-                        const SizedBox(
-                          width: 15,
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      Expanded(
+                        child: CustomDropDown(
+                          validator: (value) {
+                            return (value == "" || value == null)
+                              ? 'Please select a state.'
+                              : null;
+                          },
+                          maxHeight: 55,
+                          icon: Icons.house_outlined,
+                          label: 'State*',
+                          width: double.infinity,
+                          list: customerPDSDCCController.stateCodes.values.toList(),
+                          dropdownValue: customerPDSDCCController.parsedStateSD.text == "" ? null : 
+                            customerPDSDCCController.parsedStateSD.text,
+                          onChanged: (newState) {
+                            if (newState == null) return;
+                            customerPDSDCCController.selectStateUpdateSD(newState);
+                          },
                         ),
-                        Expanded(
-                          child: CustomDropDown(
-                            validator: (value) {
-                              return (value == "" || value == null)
-                                ? 'Please select a state.'
-                                : null;
-                            },
-                            maxHeight: 55,
-                            icon: Icons.house_outlined,
-                            label: 'State*',
-                            width: double.infinity,
-                            list: customerPDSDCCController.stateCodes.values.toList(),
-                            dropdownValue: customerPDSDCCController.parsedStateSD.text == "" ? null : 
-                              customerPDSDCCController.parsedStateSD.text,
-                            onChanged: (newState) {
-                              if (newState == null) return;
-                              customerPDSDCCController.selectStateUpdateSD(newState);
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ]),
-            )),
-          ),
+                      ),
+                    ],
+                  ),
+                ]),
+          )),
         ],
       ),
     );

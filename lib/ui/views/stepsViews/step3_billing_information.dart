@@ -28,7 +28,6 @@ class _Step3BillingInformationFormState extends State<Step3BillingInformationFor
       children: [
         Container(
               width: 1400,
-              height: isMobile ? 700 : 465,
               decoration: BoxDecoration(
                 color: colorInversePrimary,
                 boxShadow: const [
@@ -93,9 +92,9 @@ class _Step3BillingInformationFormState extends State<Step3BillingInformationFor
                                       color: colorBgWhite,
                                       width: 2.0
                                     ),
-                                    value: customerPDSDCCController.sameAsPD,
+                                    value: customerPDSDCCController.sameAsSD,
                                     onChanged: (bool? value) {
-                                      customerPDSDCCController.changeValuesShippingDetails();
+                                      customerPDSDCCController.changeValuesBillingDetails();
                                     },
                                   ),
                                 ],

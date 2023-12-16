@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/models/domain/place.dart';
 import 'package:uwifi_map_services/providers/customer_pd_sd_cc_provider.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
-class CustomListTileSD extends StatelessWidget {
+class CustomListTileBD extends StatelessWidget {
   final Place place;
-  const CustomListTileSD({
+  const CustomListTileBD({
     Key? key,
     required this.place,
   }) : super(key: key);
@@ -17,7 +17,7 @@ class CustomListTileSD extends StatelessWidget {
 
     //Extract street number
     final RegExp regex = RegExp(r'^([0-9]+)(\s+.*)?$');
-    final RegExpMatch? match = regex.firstMatch(customerPDSDController.streetSD);
+    final RegExpMatch? match = regex.firstMatch(customerPDSDController.streetBD);
     final String streetNumber = match?.group(1) ?? '';
 
     return ListTile(
@@ -29,8 +29,8 @@ class CustomListTileSD extends StatelessWidget {
           ? Text('$streetNumber ${place.address}')
           : Text(place.address),
       onTap: () {
-        customerPDSDController.pickPlaceSD(place, streetNumber);
-        customerPDSDController.clearPlacesSD();
+        customerPDSDController.pickPlaceBD(place, streetNumber);
+        customerPDSDController.clearPlacesBD();
       },
       hoverColor: colorBgLight,
     );

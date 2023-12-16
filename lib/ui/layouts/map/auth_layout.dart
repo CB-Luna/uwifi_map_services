@@ -7,7 +7,6 @@ import 'package:uwifi_map_services/providers/remote/geocode_api.dart';
 import 'package:uwifi_map_services/providers/remote/suggestions_api.dart';
 import 'package:uwifi_map_services/providers/search_controller.dart';
 import 'package:uwifi_map_services/ui/layouts/map/widgets/custom_title.dart';
-import 'package:uwifi_map_services/ui/views/form_and_map_view/form_view.dart';
 
 class AuthLayout extends StatefulWidget {
   const AuthLayout({Key? key}) : super(key: key);
@@ -79,7 +78,6 @@ class _MobileBody extends StatelessWidget {
                   CustomTitle(
                     mobile: true,
                   ),
-                  FormView(),
                 ],
               ),
             ),
@@ -117,7 +115,6 @@ class _DesktopBody extends StatelessWidget {
                     height: 20,
                   ),
                   CustomTitle(),
-                  FormView(),
                 ],
               ),
             ),

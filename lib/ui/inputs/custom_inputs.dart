@@ -11,6 +11,7 @@ class CustomInputs {
     bool autoSuggest = false,
     Color labelColor = colorPrimary,
     Color hintColor = colorPrimaryLight,
+    bool isAvailable = true,
   }) {
     return InputDecoration(
         contentPadding: const EdgeInsets.symmetric(horizontal: 5),
@@ -23,15 +24,15 @@ class CustomInputs {
         focusedBorder: OutlineInputBorder(
             borderRadius: getBorderRadius(autoSuggest),
             borderSide: getBordeSide(autoSuggest, colorPrimaryDark)),
-        fillColor: colorBgWhite,
+        fillColor: isAvailable ? colorBgWhite : colorBgLight,
         filled: true,
         hintText: hint,
         labelText: label,
         prefixIcon: Icon(
           icon,
-          color: colorPrimary,
+          color: isAvailable ? colorPrimary : colorSecondary,
         ),
-        labelStyle: TextStyle(color: labelColor),
+        labelStyle: TextStyle(color: isAvailable ? colorPrimary : colorSecondary),
         hintStyle: TextStyle(color: hintColor),
         constraints: BoxConstraints(maxHeight: maxHeight, maxWidth: maxWidth));
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/providers/cart_controller.dart';
-import 'package:uwifi_map_services/ui/views/form_and_map_view/form_view.dart';
 
 import '../classes/customer_info.dart';
 import '../ui/views/stepsViews/customer_info_view.dart';

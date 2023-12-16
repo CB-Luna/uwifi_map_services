@@ -1,6 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:uwifi_map_services/data/repositories_impl/suggestions_repository_impl.dart';
 import 'package:uwifi_map_services/helpers/constants.dart';
 import 'package:uwifi_map_services/helpers/globals.dart';
 import 'package:uwifi_map_services/providers/cart_controller.dart';
@@ -12,6 +14,7 @@ import 'package:uwifi_map_services/services/navigation_service.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uuid/uuid.dart';
 
+import 'providers/remote/suggestions_api.dart';
 import 'providers/tracking_provider.dart';
 
 void main() async {
@@ -45,7 +48,18 @@ class AppState extends StatelessWidget {
         //Provider para carrito de compras
         ChangeNotifierProvider<Cart>(create: (_) => Cart()),
         //Provider para customer Personal Details, Shipping Details y Credit Card
-        ChangeNotifierProvider(create: (_) => CustomerPDSDCCProvider(notify: false)),
+        //Provider para llenado automático de Address
+        ChangeNotifierProvider<CustomerPDSDCCProvider>(
+          create: (_) => CustomerPDSDCCProvider(
+              SuggestionsRepositoryImpl(
+                SuggestionsAPI(Dio()),
+              ),
+              SuggestionsRepositoryImpl(
+                SuggestionsAPI(Dio()),
+              ),
+              UniqueKey(),
+              notify: false),
+        ),
         ChangeNotifierProvider<CustomerInfoProvider>(
           create: (_) => CustomerInfoProvider(
           ),

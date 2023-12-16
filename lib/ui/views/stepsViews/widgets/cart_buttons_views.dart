@@ -44,6 +44,10 @@ styledButton(context) {
 void finalPressed(BuildContext context,
       CustomerPDSDCCProvider customerPDSDCCController) async {
         try {
+          print(customerPDSDCCController.positionSD?.toJSON()?.lat);
+          print(customerPDSDCCController.positionSD?.toJSON()?.lng);
+          print(customerPDSDCCController.parsedStateCodeSD.text);
+          print(customerPDSDCCController.parsedStateCodeBD.text);
           dynamic res;
           var json = {
             "first_name": customerPDSDCCController.parsedFNamePD.text,
@@ -58,8 +62,8 @@ void finalPressed(BuildContext context,
                       "city": customerPDSDCCController.parsedCitySD.text,
                       "state_code": customerPDSDCCController.parsedStateCodeSD.text,
                       "type": "Physical",
-                      "latitude": "29.87403",
-                      "longitude": "-94.14245"
+                      "latitude": "${customerPDSDCCController.positionSD?.toJSON()?.lat}",
+                      "longitude": "${customerPDSDCCController.positionSD?.toJSON()?.lng}"
                   },
                   {
                       "address_1": customerPDSDCCController.parsedAddress1BD.text,
@@ -68,8 +72,8 @@ void finalPressed(BuildContext context,
                       "city": customerPDSDCCController.parsedCityBD.text,
                       "state_code": customerPDSDCCController.parsedStateCodeBD.text,
                       "type": "Billing",
-                      "latitude": "29.87403",
-                      "longitude": "-94.14245"
+                      "latitude": "${customerPDSDCCController.positionBD?.toJSON()?.lat}",
+                      "longitude": "${customerPDSDCCController.positionBD?.toJSON()?.lng}"
                   }
               ],
               "services": [

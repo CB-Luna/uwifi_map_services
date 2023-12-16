@@ -39,7 +39,6 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
       children: [
         Container(
           width: 1400,
-          height: 260,
           decoration: BoxDecoration(
             color: colorInversePrimary,
             boxShadow: const [
@@ -92,155 +91,153 @@ class _Step1PersonalDetailsFormState extends State<Step1PersonalDetailsForm> {
                   ),
                 ),
               ),
-              Flexible(
-                child: Form(
-                    key:  customerPDSDCCController.formKeyPD,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 30),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                              Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Expanded(
-                                    child: TextFormField(
-                                      /// VARIABLE STORAGE
-                                      controller:  customerPDSDCCController.parsedFNamePD,
-                                      onChanged: (value) {
-                                         customerPDSDCCController.activeNotifyListeners();
-                                      },
-                                      ///VALIDATION TRIGGER
-                                      autovalidateMode: AutovalidateMode
-                                          .onUserInteraction,
-                                      autocorrect: false,
-                                      obscureText: false,
-                                      keyboardType: TextInputType.name,
-                                      decoration: CustomInputs()
-                                          .formInputDecoration(
-                                              label: 'First Name*',
-                                              icon: Icons.person_outlined,
-                                              maxHeight: 55),
-
-                                    validator: (value) {
-                                        return (nameCharacters.hasMatch(value ?? ''))
-                                        ? null
-                                        : 'Please enter your name, the name should be capitalized.';
-                                    },
-                                    style: const TextStyle(
-                                      color: colorPrimaryDark,
-                                    ),
-                                  ),
-                                  ),
-                                  const SizedBox(width: 15),
-                                  Expanded(
-                                    child: TextFormField(
-                                      /// VARIABLE STORAGE
-                                      controller:  customerPDSDCCController.parsedLNamePD,
-                                      onChanged: (value) {
-                                         customerPDSDCCController.activeNotifyListeners();
-                                      },
-                                      ///VALIDATION TRIGGER
-                                      autovalidateMode: AutovalidateMode
-                                          .onUserInteraction,
-                                      autocorrect: false,
-                                      obscureText: false,
-                                      keyboardType: TextInputType.name,
-                                      decoration: CustomInputs()
-                                          .formInputDecoration(
-                                              label: 'Last Name*',
-                                              icon: Icons.person_outlined,
-                                              maxHeight: 55),
-
-                                     validator: (value) {
-                                        return (nameCharacters.hasMatch(value ?? ''))
-                                        ? null
-                                        : 'Please enter your last name, the last name should be capitalized.';
-                                    },
-                                    style: const TextStyle(
-                                      color: colorPrimaryDark,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
+              Form(
+                  key:  customerPDSDCCController.formKeyPD,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 30),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
                             Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment:
+                                  CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Expanded(
                                   child: TextFormField(
                                     /// VARIABLE STORAGE
-                                    controller:  customerPDSDCCController.parsedPhonePD,
-
+                                    controller:  customerPDSDCCController.parsedFNamePD,
+                                    onChanged: (value) {
+                                       customerPDSDCCController.activeNotifyListeners();
+                                    },
                                     ///VALIDATION TRIGGER
-                                    autovalidateMode:
-                                        AutovalidateMode.onUserInteraction,
+                                    autovalidateMode: AutovalidateMode
+                                        .onUserInteraction,
+                                    autocorrect: false,
                                     obscureText: false,
-                                    keyboardType: TextInputType.phone,
+                                    keyboardType: TextInputType.name,
                                     decoration: CustomInputs()
                                         .formInputDecoration(
-                                            label: 'Phone Number*',
-                                            icon: Icons.phone_outlined,
+                                            label: 'First Name*',
+                                            icon: Icons.person_outlined,
                                             maxHeight: 55),
 
-                                    inputFormatters: [
-                                      LengthLimitingTextInputFormatter(14),
-                                      phoneFormat
-                                    ],
-                                    validator: (value) {
-                                      return (phoneCharacters
-                                                  .hasMatch(value ?? '') &&
-                                              value?.length == 14)
-                                          ? null
-                                          : 'Please enter a valid phone number';
-                                    },
-                                    style: const TextStyle(
-                                      color: colorPrimaryDark,
-                                    ),
+                                  validator: (value) {
+                                      return (nameCharacters.hasMatch(value ?? ''))
+                                      ? null
+                                      : 'Please enter your name, the name should be capitalized.';
+                                  },
+                                  style: const TextStyle(
+                                    color: colorPrimaryDark,
                                   ),
+                                ),
                                 ),
                                 const SizedBox(width: 15),
                                 Expanded(
                                   child: TextFormField(
                                     /// VARIABLE STORAGE
-                                    controller:  customerPDSDCCController.parsedEmailPD,
-
+                                    controller:  customerPDSDCCController.parsedLNamePD,
+                                    onChanged: (value) {
+                                       customerPDSDCCController.activeNotifyListeners();
+                                    },
                                     ///VALIDATION TRIGGER
-                                    autovalidateMode:
-                                        AutovalidateMode.onUserInteraction,
+                                    autovalidateMode: AutovalidateMode
+                                        .onUserInteraction,
+                                    autocorrect: false,
                                     obscureText: false,
-                                    keyboardType: TextInputType.emailAddress,
+                                    keyboardType: TextInputType.name,
                                     decoration: CustomInputs()
                                         .formInputDecoration(
-                                            label: 'E-mail Address*',
-                                            icon: Icons.mail_outlined,
+                                            label: 'Last Name*',
+                                            icon: Icons.person_outlined,
                                             maxHeight: 55),
 
-                                    validator: (value) {
-                                      String pattern =
-                                          r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                                      RegExp regExp = RegExp(pattern);
-                                      return regExp.hasMatch(value ?? '')
-                                          ? null
-                                          : 'Please enter a valid e-mail address';
-                                    },
-                                    style: const TextStyle(
-                                      color: colorPrimaryDark,
-                                    ),
+                                   validator: (value) {
+                                      return (nameCharacters.hasMatch(value ?? ''))
+                                      ? null
+                                      : 'Please enter your last name, the last name should be capitalized.';
+                                  },
+                                  style: const TextStyle(
+                                    color: colorPrimaryDark,
                                   ),
                                 ),
-                              ],
-                            ),
-                          ]),
-                    )),
-              ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Expanded(
+                                child: TextFormField(
+                                  /// VARIABLE STORAGE
+                                  controller:  customerPDSDCCController.parsedPhonePD,
+
+                                  ///VALIDATION TRIGGER
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  obscureText: false,
+                                  keyboardType: TextInputType.phone,
+                                  decoration: CustomInputs()
+                                      .formInputDecoration(
+                                          label: 'Phone Number*',
+                                          icon: Icons.phone_outlined,
+                                          maxHeight: 55),
+
+                                  inputFormatters: [
+                                    LengthLimitingTextInputFormatter(14),
+                                    phoneFormat
+                                  ],
+                                  validator: (value) {
+                                    return (phoneCharacters
+                                                .hasMatch(value ?? '') &&
+                                            value?.length == 14)
+                                        ? null
+                                        : 'Please enter a valid phone number';
+                                  },
+                                  style: const TextStyle(
+                                    color: colorPrimaryDark,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 15),
+                              Expanded(
+                                child: TextFormField(
+                                  /// VARIABLE STORAGE
+                                  controller:  customerPDSDCCController.parsedEmailPD,
+
+                                  ///VALIDATION TRIGGER
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  obscureText: false,
+                                  keyboardType: TextInputType.emailAddress,
+                                  decoration: CustomInputs()
+                                      .formInputDecoration(
+                                          label: 'E-mail Address*',
+                                          icon: Icons.mail_outlined,
+                                          maxHeight: 55),
+
+                                  validator: (value) {
+                                    String pattern =
+                                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                                    RegExp regExp = RegExp(pattern);
+                                    return regExp.hasMatch(value ?? '')
+                                        ? null
+                                        : 'Please enter a valid e-mail address';
+                                  },
+                                  style: const TextStyle(
+                                    color: colorPrimaryDark,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ]),
+                  )),
             ],
           ),
         ),

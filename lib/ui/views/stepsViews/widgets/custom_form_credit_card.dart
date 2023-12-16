@@ -7,6 +7,7 @@ import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/custom_drop_down.dart';
+import 'package:uwifi_map_services/ui/views/widgets/custom_list_tile_bd.dart';
 
 import '../../../../providers/customer_pd_sd_cc_provider.dart';
 
@@ -25,6 +26,13 @@ class CustomFormCreditCard extends StatelessWidget {
       filter: {'#': RegExp(r'[0-9]')},
       type: MaskAutoCompletionType.lazy,
     );
+    final isMobile = MediaQuery.of(context).size.width < 1024 ? true : false;
+    final placesBD = customerPDSDCCController.placesBD ?? [];
+    if (placesBD.isNotEmpty) {
+      customerPDSDCCController.hasSuggestionsBD = true;
+    } else {
+      customerPDSDCCController.hasSuggestionsBD = false;
+    }
 
     return Column(
       children: [
@@ -42,7 +50,9 @@ class CustomFormCreditCard extends StatelessWidget {
                           child: TextFormField(
                             /// VARIABLE STORAGE
                             controller: customerPDSDCCController.parsedAddress1BD,
-                                        
+                            onChanged: (value) {
+                              customerPDSDCCController.onAddressChangedBD(value);
+                            },  
                             ///VALIDATION TRIGGER
                             // initialValue: dir,
                             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -121,12 +131,34 @@ class CustomFormCreditCard extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
+                    // Se usa material para que se dibuje encima del
+                    // contenedor padre (con BoxDecoration)
+                    Visibility(
+                      visible: placesBD.length > 1 ? true : false,
+                      child: SizedBox(
+                        height: isMobile ? 120 : 150,
+                        child: Material(
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: placesBD.length,
+                            itemBuilder: (_, index) {
+                              final place = placesBD[index];
+                              return CustomListTileBD(
+                                place: place,
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Flexible(
                           child: TextFormField(
+                            readOnly: true,
+                            enabled: false,
                             /// VARIABLE STORAGE
                             controller: customerPDSDCCController.parsedCityBD,
                                         
@@ -138,7 +170,8 @@ class CustomFormCreditCard extends StatelessWidget {
                             decoration: CustomInputs().formInputDecoration(
                                 label: 'City*',
                                 icon: Icons.house_outlined,
-                                maxHeight: 55),
+                                maxHeight: 55,
+                                isAvailable: false),
                             style: const TextStyle(
                               color: colorPrimaryDark,
                             ),
