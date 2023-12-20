@@ -82,7 +82,7 @@ class _Step3BillingInformationFormState extends State<Step3BillingInformationFor
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Same as Shipping Details',
+                                    'Same as Shipping Address',
                                     style: GoogleFonts.workSans(
                                     fontSize: isMobile ? 12 : 18,
                                     color: colorInversePrimary,
