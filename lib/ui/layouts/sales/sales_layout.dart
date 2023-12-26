@@ -66,7 +66,7 @@ class SalesLayout extends StatelessWidget {
                     if (!mobile(context)) Column(
                       children: [
                         const Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(16.0),
                           child: CartWidget(),
                         ),
                         //CheckBoxes
