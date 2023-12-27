@@ -12,13 +12,13 @@ class Cart with ChangeNotifier {
   bool aciveToogle = false;
   List<Product> products = [Product(
         id: 'uwifiService',
-        name: "UWIFI Service Plan",
+        name: "U-wifi Service Plan",
         cost: 30.0,
         imageurl: "",
         service: "uwifiPlan",
         category: "plan",
         quantity: 1,
-        pwName: "UWIFI Service Plan")];
+        pwName: "U-wifi Service Plan")];
   List<Product> devices = [];
   List<Product> additionalsDevicesSelected = [];
   List<Product> discounts = [];

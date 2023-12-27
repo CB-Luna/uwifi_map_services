@@ -28,7 +28,7 @@ class PromoCheckboxState extends State<PromoCheckbox> {
             children: [
               Flexible(
                 child: Text(
-                  'I would like to receive promotional messages from UWIFI by E-mail. You can unsubscribe at any time.',
+                  'I would like to receive promotional messages from U-wifi by E-mail. You can unsubscribe at any time.',
                   style: GoogleFonts.workSans(
                   fontSize: 15,
                   color: colorPrimary,
@@ -53,7 +53,7 @@ class PromoCheckboxState extends State<PromoCheckbox> {
             children: [
               Flexible(
                 child: Text(
-                  'I would like to receive promotional messages from UWIFI by SMS.\n\n*Message and data rates may apply to receiving these messages.\n\n*Reply with STOP at any time to opt-out from future messages.',
+                  'I would like to receive promotional messages from U-wifi by SMS.\n\n*Message and data rates may apply to receiving these messages.\n\n*Reply with STOP at any time to opt-out from future messages.',
                   style: GoogleFonts.workSans(
                   fontSize: 15,
                   color: colorPrimary,

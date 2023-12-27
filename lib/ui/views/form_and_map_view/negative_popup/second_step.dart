@@ -40,7 +40,7 @@ class SecondStep extends StatelessWidget {
           value: controller.emailCheckbox,
           onChanged: controller.setEmailCheckbox,
           text:
-              'I would like to receive promotional messages from UWIFI by E-mail',
+              'I would like to receive promotional messages from U-wifi by E-mail',
         ),
       ),
       FractionallySizedBox(
@@ -48,7 +48,7 @@ class SecondStep extends StatelessWidget {
         child: CustomCheckbox(
           value: controller.smsCheckbox,
           onChanged: controller.setSmsCheckbox,
-          text: 'I would like to receive promotional messages from UWIFI by SMS',
+          text: 'I would like to receive promotional messages from U-wifi by SMS',
         ),
       ),
     ];
