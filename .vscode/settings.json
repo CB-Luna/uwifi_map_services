@@ -1,0 +1,15 @@
+{
+    "cmake.sourceDirectory": "${workspaceFolder}/linux",
+    // "dart.sdkPath": "/Users/kevinramos/flutter/bin/cache/dart-sdk",
+    // De Uzziel
+    "dart.sdkPath": "/Users/uzzie/Development/flutter/bin/cache/dart-sdk",
+    "dart.flutterSdkPath": ".fvm/flutter_sdk",
+    // Remove .fvm files from search
+    "search.exclude": {
+        "**/.fvm": true
+    },
+    // Remove from file watching
+    "files.watcherExclude": {
+        "**/.fvm": true
+    }
+}
