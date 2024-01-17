@@ -14,41 +14,43 @@ class CustomCreditCard extends StatelessWidget {
     final customerPDSDCCController = Provider.of<CustomerPDSDCCProvider>(context);
     bool isCvvFocused = false;
 
-    return CreditCardWidget(
-      height: 200,
+    return SizedBox(
+      height: 230,
       width: 400,
-      cardBgColor: colorSecondary,
-      cardNumber: customerPDSDCCController.number.text,
-      expiryDate: customerPDSDCCController.date.text,
-      cardHolderName: customerPDSDCCController.cardName.text,
-      cvvCode: customerPDSDCCController.cvv.text,
-      isHolderNameVisible: true,
-      showBackView: isCvvFocused,
-      onCreditCardWidgetChange:
-          (CreditCardBrand creditCardBrand) {
-          },
-      glassmorphismConfig: Glassmorphism(
-        blurX: 8.0, 
-        blurY: 16.0, 
-        gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: <Color>[
-              colorSecondary,
-              colorSecondary.withAlpha(200),
-            ],
-            stops: const <double>[
-              0.3,
-              0,
-            ],
-          )),
-      enableFloatingCard: true,
-      floatingConfig: const FloatingConfig(
-        isGlareEnabled: true,
-        isShadowEnabled: true,
-        shadowConfig: FloatingShadowConfig(),
-      ),
-      );
+      child: CreditCardWidget(
+        cardBgColor: colorSecondary,
+        cardNumber: customerPDSDCCController.number.text,
+        expiryDate: customerPDSDCCController.date.text,
+        cardHolderName: customerPDSDCCController.cardName.text,
+        cvvCode: customerPDSDCCController.cvv.text,
+        isHolderNameVisible: true,
+        showBackView: isCvvFocused,
+        onCreditCardWidgetChange:
+            (CreditCardBrand creditCardBrand) {
+            },
+        glassmorphismConfig: Glassmorphism(
+          blurX: 8.0, 
+          blurY: 16.0, 
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: <Color>[
+                colorSecondary,
+                colorSecondary.withAlpha(200),
+              ],
+              stops: const <double>[
+                0.3,
+                0,
+              ],
+            )),
+        enableFloatingCard: true,
+        floatingConfig: const FloatingConfig(
+          isGlareEnabled: true,
+          isShadowEnabled: true,
+          shadowConfig: FloatingShadowConfig(),
+        ),
+        ),
+    );
   }
 
 }

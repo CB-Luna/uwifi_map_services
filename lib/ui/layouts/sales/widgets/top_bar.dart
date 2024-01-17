@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
+import 'package:uwifi_map_services/ui/views/stepsViews/widgets/buttons/custom_icon_button.dart';
 
 import '../../../../data/constants.dart';
 import '../../../../providers/cart_controller.dart';
@@ -37,21 +39,31 @@ class TopBar extends StatelessWidget {
         BoxShadow(
           blurRadius: 15,
           spreadRadius: -5,
-          color: colorBgB,
+          color: colorBgWhite,
           offset: Offset(0, 5),
         )
-      ], color: colorBgBlack),
+      ], color: colorBgW),
       padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: onelineDisplay ? MainAxisSize.min : MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          CustomIconButton(
+            icon: Icons.arrow_back_ios_rounded,
+            text: "Back",
+            onPressed: () async {
+              // Open URL in the actual tab
+              launchUrl(Uri.parse(
+              'https://react--uwifi.netlify.app/'), 
+              webOnlyWindowName: '_self',);
+            },
+          ),
           const Spacer(),
           StepperWidget(
-            width: 50,
+            width: 140,
             curStep: stepsController.currentStep.index,
-            activeColor: colorsTheme(context).primary),
+            activeColor: colorPrimary),
           const Spacer()
         ],
       ),

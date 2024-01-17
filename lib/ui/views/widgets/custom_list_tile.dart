@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/models/domain/place.dart';
-import 'package:uwifi_map_services/providers/customer_pd_sd_cc_provider.dart';
+import 'package:uwifi_map_services/providers/customer_pd_sd_provider.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
-class CustomListTileSD extends StatelessWidget {
+
+class CustomListTile extends StatelessWidget {
   final Place place;
-  const CustomListTileSD({
+  const CustomListTile({
     Key? key,
     required this.place,
   }) : super(key: key);
@@ -13,11 +14,11 @@ class CustomListTileSD extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final customerPDSDController = Provider.of<CustomerPDSDCCProvider>(context);
+    final customerPDSDController = Provider.of<CustomerPDSDProvider>(context);
 
     //Extract street number
     final RegExp regex = RegExp(r'^([0-9]+)(\s+.*)?$');
-    final RegExpMatch? match = regex.firstMatch(customerPDSDController.streetSD);
+    final RegExpMatch? match = regex.firstMatch(customerPDSDController.street);
     final String streetNumber = match?.group(1) ?? '';
 
     return ListTile(
@@ -29,8 +30,8 @@ class CustomListTileSD extends StatelessWidget {
           ? Text('$streetNumber ${place.address}')
           : Text(place.address),
       onTap: () {
-        customerPDSDController.pickPlaceSD(place, streetNumber);
-        customerPDSDController.clearPlacesSD();
+        customerPDSDController.pickPlace(place, streetNumber);
+        customerPDSDController.clearPlaces();
       },
       hoverColor: colorBgLight,
     );

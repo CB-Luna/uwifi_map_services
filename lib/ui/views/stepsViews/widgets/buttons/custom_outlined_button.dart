@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 
 class CustomOutlinedButton extends StatelessWidget {
   final Function? onPressed;
@@ -14,9 +14,9 @@ class CustomOutlinedButton extends StatelessWidget {
     Key? key,
     this.onPressed,
     required this.text,
-    this.bgColor = const Color(0xFFD20030),
-    this.borderColor = Colors.transparent,
-    this.textColor = Colors.white,
+    this.bgColor = Colors.transparent,
+    this.borderColor = colorSecondary,
+    this.textColor = colorBgWhite,
     this.fontSize = 13,
     this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
   }) : super(key: key);
@@ -27,26 +27,25 @@ class CustomOutlinedButton extends StatelessWidget {
       style: ButtonStyle(
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(100),
           ),
         ),
         side: MaterialStateProperty.all(
           BorderSide(
             color: borderColor,
+            width: 3,
           ),
         ),
         backgroundColor: MaterialStateProperty.all(bgColor),
       ),
       onPressed: () => onPressed != null ? onPressed!() : null,
-      child: Padding(
-        padding: padding,
-        child: Text(
-          text,
-          style: GoogleFonts.workSans(
-            color: textColor,
-            fontSize: fontSize,
-            fontWeight: FontWeight.w600,
-          ),
+      child: Text(
+        text,
+        style: TextStyle(
+        color: textColor,
+        fontSize: 12,
+        fontFamily: 'Lexend',
+        fontWeight: FontWeight.w500,
         ),
       ),
     );

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:uwifi_map_services/ui/views/stepsViews/widgets/cart_buttons_views.dart';
 
-import '../../../../providers/customer_info_controller.dart';
-import '../../../views/stepsViews/widgets/cart_buttons_views.dart';
+import '../../../../providers/customer_ssn_acp_provider.dart';
 
 class NavigationMobile extends StatelessWidget {
   const NavigationMobile({
     Key? key,
-    required this.customerController,
+    required this.customerSSNACPController,
   }) : super(key: key);
 
-  final CustomerInfoProvider customerController;
+  final CustomerSSNACPProvider customerSSNACPController;
 
   @override
   Widget build(BuildContext context) {

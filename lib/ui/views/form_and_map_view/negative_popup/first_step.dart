@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/providers/popup_controller.dart';
-import 'package:uwifi_map_services/ui/buttons/custom_outlined_button.dart';
+import 'package:uwifi_map_services/ui/views/stepsViews/widgets/buttons/custom_outlined_button.dart';
 import '../../../../classes/customer_info.dart';
 
 class FirstStep extends StatelessWidget {

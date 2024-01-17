@@ -2,9 +2,10 @@ class Product {
   final String id;
   final String name;
   final double cost;
-  String? imageurl;
+  double subtotal;
+  String imageurl;
   final String service;
-  final String category; //tipo de producto
+  final String description; //tipo de producto
   int? index;
   bool? isSelected;
   int quantity = 1;
@@ -15,9 +16,10 @@ class Product {
     required this.id,
     required this.name,
     required this.cost,
-    this.imageurl,
+    this.subtotal = 0.0,
+    required this.imageurl,
     required this.service,
-    required this.category,
+    required this.description,
     this.index,
     this.isSelected,
     required this.quantity,
@@ -29,27 +31,30 @@ class Product {
     String? id,
     String? name,
     double? cost,
+    double? subtotal,
     String? imageurl,
     String? service,
-    String? category,
+    String? description,
     int? index,
     bool? isSelected,
     int? quantity,
     String? pwName,
     List<String>? groups,
+    bool? carousel
   }) {
     return Product(
       id: id ?? this.id,
       name: name ?? this.name,
       cost: cost ?? this.cost,
+      subtotal: subtotal ?? this.subtotal,
       imageurl: imageurl ?? this.imageurl,
       service: service ?? this.service,
-      category: category ?? this.category,
+      description: description ?? this.description,
       index: index ?? this.index,
       isSelected: isSelected ?? this.isSelected,
       quantity: quantity ?? this.quantity,
       pwName: pwName ?? this.pwName,
-      groups: groups ?? this.groups,
+      groups: groups ?? this.groups
     );
   }
 
@@ -57,8 +62,8 @@ class Product {
     return {
       'id': id,
       'name': name,
-      'category': service,
-      'family': category,
+      'description': service,
+      'family': description,
       'price': cost.toString(),
       'quantity': quantity.toString(),
       'pwName': pwName

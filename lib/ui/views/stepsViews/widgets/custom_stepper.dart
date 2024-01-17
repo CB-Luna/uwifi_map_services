@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:uwifi_map_services/theme/theme_data.dart';
 
 class StepperWidget extends StatelessWidget {
   final double width;
@@ -44,23 +45,39 @@ class StepperWidget extends StatelessWidget {
 
       list.add(
         //dot with icon view
-        Container(
-          width: 35.0,
-          height: 35.0,
-          padding: const EdgeInsets.all(0),
-          decoration: BoxDecoration(
-            color: circleColor,
-            borderRadius: const BorderRadius.all(Radius.circular(25.0)),
-            border: Border.all(
-              color: activeColor,
-              width: 2.0,
+        Row(
+          children: [
+            Container(
+              width: 35.0,
+              height: 35.0,
+              padding: const EdgeInsets.all(0),
+              decoration: BoxDecoration(
+                color: circleColor,
+                borderRadius: const BorderRadius.all(Radius.circular(25.0)),
+                border: Border.all(
+                  color: activeColor,
+                  width: 2.0,
+                ),
+              ),
+              child: Icon(
+                icon,
+                color: iconColor,
+                size: 18.0,
+              ),
             ),
-          ),
-          child: Icon(
-            icon,
-            color: iconColor,
-            size: 18.0,
-          ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Text(
+                'Checkout',
+                style: TextStyle(
+                  color: colorBgBlack,
+                  fontSize: 18.0,
+                  fontFamily: 'Quicksand',
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
         ),
       );
 

@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:uwifi_map_services/providers/cart_controller.dart';
-
-import '../classes/customer_info.dart';
 import '../ui/views/stepsViews/customer_info_view.dart';
 
 enum Views { customerInfoView}
@@ -74,12 +70,12 @@ class StepsController with ChangeNotifier {
   validateStep(bool cartContains, context) {
     switch (currentStep) {
       case Views.customerInfoView:
-        final cartController = Provider.of<Cart>(context, listen: false);
+        // final cartController = Provider.of<Cart>(context, listen: false);
         if (formValidation() && promoCheckFlag) {
-          cartController.isSelectedGigFastVoice()
-              // ? selectorSummaryview(context)
-              ? null
-              : null;
+          // cartController.isSelectedGigFastVoice()
+          //     // ? selectorSummaryview(context)
+          //     ? null
+          //     : null;
           // popupAcknowledge(context);
           currentStep = Views.customerInfoView;
         }

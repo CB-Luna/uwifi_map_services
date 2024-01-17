@@ -4,80 +4,127 @@ import 'package:supabase_flutter/supabase_flutter.dart' hide Provider;
 import 'package:uwifi_map_services/helpers/globals.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 import 'package:uwifi_map_services/providers/customer_pd_sd_cc_provider.dart';
+import 'package:uwifi_map_services/providers/customer_pd_sd_provider.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/final_popup_fail.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/final_popup_success.dart';
-import '../../../../providers/cart_controller.dart';
-import '../../../../providers/steps_controller.dart';
+import '../../../../../providers/cart_controller.dart';
+import '../../../../../providers/steps_controller.dart';
 import 'cart_buttons.dart';
 
 styledButton(context) {
   final cartController = Provider.of<Cart>(context);
   final stepsController = Provider.of<StepsController>(context);
+  final customerPDSDController = Provider.of<CustomerPDSDProvider>(context);
   final customerPDSDCCController = Provider.of<CustomerPDSDCCProvider>(context);
   final customerInfoController = Provider.of<CustomerInfoProvider>(context);
+
   switch (stepsController.currentStep) {
     //Se controla la leyenda del botón del shopping cart, dependiendo la vista actual del proceso.
     case Views.customerInfoView:
       //Se controla la opacidad del botón (que se haga ver habilitado)
       var opacity = 1.0;
-
       return CartButtons(
           opacity: opacity,
           isVisible: true,
-          buttonText: "Check for Services",
+          buttonText: "Checkout | \$${cartController.total}",
           function: () {
-            bool boolPD = customerPDSDCCController.formValidationPD();
-            bool boolSD = stepsController.formValidation();
-            bool boolACC = customerInfoController.formValidation();
-            bool boolCC = customerPDSDCCController.formValidationCC();
-            if (boolPD && boolSD && boolACC && boolCC) {
-              finalPressed(context, customerPDSDCCController);
+            if (customerPDSDCCController.sameAsSD) {
+              bool boolPD = customerPDSDController.formValidationPD();
+              bool boolSD = stepsController.formValidation();
+              bool boolCC = customerPDSDCCController.formValidationCC();
+                if (boolPD && boolSD && boolCC) {
+                  finalPressed(context, customerPDSDController, customerPDSDController, customerPDSDCCController, true);
+                }
+            } else {
+              bool boolPD = customerPDSDController.formValidationPD();
+              bool boolSD = stepsController.formValidation();
+              bool boolPAD = customerInfoController.formValidation();
+              bool boolCC = customerPDSDCCController.formValidationCC();
+              if (boolPD && boolSD && boolPAD && boolCC) {
+                finalPressed(context, customerPDSDController, customerPDSDController, customerPDSDCCController, false);
+              }
             }
           },
-          cartContains: cartController.products.isNotEmpty);
+          cartContains: cartController.services.isNotEmpty);
 
     default:
       return const Text("");
   }
 }
 
-void finalPressed(BuildContext context,
-      CustomerPDSDCCProvider customerPDSDCCController) async {
+void finalPressed(BuildContext context, CustomerPDSDProvider controllerPesonalD, CustomerPDSDProvider controllerShippingD, CustomerPDSDCCProvider controllerPaymentD, bool sameAsSD) async {
         try {
           dynamic res;
-          var json = {
-            "first_name": customerPDSDCCController.parsedFNamePD.text,
-              "last_name": customerPDSDCCController.parsedLNamePD.text,
-              "email": customerPDSDCCController.parsedEmailPD.text,
-              "mobile_phone": customerPDSDCCController.parsedPhonePD.text,
-              "address": [
-                  {
-                      "address_1": customerPDSDCCController.parsedAddress1SD.text,
-                      "address_2": null,
-                      "zipcode": customerPDSDCCController.parsedZipcodeSD.text,
-                      "city": customerPDSDCCController.parsedCitySD.text,
-                      "state_code": customerPDSDCCController.parsedStateCodeSD.text,
-                      "type": "Physical",
-                      "latitude": "${customerPDSDCCController.positionSD?.toJSON()?.lat}",
-                      "longitude": "${customerPDSDCCController.positionSD?.toJSON()?.lng}"
-                  },
-                  {
-                      "address_1": customerPDSDCCController.parsedAddress1BD.text,
-                      "address_2": null,
-                      "zipcode": int.parse(customerPDSDCCController.parsedZipcodeBD.text),
-                      "city": customerPDSDCCController.parsedCityBD.text,
-                      "state_code": customerPDSDCCController.parsedStateCodeBD.text,
-                      "type": "Billing",
-                      "latitude": "${customerPDSDCCController.positionBD?.toJSON()?.lat}",
-                      "longitude": "${customerPDSDCCController.positionBD?.toJSON()?.lng}"
-                  }
-              ],
-              "services": [
-                  {
-                      "service_id": 1
-                  }
-              ]
-          };
+          var json = {};
+          if (sameAsSD) {
+            json = {
+              "first_name": controllerPesonalD.parsedFNamePD.text,
+                "last_name": controllerPesonalD.parsedLNamePD.text,
+                "email": controllerPesonalD.parsedEmailPD.text,
+                "mobile_phone": controllerPesonalD.parsedPhonePD.text,
+                "address": [
+                    {
+                        "address_1": controllerShippingD.parsedAddress1SD.text,
+                        "address_2": null,
+                        "zipcode": controllerShippingD.parsedZipcodeSD.text,
+                        "city": controllerShippingD.parsedCitySD.text,
+                        "state_code": "TX",
+                        "type": "Physical",
+                        "latitude": controllerShippingD.positionSD?.toJSON()?.lat,
+                        "longitude": controllerShippingD.positionSD?.toJSON()?.lng
+                    },
+                    {
+                        "address_1": controllerShippingD.parsedAddress1SD.text,
+                        "address_2": null,
+                        "zipcode": int.parse(controllerShippingD.parsedZipcodeSD.text),
+                        "city": controllerShippingD.parsedCitySD.text,
+                        "state_code": "TX",
+                        "type": "Billing",
+                        "latitude": controllerShippingD.positionSD?.toJSON()?.lat,
+                        "longitude": controllerShippingD.positionSD?.toJSON()?.lng
+                    }
+                ],
+                "services": [
+                    {
+                        "service_id": 1
+                    }
+                ]
+            };
+          } else {
+            json = {
+              "first_name": controllerPesonalD.parsedFNamePD.text,
+                "last_name": controllerPesonalD.parsedLNamePD.text,
+                "email": controllerPesonalD.parsedEmailPD.text,
+                "mobile_phone": controllerPesonalD.parsedPhonePD.text,
+                "address": [
+                    {
+                        "address_1": controllerShippingD.parsedAddress1SD.text,
+                        "address_2": null,
+                        "zipcode": controllerShippingD.parsedZipcodeSD.text,
+                        "city": controllerShippingD.parsedCitySD.text,
+                        "state_code": "TX",
+                        "type": "Physical",
+                        "latitude": controllerShippingD.positionSD?.toJSON()?.lat,
+                        "longitude": controllerShippingD.positionSD?.toJSON()?.lng
+                    },
+                    {
+                        "address_1": controllerPaymentD.parsedAddress1BD.text,
+                        "address_2": null,
+                        "zipcode": int.parse(controllerPaymentD.parsedZipcodeBD.text),
+                        "city": controllerPaymentD.parsedCityBD.text,
+                        "state_code": "TX",
+                        "type": "Billing",
+                        "latitude": controllerPaymentD.positionBD?.toJSON()?.lat,
+                        "longitude": controllerPaymentD.positionBD?.toJSON()?.lng
+                    }
+                ],
+                "services": [
+                    {
+                        "service_id": 1
+                    }
+                ]
+            };
+          }
 
           res = await supabase.rpc(
             'create_lead',
@@ -107,10 +154,11 @@ void finalPressed(BuildContext context,
               },
             );
           }
+          
         } catch (error) {
           print("Error on Final Pressed: '$error'");
           // ignore: use_build_context_synchronously
-            showDialog(
+          showDialog(
               barrierColor: const Color(0x00022963).withOpacity(0.40),
               barrierDismissible: false,
               context: context,

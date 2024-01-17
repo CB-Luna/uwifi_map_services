@@ -38,6 +38,7 @@ dependencies:
   checkbox_formfield: ^0.2.0
   circular_menu: ^2.0.1
   clay_containers: ^0.3.2
+  customizable_counter: ^1.0.4
   date_format: ^2.0.4
   datetime_picker_formfield: ^2.0.0
   dio: ^4.0.4
@@ -79,6 +80,7 @@ dependencies:
   url_launcher: ^6.0.20
   url_strategy: ^0.2.0
   uuid: ^3.0.7
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_lints: ^2.0.1

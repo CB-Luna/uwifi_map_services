@@ -1,11 +1,4 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:uwifi_map_services/data/repositories_impl/geocode_repository_impl.dart';
-import 'package:uwifi_map_services/data/repositories_impl/suggestions_repository_impl.dart';
-import 'package:uwifi_map_services/providers/remote/geocode_api.dart';
-import 'package:uwifi_map_services/providers/remote/suggestions_api.dart';
-import 'package:uwifi_map_services/providers/search_controller.dart';
 import 'package:uwifi_map_services/ui/layouts/map/widgets/custom_title.dart';
 
 class AuthLayout extends StatefulWidget {
@@ -16,31 +9,17 @@ class AuthLayout extends StatefulWidget {
 }
 
 class _AuthLayoutState extends State<AuthLayout> {
-  SearchLocalController controller = SearchLocalController(
-    SuggestionsRepositoryImpl(
-      SuggestionsAPI(Dio()),
-    ),
-    GeocodeRepositoryImpl(
-      GeocodeAPI(Dio()),
-    ),
-    UniqueKey(),
-  );
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return ChangeNotifierProvider<SearchLocalController>.value(
-      value: controller,
-      // key: ,
-      child: Scaffold(body: chooseBody(size)),
-    );
+    return Scaffold(body: chooseBody(size));
   }
 
   @override
   void dispose() {
     // ignore: avoid_print
     print('Entered AuthLayout dispose() - key: ${widget.key}');
-    controller.dispose();
     super.dispose();
   }
 
@@ -58,11 +37,9 @@ class _MobileBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final searchController = Provider.of<SearchLocalController>(context);
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
-        searchController.clearPlaces();
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -95,12 +72,10 @@ class _DesktopBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final searchController = Provider.of<SearchLocalController>(context);
 
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
-        searchController.clearPlaces();
       },
       child: Row(
         children: [

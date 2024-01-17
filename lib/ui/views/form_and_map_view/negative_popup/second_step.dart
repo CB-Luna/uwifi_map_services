@@ -7,7 +7,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:uwifi_map_services/classes/customer_info.dart';
 import 'package:uwifi_map_services/providers/popup_controller.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
-import 'package:uwifi_map_services/ui/buttons/custom_outlined_button.dart';
+import 'package:uwifi_map_services/ui/views/stepsViews/widgets/buttons/custom_outlined_button.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_checkbox.dart';
 import 'package:uwifi_map_services/ui/inputs/custom_inputs.dart';
 

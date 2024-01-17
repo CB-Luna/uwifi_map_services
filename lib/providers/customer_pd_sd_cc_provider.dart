@@ -180,7 +180,7 @@ class CustomerPDSDCCProvider with ChangeNotifier {
   //Billing Details
   //<<Form>>
   //Bandera Checkbox BD same as SD
-  bool sameAsSD = false;
+  bool sameAsSD = true;
   // Billing Details
   GlobalKey<FormState> formKeyCC = GlobalKey<FormState>();
   final TextEditingController parsedAddress1BD = TextEditingController(text: "");
@@ -202,23 +202,23 @@ class CustomerPDSDCCProvider with ChangeNotifier {
 
   void changeValuesBillingDetails() {
     sameAsSD = !sameAsSD;
-    if (sameAsSD) {
-      parsedAddress1BD.text = parsedAddress1SD.text;
-      parsedAddress2BD.text = parsedAddress2SD.text;
-      parsedZipcodeBD.text = parsedZipcodeSD.text;
-      parsedCityBD.text = parsedCitySD.text;
-      parsedStateBD.text = parsedStateSD.text;
-      parsedStateCodeBD.text = parsedStateCodeSD.text;
-      positionBD = positionSD;
-    } else {
-      parsedAddress1BD.text = "";
-      parsedAddress2BD.text = "";
-      parsedZipcodeBD.text = "";
-      parsedCityBD.text = "";
-      parsedStateBD.text = "";
-      parsedStateCodeBD.text = "";
-      positionBD = null;
-    }
+    // if (sameAsSD) {
+    //   parsedAddress1BD.text = parsedAddress1SD.text;
+    //   parsedAddress2BD.text = parsedAddress2SD.text;
+    //   parsedZipcodeBD.text = parsedZipcodeSD.text;
+    //   parsedCityBD.text = parsedCitySD.text;
+    //   parsedStateBD.text = parsedStateSD.text;
+    //   parsedStateCodeBD.text = parsedStateCodeSD.text;
+    //   positionBD = positionSD;
+    // } else {
+    //   parsedAddress1BD.text = "";
+    //   parsedAddress2BD.text = "";
+    //   parsedZipcodeBD.text = "";
+    //   parsedCityBD.text = "";
+    //   parsedStateBD.text = "";
+    //   parsedStateCodeBD.text = "";
+    //   positionBD = null;
+    // }
     notifyListeners();
   }
 

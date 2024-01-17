@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:uwifi_map_services/ui/buttons/custom_outlined_button.dart';
+import 'package:uwifi_map_services/ui/views/stepsViews/widgets/buttons/custom_outlined_button.dart';
 
 class ThirdStep extends StatelessWidget {
   const ThirdStep({

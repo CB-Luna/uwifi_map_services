@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:uwifi_map_services/providers/customer_info_controller.dart';
+import 'package:uwifi_map_services/providers/customer_ssn_acp_provider.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 
 class PromoCheckbox extends StatefulWidget {
@@ -17,8 +17,8 @@ class PromoCheckboxState extends State<PromoCheckbox> {
 
   @override
   Widget build(BuildContext context) {
-    final customerController =
-        Provider.of<CustomerInfoProvider>(context, listen: false);
+    final customerSSNACPController =
+        Provider.of<CustomerSSNACPProvider>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Column(
@@ -40,11 +40,12 @@ class PromoCheckboxState extends State<PromoCheckbox> {
                   width: 2.0
                 ),
                 value: emailCheckbox,
+                checkColor: colorBgWhite,
                 onChanged: (emailyes) {
                   setState(() {
                     emailCheckbox = emailyes!;
                   });
-                  customerController.promoInfobyEmail = emailCheckbox;
+                  customerSSNACPController.promoInfobyEmail = emailCheckbox;
                 },
               ),
             ],
@@ -65,11 +66,12 @@ class PromoCheckboxState extends State<PromoCheckbox> {
                   width: 2.0
                 ),
                 value: smsCheckbox,
+                checkColor: colorBgWhite,
                 onChanged: (smsyes) {
                   setState(() {
                     smsCheckbox = smsyes!;
                   });
-                  customerController.promoInfoibySMS = smsCheckbox;
+                  customerSSNACPController.promoInfoibySMS = smsCheckbox;
                 },
               ),
             ],

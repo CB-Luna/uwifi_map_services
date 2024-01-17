@@ -46,8 +46,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
       ),
       borderRadius: BorderRadius.circular(5),
       elevation: 0,
-      dropdownColor: colorBgWhite,
-      style: const TextStyle(color: colorPrimary),
+      dropdownColor: colorPrimaryDark,
       onChanged: widget.onChanged,
       value: widget.dropdownValue,
       items: widget.list.map<DropdownMenuItem<String>>((String value) {
@@ -56,7 +55,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
           child: Text(
             value,
             style: const TextStyle(
-              color: colorPrimary,
+              color: colorBgWhite,
               fontFamily: 'Bicyclette-Thin',
             ),
           ),

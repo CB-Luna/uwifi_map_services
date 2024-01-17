@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
-class CustomerInfoProvider with ChangeNotifier {
+class CustomerSSNACPProvider with ChangeNotifier {
+
+  //Remember my ACP Number
+  bool acpNumberR = false;
+  // ACP Number
+  final TextEditingController acpNumber = TextEditingController(text: "");
+  // SSN Lat 4 digits
+  final TextEditingController ssn4LD = TextEditingController(text: "");
+
   final TextEditingController parsedFName = TextEditingController();
   final TextEditingController parsedLName = TextEditingController();
   final TextEditingController parsedPhone = TextEditingController();
@@ -8,9 +16,10 @@ class CustomerInfoProvider with ChangeNotifier {
   //controllers for the Card Info
   final TextEditingController parsedName = TextEditingController();
 
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  bool formValidation() {
-    return (formKey.currentState!.validate()) ? true : false;
+  GlobalKey<FormState> formKeySSNACP = GlobalKey<FormState>();
+
+  bool formValidationSSNACP() {
+    return (formKeySSNACP.currentState!.validate()) ? true : false;
   }
 
   //Card Variables
@@ -195,6 +204,11 @@ class CustomerInfoProvider with ChangeNotifier {
     portabilityInfo['listbillingTelephone'] = billingTelephone;
 
     portabilityCheck = true;
+  }
+
+  void changeRemeberACPNumber() {
+    acpNumberR = !acpNumberR;
+    notifyListeners();
   }
 
 }

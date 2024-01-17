@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../../../../providers/popup_controller.dart';
-import '../../../../buttons/custom_outlined_button.dart';
+import '../../../stepsViews/widgets/buttons/custom_outlined_button.dart';
 import '../../../../inputs/custom_radio_button.dart';
 
 class LocationStep extends StatelessWidget {

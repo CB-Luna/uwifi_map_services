@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
-import 'package:uwifi_map_services/ui/views/stepsViews/step1_personal_details_form.dart';
-import 'package:uwifi_map_services/ui/views/stepsViews/step3_billing_information.dart';
-import 'package:uwifi_map_services/ui/views/stepsViews/step2_shipping_details_form.dart';
+import 'package:uwifi_map_services/ui/views/stepsViews/full_form_widget.dart';
+import 'package:uwifi_map_services/ui/views/stepsViews/widgets/cart_summary_widget.dart';
 
 import '../../../providers/steps_controller.dart';
 
@@ -21,7 +20,8 @@ class CustomerInfoView extends StatefulWidget {
       required this.street,
       required this.city,
       required this.state,
-      required this.zipcode})
+      required this.zipcode
+      })
       : super(key: key);
 
   @override
@@ -52,7 +52,7 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       var stepsController =
           Provider.of<StepsController>(context, listen: false);
-      (MediaQuery.of(context).size.width >= 1130)
+      (MediaQuery.of(context).size.width >= 1024)
           ? stepsController.promoCheck(true)
           : stepsController.promoCheck(false);
 
@@ -60,7 +60,7 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
         double maxScroll = _scrollController.position.maxScrollExtent;
 
         if (_scrollController.offset >= (maxScroll - 85) ||
-            MediaQuery.of(context).size.width >= 1130) {
+            MediaQuery.of(context).size.width >= 1024) {
           setState(() {
             stepsController.promoCheck(true);
           });
@@ -80,8 +80,8 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
     var stepsController = Provider.of<StepsController>(context, listen: false);
     // final customerInfo = Provider.of<CustomerInfoProvider>(context);
     return Scaffold(
-      backgroundColor: colorBgB,
-      body: (MediaQuery.of(context).size.width > 1130)
+      backgroundColor: colorBgWhite,
+      body: (MediaQuery.of(context).size.width > 1024)
           ? const _WebView()
           :
           ///CLASS JAIL HERE
@@ -92,15 +92,20 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
                   SizedBox(
                     height: 10
                   ),
-                  Step1PersonalDetailsForm(),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Step2ShippingDetailsForm(),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Step3BillingInformationForm(),
+                  FullFormWidget()
+                  // WhatIsACP(),
+                  // SizedBox(
+                  //   height: 10
+                  // ),
+                  // Step1ACPSSNForm(),
+                  // SizedBox(
+                  //   height: 10,
+                  // ),
+                  // Step2PersonalDetailsForm(),
+                  // SizedBox(
+                  //   height: 10,
+                  // ),
+                  // Step3ShippingDetailsForm(),
                 ],
               ),
             ),
@@ -214,21 +219,17 @@ class _WebView extends StatefulWidget {
 class _WebViewState extends State<_WebView> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        controller: ScrollController(),
-        padding: const EdgeInsets.all(0),
-        child: Container(
-          padding: const EdgeInsets.fromLTRB(50, 10, 50, 0),
-          child: const Column(
-            children: [
-              Center(),
-              Step1PersonalDetailsForm(),
-              SizedBox(height: 10),
-              Step2ShippingDetailsForm(),
-              SizedBox(height: 10),
-              Step3BillingInformationForm(),
-            ],
-          ),
-        ));
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Despliegue de Formulario
+          FullFormWidget(),
+          // Despliegue de Shopping Cart
+          CartSummaryWidget()
+        ],
+      ),
+    );
   }
 }

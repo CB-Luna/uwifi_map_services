@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:uwifi_map_services/providers/customer_pd_sd_cc_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
-import 'package:uwifi_map_services/ui/views/stepsViews/widgets/custom_credit_card.dart';
-import 'package:uwifi_map_services/ui/views/stepsViews/widgets/custom_form_credit_card.dart';
 
-class Step3BillingInformationForm extends StatefulWidget {
-  const Step3BillingInformationForm({Key? key}) : super(key: key);
+class WhatIsACP extends StatefulWidget {
+  const WhatIsACP({Key? key}) : super(key: key);
 
   @override
-  State<Step3BillingInformationForm> createState() => _Step3BillingInformationFormState();
+  State<WhatIsACP> createState() => _WhatIsACPState();
 }
 
-class _Step3BillingInformationFormState extends State<Step3BillingInformationForm> {
+class _WhatIsACPState extends State<WhatIsACP> {
   TextEditingController number = TextEditingController(text:"");
   TextEditingController ccv = TextEditingController(text:"");
   TextEditingController date = TextEditingController(text:"");
@@ -22,12 +19,12 @@ class _Step3BillingInformationFormState extends State<Step3BillingInformationFor
 
   @override
   Widget build(BuildContext context) {
-    final customerPDSDCCController = Provider.of<CustomerPDSDCCProvider>(context);
     final isMobile = MediaQuery.of(context).size.width < 1024 ? true : false;
     return Column(
       children: [
         Container(
               width: 1400,
+              height: 210,
               decoration: BoxDecoration(
                 color: colorInversePrimary,
                 boxShadow: const [
@@ -67,7 +64,7 @@ class _Step3BillingInformationFormState extends State<Step3BillingInformationFor
                                     ),
                                   ),
                                   Text(
-                                    'Step 3: Billing Information',
+                                    'What is ACP?',
                                     style: TextStyle(
                                       color: colorInversePrimary,
                                       fontSize: isMobile ? 14 : 18,
@@ -77,54 +74,55 @@ class _Step3BillingInformationFormState extends State<Step3BillingInformationFor
                                 ],
                               ),
                             ),
-                            Flexible(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Same as Shipping Address',
-                                    style: GoogleFonts.workSans(
-                                    fontSize: isMobile ? 12 : 18,
-                                    color: colorInversePrimary,
-                                    fontWeight: FontWeight.normal)),
-                                  Checkbox(
-                                    side: const BorderSide(
-                                      color: colorBgWhite,
-                                      width: 2.0
+                            Wrap(
+                              children: [
+                                Text(
+                                  'For more information: ',
+                                  style: GoogleFonts.workSans(
+                                  fontSize: isMobile ? 12 : 18,
+                                  color: colorInversePrimary,
+                                  fontWeight: FontWeight.normal)),
+                                GestureDetector(
+                                  onTap: () async {
+                                    // Abrir el enlace cuando se toque
+                                    await launchUrl(Uri.parse(
+                                    'https://www.fcc.gov/acp'));
+                                  },
+                                  child: Text(
+                                    'https://www.fcc.gov/acp',
+                                    style: TextStyle(
+                                      color: colorInversePrimary,
+                                      fontSize: isMobile ? 12 : 18,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                    value: customerPDSDCCController.sameAsSD,
-                                    onChanged: (bool? value) {
-                                      customerPDSDCCController.changeValuesBillingDetails();
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
+                                  ),)
+                              ],
+                            )
+
                           ],
                         ),
                       ),
                     ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 30),
-                      child: isMobile ? const Column(
-                        children: [
-                          CustomCreditCard(),
-                          CustomFormCreditCard(),
-                        ],
-                      )
-                      :
-                      const Row(
-                        children: [
-                          Flexible(
-                            flex: 1,
-                            child: CustomCreditCard()
-                          ),
-                          Flexible(
-                            flex: 2,
-                            child: CustomFormCreditCard()
-                          ),
-                        ],
+                    Flexible(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 30),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  "The Affordable Connectivity Program is an FCC benefit initiative aimed at making broadband more affordable for households, ensuring access for work, education, healthcare, and other needs. The program offers a discount of up to \$30 per month for internet service, with a higher allowance of up to \$75 per month for households in qualifying Tribal lands.",
+                                  style: GoogleFonts.workSans(
+                                  fontSize: isMobile ? 12 : 18,
+                                  color: colorPrimary,
+                                  fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ]),

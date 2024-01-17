@@ -9,12 +9,14 @@ import 'package:uwifi_map_services/providers/cart_controller.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 import 'package:uwifi_map_services/providers/customer_pd_sd_cc_provider.dart';
+import 'package:uwifi_map_services/providers/customer_pd_sd_provider.dart';
+import 'package:uwifi_map_services/providers/customer_ssn_acp_provider.dart';
+import 'package:uwifi_map_services/providers/remote/suggestions_api.dart';
 import 'package:uwifi_map_services/router/router.dart';
 import 'package:uwifi_map_services/services/navigation_service.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uuid/uuid.dart';
 
-import 'providers/remote/suggestions_api.dart';
 import 'providers/tracking_provider.dart';
 
 void main() async {
@@ -47,8 +49,16 @@ class AppState extends StatelessWidget {
         ),
         //Provider para carrito de compras
         ChangeNotifierProvider<Cart>(create: (_) => Cart()),
-        //Provider para customer Personal Details, Shipping Details y Credit Card
+        //Provider para customer Personal Details y Shipping Details
         //Provider para llenado automático de Address
+        ChangeNotifierProvider<CustomerPDSDProvider>(
+          create: (_) => CustomerPDSDProvider(
+              SuggestionsRepositoryImpl(
+                SuggestionsAPI(Dio()),
+              ),
+              UniqueKey(),
+              notify: false),
+        ),
         ChangeNotifierProvider<CustomerPDSDCCProvider>(
           create: (_) => CustomerPDSDCCProvider(
               SuggestionsRepositoryImpl(
@@ -59,6 +69,11 @@ class AppState extends StatelessWidget {
               ),
               UniqueKey(),
               notify: false),
+        ),
+        //Provider para customer SSN Y ACP
+        ChangeNotifierProvider<CustomerSSNACPProvider>(
+          create: (_) => CustomerSSNACPProvider(
+          ),
         ),
         ChangeNotifierProvider<CustomerInfoProvider>(
           create: (_) => CustomerInfoProvider(
@@ -76,7 +91,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'UWIFI Map Services',
+        title: 'U-wifi Map Services ACP',
         debugShowCheckedModeBanner: false,
         initialRoute: Flurorouter.rootRoute,
         onGenerateRoute: Flurorouter.router.generator,

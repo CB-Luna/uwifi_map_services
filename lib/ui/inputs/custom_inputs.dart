@@ -24,16 +24,31 @@ class CustomInputs {
         focusedBorder: OutlineInputBorder(
             borderRadius: getBorderRadius(autoSuggest),
             borderSide: getBordeSide(autoSuggest, colorPrimaryDark)),
-        fillColor: isAvailable ? colorBgWhite : colorBgLight,
+        fillColor: isAvailable ? colorBgWhite.withOpacity(0.25) : colorBgLight.withOpacity(0.25),
         filled: true,
         hintText: hint,
         labelText: label,
         prefixIcon: Icon(
           icon,
-          color: isAvailable ? colorPrimary : colorSecondary,
+          color: isAvailable ? colorBgWhite : colorBgLight,
         ),
-        labelStyle: TextStyle(color: isAvailable ? colorPrimary : colorSecondary),
-        hintStyle: TextStyle(color: hintColor),
+        labelStyle: TextStyle(
+            color: isAvailable ? colorBgWhite : colorBgLight,
+            fontSize: 20,
+            fontFamily: 'Quicksand',
+            fontWeight: FontWeight.w500,
+            height: 0.08,
+          ),
+        hintStyle: TextStyle(
+            color: isAvailable ? colorBgWhite : colorBgLight,
+            fontSize: 20,
+            fontFamily: 'Quicksand',
+            fontWeight: FontWeight.w500,
+            height: 0.08,
+          ),
+        errorStyle: const TextStyle(
+            color: colorBgWhite,
+          ),
         constraints: BoxConstraints(maxHeight: maxHeight, maxWidth: maxWidth));
   }
 
@@ -42,7 +57,7 @@ class CustomInputs {
       return const BorderRadius.only(
           topLeft: Radius.circular(22), topRight: Radius.circular(22));
     } else {
-      return BorderRadius.circular(50);
+      return BorderRadius.circular(10);
     }
   }
 

@@ -8,7 +8,7 @@ import '../../../../../providers/popup_controller.dart';
 import '../../../../classes/customer_info.dart';
 import '../../../../providers/cart_controller.dart';
 import '../../../../router/router.dart';
-import '../../../buttons/custom_outlined_button.dart';
+import '../../stepsViews/widgets/buttons/custom_outlined_button.dart';
 class PlanTypeStep extends StatelessWidget {
   final CustomerInfo? customerInfo;
 
