@@ -101,6 +101,7 @@ class SelectorCountItemWidget extends StatelessWidget {
             AbsorbPointer(
               absorbing: isRequired,
               child: CustomizableCounter(
+                borderColor: isRequired ? colorInversePrimary : colorBgBlack,
                 minCount: 1,
                 count: counter.toDouble(),
                 onIncrement: onIncrementDecrement,
