@@ -11,72 +11,72 @@ class ExtrasSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final cartController = Provider.of<Cart>(context);
     
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: SizedBox(
-        height: 350,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width * 0.12,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(
-                      "https://nsrprlygqaqgljpfggjh.supabase.co/storage/v1/object/public/assets/fresh_merch.png"),
-                  fit: BoxFit.fill,
-                ),
+    return SizedBox(
+      height: 350,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width * 0.11,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(
+                    "https://nsrprlygqaqgljpfggjh.supabase.co/storage/v1/object/public/assets/fresh_merch.png"),
+                fit: BoxFit.fill,
               ),
             ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.38,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  //Imagenes de arriba
-                  Row(
-                    children: [
-                      //Imagen del Logo
-                      Flexible(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.19,
-                            height: 150,
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://nsrprlygqaqgljpfggjh.supabase.co/storage/v1/object/public/assets/image_u-wifi.png"),
-                                fit: BoxFit.fill,
-                              ),
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.34,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                //Imagenes de arriba
+                Row(
+                  children: [
+                    //Imagen del Logo
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.17,
+                          height: 150,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  "https://nsrprlygqaqgljpfggjh.supabase.co/storage/v1/object/public/assets/image_u-wifi.png"),
+                              fit: BoxFit.fill,
                             ),
                           ),
                         ),
                       ),
-                      //Accesorios
-                      Flexible(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.19,
-                            height: 150,
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://nsrprlygqaqgljpfggjh.supabase.co/storage/v1/object/public/assets/internet_accesories.png?t=2024-01-09T19%3A33%3A27.960Z"),
-                                fit: BoxFit.fill,
-                              ),
+                    ),
+                    //Accesorios
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.17,
+                          height: 150,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  "https://nsrprlygqaqgljpfggjh.supabase.co/storage/v1/object/public/assets/internet_accesories.png?t=2024-01-09T19%3A33%3A27.960Z"),
+                              fit: BoxFit.fill,
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                  //Carrousel
-                  Flexible(
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.35,
-                      height: 200,
+                    ),
+                  ],
+                ),
+                //Carrousel
+                Flexible(
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.34,
+                    height: 200,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: CarouselSlider(
                         options: CarouselOptions(
                           viewportFraction: cartController.merchant.length > 2 ?  0.4 : 0.6,
@@ -134,11 +134,11 @@ class ExtrasSection extends StatelessWidget {
                       ),
                     ),
                   ),
-                ],
-              ),
-            )
-          ],
-        ),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

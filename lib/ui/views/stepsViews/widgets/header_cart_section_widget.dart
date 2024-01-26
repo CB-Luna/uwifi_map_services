@@ -8,9 +8,8 @@ class HeaderCartSectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(padding: const EdgeInsets.all(16.0),
-    child: Container(
-        width: MediaQuery.of(context).size.width,
+    return Container(
+        width: MediaQuery.of(context).size.width * 0.45,
         height: MediaQuery.of(context).size.height * 0.05,
         padding: const EdgeInsets.only(bottom: 5),
         decoration: const BoxDecoration(
@@ -30,11 +29,10 @@ class HeaderCartSectionWidget extends StatelessWidget {
                         fontSize: 26.99,
                         fontFamily: 'Quicksand',
                         fontWeight: FontWeight.w600,
-                        height: 0.06,
                     ),
                 ),
             ],
         ),
-    ),);
+    );
   }
 }

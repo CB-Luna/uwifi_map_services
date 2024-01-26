@@ -13,10 +13,12 @@ class BottomCartSectionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartController = Provider.of<Cart>(context);
+    final size = MediaQuery.of(context).size;
+    final bool responsive = size.width < 1230 ? true : false;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
       child: Container(
-        width: 900,
+        width: MediaQuery.of(context).size.width,
         height: 200,
         decoration: ShapeDecoration(
           gradient: const LinearGradient(
@@ -39,7 +41,7 @@ class BottomCartSectionWidget extends StatelessWidget {
                   Row(
                     children: [
                       SizedBox(
-                        width: 130,
+                        width: responsive ? 80 : 130,
                         height: 35,
                         child: TextFormField(
                           cursorColor: colorBorder,
@@ -79,10 +81,10 @@ class BottomCartSectionWidget extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      const SizedBox(
-                        width: 150,
+                    SizedBox(
+                        width: responsive ? 130 : 150,
                         height: 30,
-                        child: CustomOutlinedButton(
+                        child: const CustomOutlinedButton(
                           text: "Apply Coupon",
                         ),
                       ),
@@ -140,7 +142,7 @@ class BottomCartSectionWidget extends StatelessWidget {
                     thirdString: "",
                   ),
                   SizedBox (
-                    width: 190,
+                    width: responsive ? 150 : 190,
                     child: styledButton(context)),
                 ],
               ),

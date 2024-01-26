@@ -20,17 +20,14 @@ class CartWidget extends StatelessWidget {
     final cartBehavior = Provider.of<BoxesBehavior>(context);
     final scrollController =  ScrollController();
 
-    final size = MediaQuery.of(context).size;
-    final bool mobile = size.width < 1024 ? true : false;
-
     return cartBehavior.isCartVisible
         ? Visibility(
             visible: cartBehavior.isCartVisible,
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 500),
               curve: Curves.easeInOut,
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.5,
+              width: MediaQuery.of(context).size.width * 0.45,
+              height: MediaQuery.of(context).size.height * 0.45,
               decoration: ShapeDecoration(
                 shape: RoundedRectangleBorder(
                   side: const BorderSide(width: 1.5, color: colorBorder),
@@ -62,7 +59,6 @@ class CartWidget extends StatelessWidget {
                         thumbVisibility: true,
                         child: SingleChildScrollView(
                         controller: scrollController,
-                        padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: <Widget>[
                                             

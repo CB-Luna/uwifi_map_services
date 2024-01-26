@@ -11,20 +11,25 @@ class CartSummaryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Flexible(
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.6,
-        height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
-          controller: ScrollController(),
-          child: const Column(
-            children: [
-              ExtrasSection(),
-              HeaderCartSectionWidget(),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                child: CartWidget(),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        child: Center(
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.45,
+            height: MediaQuery.of(context).size.height,
+            child: SingleChildScrollView(
+              controller: ScrollController(),
+              child: const Column(
+                children: [
+                  HeaderCartSectionWidget(),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    child: CartWidget(),
+                  ),
+                  ExtrasSection(),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),
