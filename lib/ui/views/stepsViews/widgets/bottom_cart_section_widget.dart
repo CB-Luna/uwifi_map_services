@@ -19,7 +19,7 @@ class BottomCartSectionWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
       child: Container(
         width: MediaQuery.of(context).size.width,
-        height: 200,
+        height: isMobile ? 155.0 : 200.0,
         decoration: ShapeDecoration(
           gradient: const LinearGradient(
             begin: Alignment(-1.00, -0.04),
@@ -30,7 +30,130 @@ class BottomCartSectionWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
           ),
         ),
-        child: Row(
+        child: isMobile ?
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  RowSummaryWidget(
+                    firstString: "Subtotal",
+                    secondString: "\$${cartController.total}",
+                    thirdString: "Items (${cartController.generalCartCounter})",
+                    size: 12,
+                  ),
+                   const RowSummaryWidget(
+                    firstString: "Taxes",
+                    secondString: "\$0.00",
+                    thirdString: "",
+                    size: 14,
+                  ),
+                   const RowSummaryWidget(
+                    firstString: "Shipping Cost",
+                    secondString: "\$0.00",
+                    thirdString: "",
+                    size: 12,
+                  ),
+                  Visibility(
+                    visible: !isMobile,
+                    child: SizedBox (
+                      width: 150,
+                      child: styledButton(context)),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: isMobile ? 120 : 130,
+                  height: 35,
+                  child: TextFormField(
+                    cursorColor: colorBorder,
+                      decoration: InputDecoration(
+                        labelText: 'Coupon Code',
+                        labelStyle: const TextStyle(
+                            color: colorBorder,
+                            fontSize: 14,
+                            fontFamily: 'Quicksand',
+                            fontWeight: FontWeight.w600,
+                          ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                          borderSide: const BorderSide(
+                            color: colorBgWhite
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                          borderSide: const BorderSide(
+                            color: colorBgWhite
+                          ),
+                        ),
+                        filled: true,
+                        fillColor: colorBgWhite,
+                      ),
+                      style: const TextStyle(
+                        color: colorBorder,
+                        fontSize: 14,
+                        fontFamily: 'Quicksand',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+              SizedBox(
+                  width: isMobile ? 130 : 150,
+                  height: 30,
+                  child: const CustomOutlinedButton(
+                    text: "Apply Coupon",
+                  ),
+                ),
+              ],
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 5.0),
+              child: Text(
+                'SECURE PAYMENTS PROVIDED BY',
+                style: TextStyle(
+                  color: colorBorder,
+                  fontSize: 9.57,
+                  fontFamily: 'Quicksand',
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                LogosPaymentsWidget(
+                  isLastOne: false,
+                  source: "https://nsrprlygqaqgljpfggjh.supabase.co/storage/v1/object/public/assets/mastercard.png?t=2024-01-09T03%3A45%3A54.326Z",
+                  width: 30.0,
+                  height: 15.0,
+                ),
+                LogosPaymentsWidget(
+                  isLastOne: false,
+                  source: "https://nsrprlygqaqgljpfggjh.supabase.co/storage/v1/object/public/assets/visa.png",
+                  width: 30.0,
+                  height: 15.0,
+                ),
+                LogosPaymentsWidget(
+                  isLastOne: false,
+                  source: "https://nsrprlygqaqgljpfggjh.supabase.co/storage/v1/object/public/assets/visa.png",
+                  width: 30.0,
+                  height: 15.0,
+                ),
+              ],
+            )
+          ],
+        )
+        :
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Padding(
@@ -82,7 +205,7 @@ class BottomCartSectionWidget extends StatelessWidget {
                         width: 10,
                       ),
                     SizedBox(
-                        width: isMobile ? 120 : 150,
+                        width: isMobile ? 130 : 150,
                         height: 30,
                         child: const CustomOutlinedButton(
                           text: "Apply Coupon",
@@ -105,15 +228,21 @@ class BottomCartSectionWidget extends StatelessWidget {
                     children: [
                       LogosPaymentsWidget(
                         isLastOne: false,
-                        source: "https://nsrprlygqaqgljpfggjh.supabase.co/storage/v1/object/public/assets/mastercard.png?t=2024-01-09T03%3A45%3A54.326Z"
+                        source: "https://nsrprlygqaqgljpfggjh.supabase.co/storage/v1/object/public/assets/mastercard.png?t=2024-01-09T03%3A45%3A54.326Z",
+                        width: 45.0,
+                        height: 25.0,
                       ),
                       LogosPaymentsWidget(
                         isLastOne: false,
-                        source: "https://nsrprlygqaqgljpfggjh.supabase.co/storage/v1/object/public/assets/visa.png"
+                        source: "https://nsrprlygqaqgljpfggjh.supabase.co/storage/v1/object/public/assets/visa.png",
+                        width: 45.0,
+                        height: 25.0,
                       ),
                       LogosPaymentsWidget(
                         isLastOne: false,
-                        source: "https://nsrprlygqaqgljpfggjh.supabase.co/storage/v1/object/public/assets/visa.png"
+                        source: "https://nsrprlygqaqgljpfggjh.supabase.co/storage/v1/object/public/assets/visa.png",
+                        width: 45.0,
+                        height: 25.0,
                       ),
                     ],
                   )
@@ -130,16 +259,19 @@ class BottomCartSectionWidget extends StatelessWidget {
                     firstString: "Subtotal",
                     secondString: "\$${cartController.total}",
                     thirdString: "Items (${cartController.generalCartCounter})",
+                    size: 12,
                   ),
                    const RowSummaryWidget(
                     firstString: "Taxes",
                     secondString: "\$0.00",
                     thirdString: "",
+                    size: 16,
                   ),
                    const RowSummaryWidget(
                     firstString: "Shipping Cost",
                     secondString: "\$0.00",
                     thirdString: "",
+                    size: 12,
                   ),
                   Visibility(
                     visible: !isMobile,
@@ -151,7 +283,7 @@ class BottomCartSectionWidget extends StatelessWidget {
               ),
             ),
           ],
-        )
+        ),
       ),
     );
   }
@@ -161,23 +293,26 @@ class RowSummaryWidget extends StatelessWidget {
   final String firstString;
   final String secondString;
   final String thirdString;
+  final double size;
 
   const RowSummaryWidget({
     super.key, 
     required this.firstString, 
     required this.secondString, 
     required this.thirdString,
+    required this.size,
   });
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           firstString,
-          style: const TextStyle(
+          style: TextStyle(
             color: colorInversePrimary,
-            fontSize: 10,
+            fontSize: size,
             fontFamily: 'Quicksand',
             fontWeight: FontWeight.w700,
           ),
@@ -185,9 +320,9 @@ class RowSummaryWidget extends StatelessWidget {
         const SizedBox(width: 5,),
         Text(
           secondString,
-          style: const TextStyle(
+          style: TextStyle(
             color: colorInversePrimary,
-            fontSize: 14,
+            fontSize: size,
             fontFamily: 'Quicksand',
             fontWeight: FontWeight.w700,
           ),
@@ -195,9 +330,9 @@ class RowSummaryWidget extends StatelessWidget {
         const SizedBox(width: 5,),
         Text(
           thirdString,
-          style: const TextStyle(
+          style: TextStyle(
             color: colorInversePrimary,
-            fontSize: 12,
+            fontSize: size,
             fontFamily: 'Quicksand',
             fontWeight: FontWeight.w200,
           ),
@@ -210,11 +345,15 @@ class RowSummaryWidget extends StatelessWidget {
 class LogosPaymentsWidget extends StatelessWidget {
   final String source;
   final bool isLastOne;
+  final double width;
+  final double height;
 
   const LogosPaymentsWidget({
     super.key, 
     required this.source, 
     required this.isLastOne,
+    required this.width,
+    required this.height
   });
 
   @override
@@ -222,8 +361,8 @@ class LogosPaymentsWidget extends StatelessWidget {
     return Row(
       children: [
         Container(
-          width: 45.00,
-          height: 25.00,
+          width: width,
+          height: height,
           decoration: ShapeDecoration(
             color: colorBgWhite,
             shape: RoundedRectangleBorder(

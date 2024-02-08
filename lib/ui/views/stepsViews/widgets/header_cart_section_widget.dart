@@ -19,7 +19,7 @@ class HeaderCartSectionWidget extends StatelessWidget {
                 bottom: BorderSide(width: 2, color: colorBorder),
             ),
         ),
-        child: const Row(
+        child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,7 +28,7 @@ class HeaderCartSectionWidget extends StatelessWidget {
                     'Cart Summary',
                     style: TextStyle(
                         color: colorBgDark,
-                        fontSize: 26.99,
+                        fontSize: isMobile ? 18.0 : 27.0,
                         fontFamily: 'Quicksand',
                         fontWeight: FontWeight.w600,
                     ),
