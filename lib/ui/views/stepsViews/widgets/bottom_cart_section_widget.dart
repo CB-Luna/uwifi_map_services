@@ -14,7 +14,7 @@ class BottomCartSectionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final cartController = Provider.of<Cart>(context);
     final size = MediaQuery.of(context).size;
-    final bool responsive = size.width < 1230 ? true : false;
+    final bool isMobile = size.width < 1024 ? true : false;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
       child: Container(
@@ -41,7 +41,7 @@ class BottomCartSectionWidget extends StatelessWidget {
                   Row(
                     children: [
                       SizedBox(
-                        width: responsive ? 80 : 130,
+                        width: isMobile ? 80 : 130,
                         height: 35,
                         child: TextFormField(
                           cursorColor: colorBorder,
@@ -82,7 +82,7 @@ class BottomCartSectionWidget extends StatelessWidget {
                         width: 10,
                       ),
                     SizedBox(
-                        width: responsive ? 130 : 150,
+                        width: isMobile ? 120 : 150,
                         height: 30,
                         child: const CustomOutlinedButton(
                           text: "Apply Coupon",
@@ -141,9 +141,12 @@ class BottomCartSectionWidget extends StatelessWidget {
                     secondString: "\$0.00",
                     thirdString: "",
                   ),
-                  SizedBox (
-                    width: responsive ? 150 : 190,
-                    child: styledButton(context)),
+                  Visibility(
+                    visible: !isMobile,
+                    child: SizedBox (
+                      width: 150,
+                      child: styledButton(context)),
+                  ),
                 ],
               ),
             ),
@@ -174,10 +177,9 @@ class RowSummaryWidget extends StatelessWidget {
           firstString,
           style: const TextStyle(
             color: colorInversePrimary,
-            fontSize: 12,
+            fontSize: 10,
             fontFamily: 'Quicksand',
             fontWeight: FontWeight.w700,
-            height: 0.09,
           ),
         ),
         const SizedBox(width: 5,),
@@ -185,10 +187,9 @@ class RowSummaryWidget extends StatelessWidget {
           secondString,
           style: const TextStyle(
             color: colorInversePrimary,
-            fontSize: 16,
+            fontSize: 14,
             fontFamily: 'Quicksand',
             fontWeight: FontWeight.w700,
-            height: 0.07,
           ),
         ),
         const SizedBox(width: 5,),
@@ -199,7 +200,6 @@ class RowSummaryWidget extends StatelessWidget {
             fontSize: 12,
             fontFamily: 'Quicksand',
             fontWeight: FontWeight.w200,
-            height: 0.07,
           ),
         )
       ],

@@ -89,6 +89,7 @@ class _Step1ACPSSNFormState extends State<Step1ACPSSNForm> {
                       width: 2.0
                     ),
                     activeColor: colorBgWhite,
+                    checkColor: colorPrimary,
                     value: customerSSNACPController.acpNumberR,
                     onChanged: (bool? value) {
                       customerSSNACPController.changeRemeberACPNumber();

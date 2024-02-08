@@ -30,7 +30,7 @@ class SelectorCountItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final bool responsive = size.width < 1230 ? true : false;
+    final bool isMobile = size.width < 1024 ? true : false;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Container(
@@ -56,8 +56,8 @@ class SelectorCountItemWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Container(
-                width: 60.0,
-                height: 60.0,
+                width: isMobile ? 45.0 : 50.0,
+                height: isMobile ? 45.0 : 50.0,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: NetworkImage(image),
@@ -69,7 +69,7 @@ class SelectorCountItemWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: SizedBox(
-                width: responsive ? 160.0 : 220.0,
+                width: isMobile ? 180.0 : 200.0,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
@@ -78,7 +78,7 @@ class SelectorCountItemWidget extends StatelessWidget {
                       title,
                       style: TextStyle(
                         color: isRequired ? colorInversePrimary : colorBgBlack,
-                        fontSize: 20.0,
+                        fontSize: isMobile ? 14.0 : 20.0,
                         fontFamily: 'Quicksand',
                         fontWeight: FontWeight.w700,
                       ),
@@ -88,7 +88,7 @@ class SelectorCountItemWidget extends StatelessWidget {
                       description,
                       style: TextStyle(
                         color: isRequired ? colorInversePrimary : colorBgBlack,
-                        fontSize: 12.0,
+                        fontSize: isMobile ? 10.0 : 12.0,
                         fontFamily: 'Quicksand',
                         fontWeight: FontWeight.w500,
                       ),
@@ -98,36 +98,82 @@ class SelectorCountItemWidget extends StatelessWidget {
                 ),
               ),
             ),
-            AbsorbPointer(
-              absorbing: isRequired,
-              child: CustomizableCounter(
-                borderColor: isRequired ? colorInversePrimary : colorBgBlack,
-                minCount: 1,
-                count: counter.toDouble(),
-                onIncrement: onIncrementDecrement,
-                onDecrement: onIncrementDecrement,
-                incrementIcon: Icon(
-                  Icons.add,
-                  color: isRequired ? colorInversePrimary : colorBgBlack,
+            isMobile ? 
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5.0),
+                  child: AbsorbPointer(
+                    absorbing: isRequired,
+                    child: CustomizableCounter(
+                      minCount: 1,
+                      count: counter.toDouble(),
+                      onIncrement: onIncrementDecrement,
+                      onDecrement: onIncrementDecrement,
+                      incrementIcon: Icon(
+                        Icons.add,
+                        color: isRequired ? colorInversePrimary : colorBgBlack,
+                      ),
+                      decrementIcon: Icon(
+                        Icons.remove,
+                        color: isRequired ? colorInversePrimary : colorBgBlack,
+                      ),
+                      textColor: isRequired ? colorInversePrimary : colorBgBlack,
+                      showButtonText: false,
+                      borderColor: isRequired ? Colors.transparent : colorPrimary,
+                    ),
+                  ),
                 ),
-                decrementIcon: Icon(
-                  Icons.remove,
-                  color: isRequired ? colorInversePrimary : colorBgBlack,
+                Text(
+                  '\$$subtotal',
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                    color: isRequired ? colorInversePrimary : colorBgBlack,
+                    fontSize: isMobile ? 12.0 : 16.0,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-                textColor: isRequired ? colorInversePrimary : colorBgBlack,
-                showButtonText: false,
-              ),
-            ),
-            Text(
-              '\$$subtotal',
-              textAlign: TextAlign.right,
-              style: TextStyle(
-                color: isRequired ? colorInversePrimary : colorBgBlack,
-                fontSize: 16.0,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w600,
-                height: 0,
-              ),
+              ],
+            )
+            :
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: AbsorbPointer(
+                    absorbing: isRequired,
+                    child: CustomizableCounter(
+                      minCount: 1,
+                      count: counter.toDouble(),
+                      onIncrement: onIncrementDecrement,
+                      onDecrement: onIncrementDecrement,
+                      incrementIcon: Icon(
+                        Icons.add,
+                        color: isRequired ? colorInversePrimary : colorBgBlack,
+                      ),
+                      decrementIcon: Icon(
+                        Icons.remove,
+                        color: isRequired ? colorInversePrimary : colorBgBlack,
+                      ),
+                      textColor: isRequired ? colorInversePrimary : colorBgBlack,
+                      showButtonText: false,
+                    ),
+                  ),
+                ),
+                Text(
+                  '\$$subtotal',
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                    color: isRequired ? colorInversePrimary : colorBgBlack,
+                    fontSize: isMobile ? 12.0 : 16.0,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
             ),
             Visibility(
               visible: !isRequired,

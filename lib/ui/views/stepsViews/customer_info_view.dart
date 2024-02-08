@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:uwifi_map_services/providers/mobile_cart_provider.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/full_form_widget.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/cart_summary_widget.dart';
@@ -78,6 +79,7 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
   @override
   Widget build(BuildContext context) {
     var stepsController = Provider.of<StepsController>(context, listen: false);
+    final mobileCartProvider = Provider.of<MobileCartProvider>(context);
     // final customerInfo = Provider.of<CustomerInfoProvider>(context);
     return Scaffold(
       backgroundColor: colorBgWhite,
@@ -87,36 +89,22 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
           ///CLASS JAIL HERE
           SingleChildScrollView(
               controller: _scrollController,
-              child: const Column(
-                children: [
-                  SizedBox(
-                    height: 10
-                  ),
-                  FullFormWidget()
-                  // WhatIsACP(),
-                  // SizedBox(
-                  //   height: 10
-                  // ),
-                  // Step1ACPSSNForm(),
-                  // SizedBox(
-                  //   height: 10,
-                  // ),
-                  // Step2PersonalDetailsForm(),
-                  // SizedBox(
-                  //   height: 10,
-                  // ),
-                  // Step3ShippingDetailsForm(),
-                ],
+              child: Center(
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 10
+                    ),
+                    Builder(
+                      builder: (context) {
+                        return mobileCartProvider.optionBodySection();
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
 
-      //?CLASS JAIL
-      // : _portView(
-      //     street: widget.street,
-      //     city: widget.city,
-      //     state: widget.state,
-      //     zipcode: widget.zipcode),
-      ///CLASS JAIL
       bottomNavigationBar: (MediaQuery.of(context).size.width > 1130)
           ? null
           : Stack(
@@ -131,26 +119,6 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
                       const SizedBox(
                         width: 10,
                       ),
-                      // if (isRep)
-                      //   Flexible(
-                      //     child: ElevatedButton(
-                      //         style: ElevatedButton.styleFrom(
-                      //             shape: const CircleBorder(
-                      //               side: BorderSide(
-                      //                   color: colorPrimary, width: 2),
-                      //             ),
-                      //             primary: colorPrimary,
-                      //             minimumSize: const Size.fromHeight(50)),
-                      //         child: const FittedBox(
-                      //           fit: BoxFit.contain,
-                      //           child: Icon(
-                      //             Icons.location_history_outlined,
-                      //             color: colorPrimary,
-                      //             size: 30,
-                      //           ),
-                      //         ),
-                      //         onPressed: () => scrollToItem()),
-                      //   ),
                       SizedBox(
                         width: 70,
                         child: Visibility(
@@ -178,23 +146,6 @@ class CustomerInfoViewState extends State<CustomerInfoView> {
                               ],
                             )),
                       ),
-                      // if (isRep)
-                      //   Flexible(
-                      //     child: ElevatedButton(
-                      //         style: ElevatedButton.styleFrom(
-                      //             shape: const CircleBorder(
-                      //               side: BorderSide(
-                      //                   color: colorSecondary, width: 2),
-                      //             ),
-                      //             primary: colorSecondary,
-                      //             minimumSize: const Size.fromHeight(50)),
-                      //         child: Image.asset(
-                      //           'images/pointer.png',
-                      //           height: 28,
-                      //           fit: BoxFit.contain,
-                      //         ),
-                      //         onPressed: () => scrollToItem2()),
-                      //   ),
                       const SizedBox(
                         width: 10,
                       )
@@ -222,7 +173,7 @@ class _WebViewState extends State<_WebView> {
     return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Despliegue de Formulario
           FullFormWidget(),

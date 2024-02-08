@@ -47,6 +47,7 @@ class LegalCheckboxState extends State<LegalCheckbox> {
                 ),
                 value: emailCheckbox,
                 activeColor: colorBgWhite,
+                checkColor: colorPrimary,
                 onChanged: (emailyes) {
                   setState(() {
                     emailCheckbox = emailyes!;
@@ -82,6 +83,7 @@ class LegalCheckboxState extends State<LegalCheckbox> {
                 ),
                 value: smsCheckbox,
                 activeColor: colorBgWhite,
+                checkColor: colorPrimary,
                 onChanged: (smsyes) {
                   setState(() {
                     smsCheckbox = smsyes!;

@@ -10,6 +10,8 @@ class ExtrasSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartController = Provider.of<Cart>(context);
+    final size = MediaQuery.of(context).size;
+    final bool isMobile = size.width < 1024 ? true : false;
     
     return SizedBox(
       height: 350,
@@ -17,7 +19,7 @@ class ExtrasSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            width: MediaQuery.of(context).size.width * 0.11,
+            width: MediaQuery.of(context).size.width * (isMobile ? 0.0 : 0.11),
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: NetworkImage(
@@ -27,7 +29,7 @@ class ExtrasSection extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.34,
+            width: MediaQuery.of(context).size.width * (isMobile ? 0.9 : 0.34),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -39,7 +41,7 @@ class ExtrasSection extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Container(
-                          width: MediaQuery.of(context).size.width * 0.17,
+                          width: MediaQuery.of(context).size.width * (isMobile ? 0.45 : 0.17),
                           height: 150,
                           decoration: const BoxDecoration(
                             image: DecorationImage(
@@ -56,7 +58,7 @@ class ExtrasSection extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Container(
-                          width: MediaQuery.of(context).size.width * 0.17,
+                          width: MediaQuery.of(context).size.width * (isMobile ? 0.45 : 0.17),
                           height: 150,
                           decoration: const BoxDecoration(
                             image: DecorationImage(
@@ -73,7 +75,7 @@ class ExtrasSection extends StatelessWidget {
                 //Carrousel
                 Flexible(
                   child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.34,
+                    width: MediaQuery.of(context).size.width * (isMobile ? 0.9 : 0.34),
                     height: 200,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),

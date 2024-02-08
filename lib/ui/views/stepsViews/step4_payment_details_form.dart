@@ -110,6 +110,7 @@ class _Step4PaymentDetailsFormState extends State<Step4PaymentDetailsForm> {
                     width: 2.0
                   ),
                   activeColor: colorBgWhite,
+                  checkColor: colorPrimary,
                   value: customerPDSDCCController.sameAsSD,
                   onChanged: (bool? value) {
                     customerPDSDCCController.changeValuesBillingDetails();

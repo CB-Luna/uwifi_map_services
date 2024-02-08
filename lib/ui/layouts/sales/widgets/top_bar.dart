@@ -1,8 +1,11 @@
+import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:uwifi_map_services/providers/mobile_cart_provider.dart';
 import 'package:uwifi_map_services/theme/theme_data.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/buttons/custom_icon_button.dart';
+import 'package:badges/badges.dart' as badge;
 
 import '../../../../data/constants.dart';
 import '../../../../providers/cart_controller.dart';
@@ -20,6 +23,7 @@ class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //DEFINICIÓN DE PROVIDERS
+    final mobileCartProvider = Provider.of<MobileCartProvider>(context);
     final stepsController = Provider.of<StepsController>(context);
     final cartController = Provider.of<Cart>(context);
 
@@ -32,6 +36,8 @@ class TopBar extends StatelessWidget {
     }
 
     bool onelineDisplay = screenSize(context).width >= 1100;
+    final size = MediaQuery.of(context).size;
+    final bool isMobile = size.width < 1024 ? true : false;
 
     return Container(
       width: double.infinity,
@@ -64,7 +70,55 @@ class TopBar extends StatelessWidget {
             width: 140,
             curStep: stepsController.currentStep.index,
             activeColor: colorPrimary),
-          const Spacer()
+          const Spacer(),
+          Visibility(
+            visible: isMobile,
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: ClayContainer(
+                spread: 6,
+                color: colorPrimary,
+                parentColor: colorInversePrimary,
+                height: 45,
+                width: 45,
+                depth: 40,
+                borderRadius: 25,
+                curveType: CurveType.concave,
+                child: InkWell(
+                  onTap: () {
+                    mobileCartProvider.changeBodyOption();
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: mobileCartProvider.valueBodyOption == 0 ?
+                    badge.Badge(
+                      badgeContent: Text(
+                          cartController.generalCartCounter.toString(),
+                          style: const TextStyle(color: colorInversePrimary)),
+                      showBadge:
+                          cartController.generalCartCounter == 0 ? false : true,
+                      badgeColor: colorSecondary,
+                      position: badge.BadgePosition.bottomStart(),
+                      elevation: 4,
+                      child: const Icon(
+                        Icons.add_shopping_cart_outlined,
+                        color: colorInversePrimary,
+                        size: 25,
+                      ),
+                    )
+                    :
+                    const Icon(
+                      Icons.view_list_outlined,
+                      color: colorInversePrimary,
+                      size: 25,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
