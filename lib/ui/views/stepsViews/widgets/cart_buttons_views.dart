@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide Provider;
+import 'package:uwifi_map_services/helpers/constants.dart';
 import 'package:uwifi_map_services/helpers/globals.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 import 'package:uwifi_map_services/providers/customer_pd_sd_cc_provider.dart';
@@ -55,9 +59,9 @@ styledButton(context) {
 void finalPressed(BuildContext context, CustomerPDSDProvider controllerPesonalD, CustomerPDSDProvider controllerShippingD, CustomerPDSDCCProvider controllerPaymentD, bool sameAsSD) async {
         try {
           dynamic res;
-          var json = {};
+          var jsonAPI = {};
           if (sameAsSD) {
-            json = {
+            jsonAPI = {
               "first_name": controllerPesonalD.parsedFNamePD.text,
                 "last_name": controllerPesonalD.parsedLNamePD.text,
                 "email": controllerPesonalD.parsedEmailPD.text,
@@ -91,7 +95,7 @@ void finalPressed(BuildContext context, CustomerPDSDProvider controllerPesonalD,
                 ]
             };
           } else {
-            json = {
+            jsonAPI = {
               "first_name": controllerPesonalD.parsedFNamePD.text,
                 "last_name": controllerPesonalD.parsedLNamePD.text,
                 "email": controllerPesonalD.parsedEmailPD.text,
@@ -129,22 +133,53 @@ void finalPressed(BuildContext context, CustomerPDSDProvider controllerPesonalD,
           res = await supabase.rpc(
             'create_lead',
             params: {
-              "data" : json
+              "data" : jsonAPI
             }
           );
 
           if (res != null) {
-            // ignore: use_build_context_synchronously
-            showDialog(
-              barrierColor: const Color(0x00022963).withOpacity(0.40),
-              barrierDismissible: false,
-              context: context,
-              builder: (_) {
-                return const FinalPopupSuccess();
-              },
-            );
+            if(!context.mounted) return;
+            //Se crea la orden mediante el Usuario
+            var urlAPI = Uri.parse("$urlAirflow/api/v1/dags/shipping_bundle_order_started_v1/dagRuns");
+            final headers = ({
+              "Content-Type": "application/json",
+              'Authorization': 'Basic YWlyZmxvdzpjYiF1bmEyMDIz'
+            });
+            var responseAPI = await post(urlAPI,
+              headers: headers,
+              body: json.encode(
+                  {
+                      "conf": {
+                          "customer_id": res["customer_id"],
+                      },
+                      "note": "DAG runned by API"
+                  },
+                ),
+              );
+            if (responseAPI.statusCode == 200) {
+              if(!context.mounted) return;
+              //Se realiza éxitosamente el proceso en Airflow
+              showDialog(
+                barrierColor: const Color(0x00022963).withOpacity(0.40),
+                barrierDismissible: false,
+                context: context,
+                builder: (_) {
+                  return const FinalPopupSuccess();
+                },
+              );
+            } else {
+              if(!context.mounted) return;
+              showDialog(
+                barrierColor: const Color(0x00022963).withOpacity(0.40),
+                barrierDismissible: false,
+                context: context,
+                builder: (_) {
+                  return const FinalPopupFail();
+                },
+              );
+            }
           } else {
-            // ignore: use_build_context_synchronously
+            if(!context.mounted) return;
             showDialog(
               barrierColor: const Color(0x00022963).withOpacity(0.40),
               barrierDismissible: false,
@@ -157,7 +192,7 @@ void finalPressed(BuildContext context, CustomerPDSDProvider controllerPesonalD,
           
         } catch (error) {
           print("Error on Final Pressed: '$error'");
-          // ignore: use_build_context_synchronously
+          if(!context.mounted) return;
           showDialog(
               barrierColor: const Color(0x00022963).withOpacity(0.40),
               barrierDismissible: false,
