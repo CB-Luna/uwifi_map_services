@@ -8,7 +8,8 @@ const redirectUrl =
     'https://supabase.cbluna-dev.com/arux-change-pass/#/change-password/token';
 const themeId = String.fromEnvironment('themeId', defaultValue: '2'); 
 String urlNotifications = 'https://supa43.rtatel.com/notifications/api';
-const urlAirflow = "http://34.123.63.165";
+const urlAirflow = "https://u-airflow.cbluna-dev.com/";
+const bearerAirflow = "Basic YWlyZmxvdzpjYiF1bmEyMDIz";
 
 //////// PROD ////////
 // final Uri urlFMTAPK = Uri.parse(
@@ -20,7 +21,8 @@ const urlAirflow = "http://34.123.63.165";
 //     'https://supabase.cbluna-dev.com/arux-change-pass/#/change-password/token';
 // const themeId = String.fromEnvironment('themeId', defaultValue: '2');
 // String urlNotifications = 'https://supa41.rtatel.com/notifications/api';
-// const urlAirflow = "http://34.123.63.165";
+// const urlAirflow = "https://u-airflow.cbluna-dev.com/";
+// const bearerAirflow = "Basic YWlyZmxvdzpjYiF1bmEyMDIz";
 
 //String apiGatewayURL = "http://10.5.24.43:8082/x2/api"; //DEV
 //String apiGatewayURL = "https://apps.cblsrv43.rtatel.com/wop_x2/api"; //DEV
