@@ -61,7 +61,7 @@ class TopBar extends StatelessWidget {
             onPressed: () async {
               // Open URL in the actual tab
               launchUrl(Uri.parse(
-              'https://react--uwifi.netlify.app/'), 
+              'https://uwif-astro-web.vercel.app/'), 
               webOnlyWindowName: '_self',);
             },
           ),
