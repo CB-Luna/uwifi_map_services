@@ -63,16 +63,18 @@ void finalPressed(BuildContext context, CustomerPDSDProvider controllerPesonalD,
           final headers = ({
             "Content-Type": "application/json",
           });
-          var request = Request('POST', Uri.parse('${urlAirflow}payment'));
-          request.body =  json.encode(
-            {
-                "transaction_type": "SALE",
-                "terminal_id": "TESTTERMINAL",
-                "card_num": controllerPaymentD.number.text.replaceAll(" ", ""),
-                "card_exp_month": int.parse(controllerPaymentD.date.text.split("/")[0]),
-                "card_exp_year": int.parse(controllerPaymentD.date.text.split("/")[1]),
-                "total_amount": int.parse((total.round()*100).toString())
-            },
+          var responseAPI = await post(Uri.parse('${urlAirflow}payment'),
+          headers: headers,
+          body: json.encode(
+              {
+                  "transaction_type": "SALE",
+                  "terminal_id": "TESTTERMINAL",
+                  "card_num": controllerPaymentD.number.text.replaceAll(" ", "").toString(),
+                  "card_exp_month": controllerPaymentD.date.text.split("/")[0],
+                  "card_exp_year": controllerPaymentD.date.text.split("/")[1],
+                  "total_amount": int.parse((total.round()*100).toString())
+              },
+            ),
           );
           // var headers = {
           //   'Content-Type': 'application/json'
@@ -86,10 +88,7 @@ void finalPressed(BuildContext context, CustomerPDSDProvider controllerPesonalD,
           //   "card_exp_year": 12,
           //   "total_amount": 9900
           // });
-          request.headers.addAll(headers);
-
-          StreamedResponse responseAPI = await request.send();
-          if (responseAPI.statusCode == 200) {
+          if (!responseAPI.body.contains("Error")) {
               // Se realiza éxitosamente la pasarela de pagos
               dynamic res;
               var jsonAPI = {};
