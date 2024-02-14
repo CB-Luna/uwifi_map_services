@@ -60,30 +60,37 @@ styledButton(context) {
 void finalPressed(BuildContext context, CustomerPDSDProvider controllerPesonalD, CustomerPDSDProvider controllerShippingD, CustomerPDSDCCProvider controllerPaymentD, bool sameAsSD, double total) async {
         try {
           //Se crea la la pasarela de Pago para el Usuario
-          // print("num ${controllerPaymentD.number.text.replaceAll(" ", "")}");
-          // print("Date ${controllerPaymentD.date.text}");
-          // print("Month ${controllerPaymentD.date.text.split("/")[0]}");
-          // print("Year ${controllerPaymentD.date.text.split("/")[1]}");
-          // print("Total centavos ${int.parse((total.round()*100).toString())}");
-          // var urlAPI = Uri.parse("$urlAirflow/payment");
-          // final headers = ({
-          //   "Content-Type": "application/json",
+          final headers = ({
+            "Content-Type": "application/json",
+          });
+          var request = Request('POST', Uri.parse('${urlAirflow}payment'));
+          request.body =  json.encode(
+            {
+                "transaction_type": "SALE",
+                "terminal_id": "TESTTERMINAL",
+                "card_num": controllerPaymentD.number.text.replaceAll(" ", ""),
+                "card_exp_month": int.parse(controllerPaymentD.date.text.split("/")[0]),
+                "card_exp_year": int.parse(controllerPaymentD.date.text.split("/")[1]),
+                "total_amount": int.parse((total.round()*100).toString())
+            },
+          );
+          // var headers = {
+          //   'Content-Type': 'application/json'
+          // };
+          // var request = Request('POST', Uri.parse('${urlAirflow}payment'));
+          // request.body = json.encode({
+          //   "transaction_type": "SALE",
+          //   "terminal_id": "TESTTERMINAL",
+          //   "card_num": "4000300020001000",
+          //   "card_exp_month": 12,
+          //   "card_exp_year": 12,
+          //   "total_amount": 9900
           // });
-          // var responseAPI = await post(urlAPI,
-          //   headers: headers,
-          //   body: json.encode(
-          //       {
-          //           "transaction_type": "SALE",
-          //           "terminal_id": "TESTTERMINAL",
-          //           "card_num": controllerPaymentD.number.text.replaceAll(" ", ""),
-          //           "card_exp_month": controllerPaymentD.date.text.split("/")[0],
-          //           "card_exp_year": controllerPaymentD.date.text.split("/")[1],
-          //           "total_amount": int.parse((total.round()*100).toString())
-          //       },
-          //     ),
-          //   );
-          // if (responseAPI.statusCode == 200) {
-              //Se realiza éxitosamente la pasarela de pagos
+          request.headers.addAll(headers);
+
+          StreamedResponse responseAPI = await request.send();
+          if (responseAPI.statusCode == 200) {
+              // Se realiza éxitosamente la pasarela de pagos
               dynamic res;
               var jsonAPI = {};
               if (sameAsSD) {
@@ -215,17 +222,17 @@ void finalPressed(BuildContext context, CustomerPDSDProvider controllerPesonalD,
                   },
                 );
               }
-            // } else {
-            //   if(!context.mounted) return;
-            //   showDialog(
-            //     barrierColor: const Color(0x00022963).withOpacity(0.40),
-            //     barrierDismissible: false,
-            //     context: context,
-            //     builder: (_) {
-            //       return const FinalPopupNotValidCreditCard();
-            //     },
-            //   );
-            // }
+            } else {
+              if(!context.mounted) return;
+              showDialog(
+                barrierColor: const Color(0x00022963).withOpacity(0.40),
+                barrierDismissible: false,
+                context: context,
+                builder: (_) {
+                  return const FinalPopupNotValidCreditCard();
+                },
+              );
+            }
           
         } catch (error) {
           print("Error on Final Pressed: '$error'");
