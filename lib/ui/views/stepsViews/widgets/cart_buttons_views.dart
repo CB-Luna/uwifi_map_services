@@ -5,12 +5,10 @@ import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide Provider;
 import 'package:uwifi_map_services/helpers/constants.dart';
-import 'package:uwifi_map_services/helpers/globals.dart';
 import 'package:uwifi_map_services/providers/customer_info_controller.dart';
 import 'package:uwifi_map_services/providers/customer_pd_sd_cc_provider.dart';
 import 'package:uwifi_map_services/providers/customer_pd_sd_provider.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/final_popup_fail.dart';
-import 'package:uwifi_map_services/ui/views/stepsViews/widgets/final_popup_not_valid_credit_card.dart';
 import 'package:uwifi_map_services/ui/views/stepsViews/widgets/final_popup_success.dart';
 import '../../../../../providers/cart_controller.dart';
 import '../../../../../providers/steps_controller.dart';
@@ -58,191 +56,147 @@ styledButton(context) {
 }
 
 void finalPressed(BuildContext context, CustomerPDSDProvider controllerPesonalD, CustomerPDSDProvider controllerShippingD, CustomerPDSDCCProvider controllerPaymentD, bool sameAsSD, double total) async {
-        try {
-          //Se crea la la pasarela de Pago para el Usuario
-          final headers = ({
-            "Content-Type": "application/json",
-          });
-          var responseAPI = await post(Uri.parse('${urlAirflow}payment'),
-          headers: headers,
-          body: json.encode(
+    try {
+      //Se crea el API para Registrar Usuario
+      final headers = ({
+        "Content-Type": "application/json",
+      });
+      var jsonAPI = {};
+      if (sameAsSD) {
+        final address2SD = (controllerShippingD.parsedAddress2SD.text == "" || 
+        controllerShippingD.parsedAddress2SD.text.isEmpty) ?
+        null
+        :
+        controllerShippingD.parsedAddress2SD.text;
+        jsonAPI = {
+          "first_name": controllerPesonalD.parsedFNamePD.text,
+          "last_name": controllerPesonalD.parsedLNamePD.text,
+          "email": controllerPesonalD.parsedEmailPD.text,
+          "mobile_phone": controllerPesonalD.parsedPhonePD.text,
+          "addresses": [
               {
-                  "transaction_type": "SALE",
-                  "terminal_id": "TESTTERMINAL",
-                  "card_num": controllerPaymentD.number.text.replaceAll(" ", "").toString(),
-                  "card_exp_month": controllerPaymentD.date.text.split("/")[0],
-                  "card_exp_year": controllerPaymentD.date.text.split("/")[1],
-                  "total_amount": int.parse((total.round()*100).toString())
+                  "address_1": controllerShippingD.parsedAddress1SD.text,
+                  "address_2": address2SD,
+                  "zipcode": controllerShippingD.parsedZipcodeSD.text,
+                  "city": controllerShippingD.parsedCitySD.text,
+                  "state_code": "TX",
+                  "type": "Physical",
+                  "latitude": controllerShippingD.positionSD?.toJSON()?.lat,
+                  "longitude": controllerShippingD.positionSD?.toJSON()?.lng
               },
-            ),
-          );
-          // var headers = {
-          //   'Content-Type': 'application/json'
-          // };
-          // var request = Request('POST', Uri.parse('${urlAirflow}payment'));
-          // request.body = json.encode({
-          //   "transaction_type": "SALE",
-          //   "terminal_id": "TESTTERMINAL",
-          //   "card_num": "4000300020001000",
-          //   "card_exp_month": 12,
-          //   "card_exp_year": 12,
-          //   "total_amount": 9900
-          // });
-          if (!responseAPI.body.contains("Error")) {
-              // Se realiza éxitosamente la pasarela de pagos
-              dynamic res;
-              var jsonAPI = {};
-              if (sameAsSD) {
-                jsonAPI = {
-                  "first_name": controllerPesonalD.parsedFNamePD.text,
-                    "last_name": controllerPesonalD.parsedLNamePD.text,
-                    "email": controllerPesonalD.parsedEmailPD.text,
-                    "mobile_phone": controllerPesonalD.parsedPhonePD.text,
-                    "address": [
-                        {
-                            "address_1": controllerShippingD.parsedAddress1SD.text,
-                            "address_2": null,
-                            "zipcode": controllerShippingD.parsedZipcodeSD.text,
-                            "city": controllerShippingD.parsedCitySD.text,
-                            "state_code": "TX",
-                            "type": "Physical",
-                            "latitude": controllerShippingD.positionSD?.toJSON()?.lat,
-                            "longitude": controllerShippingD.positionSD?.toJSON()?.lng
-                        },
-                        {
-                            "address_1": controllerShippingD.parsedAddress1SD.text,
-                            "address_2": null,
-                            "zipcode": int.parse(controllerShippingD.parsedZipcodeSD.text),
-                            "city": controllerShippingD.parsedCitySD.text,
-                            "state_code": "TX",
-                            "type": "Billing",
-                            "latitude": controllerShippingD.positionSD?.toJSON()?.lat,
-                            "longitude": controllerShippingD.positionSD?.toJSON()?.lng
-                        }
-                    ],
-                    "services": [
-                        {
-                            "service_id": 1
-                        }
-                    ]
-                };
-              } else {
-                jsonAPI = {
-                  "first_name": controllerPesonalD.parsedFNamePD.text,
-                    "last_name": controllerPesonalD.parsedLNamePD.text,
-                    "email": controllerPesonalD.parsedEmailPD.text,
-                    "mobile_phone": controllerPesonalD.parsedPhonePD.text,
-                    "address": [
-                        {
-                            "address_1": controllerShippingD.parsedAddress1SD.text,
-                            "address_2": null,
-                            "zipcode": controllerShippingD.parsedZipcodeSD.text,
-                            "city": controllerShippingD.parsedCitySD.text,
-                            "state_code": "TX",
-                            "type": "Physical",
-                            "latitude": controllerShippingD.positionSD?.toJSON()?.lat,
-                            "longitude": controllerShippingD.positionSD?.toJSON()?.lng
-                        },
-                        {
-                            "address_1": controllerPaymentD.parsedAddress1BD.text,
-                            "address_2": null,
-                            "zipcode": int.parse(controllerPaymentD.parsedZipcodeBD.text),
-                            "city": controllerPaymentD.parsedCityBD.text,
-                            "state_code": "TX",
-                            "type": "Billing",
-                            "latitude": controllerPaymentD.positionBD?.toJSON()?.lat,
-                            "longitude": controllerPaymentD.positionBD?.toJSON()?.lng
-                        }
-                    ],
-                    "services": [
-                        {
-                            "service_id": 1
-                        }
-                    ]
-                };
+              {
+                  "address_1": controllerShippingD.parsedAddress1SD.text,
+                  "address_2": address2SD,
+                  "zipcode": controllerShippingD.parsedZipcodeSD.text,
+                  "city": controllerShippingD.parsedCitySD.text,
+                  "state_code": "TX",
+                  "type": "Billing",
+                  "latitude": controllerShippingD.positionSD?.toJSON()?.lat,
+                  "longitude": controllerShippingD.positionSD?.toJSON()?.lng
               }
-
-              res = await supabase.rpc(
-                'create_lead',
-                params: {
-                  "data" : jsonAPI
-                }
-              );
-
-              if (res != null) {
-                if(!context.mounted) return;
-                //Se crea la orden mediante el Usuario
-                var urlAPI = Uri.parse("$urlAirflow/api/v1/dags/shipping_bundle_order_started_v1/dagRuns");
-                final headers = ({
-                  "Content-Type": "application/json",
-                  'Authorization': bearerAirflow
-                });
-                var responseAPI = await post(urlAPI,
-                  headers: headers,
-                  body: json.encode(
-                      {
-                          "conf": {
-                              "customer_id": res["customer_id"],
-                          },
-                          "note": "DAG runned by API"
-                      },
-                    ),
-                  );
-                if (responseAPI.statusCode == 200) {
-                  if(!context.mounted) return;
-                  //Se realiza éxitosamente el proceso en Airflow
-                  showDialog(
-                    barrierColor: const Color(0x00022963).withOpacity(0.40),
-                    barrierDismissible: false,
-                    context: context,
-                    builder: (_) {
-                      return const FinalPopupSuccess();
-                    },
-                  );
-                } else {
-                  if(!context.mounted) return;
-                  showDialog(
-                    barrierColor: const Color(0x00022963).withOpacity(0.40),
-                    barrierDismissible: false,
-                    context: context,
-                    builder: (_) {
-                      return const FinalPopupFail();
-                    },
-                  );
-                }
-              } else {
-                if(!context.mounted) return;
-                showDialog(
-                  barrierColor: const Color(0x00022963).withOpacity(0.40),
-                  barrierDismissible: false,
-                  context: context,
-                  builder: (_) {
-                    return const FinalPopupFail();
-                  },
-                );
+          ],
+          "services": [
+              {
+                  "service_id": 1
               }
-            } else {
-              if(!context.mounted) return;
-              showDialog(
-                barrierColor: const Color(0x00022963).withOpacity(0.40),
-                barrierDismissible: false,
-                context: context,
-                builder: (_) {
-                  return const FinalPopupNotValidCreditCard();
-                },
-              );
-            }
-          
-        } catch (error) {
-          print("Error on Final Pressed: '$error'");
-          if(!context.mounted) return;
-          showDialog(
-              barrierColor: const Color(0x00022963).withOpacity(0.40),
-              barrierDismissible: false,
-              context: context,
-              builder: (_) {
-                return const FinalPopupFail();
+          ],
+          "credit_card": {
+              "card_number": controllerPaymentD.number.text.replaceAll(" ", "").toString(),
+              "exp_month": controllerPaymentD.date.text.split("/")[0],
+              "exp_year": controllerPaymentD.date.text.split("/")[1],
+              "cvv": controllerPaymentD.cvv.text
+          },
+          "amount": int.parse((total.round()*100).toString())
+        };
+      } else {
+        final address2SD = (controllerShippingD.parsedAddress2SD.text == "" || 
+        controllerShippingD.parsedAddress2SD.text.isEmpty) ?
+        null
+        :
+        controllerShippingD.parsedAddress2SD.text;
+        final address2BD = (controllerPaymentD.parsedAddress2BD.text == "" || 
+        controllerPaymentD.parsedAddress2BD.text.isEmpty) ?
+        null
+        :
+        controllerPaymentD.parsedAddress2BD.text;
+        jsonAPI = {
+          "first_name": controllerPesonalD.parsedFNamePD.text,
+          "last_name": controllerPesonalD.parsedLNamePD.text,
+          "email": controllerPesonalD.parsedEmailPD.text,
+          "mobile_phone": controllerPesonalD.parsedPhonePD.text,
+          "addresses": [
+              {
+                  "address_1": controllerShippingD.parsedAddress1SD.text,
+                  "address_2": address2SD,
+                  "zipcode": controllerShippingD.parsedZipcodeSD.text,
+                  "city": controllerShippingD.parsedCitySD.text,
+                  "state_code": "TX",
+                  "type": "Physical",
+                  "latitude": controllerShippingD.positionSD?.toJSON()?.lat,
+                  "longitude": controllerShippingD.positionSD?.toJSON()?.lng
               },
-            );
-        }
+              {
+                  "address_1": controllerPaymentD.parsedAddress1BD.text,
+                  "address_2": address2BD,
+                  "zipcode": controllerPaymentD.parsedZipcodeBD.text,
+                  "city": controllerPaymentD.parsedCityBD.text,
+                  "state_code": "TX",
+                  "type": "Billing",
+                  "latitude": controllerPaymentD.positionBD?.toJSON()?.lat,
+                  "longitude": controllerPaymentD.positionBD?.toJSON()?.lng
+              }
+          ],
+          "services": [
+              {
+                  "service_id": 1
+              }
+          ],
+          "credit_card": {
+              "card_number": controllerPaymentD.number.text.replaceAll(" ", "").toString(),
+              "exp_month": controllerPaymentD.date.text.split("/")[0],
+              "exp_year": controllerPaymentD.date.text.split("/")[1],
+              "cvv": controllerPaymentD.cvv.text
+          },
+          "amount": int.parse((total.round()*100).toString())
+        };
+      }
+      var urlAPI = Uri.parse("${urlAirflow}customer");
+      var responseAPI = await post(urlAPI,
+        headers: headers,
+        body: json.encode(jsonAPI),
+        );
+      if (!responseAPI.body.contains("Error")) {
+        if(!context.mounted) return;
+        //Se realiza éxitosamente el proceso en Airflow
+        showDialog(
+          barrierColor: const Color(0x00022963).withOpacity(0.40),
+          barrierDismissible: false,
+          context: context,
+          builder: (_) {
+            return const FinalPopupSuccess();
+          },
+        );
+      } else {
+        if(!context.mounted) return;
+        showDialog(
+          barrierColor: const Color(0x00022963).withOpacity(0.40),
+          barrierDismissible: false,
+          context: context,
+          builder: (_) {
+            return const FinalPopupFail();
+          },
+        );
+      }
+    } catch (error) {
+      print("Error on Final Pressed: '$error'");
+      if(!context.mounted) return;
+      showDialog(
+          barrierColor: const Color(0x00022963).withOpacity(0.40),
+          barrierDismissible: false,
+          context: context,
+          builder: (_) {
+            return const FinalPopupFail();
+          },
+        );
+    }
   }
