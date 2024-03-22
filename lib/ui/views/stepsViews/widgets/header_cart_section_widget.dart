@@ -12,7 +12,6 @@ class HeaderCartSectionWidget extends StatelessWidget {
     final bool isMobile = size.width < 1024 ? true : false;
     return Container(
         width: MediaQuery.of(context).size.width * (isMobile ? 0.9 : 0.5),
-        height: MediaQuery.of(context).size.height * 0.05,
         padding: const EdgeInsets.only(bottom: 5),
         decoration: const BoxDecoration(
             border: Border(

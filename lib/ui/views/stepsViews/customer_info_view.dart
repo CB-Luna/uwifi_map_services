@@ -174,6 +174,7 @@ class _WebViewState extends State<_WebView> {
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Despliegue de Formulario
           FullFormWidget(),
