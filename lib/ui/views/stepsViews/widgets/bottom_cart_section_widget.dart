@@ -158,7 +158,7 @@ class BottomCartSectionWidget extends StatelessWidget {
               firstString: "Taxes",
               secondString: "\$0.00",
               thirdString: "",
-              size: 14,
+              size: 12,
               firstWidth: MediaQuery.of(context).size.width * 0.25,
               secondWidth: MediaQuery.of(context).size.width * 0.20,
               thirdWidth: MediaQuery.of(context).size.width * 0.10,
@@ -480,7 +480,7 @@ class RowSummaryWidget extends StatelessWidget {
             firstString,
             style: TextStyle(
               color: colorInversePrimary,
-              fontSize: size * 1.1,
+              fontSize: size,
               fontFamily: 'Quicksand',
               fontWeight: FontWeight.w700,
             ),
@@ -492,7 +492,7 @@ class RowSummaryWidget extends StatelessWidget {
             secondString,
             style: TextStyle(
               color: colorInversePrimary,
-              fontSize: size * 1.3,
+              fontSize: size,
               fontFamily: 'Quicksand',
               fontWeight: FontWeight.w700,
             ),
@@ -504,7 +504,7 @@ class RowSummaryWidget extends StatelessWidget {
             thirdString,
             style: TextStyle(
               color: colorInversePrimary,
-              fontSize: size * 0.8,
+              fontSize: size,
               fontFamily: 'Quicksand',
               fontWeight: FontWeight.w200,
             ),

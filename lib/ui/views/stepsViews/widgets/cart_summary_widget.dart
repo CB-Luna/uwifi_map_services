@@ -12,20 +12,17 @@ class CartSummaryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final bool isMobile = size.width < 1024 ? true : false;
-    return SingleChildScrollView(
-      controller: ScrollController(),
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width * (isMobile ? 0.9 : 0.5),
-        child: const Column(
-          children: [
-            HeaderCartSectionWidget(),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 15),
-              child: CartWidget(),
-            ),
-            ExtrasSection(),
-          ],
-        ),
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * (isMobile ? 0.9 : 0.5),
+      child: const Column(
+        children: [
+          HeaderCartSectionWidget(),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 15),
+            child: CartWidget(),
+          ),
+          ExtrasSection(),
+        ],
       ),
     );
   }

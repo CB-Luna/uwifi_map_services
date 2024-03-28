@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -170,17 +168,24 @@ class _WebView extends StatefulWidget {
 class _WebViewState extends State<_WebView> {
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Despliegue de Formulario
-          FullFormWidget(),
-          // Despliegue de Shopping Cart
-          CartSummaryWidget()
-        ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+      child: SingleChildScrollView(
+        controller: ScrollController(),
+        child: const Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Despliegue de Formulario
+                FullFormWidget(),
+                // Despliegue de Shopping Cart
+                CartSummaryWidget()
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
